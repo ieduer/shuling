@@ -14,7 +14,7 @@
     "USER_CENTER_ORIGIN": "https://my.bdfz.net"
   },
   "d1_databases": [
-    { "binding": "DB", "database_name": "shuling-db", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
+    { "binding": "DB", "database_name": "shuling-db", "database_id": "efec6261-9103-4cd2-a938-4c4e529078a1", "migrations_dir": "migrations" }
   ],
   "assets": { "directory": "./dist", "binding": "ASSETS" }
 }
