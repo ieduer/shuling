@@ -1,8 +1,8 @@
 export const USER_CENTER_ORIGIN = "https://my.bdfz.net";
 export const SITE_KEY = "shuling";
-/** 書靈尚未在用戶中心註冊（SITE_REGISTRY、受眾白名單、學習紀錄契約都還沒有）。在那之前，
- * 本站不讀用戶中心的工作階段、不寫進度、事件或精通紀錄；公開註冊事務完成後才改成 true。 */
-export const UC_REGISTERED = false;
+/** 2026-11-01 起書靈已在用戶中心登記（SITE_REGISTRY shuling，記錄模式：blocked_missing_adapter，與 fuzi 相同）。
+ * 只寫進度快照（PUT /api/progress）；事件與精通紀錄要等可信轉接器另案上線，見 src/lib/sync.ts。 */
+export const UC_REGISTERED = true;
 
 const KEY = "wy-player-name";
 export const PLAYER_NAME_EVENT = "shuling-player-name-changed";

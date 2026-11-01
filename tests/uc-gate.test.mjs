@@ -1,19 +1,27 @@
-// 書靈未在用戶中心註冊前，客戶端不得讀寫用戶中心；頁面也不載入用戶中心導航件。
+// 書靈在用戶中心是記錄模式（2026-11-01 登記，SITE_REGISTRY shuling，blocked_missing_adapter，與 fuzi 相同）：
+// 載入共用身分 SDK、只寫進度快照；不寫逐局事件、不報精通（要等可信轉接器另案）。
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
 const read = (p) => fs.readFileSync(new URL("../" + p, import.meta.url), "utf8");
 
-test("UC_REGISTERED 為 false，且每個用戶中心呼叫都先檢查它", () => {
+test("UC_REGISTERED 為 true，站點鍵是 shuling", () => {
   const src = read("src/lib/identity.ts");
-  assert.match(src, /export const UC_REGISTERED = false;/);
-  for (const fn of ["userCenterApi", "getSession", "logout", "syncProgress", "recordEvent", "reportMastery"]) {
-    const body = src.slice(src.indexOf(`function ${fn}(`)).split("\n").slice(0, 3).join("\n");
-    assert.match(body, /if \(!UC_REGISTERED\) return/, fn);
-  }
+  assert.match(src, /export const UC_REGISTERED = true;/);
+  assert.match(src, /export const SITE_KEY = "shuling";/);
 });
 
-test("index.html 不載入 my.bdfz.net/site-auth.js", () => {
-  assert.ok(!/<script[^>]+my\.bdfz\.net\/site-auth\.js/.test(read("index.html")));
+test("index.html 載入 my.bdfz.net/site-auth.js（浮動導航件由 CSS 隱藏）", () => {
+  assert.match(read("index.html"), /<script src="https:\/\/my\.bdfz\.net\/site-auth\.js" defer/);
+  assert.match(read("src/styles/index.css"), /#bdfz-unified-widget \{\s*display: none !important;/);
+});
+
+test("記錄模式：只寫進度快照，不寫事件、不報精通", () => {
+  const sync = read("src/lib/sync.ts");
+  assert.match(sync, /syncProgress\(/);
+  assert.doesNotMatch(sync, /recordEvent\(|reportMastery\(/);
+  for (const f of ["src/App.tsx", "src/screens/Result.tsx", "src/screens/Battle.tsx", "src/screens/Me.tsx", "src/lib/cloud.ts"]) {
+    assert.doesNotMatch(read(f), /recordEvent\(|reportMastery\(/, f);
+  }
 });
