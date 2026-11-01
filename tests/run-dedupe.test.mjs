@@ -63,10 +63,10 @@ function pickQuestion() {
 test("同一份戰報送兩次：第二次回 duplicate，只入庫一局、詞力只加一次", async () => {
   const { worker, cleanup } = await loadWorker();
   try {
-    const db = fakeDb(); const env = { DB: db, SITE_KEY: "wy-word-battle", SITE_TITLE: "字靈收服", PRIMARY_HOST: "wygame.bdfz.net", USER_CENTER_ORIGIN: "https://my.bdfz.net", ASSETS: { fetch: async () => new Response("", { status: 404 }) } };
+    const db = fakeDb(); const env = { DB: db, SITE_KEY: "shuling", SITE_TITLE: "書靈", PRIMARY_HOST: "shuling.bdfz.net", USER_CENTER_ORIGIN: "https://my.bdfz.net", ASSETS: { fetch: async () => new Response("", { status: 404 }) } };
     const q = pickQuestion(); const startedAt = Date.now() - 12000;
     const payload = { mode: "lesson", scope: "L-test", seed: String(startedAt), nick: "測試", startedAt, answers: [{ q: q.id, pick: q.answer, ms: 1800 }] };
-    const send = () => worker.fetch(new Request("https://wygame.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "wywb_pid=dedupe-test-pid-0001" }, body: JSON.stringify(payload) }), env);
+    const send = () => worker.fetch(new Request("https://shuling.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "shuling_pid=dedupe-test-pid-0001" }, body: JSON.stringify(payload) }), env);
     const res1 = await send(); const r1 = await res1.json();
     assert.equal(r1.ok, true, res1.status + " " + JSON.stringify(r1)); assert.equal(r1.correct, 1); assert(r1.score > 0, "the picked option must be the correct one"); assert.equal(r1.duplicate, undefined);
     assert.equal(db.tables.runs.length, 1); assert.equal(db.tables.players.get("dedupe-test-pid-0001").xp, r1.score);
@@ -76,7 +76,7 @@ test("同一份戰報送兩次：第二次回 duplicate，只入庫一局、詞�
     assert.equal([...db.tables.weekly.values()][0].games, 1);
     assert.equal(r1.xpGain, r1.score); assert.equal(r1.multiplier, 1); assert.equal(r1.repeat, 0); assert.equal(r1.rankIdx, 0); assert.equal(r1.mastered, 0);
     // 同種子、不同起始時刻（真的再打一局）仍然入庫，但同範圍今日第 2 次：詞力折半；第 3 次四分之一；換範圍又是全額
-    const send2 = (startedAt, scope = "L-test") => worker.fetch(new Request("https://wygame.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "wywb_pid=dedupe-test-pid-0001" }, body: JSON.stringify({ ...payload, scope, startedAt }) }), env).then((r) => r.json());
+    const send2 = (startedAt, scope = "L-test") => worker.fetch(new Request("https://shuling.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "shuling_pid=dedupe-test-pid-0001" }, body: JSON.stringify({ ...payload, scope, startedAt }) }), env).then((r) => r.json());
     const r3 = await send2(startedAt - 60000);
     assert.equal(r3.duplicate, undefined); assert.equal(db.tables.runs.length, 2); assert.equal(r3.repeat, 1); assert.equal(r3.multiplier, 0.5); assert.equal(r3.xpGain, Math.round(r1.score * 0.5)); assert.equal(db.tables.players.get("dedupe-test-pid-0001").xp, r1.score + Math.round(r1.score * 0.5));
     const r4 = await send2(startedAt - 120000); assert.equal(r4.multiplier, 0.25); assert.equal(r4.xpGain, Math.round(r1.score * 0.25));
@@ -89,10 +89,10 @@ test("同一份戰報送兩次：第二次回 duplicate，只入庫一局、詞�
 test("今日試煉重送：第二次回既有結果，今日排行與詞力都不再加", async () => {
   const { worker, cleanup } = await loadWorker();
   try {
-    const db = fakeDb(); const env = { DB: db, SITE_KEY: "wy-word-battle", SITE_TITLE: "字靈收服", PRIMARY_HOST: "wygame.bdfz.net", USER_CENTER_ORIGIN: "https://my.bdfz.net", ASSETS: { fetch: async () => new Response("", { status: 404 }) } };
+    const db = fakeDb(); const env = { DB: db, SITE_KEY: "shuling", SITE_TITLE: "書靈", PRIMARY_HOST: "shuling.bdfz.net", USER_CENTER_ORIGIN: "https://my.bdfz.net", ASSETS: { fetch: async () => new Response("", { status: 404 }) } };
     const q = pickQuestion(); const startedAt = Date.now() - 9000;
     const payload = { mode: "daily", scope: "daily", seed: "2026-10-28", nick: "", startedAt, answers: [{ q: q.id, pick: q.answer, ms: 2200 }] };
-    const send = () => worker.fetch(new Request("https://wygame.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "wywb_pid=dedupe-test-pid-0002" }, body: JSON.stringify(payload) }), env);
+    const send = () => worker.fetch(new Request("https://shuling.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "shuling_pid=dedupe-test-pid-0002" }, body: JSON.stringify(payload) }), env);
     const res1 = await send(); const r1 = await res1.json(); assert.equal(r1.scored, true, res1.status + " " + JSON.stringify(r1)); assert.equal(r1.ranks.daily, 1);
     const r2 = await (await send()).json(); assert.equal(r2.duplicate, true); assert.equal(r2.scored, true); assert.equal(r2.ranks.daily, 1); assert.equal(r2.xp, r1.score);
     assert.equal(db.tables.runs.length, 1); assert.equal(db.tables.dailyBest.length, 1); assert.equal(db.tables.players.get("dedupe-test-pid-0002").xp, r1.score);

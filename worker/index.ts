@@ -61,13 +61,13 @@ function cleanNick(v: unknown): string {
 
 function getPid(request: Request): { pid: string; fresh: boolean } {
   const cookie = request.headers.get("cookie") || "";
-  const m = cookie.match(/(?:^|;\s*)wywb_pid=([A-Za-z0-9-]{8,64})/);
+  const m = cookie.match(/(?:^|;\s*)shuling_pid=([A-Za-z0-9-]{8,64})/);
   if (m) return { pid: m[1], fresh: false };
   return { pid: crypto.randomUUID(), fresh: true };
 }
 function pidCookie(request: Request, pid: string): string {
   const secure = new URL(request.url).protocol === "https:" ? "; Secure" : "";
-  return `wywb_pid=${pid}; Path=/; HttpOnly; SameSite=Lax; Max-Age=63072000${secure}`;
+  return `shuling_pid=${pid}; Path=/; HttpOnly; SameSite=Lax; Max-Age=63072000${secure}`;
 }
 
 async function readBody(request: Request): Promise<Record<string, unknown>> {
@@ -331,7 +331,7 @@ async function nickHandler(request: Request, env: Env): Promise<Response> {
   if (!env.DB) return json({ pid, nick, xp: 0, games: 0, best: 0, todayScored: false, linked: false }, { headers });
   await ensurePlayer(env.DB, pid, now);
   await env.DB.prepare("UPDATE players SET nick = ?, last_seen = ? WHERE pid = ?").bind(nick, now, pid).run();
-  return meHandler(new Request(request.url, { headers: { cookie: `wywb_pid=${pid}` } }), env).then(async (r) => new Response(await r.text(), { headers: { ...Object.fromEntries(r.headers), ...headers } }));
+  return meHandler(new Request(request.url, { headers: { cookie: `shuling_pid=${pid}` } }), env).then(async (r) => new Response(await r.text(), { headers: { ...Object.fromEntries(r.headers), ...headers } }));
 }
 
 /* ---------- v2.5 登入用戶中心後跨裝置同步 ----------

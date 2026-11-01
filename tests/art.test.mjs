@@ -53,7 +53,7 @@ test("PWA 圖標與 favicon 是 PNG", () => {
 });
 
 test("沒有剩下的舊站名", () => {
-  for (const f of ["src/lib/sync.ts", "wrangler.toml", "index.html", "public/site.webmanifest"]) {
+  for (const f of ["src/lib/sync.ts", "index.html", "public/site.webmanifest"]) {
     assert.ok(!readFileSync(path.join(root, f), "utf8").includes("文言詞陣"), `${f} 仍含舊站名`);
   }
 });

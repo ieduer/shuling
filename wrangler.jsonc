@@ -1,0 +1,20 @@
+// 書靈 Worker。發布只經 platform/release-authority.json 登記的交易（見 docs/OPERATIONS.md），不要直接 wrangler deploy。
+{
+  "name": "shuling",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-05-30",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
+  "routes": [{ "pattern": "shuling.bdfz.net", "custom_domain": true }],
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "vars": {
+    "SITE_KEY": "shuling",
+    "SITE_TITLE": "書靈",
+    "PRIMARY_HOST": "shuling.bdfz.net",
+    "USER_CENTER_ORIGIN": "https://my.bdfz.net"
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "shuling-db", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
+  ],
+  "assets": { "directory": "./dist", "binding": "ASSETS" }
+}

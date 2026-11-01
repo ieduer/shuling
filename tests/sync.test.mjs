@@ -63,10 +63,10 @@ function pickQuestion() {
 
 const worker = await loadWorker();
 const sqlite = freshDb(); const db = d1(sqlite);
-const env = { DB: db, SITE_KEY: "wy-word-battle", SITE_TITLE: "字靈收服", PRIMARY_HOST: "wygame.bdfz.net", USER_CENTER_ORIGIN: "https://my.bdfz.net", ASSETS: { fetch: async () => new Response("", { status: 404 }) } };
+const env = { DB: db, SITE_KEY: "shuling", SITE_TITLE: "書靈", PRIMARY_HOST: "shuling.bdfz.net", USER_CENTER_ORIGIN: "https://my.bdfz.net", ASSETS: { fetch: async () => new Response("", { status: 404 }) } };
 const q = pickQuestion();
-const req = (p, { method = "GET", pid, uc, body, raw } = {}) => new Request("https://wygame.bdfz.net" + p, { method, headers: { "content-type": "application/json", cookie: [pid ? "wywb_pid=" + pid : "", uc ? "bdfz_uc_session=" + uc : ""].filter(Boolean).join("; ") }, body: raw ?? (body ? JSON.stringify(body) : undefined) });
-const call = async (p, o) => { const res = await worker.fetch(req(p, o), env); return { status: res.status, body: await res.json(), pid: res.headers.get("set-cookie")?.match(/wywb_pid=([^;]+)/)?.[1] ?? null }; };
+const req = (p, { method = "GET", pid, uc, body, raw } = {}) => new Request("https://shuling.bdfz.net" + p, { method, headers: { "content-type": "application/json", cookie: [pid ? "shuling_pid=" + pid : "", uc ? "bdfz_uc_session=" + uc : ""].filter(Boolean).join("; ") }, body: raw ?? (body ? JSON.stringify(body) : undefined) });
+const call = async (p, o) => { const res = await worker.fetch(req(p, o), env); return { status: res.status, body: await res.json(), pid: res.headers.get("set-cookie")?.match(/shuling_pid=([^;]+)/)?.[1] ?? null }; };
 let seq = 0;
 const run = (pid, uc, scope = "L-test") => { const startedAt = Date.now() - 20000 - 1000 * seq++; return call("/api/run", { method: "POST", pid, uc, body: { mode: "lesson", scope, seed: "s" + seq, nick: "", startedAt, answers: [{ q: q.id, pick: q.answer, ms: 1500 }] } }); };
 const count = (sql, ...a) => sqlite.prepare(sql).get(...a).n;
