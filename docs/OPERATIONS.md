@@ -1,10 +1,10 @@
 # 書靈 · operations
 
-Owner: suen. Lifecycle: development (local only). Data class when launched: student_owned (nick, run scores and answers keyed by an opaque player id; User Center sync only after registration).
+Owner: suen. Lifecycle: live since 2026-11-01. Data class: student_owned (nick, run scores and answers keyed by an opaque player id; for signed-in players one User Center progress snapshot `shuling-total`, record-only).
 
 ## Quick start
 
-- Canonical path `sites/interactive/shuling`; local git branch `main`, no remote yet.
+- Canonical path `sites/interactive/shuling`; branch `main`, remote `ieduer/shuling` (public).
 - Design authority: `_meta/reports/operations/shuling-design-20261031/DESIGN.md` (P0–P4), citation analysis `NOBEL_CITATIONS_ANALYSIS.md`.
 - Engine provenance: forked from `sites/interactive/wy-word-battle` main `4b6013c` on 2026-10-31. Rank, sync, outbox and run-idempotency semantics are 字靈's (see its `docs/RANK_DESIGN.md`, `docs/SYNC_DESIGN.md`) except where this file says otherwise.
 
@@ -38,10 +38,11 @@ Vite mode has no Worker, so `/api/*` is offline and results save locally only. `
 
 First release 2026-11-01: source `cf3273a`, Worker `shuling` deployment `46176ed0` / version `3d2c2e6b`, D1 `shuling-db` `efec6261` (migrations 0001–0004), custom domain `shuling.bdfz.net`, workers.dev disabled (previews enabled). Evidence and controller: `_meta/reports/operations/shuling-launch-20261101/`.
 
-- Later releases: build from clean pushed `main`, upload a version tagged with the source commit, verify through a version override, then promote with an exact receipt via `scripts/release-worker-transaction.mjs`. D1 migrations are additive and need a `wrangler d1 export` first.
-- Rollback: previous immutable version through a registered rollback; for the first release only, removing the custom domain takes the site offline.
+- UC release 2026-11-01: source `8206df5`, version `57a2e54a`, deployment `bdad29a8` (record-only User Center; Worker code identical apart from esbuild path comments). Evidence `hub/shuling-uc/` in the same folder.
+- Later releases: build from clean pushed `main`, upload a version tagged with the source commit, verify through a version override, then promote with an exact receipt via `scripts/release-worker-transaction.mjs`. `hub/tools/shuling-release.mjs` does all of this (copy it and change `CHANGE`, the evidence folder and the reviewed allowlists). Wrangler is pinned at 4.100.0, whose `versions upload` has no `--strict`. D1 migrations are additive and need a `wrangler d1 export` first.
+- Rollback: previous immutable version through a registered rollback (currently `3d2c2e6b`, the build without User Center).
 - New hostnames: the bdfz.net SOA negative TTL is 1800 s. If anything resolved the name before it existed, resolvers (including this Mac's proxy and 1.1.1.1) keep answering NXDOMAIN for up to 30 minutes; check production through the zone edge address (`curl --resolve host:443:<edge ip>`) and the DNS record via the API instead of waiting.
-- Status: `20261101-shuling-launch` (site key `shuling`). Every accepted release needs its own Status record (`runbooks/status_public_updates.md`).
+- Status: `20261101-shuling-launch`, `20261101-shuling-register`, `20261101-shuling-uc` (site keys `shuling`, `my`). Every accepted release needs its own Status record (`runbooks/status_public_updates.md`).
 
 ## Local runtime disk profile
 
