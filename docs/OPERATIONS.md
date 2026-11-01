@@ -36,7 +36,12 @@ Vite mode has no Worker, so `/api/*` is offline and results save locally only. `
 
 ## Release, data, rollback
 
-Not releasable yet. Before the first production write: owner-approved domain and GitHub repository; target registered in `platform/release-authority.json` (new-Worker first release follows the cp `web_bootstrap` precedent); D1 created and `migrations/` applied; `wrangler.toml` given the real route and D1 id; `UC_REGISTERED` and the site-auth widget enabled only together with the User Center / nav / portals / Pulse registration transaction; Status record after acceptance.
+First release 2026-11-01: source `cf3273a`, Worker `shuling` deployment `46176ed0` / version `3d2c2e6b`, D1 `shuling-db` `efec6261` (migrations 0001–0004), custom domain `shuling.bdfz.net`, workers.dev disabled (previews enabled). Evidence and controller: `_meta/reports/operations/shuling-launch-20261101/`.
+
+- Later releases: build from clean pushed `main`, upload a version tagged with the source commit, verify through a version override, then promote with an exact receipt via `scripts/release-worker-transaction.mjs`. D1 migrations are additive and need a `wrangler d1 export` first.
+- Rollback: previous immutable version through a registered rollback; for the first release only, removing the custom domain takes the site offline.
+- New hostnames: the bdfz.net SOA negative TTL is 1800 s. If anything resolved the name before it existed, resolvers (including this Mac's proxy and 1.1.1.1) keep answering NXDOMAIN for up to 30 minutes; check production through the zone edge address (`curl --resolve host:443:<edge ip>`) and the DNS record via the API instead of waiting.
+- Status: `20261101-shuling-launch` (site key `shuling`). Every accepted release needs its own Status record (`runbooks/status_public_updates.md`).
 
 ## Local runtime disk profile
 

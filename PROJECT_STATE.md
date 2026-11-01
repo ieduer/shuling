@@ -2,7 +2,7 @@
 
 Last updated: 2026-11-01 (task `shuling-launch-20261101`)
 
-Current version: local only; bank `53807c9129ea`-family builds (version hash changes with sources and builder code; read `src/data/bank-version.json`). Initial commit on local branch `main` (no remote); nothing deployed.
+Current version: live at https://shuling.bdfz.net — source `cf3273a` (ieduer/shuling main, public), Worker `shuling` deployment `46176ed0` / version `3d2c2e6b`, D1 `shuling-db` `efec6261`, bank `904cada1558e`. First release 2026-11-01 (registry project `shuling-bdfz-net`, evidence `_meta/reports/operations/shuling-launch-20261101/`).
 
 Current objective: 設計方案 P1 — 雲山詩國＋萬國星海（愛琴海、七丘、扶桑、諾貝爾星河、思潮館）＋相關真卷，連同今日、旅程、探險、圖鑑、排行、同步，然後公開上線。
 
@@ -26,8 +26,10 @@ Known problems:
 - Official Nobel API maps J. M. G. Le Clézio to a Wikidata item that is a letter, not the author; the build ignores it (no language/work facts for him) and reports `NOBEL-WIKIDATA-MISMATCH`.
 - 字靈's own `package-lock.json` is out of sync with its package.json (`@emnapi/wasi-threads` 1.2.2 vs 1.2.3), so `npm ci` fails there; 書靈 regenerated its own lockfile with `npm install`.
 
+Launch registration (task shuling-launch-20261101): done for Pulse (72d60fb / caf2f596), nav.bdfz.net v28 (a6989b6 / 1798cc26), i.rdfzer.com (75460e5 / 6302e2d1), rdfz.net (146ee19 / a3ac9c09), Status 20261101-shuling-launch and 20261101-shuling-register. Candidates live on branch claude/shuling-register-20261101 of each hub repo (not yet merged into their main). Pending: User Center SITE_REGISTRY row, then a 書靈 release with UC_REGISTERED=true and site-auth.js plus a real signed-in write/readback.
+
 Next recommended task: author 愛琴海 and 扶桑 cards (Wikidata-backed works and authors, two-strait names), then import answer-verified gk/tw literature questions.
 
-Deployment status: not deployed; no production target exists.
+Deployment status: accepted first release 2026-11-01 (custom domain shuling.bdfz.net; workers.dev disabled, previews enabled). Later releases: source-tagged preview version + exact receipt via scripts/release-worker-transaction.mjs.
 
-Rollback anchor: not applicable (no release).
+Rollback anchor: no earlier version; remove custom domain shuling.bdfz.net (id 5693d82b…) to take the site offline. D1 rows stay.

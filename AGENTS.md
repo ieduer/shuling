@@ -10,17 +10,17 @@ This project inherits the BDFZ operations workspace `AGENTS.md` (paths in this f
 
 ## Current status (2026-10-31)
 
-- Local development only (initial commit on local `main`, 2026-10-31). No GitHub remote, no Cloudflare resources, no domain, not in release-authority, User Center, nav, portals, Pulse or Status.
+- Live since 2026-11-01 at https://shuling.bdfz.net (public repo `ieduer/shuling`, registry project `shuling-bdfz-net`, Worker `shuling`, D1 `shuling-db`). Registered in nav.bdfz.net, i.rdfzer.com, rdfz.net, Pulse and Status. User Center registration is still pending (UC stays off).
 - Engine forked from 字靈收服 `ieduer/wy-word-battle` main `4b6013c` (React + Vite + TypeScript, Cloudflare Worker + Workers Assets + D1). It is a clone-family copy, not a shared package; never edit 字靈 from here.
 - Content P1: 雲山詩國 (課本必背＋《唐詩三百首》《宋詞三百首》), 愛琴海, 七丘, 扶桑, 諾貝爾星河 (all 123 laureates), 思潮館 (Wikidata movements), 真卷殿 (verified single-answer 指考 literature items).
 
 ## Operating constraints
 
-- Source of truth: this directory, local git branch `main` (no remote yet; commit when the owner asks, never push before a repository is approved). Generated outputs (`public/bank/`, `worker/bank-index.json`, `worker/lessons.json`, `src/data/bank-version.json`) come only from `node scripts/build-bank.mjs`; never hand-edit them.
+- Source of truth: `ieduer/shuling` `main` (public; never commit secrets, student data or internal records — see README). Generated outputs (`public/bank/`, `worker/bank-index.json`, `worker/lessons.json`, `src/data/bank-version.json`) come only from `node scripts/build-bank.mjs`; never hand-edit them.
 - Every fact cites a source registered in `scripts/lib/sources.mjs` with a snapshot under `data/raw/` or `data/curated/`; the strict build fails otherwise. Never invent sources, dates, titles or translations; mark unknowns `-` and leave them out.
 - Scripts: UI text 繁體; quoted titles, author names and lines keep the source script (mainland textbook = 簡體 原文軌). Do not run OpenCC phrase conversion on content (★繁簡規則).
 - User Center: `UC_REGISTERED = false` in `src/lib/identity.ts`, and `index.html` does not load `my.bdfz.net/site-auth.js`. Do not turn either on before the public-project registration transaction (shared hub change). `tests/uc-gate.test.mjs` enforces this.
-- `wrangler.toml` has no route, `workers_dev = false` and a placeholder D1 id so any deploy fails closed. Production writes need a registered target in `platform/release-authority.json` and explicit owner authorization.
+- Releases only through the registered transaction: source-tagged preview version + exact receipt via `scripts/release-worker-transaction.mjs` (first release used `_meta/reports/operations/shuling-launch-20261101/release.mjs`). Never run `wrangler deploy` directly.
 - UI follows the 字靈 long-term directives (real painted icons, no SVG/emoji icons, four-palette cycle, contrast gate, 375 px and desktop route checks). Art is 書靈's own (`public/assets/art/v1/`, prompts and seeds in `art-pack/jobs.json`, `art-pack/cfgen.py` + `art-pack/post.py`): same rendering style as 字靈, different palette (celadon, moonstone, indigo, silver) and motifs. Never copy 字靈 assets; reject any image with model-invented characters.
 - Never AI-generate a real person's face; person cards use only verified public-domain or licensed portraits, or none.
 
