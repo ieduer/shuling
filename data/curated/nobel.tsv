@@ -1,0 +1,128 @@
+# 諾貝爾文學獎得主卡（書靈·諾貝爾星河）。一行一位得主，以「年份＋API knownName」對到官方資料。
+# name＝大陸通行譯名（繁體字形，只轉字形不換用詞）；name_tw＝臺灣譯名不同時才填。
+# kw＝授獎辭原文中逐字出現的短語（建置時比對官方授獎辭，不符即失敗）；kw_zh＝本站中文提要。
+# work_qid＝Wikidata 上該得主 P800（代表作）清單裡的作品；work／work_tw＝中文書名（大陸／臺灣）。無把握的留「-」。
+year	en	name	name_tw	kw	kw_zh	work_qid	work	work_tw
+1901	Sully Prudhomme	蘇利·普呂多姆	-	lofty idealism	崇高的理想主義	-	-	-
+1902	Theodor Mommsen	特奧多爾·蒙森	-	the art of historical writing	歷史寫作的藝術	Q1500229	羅馬史	-
+1903	Bjørnstjerne Bjørnson	比約恩斯徹納·比約松	-	the rare purity of its spirit	精神罕有的純淨	-	-	-
+1904	Frédéric Mistral	弗雷德里克·米斯特拉爾	-	Provençal philologist	普羅旺斯語文學家	-	-	-
+1904	José Echegaray	何塞·埃切加賴	-	the great traditions of the Spanish drama	西班牙戲劇的偉大傳統	-	-	-
+1905	Henryk Sienkiewicz	亨利克·顯克維奇	-	epic writer	史詩作家	Q335315	你往何處去	暴君焚城錄
+1906	Giosuè Carducci	焦蘇埃·卡爾杜齊	-	lyrical force	抒情的力量	-	-	-
+1907	Rudyard Kipling	魯德亞德·吉卜林	-	remarkable talent for narration	非凡的敘事才能	Q189509	叢林之書	叢林奇譚
+1908	Rudolf Eucken	魯道夫·奧伊肯	-	idealistic philosophy of life	理想主義的人生哲學	-	-	-
+1909	Selma Lagerlöf	塞爾瑪·拉格洛夫	-	spiritual perception	精神的洞察	Q726254	尼爾斯騎鵝旅行記	騎鵝歷險記
+1910	Paul Heyse	保羅·海澤	-	consummate artistry, permeated with idealism	浸透理想主義的完美技藝	-	-	-
+1911	Maurice Maeterlinck	莫里斯·梅特林克	-	in the guise of a fairy tale	以童話的形式	Q1367544	青鳥	-
+1912	Gerhart Hauptmann	蓋哈特·霍普特曼	-	the realm of dramatic art	戲劇藝術的領域	Q741606	織工	-
+1913	Rabindranath Tagore	羅賓德拉納特·泰戈爾	-	a part of the literature of the West	成為西方文學的一部分	Q2358930	吉檀迦利	-
+1915	Romain Rolland	羅曼·羅蘭	-	the sympathy and love of truth	同情與對真理的熱愛	Q2476841	約翰·克利斯朵夫	-
+1916	Verner von Heidenstam	魏爾納·馮·海登斯塔姆	-	a new era in our literature	我們文學的新時代	-	-	-
+1917	Karl Gjellerup	卡爾·耶勒魯普	-	inspired by lofty ideals	受崇高理想啟發	-	-	-
+1917	Henrik Pontoppidan	亨利克·彭托皮丹	-	present-day life in Denmark	當代丹麥生活	-	-	-
+1919	Carl Spitteler	卡爾·施皮特勒	-	Olympian Spring	史詩《奧林匹斯之春》	Q6548960	奧林匹斯之春	-
+1920	Knut Hamsun	克努特·漢姆生	-	Growth of the Soil	《大地的成長》	Q2266122	大地的成長	-
+1921	Anatole France	阿納托爾·法朗士	-	a true Gallic temperament	真正的高盧氣質	Q2756710	苔依絲	-
+1922	Jacinto Benavente	哈辛托·貝納文特	-	the illustrious traditions of the Spanish drama	西班牙戲劇的光輝傳統	-	-	-
+1923	William Butler Yeats	威廉·巴特勒·葉芝	葉慈	the spirit of a whole nation	整個民族的精神	-	-	-
+1924	Władysław Reymont	瓦迪斯瓦夫·萊蒙特	-	great national epic	偉大的民族史詩	Q2896338	農民	-
+1925	George Bernard Shaw	蕭伯納	-	stimulating satire	激動人心的諷刺	Q637200	賣花女	-
+1926	Grazia Deledda	格拉齊亞·黛萊達	-	the life on her native island	她故鄉島嶼上的生活	-	-	-
+1927	Henri Bergson	亨利·柏格森	-	rich and vitalizing ideas	豐富而富有生命力的思想	-	-	-
+1928	Sigrid Undset	西格麗德·溫塞特	-	Northern life during the Middle Ages	中世紀北歐生活	-	-	-
+1929	Thomas Mann	托馬斯·曼	-	Buddenbrooks	《布登勃洛克一家》	Q326909	布登勃洛克一家	-
+1930	Sinclair Lewis	辛克萊·劉易斯	辛克萊·路易斯	new types of characters	新的人物類型	Q1107000	巴比特	-
+1931	Erik Axel Karlfeldt	埃里克·阿克塞爾·卡爾費爾特	-	The poetry of Erik Axel Karlfeldt	授獎辭只有一句「卡爾費爾特的詩」	-	-	-
+1932	John Galsworthy	約翰·高爾斯華綏	-	The Forsyte Saga	《福爾賽世家》	Q735319	福爾賽世家	-
+1933	Ivan Bunin	伊凡·蒲寧	-	the classical Russian traditions in prose writing	俄國散文寫作的古典傳統	-	-	-
+1934	Luigi Pirandello	路伊吉·皮蘭德婁	-	bold and ingenious revival of dramatic and scenic art	大膽巧妙地復興戲劇與舞臺藝術	Q641651	六個尋找作者的劇中人	-
+1936	Eugene O'Neill	尤金·奧尼爾	尤金·歐尼爾	an original concept of tragedy	獨創的悲劇觀	Q2520460	悲悼	-
+1937	Roger Martin du Gard	羅歇·馬丁·杜·加爾	-	Les Thibault	長篇系列《蒂博一家》	Q2915845	蒂博一家	-
+1938	Pearl Buck	賽珍珠	-	peasant life in China	中國農民的生活	Q1218608	大地	-
+1939	Frans Eemil Sillanpää	弗蘭斯·埃米爾·西蘭帕	-	his country's peasantry	他祖國的農民	-	-	-
+1944	Johannes V. Jensen	約翰內斯·延森	-	intellectual curiosity of wide scope	廣博的求知好奇	-	-	-
+1945	Gabriela Mistral	加夫列拉·米斯特拉爾	-	the entire Latin American world	整個拉丁美洲世界	-	-	-
+1946	Hermann Hesse	赫爾曼·黑塞	赫曼·赫塞	classical humanitarian ideals	古典的人道理想	Q217073	荒原狼	-
+1947	André Gide	安德烈·紀德	-	a fearless love of truth	無畏地熱愛真理	Q27463	窄門	-
+1948	T.S. Eliot	T.S.艾略特	-	pioneer contribution to present-day poetry	對當代詩歌的開拓性貢獻	Q581458	荒原	-
+1949	William Faulkner	威廉·福克納	-	the modern American novel	現代美國小說	Q135515	喧嘩與騷動	聲音與憤怒
+1950	Bertrand Russell	伯特蘭·羅素	-	freedom of thought	思想自由	Q3393210	哲學問題	-
+1951	Pär Lagerkvist	帕爾·拉格克維斯特	-	the eternal questions confronting mankind	人類面對的永恆問題	-	-	-
+1952	François Mauriac	弗朗索瓦·莫里亞克	-	the drama of human life	人生的戲劇	-	-	-
+1953	Winston Churchill	溫斯頓·邱吉爾	-	brilliant oratory	精彩的演說	Q209788	第二次世界大戰回憶錄	-
+1954	Ernest Hemingway	歐內斯特·海明威	-	The Old Man and the Sea	《老人與海》	Q26505	老人與海	-
+1955	Halldór Laxness	哈爾多爾·拉克斯內斯	-	the great narrative art of Iceland	冰島偉大的敘事藝術	-	-	-
+1956	Juan Ramón Jiménez	胡安·拉蒙·希梅內斯	-	artistical purity	藝術的純粹	-	-	-
+1957	Albert Camus	阿爾貝·加繆	阿爾貝·卡繆	the problems of the human conscience in our times	我們時代人類良知的問題	Q163297	局外人	異鄉人
+1958	Boris Pasternak	鮑里斯·帕斯捷爾納克	-	the great Russian epic tradition	偉大的俄國史詩傳統	Q206870	日瓦戈醫生	齊瓦哥醫生
+1959	Salvatore Quasimodo	薩瓦多爾·夸西莫多	-	the tragic experience of life in our own times	我們時代生命的悲劇經驗	-	-	-
+1960	Saint-John Perse	聖瓊·佩斯	-	evocative imagery	喚起聯想的意象	-	-	-
+1961	Ivo Andrić	伊沃·安德里奇	-	the history of his country	他祖國的歷史	Q1247865	德里納河上的橋	-
+1962	John Steinbeck	約翰·斯坦貝克	約翰·史坦貝克	keen social perception	敏銳的社會洞察	Q215983	憤怒的葡萄	-
+1963	Giorgos Seferis	喬治·塞菲里斯	-	the Hellenic world of culture	希臘文化世界	-	-	-
+1964	Jean-Paul Sartre	讓-保羅·薩特	尚-保羅·沙特	the spirit of freedom and the quest for truth	自由的精神與對真理的追求	-	-	-
+1965	Mikhail Sholokhov	米哈伊爾·肖洛霍夫	米哈伊爾·蕭洛霍夫	his epic of the Don	他的頓河史詩	Q75840	靜靜的頓河	-
+1966	Shmuel Agnon	撒母耳·約瑟夫·阿格農	-	the life of the Jewish people	猶太民族的生活	-	-	-
+1966	Nelly Sachs	奈莉·薩克斯	-	Israel's destiny	以色列的命運	-	-	-
+1967	Miguel Angel Asturias	米格爾·安赫爾·阿斯圖里亞斯	-	Indian peoples of Latin America	拉丁美洲的印第安民族	-	-	-
+1968	Yasunari Kawabata	川端康成	-	the essence of the Japanese mind	日本人心靈的精髓	Q1376060	雪國	-
+1969	Samuel Beckett	薩繆爾·貝克特	-	the destitution of modern man	現代人的困頓	Q19871	等待戈多	等待果陀
+1970	Aleksandr Solzhenitsyn	亞歷山大·索爾仁尼琴	亞歷山大·索忍尼辛	the ethical force	倫理的力量	Q27321	伊凡·傑尼索維奇的一天	-
+1971	Pablo Neruda	巴勃羅·聶魯達	-	a continent's destiny and dreams	一個大陸的命運與夢想	Q5219975	二十首情詩和一首絕望的歌	-
+1972	Heinrich Böll	海因里希·伯爾	-	a renewal of German literature	德語文學的復興	-	-	-
+1973	Patrick White	帕特里克·懷特	-	introduced a new continent into literature	把一個新大陸引進文學	Q7942045	沃斯	-
+1974	Eyvind Johnson	埃溫特·雍松	-	in the service of freedom	為自由服務	-	-	-
+1974	Harry Martinson	哈里·馬丁松	-	catch the dewdrop and reflect the cosmos	捕捉露珠而映照宇宙	-	-	-
+1975	Eugenio Montale	埃烏傑尼奧·蒙塔萊	-	an outlook on life with no illusions	不抱幻想的人生觀	-	-	-
+1976	Saul Bellow	索爾·貝婁	-	subtle analysis of contemporary culture	對當代文化的精微分析	Q1424503	赫索格	-
+1977	Vicente Aleixandre	維森特·阿萊克桑德雷	-	man's condition in the cosmos	人在宇宙中的處境	-	-	-
+1978	Isaac Bashevis Singer	艾薩克·巴什維斯·辛格	-	a Polish-Jewish cultural tradition	波蘭猶太文化傳統	Q5562782	傻瓜吉姆佩爾	-
+1979	Odysseus Elytis	奧德修斯·埃利蒂斯	-	against the background of Greek tradition	以希臘傳統為背景	-	-	-
+1980	Czesław Miłosz	切斯瓦夫·米沃什	-	man's exposed condition in a world of severe conflicts	人在嚴酷衝突世界中無所遮蔽的處境	Q249657	被禁錮的頭腦	被禁錮的心靈
+1981	Elias Canetti	埃利亞斯·卡內蒂	-	a wealth of ideas and artistic power	豐富的思想與藝術力量	Q1684885	群眾與權力	-
+1982	Gabriel García Márquez	加夫列爾·加西亞·馬爾克斯	賈西亞·馬奎斯	the fantastic and the realistic are combined	幻想與現實相結合	Q178869	百年孤獨	百年孤寂
+1983	William Golding	威廉·戈爾丁	威廉·高汀	the diversity and universality of myth	神話的多樣與普遍	Q271764	蠅王	蒼蠅王
+1984	Jaroslav Seifert	雅羅斯拉夫·塞弗爾特	-	the indomitable spirit and versatility of man	人不屈的精神與多樣	-	-	-
+1985	Claude Simon	克洛德·西蒙	-	the poet's and the painter's creativeness	詩人與畫家的創造力	-	-	-
+1986	Wole Soyinka	沃萊·索因卡	-	the drama of existence	生存的戲劇	-	-	-
+1987	Joseph Brodsky	約瑟夫·布羅茨基	-	clarity of thought and poetic intensity	思想的清晰與詩的強度	-	-	-
+1988	Naguib Mahfouz	納吉布·馬哈福茲	-	an Arabian narrative art that applies to all mankind	適用於全人類的阿拉伯敘事藝術	Q510850	米達格胡同	-
+1989	Camilo José Cela	卡米洛·何塞·塞拉	-	man's vulnerability	人的脆弱	Q3212510	蜂巢	-
+1990	Octavio Paz	奧克塔維奧·帕斯	-	sensuous intelligence and humanistic integrity	感性的智慧與人文的正直	-	-	-
+1991	Nadine Gordimer	納丁·戈迪默	-	of very great benefit to humanity	對人類有極大貢獻（引諾貝爾的話）	Q6310424	七月的人民	-
+1992	Derek Walcott	德里克·沃爾科特	-	a multicultural commitment	多元文化的投入	-	-	-
+1993	Toni Morrison	托妮·莫里森	童妮·摩里森	an essential aspect of American reality	美國現實的一個本質面向	Q971767	寵兒	-
+1994	Kenzaburo Oe	大江健三郎	-	life and myth condense	生活與神話凝縮	Q2378189	個人的體驗	-
+1995	Seamus Heaney	謝默斯·希尼	-	everyday miracles and the living past	日常的奇蹟與鮮活的過去	-	-	-
+1996	Wisława Szymborska	維斯瓦娃·辛波斯卡	維斯瓦娃·辛波絲卡	ironic precision	反諷的精確	-	-	-
+1997	Dario Fo	達里奧·福	-	emulates the jesters of the Middle Ages	效法中世紀的弄臣	Q2704227	一個無政府主義者的意外死亡	-
+1998	José Saramago	若澤·薩拉馬戈	-	parables sustained by imagination, compassion and irony	以想像、同情與反諷撐起的寓言	Q826428	失明症漫記	-
+1999	Günter Grass	君特·格拉斯	-	frolicsome black fables	嬉戲的黑色寓言	Q899334	鐵皮鼓	-
+2000	Gao Xingjian	高行健	-	new paths for the Chinese novel and drama	為中文小說與戲劇開出新路	Q1760054	靈山	-
+2001	V. S. Naipaul	V.S.奈保爾	V.S.奈波爾	suppressed histories	被壓抑的歷史	Q4657437	畢司沃斯先生的房子	畢斯華斯先生的房子
+2002	Imre Kertész	凱爾泰斯·伊姆雷	-	the barbaric arbitrariness of history	歷史野蠻的專斷	Q655701	無命運的人生	非關命運
+2003	J. M. Coetzee	J.M.庫切	J.M.柯慈	the surprising involvement of the outsider	局外人出人意料的捲入	Q761474	邁克爾·K的生活和時代	-
+2004	Elfriede Jelinek	埃爾弗里德·耶利內克	-	voices and counter-voices	聲音與反聲音	Q3823559	鋼琴教師	-
+2005	Harold Pinter	哈羅德·品特	哈洛·品特	the precipice under everyday prattle	日常閒談底下的深淵	Q2539975	生日晚會	生日派對
+2006	Orhan Pamuk	奧爾罕·帕慕克	-	the melancholic soul of his native city	故鄉城市憂鬱的靈魂	Q470464	我的名字叫紅	-
+2007	Doris Lessing	多麗絲·萊辛	-	that epicist of the female experience	女性經驗的史詩作者	Q784986	金色筆記	-
+2008	Jean-Marie Gustave Le Clézio	勒克萊齊奧	-	a humanity beyond and below the reigning civilization	主流文明之外與之下的人性	-	-	-
+2009	Herta Müller	赫塔·米勒	-	the landscape of the dispossessed	被剝奪者的處境	Q479895	呼吸鞦韆	-
+2010	Mario Vargas Llosa	馬里奧·巴爾加斯·略薩	馬利歐·巴爾加斯·尤薩	his cartography of structures of power	他對權力結構的測繪	Q763199	城市與狗	-
+2011	Tomas Tranströmer	托馬斯·特朗斯特羅姆	-	condensed, translucent images	凝練透明的意象	-	-	-
+2012	Mo Yan	莫言	-	hallucinatory realism	幻覺般的現實主義	Q1766205	紅高粱家族	-
+2013	Alice Munro	艾麗絲·門羅	艾莉絲·孟若	master of the contemporary short story	當代短篇小說大師	Q760771	幸福過了頭	-
+2014	Patrick Modiano	帕特里克·莫迪亞諾	派屈克·蒙迪安諾	the art of memory	記憶的藝術	Q3452094	暗店街	-
+2015	Svetlana Alexievich	斯維特蘭娜·阿列克謝耶維奇	斯維拉娜·亞歷塞維奇	polyphonic writings	多聲部的寫作	Q21088242	戰爭中沒有女性	戰爭沒有女人的臉
+2016	Bob Dylan	鮑勃·迪倫	巴布·狄倫	the great American song tradition	偉大的美國歌曲傳統	Q214430	像一塊滾石	-
+2017	Kazuo Ishiguro	石黑一雄	-	our illusory sense of connection with the world	我們與世界相連的虛幻感	Q829934	長日留痕	長日將盡
+2018	Olga Tokarczuk	奧爾加·托卡爾丘克	奧爾嘉·朵卡萩	the crossing of boundaries as a form of life	把跨越邊界當作一種生命形式	Q9171173	雲遊	航班
+2019	Peter Handke	彼得·漢德克	-	the periphery and the specificity of human experience	人類經驗的邊緣與獨特	Q266970	罵觀眾	-
+2020	Louise Glück	露易絲·格麗克	-	austere beauty	樸素的美	Q25058084	野鳶尾	-
+2021	Abdulrazak Gurnah	阿卜杜勒拉扎克·古爾納	-	the fate of the refugee	難民的命運	Q20875782	天堂	-
+2022	Annie Ernaux	安妮·埃爾諾	安妮·艾諾	collective restraints of personal memory	個人記憶的集體束縛	Q3230588	悠悠歲月	-
+2023	Jon Fosse	約恩·福瑟	-	give voice to the unsayable	為說不出的事物發聲	Q11989942	晨與夜	-
+2024	Han Kang	韓江	-	confronts historical traumas	正面迎向歷史創傷	Q24082770	素食者	-
+2025	László Krasznahorkai	克拉斯諾霍爾卡伊·拉斯洛	-	the midst of apocalyptic terror	末日恐怖之中	Q1315145	撒旦探戈	-
+2026	Anne Carson	安妮·卡森	-	in playful dialogue with the classical tradition	與古典傳統遊戲式的對話	Q4826169	紅的自傳	-

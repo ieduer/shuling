@@ -1,0 +1,15 @@
+{
+  "name": "書靈",
+  "short_name": "書靈",
+  "description": "收服中外文學與文化裡的書靈：每日試煉、旅程關卡、排行榜與圖鑑。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4ead6",
+  "theme_color": "#f4ead6",
+  "lang": "zh-Hant",
+  "icons": [
+    { "src": "/assets/art/v1/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/art/v1/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/art/v1/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

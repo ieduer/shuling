@@ -1,0 +1,989 @@
+/* 書靈 · 基礎樣式與設計記號。手機優先，單欄；桌面置中最寬 560px。 */
+/* 四套色系（兩淺兩深）。文字色對每個底色 ≥ 4.5:1，見 tests/theme.test.mjs 與瀏覽器逐路由量測。 */
+:root {
+  /* 不隨色系變的常數：書靈球、卡面永遠是深色物件；填色上的字 */
+  --card-a: #2a241c;
+  --card-b: #16120e;
+  --card-text: #f3e9d2;
+  --card-text-dim: rgba(243, 233, 210, 0.58);
+  --gold-fill: #e6c36b;
+  --on-gold: #2b2010;
+  --on-cinnabar: #fff6ec;
+  --tier-N: #9aa5a1;
+  --tier-R: #5aa9e6;
+  --tier-SR: #b48ef1;
+  --tier-SSR: #e6c36b;
+  --radius: 18px;
+  --radius-s: 10px;
+  --font-glyph: "HuWenMingChao", "Noto Serif TC", "Songti TC", "PMingLiU", "Source Han Serif TC", serif;
+  --font-ui: -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --nav-h: 78px;
+  /* 預設＝宣紙（同 html[data-theme="paper"]） */
+  color-scheme: light;
+  --bd-opacity: 0.34;
+  --bd-filter: saturate(0.85);
+  --bd-veil: linear-gradient(180deg, rgba(244, 234, 214, 0.55), rgba(244, 234, 214, 0.22) 35%, rgba(244, 234, 214, 0.62));
+  --mist: rgba(255, 250, 235, 0.55);
+  --mist-blend: normal;
+  --mote: rgba(255, 196, 90, 0.9);
+  --tone-mix: 45%;
+  --crit-text: #8f2515;
+  --crit-glow: #fff6ec;
+  --crit-shadow: #f6d7cc;
+  --daily-a: rgba(194, 63, 39, 0.16);
+  --daily-b: rgba(122, 34, 20, 0.08);
+  --daily-line: rgba(194, 63, 39, 0.55);
+  --done-a: rgba(35, 122, 85, 0.16);
+  --done-b: rgba(30, 70, 55, 0.08);
+  --done-line: rgba(35, 122, 85, 0.55);
+  --bg: #f4ead6;
+  --bg-top: #fbf4e6;
+  --bg-mid: #f1e5cd;
+  --ink: #f4ead6;
+  --ink-2: #fbf6ea;
+  --ink-3: #ede1c6;
+  --panel: #fbf6ea;
+  --panel-2: #fffdf7;
+  --sunken: rgba(80, 60, 30, 0.08);
+  --track: rgba(80, 60, 30, 0.16);
+  --watermark: rgba(60, 45, 20, 0.22);
+  --nav-a: #fbf6ea;
+  --nav-b: #f6eedb;
+  --sheet-a: #fffdf7;
+  --sheet-b: #f8f0dd;
+  --toast-bg: #fffdf7;
+  --arena-a: #fffdf7;
+  --arena-b: #eadcbd;
+  --paper: #15100a;
+  --paper-2: #2a2117;
+  --text: #241c14;
+  --text-2: #4a3d2d;
+  --muted: #6b5c47;
+  --line: rgba(90, 65, 20, 0.22);
+  --line-2: rgba(90, 65, 20, 0.45);
+  --cinnabar: #c23f27;
+  --cinnabar-2: #a8301a;
+  --gold: #7d5a10;
+  --gold-2: #6a4a08;
+  --gold-3: #c9a657;
+  --jade: #237a55;
+  --jade-2: #1d6b49;
+  --on-jade: #ffffff;
+  --azure: #1d5fa0;
+  --violet: #5f3fb0;
+  --good: #1f6f3f;
+  --bad: #b02f1d;
+  --danger-bg: #f6dcd4;
+  --danger-text: #7a1f12;
+  --shadow: 0 10px 30px rgba(70, 50, 20, 0.18);
+}
+html[data-theme="paper"] {
+  color-scheme: light;
+}
+html[data-theme="celadon"] {
+  color-scheme: light;
+  --bd-opacity: 0.32;
+  --bd-filter: saturate(0.7) hue-rotate(10deg);
+  --bd-veil: linear-gradient(180deg, rgba(230, 239, 233, 0.58), rgba(230, 239, 233, 0.25) 35%, rgba(230, 239, 233, 0.64));
+  --mist: rgba(245, 252, 248, 0.6);
+  --mist-blend: normal;
+  --mote: rgba(120, 220, 170, 0.9);
+  --tone-mix: 45%;
+  --crit-text: #8f2515;
+  --crit-glow: #fff6ec;
+  --crit-shadow: #f6d7cc;
+  --daily-a: rgba(194, 63, 39, 0.16);
+  --daily-b: rgba(122, 34, 20, 0.08);
+  --daily-line: rgba(194, 63, 39, 0.55);
+  --done-a: rgba(35, 122, 85, 0.16);
+  --done-b: rgba(30, 70, 55, 0.08);
+  --done-line: rgba(35, 122, 85, 0.55);
+  --bg: #e6efe9;
+  --bg-top: #f1f7f3;
+  --bg-mid: #e2ece6;
+  --ink: #e6efe9;
+  --ink-2: #f5faf7;
+  --ink-3: #d9e6de;
+  --panel: #f5faf7;
+  --panel-2: #ffffff;
+  --sunken: rgba(30, 70, 50, 0.08);
+  --track: rgba(30, 70, 50, 0.16);
+  --watermark: rgba(20, 60, 45, 0.22);
+  --nav-a: #f5faf7;
+  --nav-b: #eaf2ed;
+  --sheet-a: #ffffff;
+  --sheet-b: #eef5f1;
+  --toast-bg: #ffffff;
+  --arena-a: #ffffff;
+  --arena-b: #d5e4db;
+  --paper: #0f1a14;
+  --paper-2: #1f3328;
+  --text: #15241c;
+  --text-2: #2f473b;
+  --muted: #52685c;
+  --line: rgba(20, 60, 45, 0.2);
+  --line-2: rgba(20, 60, 45, 0.42);
+  --cinnabar: #b9412a;
+  --cinnabar-2: #9e2f1b;
+  --gold: #6f5612;
+  --gold-2: #5c4609;
+  --gold-3: #bda25b;
+  --jade: #1f6f4f;
+  --jade-2: #1b5f42;
+  --on-jade: #ffffff;
+  --azure: #1a5a99;
+  --violet: #563aa6;
+  --good: #1d6a3c;
+  --bad: #a82c1b;
+  --danger-bg: #f3dcd6;
+  --danger-text: #7a1f12;
+  --shadow: 0 10px 30px rgba(20, 50, 40, 0.16);
+}
+html[data-theme="ink"] {
+  color-scheme: dark;
+  --bd-opacity: 0.72;
+  --bd-filter: saturate(1) brightness(0.85);
+  --bd-veil: linear-gradient(180deg, rgba(23, 19, 16, 0.5), rgba(23, 19, 16, 0.2) 35%, rgba(23, 19, 16, 0.78));
+  --mist: rgba(255, 220, 150, 0.14);
+  --mist-blend: screen;
+  --mote: rgba(255, 211, 107, 0.95);
+  --tone-mix: 100%;
+  --crit-text: #fff3e3;
+  --crit-glow: #ffffff;
+  --crit-shadow: #7a1f12;
+  --daily-a: rgba(217, 67, 43, 0.35);
+  --daily-b: rgba(122, 34, 20, 0.25);
+  --daily-line: rgba(255, 138, 107, 0.6);
+  --done-a: rgba(79, 176, 138, 0.28);
+  --done-b: rgba(30, 70, 55, 0.25);
+  --done-line: rgba(159, 227, 194, 0.5);
+  --bg: #171310;
+  --bg-top: #2a2118;
+  --bg-mid: #1d1813;
+  --ink: #171310;
+  --ink-2: #221c16;
+  --ink-3: #2d261e;
+  --panel: #221c16;
+  --panel-2: #2b241c;
+  --sunken: rgba(0, 0, 0, 0.32);
+  --track: rgba(255, 255, 255, 0.12);
+  --watermark: rgba(255, 255, 255, 0.2);
+  --nav-a: #1d1813;
+  --nav-b: #171310;
+  --sheet-a: #2b241c;
+  --sheet-b: #1d1813;
+  --toast-bg: #221c16;
+  --arena-a: #2b241c;
+  --arena-b: #110e0b;
+  --paper: #f3e9d2;
+  --paper-2: #e2d3b1;
+  --text: #f2e8d5;
+  --text-2: #cfc1a6;
+  --muted: #a4967c;
+  --line: rgba(230, 195, 107, 0.22);
+  --line-2: rgba(230, 195, 107, 0.45);
+  --cinnabar: #c93a22;
+  --cinnabar-2: #ff6b4a;
+  --gold: #e6c36b;
+  --gold-2: #f6da93;
+  --gold-3: #9a7536;
+  --jade: #4fb08a;
+  --jade-2: #9fe3c2;
+  --on-jade: #0e1f17;
+  --azure: #5aa9e6;
+  --violet: #b48ef1;
+  --good: #7fd89a;
+  --bad: #ff7a5c;
+  --danger-bg: #4a1d14;
+  --danger-text: #ffd4c9;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+html[data-theme="indigo"] {
+  color-scheme: dark;
+  --bd-opacity: 0.68;
+  --bd-filter: saturate(0.9) hue-rotate(-12deg) brightness(0.82);
+  --bd-veil: linear-gradient(180deg, rgba(18, 26, 38, 0.5), rgba(18, 26, 38, 0.22) 35%, rgba(18, 26, 38, 0.8));
+  --mist: rgba(170, 200, 255, 0.14);
+  --mist-blend: screen;
+  --mote: rgba(170, 215, 255, 0.95);
+  --tone-mix: 100%;
+  --crit-text: #fff3e3;
+  --crit-glow: #ffffff;
+  --crit-shadow: #7a1f12;
+  --daily-a: rgba(217, 67, 43, 0.35);
+  --daily-b: rgba(122, 34, 20, 0.25);
+  --daily-line: rgba(255, 138, 107, 0.6);
+  --done-a: rgba(79, 176, 138, 0.28);
+  --done-b: rgba(30, 70, 55, 0.25);
+  --done-line: rgba(159, 227, 194, 0.5);
+  --bg: #121a26;
+  --bg-top: #1f2b3d;
+  --bg-mid: #172130;
+  --ink: #121a26;
+  --ink-2: #1b2534;
+  --ink-3: #27344a;
+  --panel: #1b2534;
+  --panel-2: #243144;
+  --sunken: rgba(0, 0, 0, 0.32);
+  --track: rgba(255, 255, 255, 0.12);
+  --watermark: rgba(255, 255, 255, 0.2);
+  --nav-a: #172130;
+  --nav-b: #121a26;
+  --sheet-a: #243144;
+  --sheet-b: #172130;
+  --toast-bg: #1b2534;
+  --arena-a: #243144;
+  --arena-b: #0e141d;
+  --paper: #f1f5fb;
+  --paper-2: #d6dfeb;
+  --text: #e9eef6;
+  --text-2: #c4cfdf;
+  --muted: #98a7bd;
+  --line: rgba(240, 207, 122, 0.22);
+  --line-2: rgba(240, 207, 122, 0.45);
+  --cinnabar: #c93a22;
+  --cinnabar-2: #ff7a5c;
+  --gold: #f0cf7a;
+  --gold-2: #f8e0a0;
+  --gold-3: #a2844a;
+  --jade: #4fb08a;
+  --jade-2: #9fe3c2;
+  --on-jade: #0e1f17;
+  --azure: #7bbcf3;
+  --violet: #c3a3f7;
+  --good: #8be0a6;
+  --bad: #ff8a70;
+  --danger-bg: #4a1d14;
+  --danger-text: #ffd4c9;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+/* 站長 2026-10-28：浮動導航 logo 遮擋選項，整站隱藏（身分 SDK 與瀏覽計數照常） */
+#bdfz-unified-widget {
+  display: none !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+body {
+  background: radial-gradient(1200px 700px at 50% -10%, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg) 100%) fixed;
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(600px 300px at 20% 100%, rgba(217, 67, 43, 0.08), transparent 60%),
+    radial-gradient(500px 300px at 85% 20%, rgba(230, 195, 107, 0.07), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px);
+  z-index: 1;
+}
+#root {
+  position: relative;
+  z-index: 2;
+}
+a {
+  color: var(--gold);
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+h2 {
+  font-size: 15px;
+  color: var(--text-2);
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+}
+p {
+  margin: 0;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+button:disabled {
+  cursor: default;
+}
+input {
+  font: inherit;
+}
+.muted {
+  color: var(--muted);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ---- layout ---- */
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.screen {
+  position: relative;
+  z-index: 1; /* 背景畫是 z-index 0 的 fixed 層，頁內一切內容都要壓在它上面 */
+  width: min(100%, 560px);
+  margin: 0 auto;
+  padding: 14px 16px calc(var(--nav-h) + var(--safe-b) + 48px); /* 捲到底時最後一塊面板離欄 48px，圖標不貼著銅錢 */
+  flex: 1;
+}
+html[data-screen="battle"] .screen {
+  padding-bottom: 16px;
+}
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--nav-h) + var(--safe-b));
+  padding-bottom: var(--safe-b);
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  /* 欄體完全不透明：捲到一半的面板絕不會在欄裡透出來（10-28／29 站長：最兇書靈圖標與底部銅錢視覺重合） */
+  background: linear-gradient(180deg, var(--nav-a), var(--nav-b));
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -12px 28px -14px rgba(0, 0, 0, 0.28);
+  z-index: 20;
+}
+/* 欄上緣 48px 漸層到實色：被欄截到的內容先淡出再進欄，圓形圖標不會和銅錢疊在一起 */
+.nav::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 48px;
+  background: linear-gradient(180deg, transparent, var(--nav-a));
+  pointer-events: none;
+}
+/* 五枚銅錢與字都留在欄框內：欄高 78px，銅錢區固定 44px、字 13px，選中只浮 3px、放大在 44px 內 */
+.nav-btn {
+  width: 20%;
+  max-width: 120px;
+  height: var(--nav-h);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-btn.is-active {
+  color: var(--gold-2);
+}
+.nav-btn.is-active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 28px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+.nav-coin {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
+.nav-coin img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+  filter: saturate(0.55) brightness(0.8);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+.nav-btn.is-active .nav-coin img {
+  transform: translateY(-3px) scale(1.12);
+  filter: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4), 0 0 16px rgba(230, 195, 107, 0.55);
+}
+.nav-label {
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* ---- buttons / inputs / chips ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: var(--ink-3);
+  border: 1px solid var(--line-2);
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: transform 0.12s, background 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: linear-gradient(180deg, #c23f27, #8f2515);
+  border-color: #e0674d;
+  color: #fff6ec;
+  box-shadow: 0 6px 20px rgba(217, 67, 43, 0.35);
+}
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-2);
+}
+.btn-danger {
+  background: var(--danger-bg);
+  border-color: var(--bad);
+  color: var(--danger-text);
+}
+.link {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 14px;
+}
+.input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--line);
+  color: var(--text);
+  outline: none;
+}
+.input:focus {
+  border-color: var(--gold);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+.chip {
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--text-2);
+  font-size: 13px;
+  background: var(--panel);
+  transition: all 0.15s;
+}
+.chip.is-on {
+  background: var(--gold-fill);
+  color: var(--on-gold);
+  border-color: var(--gold-fill);
+  font-weight: 700;
+}
+.chip-SSR.is-on {
+  background: var(--tier-SSR);
+}
+.chip-SR.is-on {
+  background: var(--tier-SR);
+}
+.chip-R.is-on {
+  background: var(--tier-R);
+}
+.chip-N.is-on {
+  background: var(--tier-N);
+}
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 12px;
+  background: var(--sunken);
+  border: 1px solid var(--line);
+}
+.seg-btn {
+  padding: 8px 16px;
+  border-radius: 9px;
+  color: var(--text-2);
+  font-size: 14px;
+}
+.seg-btn.is-on {
+  background: var(--ink-3);
+  color: var(--gold-2);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.panel,
+.panel-glass {
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-top: 14px;
+}
+.row-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 12px;
+}
+.switch input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--gold);
+}
+
+/* ---- toasts / modal / fx ---- */
+.toasts {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 50;
+  pointer-events: none;
+}
+.toast {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--toast-bg);
+  border: 1px solid var(--line-2);
+  color: var(--text);
+  font-size: 14px;
+  animation: toast-in 0.25s ease-out;
+  box-shadow: var(--shadow);
+}
+.toast-gold {
+  border-color: var(--gold);
+  color: var(--gold-2);
+}
+.toast-bad {
+  border-color: var(--bad);
+  color: #ffd4c9;
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 40;
+  padding: 0;
+}
+.modal-card {
+  width: min(100%, 560px);
+  max-height: 86dvh;
+  overflow: auto;
+  background: var(--ink-2);
+  border: 1px solid var(--line-2);
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  padding: 18px 18px calc(18px + var(--safe-b));
+  animation: sheet-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  position: relative;
+}
+@media (min-width: 640px) {
+  .modal {
+    align-items: center;
+  }
+  .modal-card {
+    border-radius: 22px;
+    border-bottom: 1px solid var(--line-2);
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--text-2);
+}
+.fx-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+}
+.fx-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 29;
+  animation: flash 0.38s ease-out forwards;
+}
+.fx-flash-good {
+  background: radial-gradient(circle at 50% 40%, rgba(230, 195, 107, 0.35), transparent 60%);
+}
+.fx-flash-bad {
+  background: radial-gradient(circle at 50% 40%, rgba(217, 67, 43, 0.35), transparent 60%);
+}
+@keyframes flash {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.shake-soft {
+  animation: shake 0.42s;
+}
+.shake-hard {
+  animation: shake 0.42s;
+  animation-timing-function: linear;
+  --amp: 9px;
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(calc(var(--amp, 4px) * -0.5));
+  }
+  20%,
+  80% {
+    transform: translateX(var(--amp, 4px));
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(calc(var(--amp, 4px) * -1));
+  }
+  40%,
+  60% {
+    transform: translateX(var(--amp, 4px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .fx-canvas {
+    display: none;
+  }
+}
+
+.boot-error {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 8px;
+  padding: 24px;
+}
+
+/* ---- 色系轉盤：點一下換下一套 ---- */
+.dial {
+  flex: 0 0 auto;
+  position: relative;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), 0 0 0 1.5px rgba(230, 195, 107, 0.5);
+  transition: transform 0.15s;
+}
+.dial:active {
+  transform: scale(0.94);
+}
+.dial img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1.2);
+}
+.dial-name {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 10px);
+  transform: translateY(-50%);
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--toast-bg);
+  border: 1px solid var(--line-2);
+  color: var(--text);
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: dial-name 1.6s ease-out forwards;
+  z-index: 5;
+}
+/* 設定頁的轉盤靠左，提示改放右側 */
+.dial-row .dial-name {
+  right: auto;
+  left: calc(100% + 10px);
+}
+@keyframes dial-name {
+  0% {
+    opacity: 0;
+    transform: translate(6px, -50%);
+  }
+  15%,
+  70% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---- 全頁背景：畫＋色系薄紗＋霧＋靈光塵 ---- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+.bd-img {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: var(--bd-opacity);
+  filter: var(--bd-filter);
+  animation: bd-in 0.9s ease both, bd-drift 60s ease-in-out infinite alternate;
+}
+.bd-none {
+  background: var(--bg);
+  animation: bd-in 0.9s ease both;
+}
+@keyframes bd-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes bd-drift {
+  to {
+    transform: translate3d(0, -2.5%, 0) scale(1.04);
+  }
+}
+.bd-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--bd-veil);
+}
+.bd-mist {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(40% 30% at 30% 60%, var(--mist), transparent 70%), radial-gradient(35% 25% at 75% 35%, var(--mist), transparent 70%);
+  opacity: 0.8;
+  mix-blend-mode: var(--mist-blend);
+  animation: mist 48s ease-in-out infinite alternate;
+}
+.bd-mist-b {
+  background: radial-gradient(30% 22% at 60% 80%, var(--mist), transparent 70%), radial-gradient(28% 20% at 20% 20%, var(--mist), transparent 70%);
+  animation-duration: 66s;
+  animation-direction: alternate-reverse;
+}
+@keyframes mist {
+  to {
+    transform: translate3d(8%, -5%, 0) rotate(6deg);
+  }
+}
+.bd-motes {
+  position: absolute;
+  inset: 0;
+}
+.bd-motes i {
+  position: absolute;
+  left: var(--x);
+  bottom: -12px;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--mote);
+  box-shadow: 0 0 8px var(--mote), 0 0 16px var(--mote);
+  opacity: 0;
+  animation: mote var(--d) linear var(--delay) infinite;
+}
+@keyframes mote {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(14px, -50vh, 0);
+  }
+  88% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(-10px, -104vh, 0);
+    opacity: 0;
+  }
+}
+html[data-screen="battle"] .bd-motes i {
+  animation-duration: calc(var(--d) * 0.6);
+}
+/* 換頁只淡入，不用 transform／filter：它們會把頁內 fixed 元素（關卡卡片、解析底板）的定位基準搶走 */
+.screen {
+  animation: screen-in 0.4s ease-out backwards;
+}
+@keyframes screen-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---- 徽章與金星（圖） ---- */
+/* 徽章是圓章，陰影與金光都用 box-shadow 畫在圓上；不用 filter: drop-shadow（每枚都是一層離屏合成，「我的」頁一次八枚） */
+.emblem {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+.emblem img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+.emblem-5 img,
+.emblem-6 img,
+.emblem-7 img,
+.emblem-8 img,
+.emblem-9 img,
+.emblem-10 img,
+.emblem-11 img,
+.emblem-12 img {
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.35),
+    0 0 16px rgba(255, 211, 107, 0.45);
+}
+/* 題海四階（文昌、魁星、紫微、文聖）：同樣只動光暈透明度 */
+.emblem-9::after,
+.emblem-10::after,
+.emblem-11::after,
+.emblem-12::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  box-shadow: 0 0 28px rgba(255, 236, 170, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  animation: emblem-shine 3s ease-in-out infinite;
+}
+.emblem-12::after {
+  box-shadow: 0 0 34px rgba(255, 246, 200, 1);
+}
+/* 文曲的輝光：動的是一圈光暈的透明度，不逐格重畫陰影 */
+.emblem-8::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  box-shadow: 0 0 28px rgba(255, 236, 170, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  animation: emblem-shine 3s ease-in-out infinite;
+}
+@keyframes emblem-shine {
+  50% {
+    opacity: 1;
+  }
+}
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+}
+.stars img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  opacity: 0.22;
+  filter: grayscale(1) brightness(0.9);
+  transition: opacity 0.3s, filter 0.3s;
+}
+.stars img.is-on {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(255, 211, 107, 0.8));
+}
+
+/* 表單列：按鈕不換行 */
+.row-form .btn {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}

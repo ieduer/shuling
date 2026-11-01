@@ -1,0 +1,464 @@
+[
+ {
+  "name": "logo",
+  "prompt": "Round coin-shaped game icon filling the frame: an open ancient book with glowing pages from which a small silver star rises, a crescent moon behind it, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110101
+ },
+ {
+  "name": "dial",
+  "prompt": "Round coin-shaped game icon filling the frame: a round dial with four inlaid jewels at the compass points (ivory white, celadon green, obsidian black, deep indigo blue) and a slim silver pointer in the center, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110102
+ },
+ {
+  "name": "nav-home",
+  "prompt": "Round coin-shaped game icon filling the frame: an open book with a crossed calligraphy brush and a small silver star, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110110
+ },
+ {
+  "name": "nav-journey",
+  "prompt": "Round coin-shaped game icon filling the frame: an unrolled silk scroll map with a glowing star path across tiny mountains and a river, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110111
+ },
+ {
+  "name": "nav-board",
+  "prompt": "Round coin-shaped game icon filling the frame: a tall stack of bound books crowned with a silver laurel wreath, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110112
+ },
+ {
+  "name": "nav-codex",
+  "prompt": "Round coin-shaped game icon filling the frame: an ornate cloth-covered book case (shuhan) with jade clasps and a glowing bookmark, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110113
+ },
+ {
+  "name": "nav-me",
+  "prompt": "Round coin-shaped game icon filling the frame: a round jade name seal with a silver tassel, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110114
+ },
+ {
+  "name": "rank-1",
+  "prompt": "Round coin-shaped game icon filling the frame: a plain bamboo writing slip on a dark stone medallion, humble matte material, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110121
+ },
+ {
+  "name": "rank-2",
+  "prompt": "Round coin-shaped game icon filling the frame: a single calligraphy brush resting on an ink stone, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110122
+ },
+ {
+  "name": "rank-3",
+  "prompt": "Round coin-shaped game icon filling the frame: a small academy gate with a tiled roof, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110123
+ },
+ {
+  "name": "rank-4",
+  "prompt": "Round coin-shaped game icon filling the frame: three smooth blank stone steles standing in a row with carved cloud borders and no inscriptions, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110301
+ },
+ {
+  "name": "rank-5",
+  "prompt": "Round coin-shaped game icon filling the frame: one rolled scroll tied with a red cord, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110125
+ },
+ {
+  "name": "rank-6",
+  "prompt": "Round coin-shaped game icon filling the frame: five rolled scrolls fanned out, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110126
+ },
+ {
+  "name": "rank-7",
+  "prompt": "Round coin-shaped game icon filling the frame: a fine vermilion brush laid across a blank cream page beside a small red ink dish, no writing on the page, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110302
+ },
+ {
+  "name": "rank-8",
+  "prompt": "Round coin-shaped game icon filling the frame: a neat stack of bound thread-sewn volumes, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110128
+ },
+ {
+  "name": "rank-9",
+  "prompt": "Round coin-shaped game icon filling the frame: an orchid flower above a terrace of stacked books, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110129
+ },
+ {
+  "name": "rank-10",
+  "prompt": "Round coin-shaped game icon filling the frame: a smooth white jade tablet (hu) with carved cloud scrolls along its edges and a plain polished face, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110303
+ },
+ {
+  "name": "rank-11",
+  "prompt": "Round coin-shaped game icon filling the frame: a bronze ceremonial wine vessel (jue) before an academy hall, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110131
+ },
+ {
+  "name": "rank-12",
+  "prompt": "Round coin-shaped game icon filling the frame: a radiant sun and moon disc with many tiny books orbiting it like planets, brilliant platinum light, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110132
+ },
+ {
+  "name": "gem-N",
+  "prompt": "a single lustrous white pearl, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110141
+ },
+ {
+  "name": "gem-R",
+  "prompt": "a single polished green jade bead, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110142
+ },
+ {
+  "name": "gem-SR",
+  "prompt": "a single violet amethyst cut like a lotus, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110143
+ },
+ {
+  "name": "gem-SSR",
+  "prompt": "a single deep blue star sapphire with a bright six-rayed star, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110144
+ },
+ {
+  "name": "mode-daily",
+  "prompt": "a giant open book floating under a full moon, its pages releasing a constellation of silver stars over a sea of clouds, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 1152,
+  "h": 768,
+  "seed": 110151
+ },
+ {
+  "name": "mode-free",
+  "prompt": "a small boat sailing a river of ink between cliffs of stacked books, lanterns on the bow, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 1152,
+  "h": 768,
+  "seed": 110152
+ },
+ {
+  "name": "mode-wrong",
+  "prompt": "a storm-swept ruined library hall with torn pages whirling in the wind and lightning outside tall windows, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 1152,
+  "h": 768,
+  "seed": 110153
+ },
+ {
+  "name": "beast-n-silverfish",
+  "prompt": "a small silvery bookworm silverfish spirit (dushu) with shimmering paper scales, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110160
+ },
+ {
+  "name": "beast-n-slipcrane",
+  "prompt": "a small crane spirit whose feathers are bamboo writing slips, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110161
+ },
+ {
+  "name": "beast-n-inkfrog",
+  "prompt": "a small frog spirit carved from an ink stone, glossy black with jade eyes, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110162
+ },
+ {
+  "name": "beast-n-kite",
+  "prompt": "a small paper kite bird spirit with calligraphy-patterned wings, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110163
+ },
+ {
+  "name": "beast-r-scrollfox",
+  "prompt": "a fox spirit whose bushy tail is an unrolling paper scroll, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110164
+ },
+ {
+  "name": "beast-r-brushqilin",
+  "prompt": "a qilin spirit with a calligraphy brush as its horn, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110165
+ },
+ {
+  "name": "beast-r-seallion",
+  "prompt": "a lion spirit shaped like a carved jade seal stamp with a curly mane, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110166
+ },
+ {
+  "name": "beast-r-sutraelephant",
+  "prompt": "an elephant spirit carrying stacked sutra books on its back, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110167
+ },
+ {
+  "name": "beast-sr-starwhale",
+  "prompt": "a whale spirit whose body is made of star-lit book pages swimming through night sky, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110168
+ },
+ {
+  "name": "beast-sr-falcon",
+  "prompt": "a falcon spirit with feathers of folded manuscript pages and silver talons, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110169
+ },
+ {
+  "name": "beast-sr-bookdeer",
+  "prompt": "a deer spirit whose antlers are branching stacks of books, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110170
+ },
+ {
+  "name": "beast-sr-lynx",
+  "prompt": "a lynx spirit wrapped in floating ribbons of text-free scroll paper, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110171
+ },
+ {
+  "name": "beast-ssr-tianlu",
+  "prompt": "the auspicious beast Tianlu, a winged one-horned lion guardian of an imperial library, made of jade and gilded book covers, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110172
+ },
+ {
+  "name": "beast-ssr-kunpeng",
+  "prompt": "the giant Kunpeng, half colossal fish half great roc, with wings of endless unrolling scrolls, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110173
+ },
+ {
+  "name": "beast-ssr-scrolldragon",
+  "prompt": "an oriental dragon whose long body is a single endless unrolling scroll, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110174
+ },
+ {
+  "name": "beast-ssr-whitedeer",
+  "prompt": "a sacred white deer of a mountain academy with silver star antlers and a lantern, a mythical spirit creature woven from ancient books, bamboo slips and scroll paper, upper body portrait facing the viewer, glowing eyes, volumetric three-dimensional glossy render with depth, intricate paper and ink detail, moonlit silver-blue rim lighting, centered on a plain solid black background, no text, no letters",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110175
+ },
+ {
+  "name": "map-shi",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: layered cloud-wrapped mountains with poets' pavilions on terraces, plum blossoms and willows, a moon-reflecting lake, a hermit's thatched hut and a pagoda, cranes flying. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110181
+ },
+ {
+  "name": "map-nobel",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a cosmic river of stars flowing through deep indigo night, small floating islands of bookshelves, a stone bridge of stacked books, glowing star constellations along the river. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110182
+ },
+ {
+  "name": "bg-home",
+  "prompt": "a moonlit celestial library pavilion of the fabled Langhuan paradise with floating books and silver fireflies, distant misty mountains, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 896,
+  "h": 1536,
+  "seed": 110191
+ },
+ {
+  "name": "bg-board",
+  "prompt": "a forest of tall carved stone steles lit by blue lanterns at night, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 896,
+  "h": 1536,
+  "seed": 110192
+ },
+ {
+  "name": "bg-codex",
+  "prompt": "an endless archive of tall bookshelves receding into misty light, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 896,
+  "h": 1536,
+  "seed": 110193
+ },
+ {
+  "name": "bg-me",
+  "prompt": "a quiet scholar's study with an ink stone, brushes and a lit oil lamp by a round moon window, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 896,
+  "h": 1536,
+  "seed": 110194
+ },
+ {
+  "name": "bg-battle",
+  "prompt": "a vast misty library hall with scrolls floating in the air and moonlight through high windows, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 896,
+  "h": 1536,
+  "seed": 110195
+ },
+ {
+  "name": "bg-result",
+  "prompt": "dawn over a sea of clouds with unrolled scrolls drifting like ribbons, celadon jade, moonstone white and deep indigo palette with silver light, atmospheric fantasy game background, painterly, cinematic depth, volumetric light, drifting mist, no text, no characters, no people",
+  "w": 896,
+  "h": 1536,
+  "seed": 110196
+ },
+ {
+  "name": "node-off",
+  "prompt": "Round coin-shaped game icon filling the frame: a closed book with a dark jade cover, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110201
+ },
+ {
+  "name": "node-lit",
+  "prompt": "Round coin-shaped game icon filling the frame: an open book with glowing silver pages, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110202
+ },
+ {
+  "name": "node-clear",
+  "prompt": "Round coin-shaped game icon filling the frame: an open book sealed with a golden ribbon and a small star, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110203
+ },
+ {
+  "name": "skill-zhuzhao",
+  "prompt": "Round coin-shaped game icon filling the frame: a lit oil lamp beside an open book casting light on its pages, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110211
+ },
+ {
+  "name": "skill-zhishui",
+  "prompt": "Round coin-shaped game icon filling the frame: an hourglass whose falling water has frozen into ice crystals, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110212
+ },
+ {
+  "name": "skill-shenji",
+  "prompt": "Round coin-shaped game icon filling the frame: a glowing jade bookmark with a single open eye, carved celadon jade disc, glossy 3D game UI icon, ornate silver filigree rim with moonstone inlays, celadon green, moonstone white and deep indigo palette, soft studio lighting, perfectly centered on a plain solid black background, no text, no letters, no watermark",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110213
+ },
+ {
+  "name": "candle",
+  "prompt": "a small celadon porcelain oil lamp with a calm blue-white flame, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110221
+ },
+ {
+  "name": "mana",
+  "prompt": "a single glowing drop of indigo ink with a silver spark inside, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110222
+ },
+ {
+  "name": "star",
+  "prompt": "a single five-pointed silver-blue star, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110223
+ },
+ {
+  "name": "crown",
+  "prompt": "a small jade crown with silver book-shaped ornaments, glossy 3D render, soft silver-blue glow, centered on a plain solid black background, no text",
+  "w": 1024,
+  "h": 1024,
+  "seed": 110224
+ },
+ {
+  "name": "cardback",
+  "prompt": "an ornate deep indigo card back with a silver filigree border and a small jade scroll-dragon emblem in the center, symmetrical, no text",
+  "w": 768,
+  "h": 1024,
+  "seed": 110231
+ },
+ {
+  "name": "map-aegean",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a sunlit Aegean sea of turquoise water with white marble temples and columns on rocky islands, olive groves, an ancient amphitheatre carved into a hillside, a trireme ship. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110183
+ },
+ {
+  "name": "map-rome",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: seven green hills with Roman aqueducts, a forum of marble arches and a laurel grove, cypress trees along stone roads, distant snowy mountains. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110184
+ },
+ {
+  "name": "map-fusang",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a Japanese archipelago of misty islands with vermilion torii gates, a pagoda among cherry blossoms, a thatched hermit hut by a stream, Mount Fuji far away. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110185
+ },
+ {
+  "name": "map-schools",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a vast hall of tidal currents where rivers of different colours of light flow between floating libraries and observatory towers, a lighthouse of books. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110186
+ },
+ {
+  "name": "map-exam",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: an ancient examination courtyard with rows of small stone study cells under lantern light, a great hall with a jade gate, scrolls hanging from eaves. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110187
+ }
+]

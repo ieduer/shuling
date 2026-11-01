@@ -1,0 +1,108 @@
+# 萬國星海（P1）：愛琴海、七丘、扶桑的人物與作品。以英文名在 Wikidata 檢索，hint＝條目描述必須含有的字（確認是同一個實體），否則建置失敗。
+# name＝大陸通行譯名（繁體字形，只轉字形）；name_tw＝臺灣通行譯名不同時才填；author＝作品的作者（本表 id），建置時須與 Wikidata P50 一致。
+id	region	kind	en	hint	name	name_tw	author
+homer	aegean	person	Homer	iliad	荷馬	-	-
+hesiod	aegean	person	Hesiod	poet	赫西俄德	-	-
+sappho	aegean	person	Sappho	poet	薩福	-	-
+pindar	aegean	person	Pindar	poet	品達	-	-
+aesop	aegean	person	Aesop	storyteller	伊索	-	-
+aeschylus	aegean	person	Aeschylus	playwright	埃斯庫羅斯	艾斯奇勒斯	-
+sophocles	aegean	person	Sophocles	playwright	索福克勒斯	索福克里斯	-
+euripides	aegean	person	Euripides	playwright	歐里庇得斯	尤里比底斯	-
+aristophanes	aegean	person	Aristophanes	playwright	阿里斯托芬	-	-
+herodotus	aegean	person	Herodotus	historian	希羅多德	-	-
+thucydides	aegean	person	Thucydides	historian	修昔底德	-	-
+plato	aegean	person	Plato	philosopher	柏拉圖	-	-
+aristotle	aegean	person	Aristotle	philosopher	亞里士多德	亞里斯多德	-
+plutarch	aegean	person	Plutarch	philosopher	普魯塔克	蒲魯塔克	-
+iliad	aegean	work	Iliad	epic poem	伊利亞特	伊里亞德	homer
+odyssey	aegean	work	Odyssey	epic poem	奧德賽	-	homer
+theogony	aegean	work	Theogony	poem	神譜	-	hesiod
+worksdays	aegean	work	Works and Days	poem	工作與時日	-	hesiod
+oedipus	aegean	work	Oedipus Rex	tragedy	俄狄浦斯王	伊底帕斯王	sophocles
+antigone	aegean	work	Antigone (Sophocles)	play	安提戈涅	安蒂岡妮	sophocles
+medea	aegean	work	Medea (Euripides)	play	美狄亞	米蒂亞	euripides
+prometheus	aegean	work	Prometheus Bound	tragedy	被縛的普羅米修斯	-	aeschylus
+oresteia	aegean	work	Oresteia	trilogy	俄瑞斯忒亞	-	aeschylus
+birds	aegean	work	The Birds (play)	play	鳥	-	aristophanes
+frogs	aegean	work	The Frogs	comedy	蛙	-	aristophanes
+histories	aegean	work	Histories (Herodotus)	Herodotus	歷史	-	herodotus
+peloponnesian	aegean	work	History of the Peloponnesian War	Thucydides	伯羅奔尼撒戰爭史	-	thucydides
+republic	aegean	work	Republic (Plato)	dialogue	理想國	-	plato
+symposium	aegean	work	Symposium (Plato)	dialogue	會飲篇	-	plato
+poetics	aegean	work	Poetics (Aristotle)	Aristotle	詩學	-	aristotle
+lives	aegean	work	Parallel Lives	biographies	希臘羅馬名人傳	-	plutarch
+virgil	rome	person	Virgil	poet	維吉爾	魏吉爾	-
+ovid	rome	person	Ovid	poet	奧維德	-	-
+horace	rome	person	Horace	poet	賀拉斯	-	-
+lucretius	rome	person	Lucretius	poet	盧克萊修	-	-
+seneca	rome	person	Seneca the Younger	philosopher	塞內加	-	-
+aurelius	rome	person	Marcus Aurelius	emperor	馬可·奧勒留	馬可·奧理略	-
+augustine	rome	person	Augustine of Hippo	theologian	奧古斯丁	-	-
+aeneid	rome	work	Aeneid	poem	埃涅阿斯紀	伊尼亞德	virgil
+metamorphoses	rome	work	Metamorphoses	poem	變形記	-	ovid
+arspoetica	rome	work	Ars Poetica (Horace)	poem	詩藝	-	horace
+rerumnatura	rome	work	De rerum natura	poem	物性論	-	lucretius
+meditations	rome	work	Meditations	Marcus Aurelius	沉思錄	-	aurelius
+confessions	rome	work	Confessions (Augustine)	autobiographical	懺悔錄	-	augustine
+murasaki	fusang	person	Murasaki Shikibu	novelist	紫式部	-	-
+seishonagon	fusang	person	Sei Shōnagon	author	清少納言	-	-
+kamonochomei	fusang	person	Kamo no Chōmei	poet	鴨長明	-	-
+kenko	fusang	person	Yoshida Kenkō	writer	吉田兼好	-	-
+zeami	fusang	person	Zeami Motokiyo	playwright	世阿彌	-	-
+basho	fusang	person	Matsuo Bashō	poet	松尾芭蕉	-	-
+buson	fusang	person	Yosa Buson	poet	與謝蕪村	-	-
+issa	fusang	person	Kobayashi Issa	writer	小林一茶	-	-
+saikaku	fusang	person	Ihara Saikaku	writer	井原西鶴	-	-
+chikamatsu	fusang	person	Chikamatsu Monzaemon	playwright	近松門左衛門	-	-
+bakin	fusang	person	Kyokutei Bakin	novelist	曲亭馬琴	-	-
+shoyo	fusang	person	Tsubouchi Shōyō	writer	坪內逍遙	-	-
+futabatei	fusang	person	Futabatei Shimei	author	二葉亭四迷	-	-
+ogai	fusang	person	Mori Ōgai	novelist	森鷗外	-	-
+soseki	fusang	person	Natsume Sōseki	novelist	夏目漱石	-	-
+ichiyo	fusang	person	Higuchi Ichiyō	writer	樋口一葉	-	-
+shiki	fusang	person	Masaoka Shiki	poet	正岡子規	-	-
+akiko	fusang	person	Yosano Akiko	poet	與謝野晶子	-	-
+takuboku	fusang	person	Ishikawa Takuboku	poet	石川啄木	-	-
+toson	fusang	person	Shimazaki Tōson	writer	島崎藤村	-	-
+akutagawa	fusang	person	Ryūnosuke Akutagawa	writer	芥川龍之介	-	-
+tanizaki	fusang	person	Jun'ichirō Tanizaki	author	谷崎潤一郎	-	-
+shiga	fusang	person	Naoya Shiga	writer	志賀直哉	-	-
+kenji	fusang	person	Kenji Miyazawa	poet	宮澤賢治	-	-
+dazai	fusang	person	Osamu Dazai	author	太宰治	-	-
+mishima	fusang	person	Yukio Mishima	author	三島由紀夫	-	-
+abe	fusang	person	Kōbō Abe	writer	安部公房	-	-
+endo	fusang	person	Shūsaku Endō	author	遠藤周作	-	-
+murakami	fusang	person	Haruki Murakami	writer	村上春樹	-	-
+genji	fusang	work	The Tale of Genji	classic	源氏物語	-	murasaki
+pillowbook	fusang	work	The Pillow Book	observations	枕草子	-	seishonagon
+hojoki	fusang	work	Hōjōki	kamakura	方丈記	-	kamonochomei
+tsurezuregusa	fusang	work	Tsurezuregusa	literary work	徒然草	-	kenko
+okunohosomichi	fusang	work	Oku no Hosomichi	Bashō	奧之細道	-	basho
+sonezaki	fusang	work	The Love Suicides at Sonezaki	play	曾根崎心中	-	chikamatsu
+hakkenden	fusang	work	Nansō Satomi Hakkenden	novel	南總里見八犬傳	-	bakin
+shosetsushinzui	fusang	work	Shōsetsu Shinzui	Tsubouchi	小說神髓	-	shoyo
+ukigumo	fusang	work	Ukigumo	novel	浮雲	-	futabatei
+maihime	fusang	work	The Dancing Girl	short story	舞姬	-	ogai
+iamacat	fusang	work	I Am a Cat	novel	我是貓	-	soseki
+kokoro	fusang	work	Kokoro	novel	心	-	soseki
+botchan	fusang	work	Botchan	novel	哥兒	少爺	soseki
+rashomon	fusang	work	Rashōmon (short story)	story	羅生門	-	akutagawa
+inagrove	fusang	work	In a Grove	story	竹林中	-	akutagawa
+makioka	fusang	work	The Makioka Sisters	novel	細雪	-	tanizaki
+galactic	fusang	work	Night on the Galactic Railroad	novel	銀河鐵道之夜	-	kenji
+nolongerhuman	fusang	work	No Longer Human	novel	人間失格	-	dazai
+goldenpavilion	fusang	work	The Temple of the Golden Pavilion	novel	金閣寺	-	mishima
+womanindunes	fusang	work	The Woman in the Dunes	novel	砂女	-	abe
+silence	fusang	work	Silence (Endō novel)	novel	沉默	-	endo
+norwegianwood	fusang	work	Norwegian Wood (novel)	novel	挪威的森林	-	murakami
+manyoshu	fusang	work	Man'yōshū	collection	萬葉集	-	-
+kokinshu	fusang	work	Kokin Wakashū	anthology	古今和歌集	-	-
+taketori	fusang	work	The Tale of the Bamboo Cutter	tale	竹取物語	-	-
+heike	fusang	work	The Tale of the Heike	japanese book	平家物語	-	-
+kojiki	fusang	work	Kojiki	chronicle	古事記	-	-
+aesopfables	aegean	work	Aesop's Fables	fables	伊索寓言	-	aesop
+takekurabe	fusang	work	Takekurabe	Ichiyō	青梅竹馬	-	ichiyo
+midaregami	fusang	work	Midaregami	poetry	亂髮	-	akiko
+ichiakunosuna	fusang	work	Ichiaku no Suna	poetry collection	一握之砂	-	takuboku
+anyakoro	fusang	work	A Dark Night's Passing	novel	暗夜行路	-	shiga
