@@ -1,8 +1,8 @@
 # Project State
 
-Last updated: 2026-11-02 (task `shuling-bj-20261102`)
+Last updated: 2026-11-02 (task `shuling-bj-reasoning-20261102`)
 
-Current version: live at https://shuling.bdfz.net — source `caa83b3` (ieduer/shuling main, public), Worker `shuling` deployment `c7d0a6f9` / version `e08e6d23` (bank `4ec05cb17a06`: core canon plus 40 北京卷 items, 90-second 真題; User Center record-only unchanged; rollback version `18a20083` / deployment `dab5b234`, source `c1ef85d`, the core-canon build), D1 `shuling-db` `efec6261`. Accepted 2026-11-02T02:32Z, effective 02:30Z (evidence `_meta/reports/operations/shuling-bj-20261102/r2/`, Status `20261102-shuling-beijing-exam`). Previous: core canon `c1ef85d` / `18a20083`, accepted 2026-11-02T01:47Z (`_meta/reports/operations/shuling-canon-20261101/`, Status `20261102-shuling-core-canon`). First release 2026-11-01 (registry project `shuling-bdfz-net`, evidence `_meta/reports/operations/shuling-launch-20261101/`).
+Current version: live at https://shuling.bdfz.net — source `42714cf` (ieduer/shuling main, public), Worker `shuling` deployment `9e4a9688` / version `19e295fa` (bank `1b921b91debe`: core canon plus 40 北京卷 items with the gk AI reference analysis, 真題 in paper order A–D, 90-second 真題; User Center record-only unchanged; rollback version `e08e6d23` / deployment `c7d0a6f9`, source `caa83b3`), D1 `shuling-db` `efec6261`. Accepted 2026-11-02T03:16Z, effective 02:58Z (evidence `_meta/reports/operations/shuling-bj-reasoning-20261102/`, Status `20261102-shuling-beijing-reasoning`). Previous: 北京卷 `caa83b3` / `e08e6d23`, accepted 02:32Z (`_meta/reports/operations/shuling-bj-20261102/r2/`, Status `20261102-shuling-beijing-exam`); core canon `c1ef85d` / `18a20083` (`_meta/reports/operations/shuling-canon-20261101/`). First release 2026-11-01 (registry project `shuling-bdfz-net`, evidence `_meta/reports/operations/shuling-launch-20261101/`).
 
 Current objective: core-canon edition (owner 2026-11-01) — the bank is the most important content and key questions of human literature; title→author only for titles that identify one poem.
 
