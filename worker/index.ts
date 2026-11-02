@@ -2,7 +2,7 @@
  * 分數不信任客戶端：每局答案以題庫索引（選項雜湊、稀有度、題型）重算，公式與前端共用 src/engine/score.ts。 */
 import bankIndex from "./bank-index.json";
 import lessonsIndex from "./lessons.json";
-import { questionScore, LIMIT_MS, RUN_SIZE, prestigeOf, rankIdxOf } from "../src/engine/score";
+import { questionScore, limitOf, RUN_SIZE, prestigeOf, rankIdxOf } from "../src/engine/score";
 import { clearedStats, creditXp, masteredFromTallies, repeatMultiplier } from "../src/engine/rank";
 import { mergeSaves, normalizeSave, SAVE_MAX_BYTES, serializeSave, utf8Bytes, type SaveShape } from "../src/engine/save";
 import { saveRankStats } from "../src/engine/save-rank";
@@ -151,7 +151,7 @@ async function submitRun(request: Request, env: Env): Promise<Response> {
     if (!entry || seen.has(q)) continue;
     seen.add(q);
     const pick = String(a.pick ?? "");
-    const ms = Math.min(LIMIT_MS, Math.max(0, Number(a.ms) || 0));
+    const ms = Math.min(limitOf(entry.t), Math.max(0, Number(a.ms) || 0));
     const ok = pick !== "" && (await sha16(pick)) === entry.a;
     combo = ok ? combo + 1 : 0;
     maxCombo = Math.max(maxCombo, combo);

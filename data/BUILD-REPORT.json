@@ -21,10 +21,11 @@
   "data/raw/chinese-poetry/anthologies.json": "5ddadb6bdc0e79a8c8c81d6a573baad13eb1564a9492bd717f959e5c149c2360",
   "data/raw/chinese-poetry/canon-extra.json": "7542ea728a77a43892ec70be8516b5a7d06b45a65758bb07a468c0565ee7ae9c",
   "data/raw/exams/tw-literature.json": "3ccd37d8f53091da8a4d68920452a651e3fcd6fe1ea62f195b8d5355d7bc7118",
+  "data/raw/exams/bj-literature.json": "8e84570e82fbd569d917c2adfe1d200bd748d491ca610e1c3b909b34fa3343a5",
   "data/raw/recite/recite-ms.json": "6a483845ca2e15c0689def18f1d996c5136d2875ad8b874feca5137e38b0986d",
   "data/raw/recite/recite-gk.json": "ee7c6486c8f14eb8f558d50e6acc45ecc0e7c45714ed42d39c8734c0ed64d7a0"
  },
- "codeDigest": "d380c7bdc2360538214836795758338603e73273fa213e3ab855b6b36b9c962e",
+ "codeDigest": "9b24ea5c1adc5b285166ef2f9fbeb878744bdcb63cb6a6672e1e5171a3b01fa4",
  "coverage": {
   "canon": {
    "wikidataPeople": 160,
@@ -87,8 +88,8 @@
     "questions": 190
    },
    "exam": {
-    "cards": 15,
-    "questions": 71
+    "cards": 33,
+    "questions": 111
    }
   }
  },

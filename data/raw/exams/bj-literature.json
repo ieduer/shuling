@@ -1,0 +1,1536 @@
+{
+ "source": "高考站 gk.bdfz.net（ieduer/gaokao）已接受版本的北京卷語文題面與答案核查表",
+ "source_commit": "a209908baa1e5ec1e3fa31f5c15b6a64ff4f2499",
+ "source_files": {
+  "data/all.json": "c24e07c01809d9afea34251a07345ee698fe4c28032765ee031765cbc5bd220a",
+  "data/answer-authority.json": "2943410d4d40e7bf128c711318f980ecdd23930f0b1c54c47f00374cdfd7bc69",
+  "data/answer-release-scope.json": "4b62ea0d6cc790c776a12ab6eeacb912eff3b696c89910baf2a7144c88ab467b"
+ },
+ "answer_qualification": {
+  "contract": "qualified-learning-reference-v1",
+  "originalPublicationVerified": false,
+  "officialRubricVerified": false,
+  "note": "答案為學習參考：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實。"
+ },
+ "selection": {
+  "shici": "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題",
+  "wenxue": [
+   "2007-yuyanjichu:5",
+   "2008-yuyanjichu:5",
+   "2009-yuyanjichu:5",
+   "2010-yuyanjichu:4",
+   "2011-yuyanjichu:4",
+   "2012-yuyanjichu:5"
+  ],
+  "mingzhu": [
+   "2014-honglou:1"
+  ]
+ },
+ "questions": [
+  {
+   "id": "bj-2004-shici-1",
+   "gk_id": "2004-shici:1",
+   "year": 2004,
+   "year_label": "2004年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "红梅  苏轼\n\n怕愁贪睡独开迟，自恐冰容不入时。故作小红桃杏色，尚余孤瘦雪霜姿。\n寒心未肯随春态，酒晕无端上玉肌。诗老不知梅格在，更看绿叶与青枝。\n\n注：诗老；指苏轼的前辈诗人石曼卿。",
+   "stem": "对这首诗的理解，不恰当的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“独开迟”既点出了红梅晚开，也赋予了她不与众花争春的品性。"
+    },
+    {
+     "key": "B",
+     "text": "“自恐”句不是说自己真的担心，而是含蓄地表达了不愿趋时的情感。"
+    },
+    {
+     "key": "C",
+     "text": "“尚余”句在写红梅“雪霜姿”的同时，也透露出一丝无奈。"
+    },
+    {
+     "key": "D",
+     "text": "“酒晕”句是说梅花之色仿佛是人饮酒后脸上泛起的红晕。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "007644c0dda9bd9acef80d2f878c6fd9cf8f3de5999358411d73f257a4c73508"
+  },
+  {
+   "id": "bj-2004-shici-2",
+   "gk_id": "2004-shici:2",
+   "year": 2004,
+   "year_label": "2004年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "红梅  苏轼\n\n怕愁贪睡独开迟，自恐冰容不入时。故作小红桃杏色，尚余孤瘦雪霜姿。\n寒心未肯随春态，酒晕无端上玉肌。诗老不知梅格在，更看绿叶与青枝。\n\n注：诗老；指苏轼的前辈诗人石曼卿。",
+   "stem": "对这首诗的赏析，不恰当的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "诗人使用拟人手法，以红梅自况，表达了与桃杏一起装点春天的愿望。"
+    },
+    {
+     "key": "B",
+     "text": "心境幽寒的红梅“怕愁贪睡”，不肯随“春”，故而未能及早开放。"
+    },
+    {
+     "key": "C",
+     "text": "红梅生机难抑，烂漫开放，冰容雪姿，孤瘦高洁，自成一片春光。"
+    },
+    {
+     "key": "D",
+     "text": "面对百花盛开的“春态”，红梅仍深自怵惕，保持自己的节操。"
+    }
+   ],
+   "answer": "A",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "d3701c5c428979597399a025b0a89e61b5f1deabf9aaa292c21d3bfd1d8da40d"
+  },
+  {
+   "id": "bj-2005-shici-1",
+   "gk_id": "2005-shici:1",
+   "year": 2005,
+   "year_label": "2005年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "夜游宫  记梦寄师伯浑①\n陆游\n\n雪晓清笳乱起，梦游处、不知何地。铁骑无声望似水。想关河：雁门西，青海际。\n睡觉寒灯里，漏声断、月斜窗纸。自许封侯在万里，有谁知？鬓虽残，心未死。\n\n注释：①师伯浑，陆游的友人。",
+   "stem": "下列对词句的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“雪晓清笳乱起”句突出了边地风光特色，也渲染了战争气氛。"
+    },
+    {
+     "key": "B",
+     "text": "“想关河”中的“想”是“推测”、“猜想”的意思。"
+    },
+    {
+     "key": "C",
+     "text": "“雁门西，青海际”两句，代指宋金对峙的前线地区。"
+    },
+    {
+     "key": "D",
+     "text": "“漏声断”中“断”，是断断续续的意思。 答：[ ]"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "2b236f946b3f62e067c1902a55a9807ced443d487fe78e46b8891538f2f0f7bd"
+  },
+  {
+   "id": "bj-2005-shici-2",
+   "gk_id": "2005-shici:2",
+   "year": 2005,
+   "year_label": "2005年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "夜游宫  记梦寄师伯浑①\n陆游\n\n雪晓清笳乱起，梦游处、不知何地。铁骑无声望似水。想关河：雁门西，青海际。\n睡觉寒灯里，漏声断、月斜窗纸。自许封侯在万里，有谁知？鬓虽残，心未死。\n\n注释：①师伯浑，陆游的友人。",
+   "stem": "下列对这首词的赏析，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“铁骑无声望似水”句，形象地描绘了军队阵容的整肃与声势的浩大。"
+    },
+    {
+     "key": "B",
+     "text": "词的上片写梦境，下片写梦醒后的情境和感想，衔接自然，结构紧凑。"
+    },
+    {
+     "key": "C",
+     "text": "“清笳乱起”和“铁骑无声”一动一静，以动衬静，手法巧妙。"
+    },
+    {
+     "key": "D",
+     "text": "作者通过“雪晓”、“寒灯”“漏断”、“月斜”等意象，写出了清冷的意境。 答：[ ]"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "8f155b260722da7b307d3b68c9d94b503d43316800271f649507ee4f58e51e19"
+  },
+  {
+   "id": "bj-2007-yuyanjichu-5",
+   "gk_id": "2007-yuyanjichu:5",
+   "year": 2007,
+   "year_label": "2007年北京卷",
+   "q_num": 5,
+   "category": "文學常識",
+   "passage": "",
+   "stem": "下列有关文学常识的表述，错误的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "《再别康桥》、《雨巷》、《大堰河——我的保姆》、《乡愁》，分别是徐志摩、戴望舒、艾青、余光中的诗作。"
+    },
+    {
+     "key": "B",
+     "text": "巴尔扎克和卡夫卡都是著名小说家，前者是批判现实主义文学巨匠，后者是西方现代主义文学奠基人。"
+    },
+    {
+     "key": "C",
+     "text": "鲁迅曾对章回体长篇小说《儒林外史》的讽刺艺术给以很高评价，这部小说的作者是清代的蒲松龄。"
+    },
+    {
+     "key": "D",
+     "text": "人称“小杜”的唐代作家杜牧，工诗擅文，《过华清宫》和《阿房宫赋》都是他的名作。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "dd2d8c956e7505a6d0058c970eb16e7fb147295c22dbf95101b3f2521fd1b9fa"
+  },
+  {
+   "id": "bj-2008-yuyanjichu-5",
+   "gk_id": "2008-yuyanjichu:5",
+   "year": 2008,
+   "year_label": "2008年北京卷",
+   "q_num": 5,
+   "category": "文學常識",
+   "passage": "",
+   "stem": "下列语句画线处所指的文学家，依次是\n1淋漓襟袖啼红泪，比司马青衫更湿\n2陈王昔时宴平乐，斗酒十千恣欢谑\n3铁板铜琶，继东坡，高唱大江东去\n4幽愁发愤，著成信史照人寰",
+   "options": [
+    {
+     "key": "A",
+     "text": "李清照 李 白 苏 轼 欧阳修"
+    },
+    {
+     "key": "B",
+     "text": "白居易 曹 植 辛弃疾 司马迁"
+    },
+    {
+     "key": "C",
+     "text": "白居易 李 白 辛弃疾 欧阳修"
+    },
+    {
+     "key": "D",
+     "text": "李清照 曹 植 苏 轼 司马迁"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a1139d-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "e27ccd35112149faebecf0365b72256514c61973190a4633c4e7d1bd028f09d9"
+  },
+  {
+   "id": "bj-2008-shici-1",
+   "gk_id": "2008-shici:1",
+   "year": 2008,
+   "year_label": "2008年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "酬王处士九日见怀之作\n顾炎武\n\n 是日惊秋老，相望各一涯。   离怀消浊酒，愁眼见黄花。\n天地存肝胆，江山阅鬓华。   多蒙千里讯，逐客已无家。\n\n注释：顾炎武，明清之际著名学者、诗人。明末投身反宦官、权贵斗争。清兵南下，参加人民抗清起义。入清后，多次拒绝清廷征召，流亡北方，考察山川形势，志存恢复。",
+   "stem": "下列对诗句的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "是日惊秋老：是无情的日月送来秋天，催人衰老，令人震惊。"
+    },
+    {
+     "key": "B",
+     "text": "相望各一涯：天各一方，遥相瞩望。"
+    },
+    {
+     "key": "C",
+     "text": "离怀销浊酒：离别的情怀只能借浊酒来排遣。"
+    },
+    {
+     "key": "D",
+     "text": "逐客已无家：亡国之人，已无家可言。"
+    }
+   ],
+   "answer": "A",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "32382c0b2ee15e88b345742ac4b46ccd839c58b1c114f72da493a55da186a4e8"
+  },
+  {
+   "id": "bj-2009-yuyanjichu-5",
+   "gk_id": "2009-yuyanjichu:5",
+   "year": 2009,
+   "year_label": "2009年北京卷",
+   "q_num": 5,
+   "category": "文學常識",
+   "passage": "",
+   "stem": "某校文学刊物转载的一段评论中有四个注解，其中不正确的一个是\n茅盾在《子夜》等小说创作中所努力实现的创作模式，是西方由巴尔扎克、列夫·托尔斯泰、左拉等现实主义、自然主义小说家所成功地实践了的创作模式。",
+   "options": [
+    {
+     "key": "A",
+     "text": "《子夜》：长篇小说，通过主人公吴荪甫的悲剧命运揭示了当时的重大社会问题。"
+    },
+    {
+     "key": "B",
+     "text": "巴尔扎克：19世纪法国作家，他的《人间喜剧》被称为巴黎上流社会的编年史。"
+    },
+    {
+     "key": "C",
+     "text": "列夫·托尔斯泰：19世纪俄国作家，他的《战争与和平》以气势恢弘著称。"
+    },
+    {
+     "key": "D",
+     "text": "左拉：19世纪法国作家，他的代表作是体现人道主义思想的《巴黎圣母院》"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a1136d-gpt-6-astra",
+   "answer_references": [
+    {
+     "title": "2009北京题源：新浪原卷样式6页逐页目视，第2页缺失，Gzy转载异文限定",
+     "url": "https://slide.edu.sina.com.cn/slide_11_272_71.html?img=708"
+    },
+    {
+     "title": "新浪2009-06-08估分页，新干线学校提供；原卷样式题图，非考试机构出版链认证",
+     "url": "https://edu.sina.com.cn/shiti/2009/0608/2141010572.html"
+    }
+   ],
+   "input_sha256": "f5fb8deb13af41669a62d3f7cc63465f1f8fdb92760fe082b1d3fe879b2bbe0f"
+  },
+  {
+   "id": "bj-2009-shici-1",
+   "gk_id": "2009-shici:1",
+   "year": 2009,
+   "year_label": "2009年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "西江月 黄陵庙（又题阻风三峰下）\n张孝祥①\n\n满载一船秋色，平铺十里湖光。波神②留我看斜阳，唤起鳞鳞细浪。\n明日风回更好，今宵露宿何妨？水晶宫里奏《霓裳》，准拟③岳阳楼上。\n\n注：①张孝祥：南宋初词人。这首词，因船行洞庭湖畔黄陵庙下为风浪所阻而作。作者与友人信中提到：“某离长沙且十日，尚在黄陵庙下，波臣风伯亦善戏矣。”\n②波神：水神。  ③准拟：准定。",
+   "stem": "下列对词中语句的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "一、二句点明行船的季节，描写洞庭湖上风浪未起时的景色。"
+    },
+    {
+     "key": "B",
+     "text": "三、四句有主观想象色彩，“鳞鳞细浪”实际指滚滚波涛。"
+    },
+    {
+     "key": "C",
+     "text": "五、六句写明日风向一转便可顺风行船，今晚露宿又有什么关系呢？"
+    },
+    {
+     "key": "D",
+     "text": "七、八句写作者期盼到岳阳楼上听水下传来的《霓裳》曲。"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a1136d-gpt-6-astra",
+   "answer_references": [
+    {
+     "title": "2009北京题源：新浪原卷样式6页逐页目视，第2页缺失，Gzy转载异文限定",
+     "url": "https://slide.edu.sina.com.cn/slide_11_272_71.html?img=708"
+    },
+    {
+     "title": "北京新东方优能中学教育：深度解读2010高考(北京卷)语文试题，回顾2009诗词D项",
+     "url": "https://edu.sina.com.cn/gaokao/2010-06-09/1411251692.shtml"
+    }
+   ],
+   "input_sha256": "6e6474d92ff74941f1b0715c7f3f4e3446399e1d5c4017df0051cf1ae78fb93a"
+  },
+  {
+   "id": "bj-2010-yuyanjichu-4",
+   "gk_id": "2010-yuyanjichu:4",
+   "year": 2010,
+   "year_label": "2010年北京卷",
+   "q_num": 4,
+   "category": "文學常識",
+   "passage": "",
+   "stem": "下列有关文学常识的表达，有错误的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "《楚辞》是屈原、宋玉等人的作品的总集，这些作品有浓厚的楚地色彩，屈原的长诗《离骚》是其中的代表作。"
+    },
+    {
+     "key": "B",
+     "text": "白居易的《长恨歌》《琵琶行》是具有感伤色彩的叙事诗，他的《新乐府》则反映了较强的批判现实的精神。"
+    },
+    {
+     "key": "C",
+     "text": "《堂吉诃德》是意大利小说家塞万提斯创作的长篇小说，堂吉诃德这个人物形象既是滑稽的又是发人深省的。"
+    },
+    {
+     "key": "D",
+     "text": "举世公认的文学经典《哈姆莱特》，写的是丹麦王子哈姆莱特为父复仇的故事，该剧是莎士比亚的四大悲剧之一。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2010北京题源：18页重排PDF与Gzywtk、明确校勘，原7页卷未认证",
+     "url": "https://cdn.gaokzx.com/zixunzhan/202403/d77fabda-ee06-45c5-b24e-19357370805a.pdf"
+    }
+   ],
+   "input_sha256": "4b35ecda7b1f3829a932d0dc0db0a8f9b81fda4056f5d21864dc8012ecbf895d"
+  },
+  {
+   "id": "bj-2010-shici-1",
+   "gk_id": "2010-shici:1",
+   "year": 2010,
+   "year_label": "2010年北京卷",
+   "q_num": 13,
+   "category": "古典詩歌",
+   "passage": "古风（其三十九）\n李白\n登高望四海，天地何漫漫。霜被群物秋，风飘大荒寒。 荣华东流水，万事皆波澜。白日掩徂辉①，浮云无定端。 梧桐巢燕雀，枳棘②栖鸳鸾③。且复归去来，剑歌行路难。\n\n注：①徂辉：落日余晖。        ②枳棘：枝小刺多的灌木。\n③鸳鸾：传说中与凤凰同类，非梧桐不止，非练实不食，非醴泉不饮。",
+   "stem": "下列对本诗的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "前四句，写诗人登高望远，看到天高地阔、霜染万物的清秋景象，奠定了全诗昂扬奋发的基调."
+    },
+    {
+     "key": "B",
+     "text": "诗中“荣华东流水”与李白《梦游天姥吟留别》中的“古来万事东流水”表达的意思有相似性。"
+    },
+    {
+     "key": "C",
+     "text": "七、八句借助于描写白日将尽、浮云变幻的景象，形象而含蓄地表达了诗人对世事人生的感受."
+    },
+    {
+     "key": "D",
+     "text": "九、十句的意思是本应栖息于梧桐的鸳鸾竟巢于恶树之中，而燕雀却得以安然地宿在梧桐之上"
+    }
+   ],
+   "answer": "A",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2010北京题源：18页重排PDF与Gzywtk、明确校勘，原7页卷未认证",
+     "url": "https://cdn.gaokzx.com/zixunzhan/202403/d77fabda-ee06-45c5-b24e-19357370805a.pdf"
+    }
+   ],
+   "input_sha256": "fd1789e804ac4bc59d9e6c67507f4abbf02deaeadacc8e7edbdab8cbf64b9602"
+  },
+  {
+   "id": "bj-2011-yuyanjichu-4",
+   "gk_id": "2011-yuyanjichu:4",
+   "year": 2011,
+   "year_label": "2011年北京卷",
+   "q_num": 4,
+   "category": "文學常識",
+   "passage": "",
+   "stem": "下列有关文学常识的表达，有错误的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“胜败兵家事不期，包羞忍耻是男儿。江东子弟多才俊。卷土重来未可知”，这首诗写了与楚汉相争时的项羽有关的事。"
+    },
+    {
+     "key": "B",
+     "text": "“枫叶四弦秋，枨触天涯迁谪恨；浔阳千尺水，勾留江山别离情”，这幅对联所写的内容与白居易的《琵琶行》相关。"
+    },
+    {
+     "key": "C",
+     "text": "巴尔扎克是19世纪法国浪漫主义文学家，他所创作的90多部小说，总名为《人间喜剧》，堪称法国社会的“百科全书”。"
+    },
+    {
+     "key": "D",
+     "text": "海明威是美国现代著名作家，曾获得诺贝尔文学奖，他的代表作有《老人与海》、《太阳照常升起》、《永别了，武器》等。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2011北京题源：北京高考在线重排PDF与Gzywtk，作者文本局部校勘，原卷未认证",
+     "url": "https://gaokao.eol.cn/huodong/2011gkst/201106/t20110608_787585.shtml"
+    }
+   ],
+   "input_sha256": "56010089e46cfbce2081fe783e4e60ef8ceb5d2e98cf6b0d914ffdf94439ccd4"
+  },
+  {
+   "id": "bj-2011-shici-1",
+   "gk_id": "2011-shici:1",
+   "year": 2011,
+   "year_label": "2011年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "示秬秸①\n张耒\n北邻卖饼儿，每五鼓未旦，即绕街呼卖，虽大寒烈风不废，而时略不少差也。因为作诗，且有所警，示秬、秸。\n城头月落霜如雪，楼头五更声欲绝。捧盘出户歌一声，市楼东西人未行。\n北风吹衣射我饼，不忧衣单忧饼冷。业无高卑志当坚，男儿有求安得闲。\n\n①秬秸：张耒二子张秬、张秸。张耒，北宋著名文学家，曾官太常寺少卿。",
+   "stem": "下列的理解和赏析，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "诗前小序交代了本诗写作的起因和目的，凸显了诗作内容的真实性。"
+    },
+    {
+     "key": "B",
+     "text": "“歌一声”，是说卖饼儿沿街呼卖时有腔有调，生动形象并富于童趣。"
+    },
+    {
+     "key": "C",
+     "text": "卖饼儿衣着单薄，凛冽的寒风吹透了他的衣衫，他却担忧饼冷难卖。"
+    },
+    {
+     "key": "D",
+     "text": "作者在诗的最后，对两个儿子提出了谆谆告诫，点明了本诗的题旨。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2011北京题源：北京高考在线重排PDF与Gzywtk，作者文本局部校勘，原卷未认证",
+     "url": "https://gaokao.eol.cn/huodong/2011gkst/201106/t20110608_787585.shtml"
+    }
+   ],
+   "input_sha256": "8bc1b76a8982647bcae99a8af126532d7db66700fd9e981f65399ef445ba5c00"
+  },
+  {
+   "id": "bj-2012-yuyanjichu-5",
+   "gk_id": "2012-yuyanjichu:5",
+   "year": 2012,
+   "year_label": "2012年北京卷",
+   "q_num": 5,
+   "category": "文學常識",
+   "passage": "",
+   "stem": "下列有关文学常识的表述，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "英国文艺复兴时期莎士比亚创作的《罗密欧与朱丽叶》，与中国元朝关汉卿创作的《窦娥冤》，二者同属戏剧艺术。"
+    },
+    {
+     "key": "B",
+     "text": "杜甫的《蜀相》和苏轼的《念奴娇．赤壁怀古》都是咏史抒怀诗词的代表作，前者借诸葛言志，后者托周瑜抒怀。"
+    },
+    {
+     "key": "C",
+     "text": "从先秦《诗经》《楚辞》到唐宋诗词，再到明清诗文，作品的句式呈现以下共同特点：多用对偶，骈散相间，错落有致。"
+    },
+    {
+     "key": "D",
+     "text": "《聊斋志异》叙述的一些故事从内容上说是荒诞的、超现实的，但书中的许多细节又极具真实感，细腻而生动。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2012北京题源：EOL学科网重排图与Gzywtk对照，原卷及标记未认证",
+     "url": "https://gaokao.eol.cn/huodong/2012gkst/201206/t20120608_787585.shtml"
+    }
+   ],
+   "input_sha256": "ad5330f689a1976b99df79b40f03cfef086241bbdf8de135fa1e122f9332e09a"
+  },
+  {
+   "id": "bj-2012-shici-1",
+   "gk_id": "2012-shici:1",
+   "year": 2012,
+   "year_label": "2012年北京卷",
+   "q_num": 10,
+   "category": "古典詩歌",
+   "passage": "柳堤\n\n春江水正平，密树听啼莺。十里笼晴苑，千条锁故营。\n雨香飞燕促，风暖落花轻。更欲劳攀折，年年还自生。",
+   "stem": "下列对本诗的赏析，不正确的是",
+   "options": [
+    {
+     "key": "A",
+     "text": "一、二句点题，写“春江”暗含江边之“堤”，写“密树”点出堤上之“柳”。"
+    },
+    {
+     "key": "B",
+     "text": "三、四句承题，“十里”承“春江”，写堤长；“千条”承“密树”，状柳茂。"
+    },
+    {
+     "key": "C",
+     "text": "三、四句写柳堤晴日的静景，五、六句写雨天的动景，以静写动，借静衬动。"
+    },
+    {
+     "key": "D",
+     "text": "“啼莺”“飞燕”“风暖”“落花”具体生动地描绘出暮春时节的美丽景色。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2012北京题源：EOL学科网重排图与Gzywtk对照，原卷及标记未认证",
+     "url": "https://gaokao.eol.cn/huodong/2012gkst/201206/t20120608_787585.shtml"
+    },
+    {
+     "title": "古今图书集成草木典265柳堤",
+     "url": "https://zh.wikisource.org/wiki/欽定古今圖書集成/博物彙編/草木典/第265卷"
+    }
+   ],
+   "input_sha256": "69e3ae6ca0de34e74b1031639419b34b3c5f5560efb2a24e54a699470d47a90a"
+  },
+  {
+   "id": "bj-2013-shici-1",
+   "gk_id": "2013-shici:1",
+   "year": 2013,
+   "year_label": "2013年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "古风（其十）\n李白\n\n齐有倜傥生，鲁连①特高妙。\n明月出海底，一朝开光曜。\n却秦振英声，后世仰末照。\n意轻千金赠，顾向平原②笑。\n吾亦澹荡人，拂衣可同调。\n\n注释：①鲁连：鲁仲连，战国齐人，他说服魏与赵合力抗秦\n②平原：即平原君，赵国重臣",
+   "stem": "下列对本诗的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "三四句与曹植诗句“大国多良材，譬海出明珠”都运用比喻的方式表达赞誉之情。"
+    },
+    {
+     "key": "B",
+     "text": "“后世仰末照”句，感叹鲁仲连的功绩如同就要落山的太阳一样将被后人渐渐遗忘。"
+    },
+    {
+     "key": "C",
+     "text": "本诗最后两句，以“澹荡人”与开头的“倜傥生”相呼应，意在表明诗人的志趣。"
+    },
+    {
+     "key": "D",
+     "text": "李白在诗中盛赞了鲁仲连的高风亮节，并把他引为“同调”，内容显豁，感情深挚。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2013北京题源：EOL学科网重排图与Gzywtk对照，原卷及标记未认证",
+     "url": "https://gaokao.eol.cn/shiti/zhenti/201306/t20130608_957719.shtml"
+    },
+    {
+     "title": "古风齐有倜傥生原文",
+     "url": "https://zh.wikisource.org/zh-hant/%E5%8F%A4%E9%A2%A8_%28%E9%BD%8A%E6%9C%89%E5%80%9C%E5%84%BB%E7%94%9F%29"
+    }
+   ],
+   "input_sha256": "9eccf2a65847a9e02fd691b2c23817e887c646a4cf388f195201ae480c356b07"
+  },
+  {
+   "id": "bj-2014-shici-1",
+   "gk_id": "2014-shici:1",
+   "year": 2014,
+   "year_label": "2014年北京卷",
+   "q_num": null,
+   "category": "古典詩歌",
+   "passage": "奉陪郑驸马韦曲【1】\n杜甫\n\n韦曲花无赖，家家恼煞人。绿樽须尽日，白发好禁【2】春。\n石角钩衣破，藤梢刺眼新。何时占丛竹，头戴小乌巾。\n\n注释：【1】韦曲：唐代长安游览胜地。杜甫作此诗时，求仕于长安而未果。【2】禁：消受。",
+   "stem": "下列对本诗的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "诗的首句和辛弃疾的“最喜小儿无赖”，两处“无赖”都传达了作者的喜爱之情。"
+    },
+    {
+     "key": "B",
+     "text": "三四句意谓韦曲的满眼春色，让自感老去的诗人也觉得应借酒释怀，消受春光。"
+    },
+    {
+     "key": "C",
+     "text": "五六句通过“石角钩衣”、“藤梢刺眼”的细致描写，状写韦曲春去夏来的美景。"
+    },
+    {
+     "key": "D",
+     "text": "此诗运用了“反言”，如“恼煞人”，实际是爱煞人，正话反说，有相反相成之趣。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2014北京题源：Sina人工转录，与EOL图及Gzywtk对照，非原卷认证",
+     "url": "https://edu.sina.com.cn/gaokao/2014-06-09/1441422994.shtml"
+    }
+   ],
+   "input_sha256": "8b4bb032486f9ca7cbdb6f34e3c88786890684eed757f633fffcff4a0a43a3d6"
+  },
+  {
+   "id": "bj-2014-honglou-1",
+   "gk_id": "2014-honglou:1",
+   "year": 2014,
+   "year_label": "2014年北京卷",
+   "q_num": 7,
+   "category": "古典小說與戲曲",
+   "passage": "",
+   "stem": "《红楼梦》中，两位才女中秋月下吟诗，其中一位被称作“多病西施”，她所吟的“冷月葬花魂”诗句，正是其诗意而悲剧的人生的写照。此才女是",
+   "options": [
+    {
+     "key": "A",
+     "text": "史湘云"
+    },
+    {
+     "key": "B",
+     "text": "林黛玉"
+    },
+    {
+     "key": "C",
+     "text": "薛宝钗"
+    },
+    {
+     "key": "D",
+     "text": "妙玉"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
+   "answer_references": [
+    {
+     "title": "2014北京题源：Sina人工转录，与EOL图及Gzywtk对照，非原卷认证",
+     "url": "https://edu.sina.com.cn/gaokao/2014-06-09/1441422994.shtml"
+    },
+    {
+     "title": "红楼梦第七十六回原文",
+     "url": "https://zh.wikisource.org/zh-hans/紅樓夢/第076回"
+    }
+   ],
+   "input_sha256": "421f513bb68f1eab402d8327a3180a7865775e0f20c1e6775abc738c3af8c9bd"
+  },
+  {
+   "id": "bj-2015-shici-1",
+   "gk_id": "2015-shici:1",
+   "year": 2015,
+   "year_label": "2015年北京卷",
+   "q_num": 16,
+   "category": "古典詩歌",
+   "passage": "醉翁操【1】\n苏轼\n\n琅然，清圆，谁弹？响空山。无言，惟翁醉中知其天。月明风露娟娟，人未眠。荷蒉过山前，曰有心也哉此贤【2】。\n\n醉翁啸咏，声和流泉。醉翁去后，空有朝吟夜怨。山有时而童巅【3】，水有时而回川。思翁无岁年，翁今为飞仙。此意在人间，试听徽外三两弦【4】。\n\n注释：【1】据本词序，欧阳修喜爱琅琊幽谷的山川奇丽、泉鸣空涧，常把酒临听，欣然忘归。后沈遵作琴曲《醉翁操》，崔闲记谱，请苏轼填词。【2】蒉，草筐。《论语·宪问》：“子击磬于卫，有荷蒉而过孔氏之门者，曰：‘有心哉，击磬乎！’”【3】童巅：山顶光秃。山无草木曰童。【4】徽：琴徽，系弦之绳。此处代指琴。",
+   "stem": "下列对本词的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“响空山”与王维《山居秋暝》“空山新雨后”的“空山”，都写出了山的空寂。"
+    },
+    {
+     "key": "B",
+     "text": "“荷蒉”两句以《论语》中荷蒉者对孔子击磬的评价，赞赏醉翁懂得鸣泉之妙。"
+    },
+    {
+     "key": "C",
+     "text": "“醉翁去后”两句描写醉翁离开琅琊后，作者空对流泉，以吟诵表达思念之情。"
+    },
+    {
+     "key": "D",
+     "text": "词作最后三句是说醉翁虽已离世，声和流泉的美妙意境却仍然得以留存人间。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，逐题来源与分歧裁定",
+   "answer_references": [
+    {
+     "title": "2015北京语文新浪转载重排，仅作限定来源复核，原卷仍待核",
+     "url": "https://edu.sina.com.cn/gaokao/2015-06-07/1622471853.shtml"
+    },
+    {
+     "title": "汉典徽：系弦绳与琴面标识的多义",
+     "url": "https://www.zdic.net/hans/徽"
+    }
+   ],
+   "input_sha256": "0d75a19a6f93d1c3c578b11eb7b9554c6073308f2cb1a735dab4d029deb35df4"
+  },
+  {
+   "id": "bj-2016-shici-1",
+   "gk_id": "2016-shici:1",
+   "year": 2016,
+   "year_label": "2016年北京卷",
+   "q_num": 15,
+   "category": "古典詩歌",
+   "passage": "西村\n陆游\n\n乱山深处小桃源，往岁求浆忆叩门。\n高柳簇桥初转马，数家临水自成村。\n茂林风送幽禽语，坏壁苔侵醉墨痕。\n一首清诗记今夕，细云新月耿【1】黄昏。\n\n注释：【1】耿：微明的样子。",
+   "stem": "下列对本诗的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "作者到西村“叩门求浆”，是在清风吹拂、新月初现的黄昏时分。"
+    },
+    {
+     "key": "B",
+     "text": "“初转马”与“小乔初嫁了”中的“初”都是“才”“刚刚”的意思。"
+    },
+    {
+     "key": "C",
+     "text": "“茂林风送幽禽语”意谓清风送来茂林深处的鸟鸣，衬出西村的幽静。"
+    },
+    {
+     "key": "D",
+     "text": "“坏壁苔侵醉墨痕”意谓残壁上青苔侵蚀了昔日醉后留下的字迹。"
+    }
+   ],
+   "answer": "A",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2016北京语文十页原题扫描公开转载，逐页核对",
+     "url": "https://slide.edu.sina.com.cn/slide_11_78377_35062.html"
+    }
+   ],
+   "input_sha256": "95d780e20d2ab667102b8696624acb7bcac667c8156f77db99f60dc19f6792b0"
+  },
+  {
+   "id": "bj-2016-shici-2",
+   "gk_id": "2016-shici:2",
+   "year": 2016,
+   "year_label": "2016年北京卷",
+   "q_num": 16,
+   "category": "古典詩歌",
+   "passage": "西村\n陆游\n\n乱山深处小桃源，往岁求浆忆叩门。\n高柳簇桥初转马，数家临水自成村。\n茂林风送幽禽语，坏壁苔侵醉墨痕。\n一首清诗记今夕，细云新月耿【1】黄昏。\n\n注释：【1】耿：微明的样子。",
+   "stem": "“茂林风送幽禽语，坏壁苔侵醉墨痕”两句，以“声”“色”调动人的听觉和视觉感受，下列诗句“声色兼备”的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "梁台歌管三更罢，犹自风摇九子铃。（李商隐《齐宫词》）"
+    },
+    {
+     "key": "B",
+     "text": "横笛闻声不见人，红旗直上天山雪。（陈羽《从军行》）"
+    },
+    {
+     "key": "C",
+     "text": "春来茗叶还争白，腊尽梅梢尽放红。（韩元吉《送陆务观福建提仓》）"
+    },
+    {
+     "key": "D",
+     "text": "梅子留酸软齿牙，芭蕉分绿与窗纱。（杨万里《闲居初夏午睡起二绝句》其一）"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2016北京语文十页原题扫描公开转载，逐页核对",
+     "url": "https://slide.edu.sina.com.cn/slide_11_78377_35062.html"
+    }
+   ],
+   "input_sha256": "979109da5ed0db214dc0251219dc43bb2df1e0e14a6ed3abfa8d1dd5cb803e71"
+  },
+  {
+   "id": "bj-2017-shici-1",
+   "gk_id": "2017-shici:1",
+   "year": 2017,
+   "year_label": "2017年北京卷",
+   "q_num": 15,
+   "category": "古典詩歌",
+   "passage": "晓行巴峡\n王维\n\n际晓投巴峡，馀春忆帝京。晴江一女浣，朝日众鸡鸣。\n水国舟中市，山桥树杪【1】行。登高万井出，眺迥二流明。\n人作殊方语，莺为故国声。赖多山水趣，稍解别离情。\n\n注释：【1】树杪：树梢。",
+   "stem": "下列对本诗的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "巴峡乡邑旭日东升，众鸡鸣唱，晴朗的江边一个女子在浣洗。"
+    },
+    {
+     "key": "B",
+     "text": "水国乡民在舟中行商，山上有桥，行人走在桥上，如在树颠。"
+    },
+    {
+     "key": "C",
+     "text": "诗人登高远眺，万亩良田，井然有序，二水流过，分外澄明。"
+    },
+    {
+     "key": "D",
+     "text": "诗人在暮春之际来到巴峡，山水之趣宽解着诗人的离愁别绪。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2017北京语文十页原题扫描公开转载，逐页核对",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523465.shtml"
+    },
+    {
+     "title": "EOL刊学而思高考研究中心参考，非官方发布链",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523795.shtml"
+    }
+   ],
+   "input_sha256": "a0deece8b05d5e16b2c7adbacff3a025b24b492519c59b224bd9dcd9da7ae08d"
+  },
+  {
+   "id": "bj-2017-shici-2",
+   "gk_id": "2017-shici:2",
+   "year": 2017,
+   "year_label": "2017年北京卷",
+   "q_num": 16,
+   "category": "古典詩歌",
+   "passage": "晓行巴峡\n王维\n\n际晓投巴峡，馀春忆帝京。晴江一女浣，朝日众鸡鸣。\n水国舟中市，山桥树杪【1】行。登高万井出，眺迥二流明。\n人作殊方语，莺为故国声。赖多山水趣，稍解别离情。\n\n注释：【1】树杪：树梢。",
+   "stem": "“人作殊方语，莺为故国声”一联中，鸟雀之声传递了作者的思乡之情。下列诗句采用这一写作手法的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "欲暮黄鹂啭，伤心玉镜台。（王昌龄《古意》）"
+    },
+    {
+     "key": "B",
+     "text": "天寒雁声急，岁晚客程遥。（晁补之《吴松道中》）"
+    },
+    {
+     "key": "C",
+     "text": "苍鸠鸣竹间，两两自相语。（张耒《感春》）"
+    },
+    {
+     "key": "D",
+     "text": "殷勤报春去，恰恰一莺啼。（杨万里《和仲良春晚即事》）"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2017北京语文十页原题扫描公开转载，逐页核对",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523465.shtml"
+    },
+    {
+     "title": "EOL刊学而思高考研究中心参考，非官方发布链",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523795.shtml"
+    }
+   ],
+   "input_sha256": "f8d19f099aa98e1a2cd2ccf407e82277136f3873b24afa577293bb8553e3ba45"
+  },
+  {
+   "id": "bj-2018-shici-1",
+   "gk_id": "2018-shici:1",
+   "year": 2018,
+   "year_label": "2018年北京卷",
+   "q_num": 14,
+   "category": "古典詩歌",
+   "passage": "满江红·送李正之提刑入蜀【1】\n辛弃疾\n\n蜀道登天，一杯送绣衣【2】行客。还自叹中年多病，不堪离别。东北看惊诸葛表，西南更草相如檄【3】。把功名收拾付君侯，如椽笔。 儿女泪，君休滴。荆楚路，吾能说。要新诗准备，庐山山色。赤壁矶头千古浪，铜鞮陌【4】上三更月。正梅花万里雪深时，须相忆。\n\n注释：【1】这首词作于宋孝宗淳熙十一年（1184），当时辛弃疾闲居江西上饶。提刑，官名，主管地方司法、监察等事务。【2】绣衣：官服。【3】相如檄：指司马相如所作《喻巴蜀檄》，主旨是安抚巴蜀百姓。【4】铜鞮陌：代指襄阳。",
+   "stem": "下列对本词的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "词的开头四句，先写对方行程，再写自己的多病与离愁，暗含蹉跎失志的惆怅。"
+    },
+    {
+     "key": "B",
+     "text": "李正之即将远赴蜀地担任要职，作者满含深情地称许友人才华出众，巨笔如椽。"
+    },
+    {
+     "key": "C",
+     "text": "作者认为荆楚路上的江山美景都是作诗的好素材，如庐山景、赤壁浪、襄阳月。"
+    },
+    {
+     "key": "D",
+     "text": "词的结尾两句，怀念过去与李正之雪中赏梅的情景，表达对友谊的珍惜与赞美。"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2018北京语文公开重排题本，文字与标记核对，原始扫描件待核",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
+    },
+    {
+     "title": "EOL公开参考，来源非官方链，逐项审查而非照录",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
+    }
+   ],
+   "input_sha256": "a20cceb1d70ba3be6e083bed4c433c5e279294e3b481ecfea5e7bd549c9f80d1"
+  },
+  {
+   "id": "bj-2018-shici-2",
+   "gk_id": "2018-shici:2",
+   "year": 2018,
+   "year_label": "2018年北京卷",
+   "q_num": 15,
+   "category": "古典詩歌",
+   "passage": "满江红·送李正之提刑入蜀【1】\n辛弃疾\n\n蜀道登天，一杯送绣衣【2】行客。还自叹中年多病，不堪离别。东北看惊诸葛表，西南更草相如檄【3】。把功名收拾付君侯，如椽笔。 儿女泪，君休滴。荆楚路，吾能说。要新诗准备，庐山山色。赤壁矶头千古浪，铜鞮陌【4】上三更月。正梅花万里雪深时，须相忆。\n\n注释：【1】这首词作于宋孝宗淳熙十一年（1184），当时辛弃疾闲居江西上饶。提刑，官名，主管地方司法、监察等事务。【2】绣衣：官服。【3】相如檄：指司马相如所作《喻巴蜀檄》，主旨是安抚巴蜀百姓。【4】铜鞮陌：代指襄阳。",
+   "stem": "辛弃疾词善于借用典故和化用前人佳句来抒情达意。下列分析，正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“东北看惊诸葛表”，借用诸葛亮上表出师的典故，勉励友人报国立功。"
+    },
+    {
+     "key": "B",
+     "text": "“赤壁矶头千古浪”，借用苏轼游览赤壁的典故，抒发人生短暂的感慨。"
+    },
+    {
+     "key": "C",
+     "text": "“蜀道登天”，化用李白“蜀道之难，难于上青天”，表达对友人的担忧，望其早归。"
+    },
+    {
+     "key": "D",
+     "text": "“儿女泪，君休滴”，化用王勃“无为在歧路，儿女共沾巾”，表现宦游漂泊的凄苦。"
+    }
+   ],
+   "answer": "A",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2018北京语文公开重排题本，文字与标记核对，原始扫描件待核",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
+    },
+    {
+     "title": "EOL公开参考，来源非官方链，逐项审查而非照录",
+     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
+    }
+   ],
+   "input_sha256": "ffc719dad484d4125f0f0c5173bd6bc1fc7fe016f386a849bd8fa2c022f98bda"
+  },
+  {
+   "id": "bj-2019-shici-1",
+   "gk_id": "2019-shici:1",
+   "year": 2019,
+   "year_label": "2019年北京卷",
+   "q_num": 13,
+   "category": "古典詩歌",
+   "passage": "和张规臣水墨梅五绝【1】\n陈与义\n\n其一\n巧画无盐【2】丑不除，此花风韵更清姝。\n从教【3】变白能为黑，桃李依然是仆奴。\n\n其四\n含章【4】檐下春风面，造化功成秋兔毫。\n意足不求颜色似，前身相马九方皋【5】。\n\n注释：【1】五首绝句题咏同一幅墨梅图。【2】无盐：战国时齐国丑女钟离春。【3】从教：任凭。【4】含章：即含章殿，传说南朝时宋武帝寿阳公主卧于含章殿檐下，梅花落在额头形成美妆。【5】九方皋：春秋时相马名手。",
+   "stem": "下列对两首诗的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "第一首前两句认为，不论怎样描画无盐也无法变丑为美，墨梅图却能尽显梅花之美。"
+    },
+    {
+     "key": "B",
+     "text": "第二首前两句认为，墨梅图中的梅花犹如佳人容颜般美妙，展现出堪比造化的画技。"
+    },
+    {
+     "key": "C",
+     "text": "两首诗所题咏的墨梅图，不但描绘了梅花，还描绘了桃花、李花，对比鲜明"
+    },
+    {
+     "key": "D",
+     "text": "两首诗所题咏的墨梅图，没有描绘含章殿和九方皋，诗人提及二者是在用典。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2019北京语文参考答案公开转载扫描第11—12页；原发布机关链未核实",
+     "url": "https://cdn.zizzs.com/zixunzhan/202310/29ce91f8-0d5e-474f-8271-3e404cca029a.pdf"
+    }
+   ],
+   "input_sha256": "85a92af73df192f2e7243fa6eaab52f8b5e7c114a5623bb85c75c5cfa8fb2819"
+  },
+  {
+   "id": "bj-2019-shici-2",
+   "gk_id": "2019-shici:2",
+   "year": 2019,
+   "year_label": "2019年北京卷",
+   "q_num": 14,
+   "category": "古典詩歌",
+   "passage": "和张规臣水墨梅五绝【1】\n陈与义\n\n其一\n巧画无盐【2】丑不除，此花风韵更清姝。\n从教【3】变白能为黑，桃李依然是仆奴。\n\n其四\n含章【4】檐下春风面，造化功成秋兔毫。\n意足不求颜色似，前身相马九方皋【5】。\n\n注释：【1】五首绝句题咏同一幅墨梅图。【2】无盐：战国时齐国丑女钟离春。【3】从教：任凭。【4】含章：即含章殿，传说南朝时宋武帝寿阳公主卧于含章殿檐下，梅花落在额头形成美妆。【5】九方皋：春秋时相马名手。",
+   "stem": "题画诗往往包含“画外音”。下列分析，正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "第一首反映了诗人爱好清姝、不喜浓艳的审美追求。"
+    },
+    {
+     "key": "B",
+     "text": "第一首讽刺了现实生活中颠倒黑白、奴颜婢膝之人。"
+    },
+    {
+     "key": "C",
+     "text": "第二首联想到古代公主的梅花妆，表现梅花的富贵气质。"
+    },
+    {
+     "key": "D",
+     "text": "第二首比较画梅和相马的相似点，说明艺术来源于生活。"
+    }
+   ],
+   "answer": "A",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2019北京语文参考答案公开转载扫描第11—12页；原发布机关链未核实",
+     "url": "https://cdn.zizzs.com/zixunzhan/202310/29ce91f8-0d5e-474f-8271-3e404cca029a.pdf"
+    }
+   ],
+   "input_sha256": "adb9cb35fd9ff1693e935975c2fcb94393c2bc77c5195750641ab29a5e6f7b56"
+  },
+  {
+   "id": "bj-2020-shici-1",
+   "gk_id": "2020-shici:1",
+   "year": 2020,
+   "year_label": "2020年北京卷",
+   "q_num": 13,
+   "category": "古典詩歌",
+   "passage": "寄东鲁二稚子【1】\n李白\n\n吴地桑叶绿，吴蚕已三眠。我家寄东鲁，谁种龟阴【2】田。\n春事已不及，江行复茫然。南风吹归心，飞堕酒楼前。\n楼东一株桃，枝叶拂青烟。此树我所种，别来向三年。\n桃今与楼齐，我行尚未旋。娇女字平阳，折花倚桃边。\n折花不见我，泪下如流泉。小儿名伯禽，与姊亦齐肩。\n双行桃树下，抚背复谁怜。念此失次第，肝肠日忧煎。\n裂素写远意，因之汶阳川。\n\n注释：[1]这首诗作于金陵。[2]龟阴：地名，与后文的“汶阳川”都在鲁地。",
+   "stem": "下列对这首诗的理解与赏析，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "李白由江南农事春景联想到东鲁田地无人耕种，心生茫然之感。"
+    },
+    {
+     "key": "B",
+     "text": "李白思念一双儿女，追忆昔日春游漫步的场景，不禁泪下如泉。"
+    },
+    {
+     "key": "C",
+     "text": "这首诗叙事朴实，语言明白如话，亲切自然，堪称“天然去雕饰”。"
+    },
+    {
+     "key": "D",
+     "text": "这首诗展现李白柔情的一面，其风格与《梦游天姥吟留别》不同。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2020北京语文公开重排题本，文字与标记核对，原始扫描件待核",
+     "url": "https://gaokao.eol.cn/shiti/zhenti/202102/W020220527566843533730.doc"
+    }
+   ],
+   "input_sha256": "7ae1a409b72ebdec24900a4bc5558a4f955eba95d7c0f729909f4ec31fa5763f"
+  },
+  {
+   "id": "bj-2020-shici-2",
+   "gk_id": "2020-shici:2",
+   "year": 2020,
+   "year_label": "2020年北京卷",
+   "q_num": 14,
+   "category": "古典詩歌",
+   "passage": "寄东鲁二稚子【1】\n李白\n\n吴地桑叶绿，吴蚕已三眠。我家寄东鲁，谁种龟阴【2】田。\n春事已不及，江行复茫然。南风吹归心，飞堕酒楼前。\n楼东一株桃，枝叶拂青烟。此树我所种，别来向三年。\n桃今与楼齐，我行尚未旋。娇女字平阳，折花倚桃边。\n折花不见我，泪下如流泉。小儿名伯禽，与姊亦齐肩。\n双行桃树下，抚背复谁怜。念此失次第，肝肠日忧煎。\n裂素写远意，因之汶阳川。\n\n注释：[1]这首诗作于金陵。[2]龟阴：地名，与后文的“汶阳川”都在鲁地。",
+   "stem": "下列对诗句的分析，正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "诗人先说“吴蚕已三眠”，后又说“别来向三年”，抒发了青春不再的痛苦之情。"
+    },
+    {
+     "key": "B",
+     "text": "诗人先感慨“谁种龟阴田”，最后又说“因之汶阳川”，表达了归隐田园的志向。"
+    },
+    {
+     "key": "C",
+     "text": "“南风吹归心，飞堕酒楼前”，这两句由金陵酒楼引发东鲁家园之思，过渡巧妙。"
+    },
+    {
+     "key": "D",
+     "text": "“念此失次第，肝肠日忧煎”，意思是想到孩子们缺失父爱，诗人心中纷乱焦虑。"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2020北京语文公开重排题本，文字与标记核对，原始扫描件待核",
+     "url": "https://gaokao.eol.cn/shiti/zhenti/202102/W020220527566843533730.doc"
+    }
+   ],
+   "input_sha256": "3bc90907e3d157d6a6d9d26f4719bc5d5207d02ad4cee7c8baf07b1595ff1f98"
+  },
+  {
+   "id": "bj-2021-shici-1",
+   "gk_id": "2021-shici:1",
+   "year": 2021,
+   "year_label": "2021年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "和陶归园田居（其一）【1】\n苏轼\n\n环州多白水，际海皆苍山。以彼无尽景，寓我有限年。\n东家著孔丘，西家著颜渊。市为不二价，农为不争田。\n周公与管蔡【2】，恨不茅三间。我饱一饭足，薇蕨补食前。\n门生馈薪米，救我厨无烟。斗酒与只鸡，酣歌饯华颠【3】。\n禽鱼岂知道，我适物自闲。悠悠未必尔，聊乐我所然。\n\n注释：【1】此诗作于苏轼被贬惠州时。一日苏轼游白水山佛迹岩，夜闻其子苏过诵陶渊明《归园田居》，于是作此诗。【2】周公与管蔡：西周初，管叔、蔡叔叛，周公率兵平叛。【3】华颠：头发花白。",
+   "stem": "下列对诗句的分析，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“环州多白水”四句写景，写惠州被群山环绕，幽僻而苍凉。"
+    },
+    {
+     "key": "B",
+     "text": "“东家著孔丘”四句，写出了当地人的道德淳厚、民风纯朴。"
+    },
+    {
+     "key": "C",
+     "text": "“周公与管蔡”二句，设想彼此对立的人也会向往安居于此。"
+    },
+    {
+     "key": "D",
+     "text": "“我饱一饭足”二句，写生活虽穷困，但诗人仍能感到满足。"
+    }
+   ],
+   "answer": "A",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2021北京语文原卷十页影像，全文及加点画线核对",
+     "url": "https://gaokaobang.oss-cn-beijing.aliyuncs.com/attachs/ohr/2021/09/05/151605_61346eb566495.docx"
+    }
+   ],
+   "input_sha256": "b5d98605a5a4e4aa39fd216fb319a580c2f025590de3749dd29fe0ca33801976"
+  },
+  {
+   "id": "bj-2021-shici-2",
+   "gk_id": "2021-shici:2",
+   "year": 2021,
+   "year_label": "2021年北京卷",
+   "q_num": 13,
+   "category": "古典詩歌",
+   "passage": "和陶归园田居（其一）【1】\n苏轼\n\n环州多白水，际海皆苍山。以彼无尽景，寓我有限年。\n东家著孔丘，西家著颜渊。市为不二价，农为不争田。\n周公与管蔡【2】，恨不茅三间。我饱一饭足，薇蕨补食前。\n门生馈薪米，救我厨无烟。斗酒与只鸡，酣歌饯华颠【3】。\n禽鱼岂知道，我适物自闲。悠悠未必尔，聊乐我所然。\n\n注释：【1】此诗作于苏轼被贬惠州时。一日苏轼游白水山佛迹岩，夜闻其子苏过诵陶渊明《归园田居》，于是作此诗。【2】周公与管蔡：西周初，管叔、蔡叔叛，周公率兵平叛。【3】华颠：头发花白。",
+   "stem": "下列对这首诗的理解与赏析，正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "本诗与陶诗都反映出诗人在远离官场之后，归隐田园的心情。"
+    },
+    {
+     "key": "B",
+     "text": "作者效仿陶渊明，在抒写田园生活时，表达了对劳作的热爱。"
+    },
+    {
+     "key": "C",
+     "text": "陶诗原作除最后一句外通篇对仗，作者这首和陶诗也是如此。"
+    },
+    {
+     "key": "D",
+     "text": "本诗语言质朴而内涵丰富，正如作者评陶诗所言“质而实绮”。"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "2021北京语文原卷十页影像，全文及加点画线核对",
+     "url": "https://gaokaobang.oss-cn-beijing.aliyuncs.com/attachs/ohr/2021/09/05/151605_61346eb566495.docx"
+    }
+   ],
+   "input_sha256": "4905f533789a8f17580293bbb81c8eabfbc8a078b01054e0c9018d5e1b89e614"
+  },
+  {
+   "id": "bj-2022-shici-1",
+   "gk_id": "2022-shici:1",
+   "year": 2022,
+   "year_label": "2022年北京卷",
+   "q_num": 11,
+   "category": "古典詩歌",
+   "passage": "病柏【1】\n杜甫\n\n有柏生崇冈，童童状车盖。\n偃蹇龙虎姿，主当风云会。\n神明依正直，故老多再拜。\n岂知千年根，中路颜色坏【2】。\n出非不得地【3】，蟠踞亦高大。\n岁寒忽无凭，日夜柯叶改。\n丹凤领九雏，哀鸣翔其外。\n鸱鸮志意满【4】，养子穿穴内。\n客从何乡来，伫立久吁怪。\n静求元精理【5】，浩荡难倚赖。\n\n注释：【1】此诗作于上元二年（761）秋，杜甫时居成都草堂。【2】中路：中途。【3】出：生长。【4】鸱鸮：猫头鹰。【5】元精理：事物根本的道理。",
+   "stem": "下列对诗句的分析，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "前六句写柏树枝繁叶茂、高大轩昂之态，表现出诗人的赞美之情。"
+    },
+    {
+     "key": "B",
+     "text": "“岂知”两句写柏的衰败，“岁寒”两句写凋零，流露出惋惜之情。"
+    },
+    {
+     "key": "C",
+     "text": "“客从何乡来”两句，诗人由病柏而想到故乡，抒发了思乡之情。"
+    },
+    {
+     "key": "D",
+     "text": "这首诗在结尾两句抒发胸臆，表达了世事无常、难以意料的感慨。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [
+    {
+     "title": "2022北京卷公开题面重印及版面核对（非官方评分认证）",
+     "url": "https://cdn.zgkao.com/zixunzhan/202401/7e28deb2-3b24-4275-8f7d-64a75a17ce26.pdf"
+    }
+   ],
+   "input_sha256": "be7995a3b0e71077ea1f4fa3ce53653e3a5428062638a5b4d86b2977961499bb"
+  },
+  {
+   "id": "bj-2022-shici-2",
+   "gk_id": "2022-shici:2",
+   "year": 2022,
+   "year_label": "2022年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "病柏【1】\n杜甫\n\n有柏生崇冈，童童状车盖。\n偃蹇龙虎姿，主当风云会。\n神明依正直，故老多再拜。\n岂知千年根，中路颜色坏【2】。\n出非不得地【3】，蟠踞亦高大。\n岁寒忽无凭，日夜柯叶改。\n丹凤领九雏，哀鸣翔其外。\n鸱鸮志意满【4】，养子穿穴内。\n客从何乡来，伫立久吁怪。\n静求元精理【5】，浩荡难倚赖。\n\n注释：【1】此诗作于上元二年（761）秋，杜甫时居成都草堂。【2】中路：中途。【3】出：生长。【4】鸱鸮：猫头鹰。【5】元精理：事物根本的道理。",
+   "stem": "下列对这首诗的理解与赏析，正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "诗人善用比兴手法，此诗中的病柏与刘禹锡“病树前头万木春”有相同的寄托。"
+    },
+    {
+     "key": "B",
+     "text": "文似看山不喜平，此诗运用转笔形成了诗意的转折，其色调也从明朗转为黯淡。"
+    },
+    {
+     "key": "C",
+     "text": "杜甫借物抒怀，用柏树的“蟠踞亦高大”之姿隐喻了当时藩镇的龙盘虎踞之势。"
+    },
+    {
+     "key": "D",
+     "text": "此诗情感复杂而深沉，既有对现实的不满，也有对未来的希望，可谓沉郁顿挫。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [
+    {
+     "title": "2022北京卷公开题面重印及版面核对（非官方评分认证）",
+     "url": "https://cdn.zgkao.com/zixunzhan/202401/7e28deb2-3b24-4275-8f7d-64a75a17ce26.pdf"
+    }
+   ],
+   "input_sha256": "a0601fa89208cc85aca15c8065384edeeb59fd8fe025327073fc832ab5676ed3"
+  },
+  {
+   "id": "bj-2023-shici-1",
+   "gk_id": "2023-shici:1",
+   "year": 2023,
+   "year_label": "2023年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "将赴成都草堂途中有作先寄严郑公五首 其五①\n杜甫\n\n锦官城西生事微，乌皮几②在还思归。\n昔去为忧乱兵入，今来已恐邻人非。\n侧身天地更怀古，回首风尘甘息机③。\n共说总戎云鸟阵④，不妨游子芰荷衣。\n\n【注】①此诗作于公元764年。杜甫于760年在成都营建草堂。762年，严武入朝，杜甫送行至绵州。其后，成都发生兵乱，杜甫流亡至梓州。764年，严武封郑国公、拜剑南节度使，再次镇守成都。②乌皮几：包着黑皮的小桌。③息机：熄灭用世之心。④总戎：主帅。云鸟阵：一种作战的阵法。",
+   "stem": "以下对诗歌的理解，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“锦官城西”句写诗人在成都生计微薄，感慨世事之艰难。"
+    },
+    {
+     "key": "B",
+     "text": "“乌皮几”句，诗人借“乌皮几”表达了自己的思归之情。"
+    },
+    {
+     "key": "C",
+     "text": "“昔去”句，诗人叙写昔日离开成都，担忧乱兵入城骚扰。"
+    },
+    {
+     "key": "D",
+     "text": "“今来”句写诗人回到成都后，看到兵戈扰攘、物是人非。"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "8e30a9e0a92379eca4f74cd00470d0f63b4dd0f119622dc5c669ce445d058728"
+  },
+  {
+   "id": "bj-2023-shici-2",
+   "gk_id": "2023-shici:2",
+   "year": 2023,
+   "year_label": "2023年北京卷",
+   "q_num": 13,
+   "category": "古典詩歌",
+   "passage": "将赴成都草堂途中有作先寄严郑公五首 其五①\n杜甫\n\n锦官城西生事微，乌皮几②在还思归。\n昔去为忧乱兵入，今来已恐邻人非。\n侧身天地更怀古，回首风尘甘息机③。\n共说总戎云鸟阵④，不妨游子芰荷衣。\n\n【注】①此诗作于公元764年。杜甫于760年在成都营建草堂。762年，严武入朝，杜甫送行至绵州。其后，成都发生兵乱，杜甫流亡至梓州。764年，严武封郑国公、拜剑南节度使，再次镇守成都。②乌皮几：包着黑皮的小桌。③息机：熄灭用世之心。④总戎：主帅。云鸟阵：一种作战的阵法。",
+   "stem": "以下对诗歌的赏析，正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "律诗一般只有中间两联对仗，而此诗四联皆对，属对精切，律法谨严。"
+    },
+    {
+     "key": "B",
+     "text": "诗人借众人的评价，从侧面称赞严郑公的才能，语言得体而蕴藉有味。"
+    },
+    {
+     "key": "C",
+     "text": "此诗尾联在语意上与第一句中的“生事微”前后呼应，可谓章法井然。"
+    },
+    {
+     "key": "D",
+     "text": "末句化用《离骚》典故，借芰荷衣显示杜甫不肯同流合污的高洁人格。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [],
+   "input_sha256": "8d8e85092b948ef2d5fae899ac84dca47fa7fa5e00242083894faf8dfffcd0a2"
+  },
+  {
+   "id": "bj-2024-shici-1",
+   "gk_id": "2024-shici:1",
+   "year": 2024,
+   "year_label": "2024年北京卷",
+   "q_num": 11,
+   "category": "古典詩歌",
+   "passage": "马诗二十三首(选四)李贺\n\n其一\n龙脊贴连钱,银蹄白踏烟。\n无人织锦韂①,谁为铸金鞭。\n\n其五\n大漠沙如雪,燕山月似钩。\n何当金络脑,快走踏清秋。\n\n其十\n催榜②渡乌江,神骓泣向风。\n君王今解剑,何处逐英雄。\n\n其十三\n宝玦谁家子,长闻侠骨香。\n堆金③买骏骨,将送楚襄王④。\n\n注释 ①韂:披在马腹两侧用来遮挡泥土的一种马具。②榜:船桨。③堆金:《战国策》载郭隗谓燕昭王曰:“臣闻古之君人,有以千金求千里马者。”④楚襄王:清人王琦曰:“夫襄王者,未闻有好马之癖。”",
+   "stem": "下列对四首诗的依次解读,不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "其一言骏马脊上有钱形花纹,奔跑起来如踏烟云。"
+    },
+    {
+     "key": "B",
+     "text": "其五描写壮丽的塞外风景，想象骏马驰骋的画面。"
+    },
+    {
+     "key": "C",
+     "text": "其十写项羽自刎之后,乌骓马临风哭泣，怀念故主。"
+    },
+    {
+     "key": "D",
+     "text": "其十三写侠客千金买马,拜谒明主,实现人生价值。"
+    }
+   ],
+   "answer": "D",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
+   "answer_references": [
+    {
+     "title": "公开转载题面勘误与格式核对（非官方评分认证）",
+     "url": "https://gaokao.eol.cn/shiti/yw/202407/t20240705_2621911_4.shtml"
+    }
+   ],
+   "input_sha256": "986b2b72acbc2cc5a05682ca50ef4db2b7f30579027216684446b80e1ab9e115"
+  },
+  {
+   "id": "bj-2024-shici-2",
+   "gk_id": "2024-shici:2",
+   "year": 2024,
+   "year_label": "2024年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "马诗二十三首(选四)李贺\n\n其一\n龙脊贴连钱,银蹄白踏烟。\n无人织锦韂①,谁为铸金鞭。\n\n其五\n大漠沙如雪,燕山月似钩。\n何当金络脑,快走踏清秋。\n\n其十\n催榜②渡乌江,神骓泣向风。\n君王今解剑,何处逐英雄。\n\n其十三\n宝玦谁家子,长闻侠骨香。\n堆金③买骏骨,将送楚襄王④。\n\n注释 ①韂:披在马腹两侧用来遮挡泥土的一种马具。②榜:船桨。③堆金:《战国策》载郭隗谓燕昭王曰:“臣闻古之君人,有以千金求千里马者。”④楚襄王:清人王琦曰:“夫襄王者,未闻有好马之癖。”",
+   "stem": "下列对四首诗的整体分析,正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "四首诗借“金鞭”“金络脑”“宝玦”等多种马具，衬托马的形象。"
+    },
+    {
+     "key": "B",
+     "text": "四首诗多处使用“谁”“何”等,加强了语气,增强了情感表达。"
+    },
+    {
+     "key": "C",
+     "text": "四首诗都是五言绝句,句句对仗,典丽精工,将咏物、咏史熔于一炉。"
+    },
+    {
+     "key": "D",
+     "text": "四首诗灵活运用了比喻、拟人、排比等修辞手法，体现“诗鬼”之才。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "codex-01a10ba5-gpt-6-astra",
+   "answer_references": [
+    {
+     "title": "公开转载题面勘误与格式核对（非官方评分认证）",
+     "url": "https://gaokao.eol.cn/shiti/yw/202407/t20240705_2621911_4.shtml"
+    }
+   ],
+   "input_sha256": "c26e3a946c707e040cc25ba69621640d2aab71e5d89be6dfb456547749fc23e8"
+  },
+  {
+   "id": "bj-2025-shici-2",
+   "gk_id": "2025-shici:2",
+   "year": 2025,
+   "year_label": "2025年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "游嘉州后溪\n薛能①\n山屐经过满径踪,隔溪遥见夕阳舂。\n当时诸葛成何事,只合终身作卧龙。\n\n诸葛武侯\n王安石\n恸哭杨颙②为一言,余风今日更谁传。\n区区庸蜀支吴魏,不是虚心岂得贤。\n\n赤壁\n胡安国③\n片语能令孙仲谋,气如山涌剑横秋。\n莫言诸葛成何事,万古忠言第一流。\n\n【注】①薛能:唐代诗人,曾在嘉州(今四川乐山)为官。②杨颙:蜀臣,曾向诸葛亮谏言治国之术,他死后诸葛亮深感悲痛。③胡安国:两宋之际学者,向宋高宗献《时政论》,提出保国方略。",
+   "stem": "下列对三首诗的赏析,正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "第一首借景抒情,将暮春之景与凄凉之感融合为一体。"
+    },
+    {
+     "key": "B",
+     "text": "第二首从具体事件出发品人论史,以小见大,构思新巧。"
+    },
+    {
+     "key": "C",
+     "text": "前两首都使用比喻和拟人的修辞手法,增强了画面感。"
+    },
+    {
+     "key": "D",
+     "text": "后两首都借古讽今、托物言志,使诗歌意蕴更为丰富。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [
+    {
+     "title": "公开转载题面勘误与格式核对（非官方评分认证）",
+     "url": "https://zy.21cnjy.com/23263988"
+    }
+   ],
+   "input_sha256": "798b8aacc390ccc06060a1ec8d128211433a9e0a4e6bfe0bf7020e942281701f"
+  },
+  {
+   "id": "bj-2026-shici-1",
+   "gk_id": "2026-shici:1",
+   "year": 2026,
+   "year_label": "2026年北京卷",
+   "q_num": 11,
+   "category": "古典詩歌",
+   "passage": "水龙吟·雁【1】\n苏轼\n露寒烟冷蒹葭老，天外征鸿寥唳。银河秋晚，长门【2】灯悄，一声初至。应念潇湘，岸遥人静，水多菰米。乍望极平田，徘徊欲下，依前被、风惊起。\n\n须信衡阳万里。有谁家、锦书遥寄。万重云外，斜行横阵，才疏又缀。仙掌【3】月明，石头城下，影摇寒水。念征衣未捣，佳人拂杵，有盈盈泪。\n\n注释：【1】这首词作于元丰七年，苏轼离开贬地黄州赴常州，途经金陵。【2】长门：汉武帝时，陈皇后居长门宫，愁闷失意，司马相如作《长门赋》。【3】仙掌：指汉武帝在长安建章宫修造的金铜仙人。",
+   "stem": "下列对这首词中语句的解读，不正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "“露寒烟冷蒹葭老”，点明秋季景物特点：露水寒凉，雾霭清冷，蒹葭枯萎。"
+    },
+    {
+     "key": "B",
+     "text": "“应念潇湘，岸遥人静，水多菰米”，写鸿雁向往潇湘大地，那里安宁富足。"
+    },
+    {
+     "key": "C",
+     "text": "“斜行横阵，才疏又缀”，描写鸿雁列队，纵横变化，时而高远，时而停顿。"
+    },
+    {
+     "key": "D",
+     "text": "“佳人拂杵，有盈盈泪”，写闺中女子轻拂捣衣之杵，心有所思，潸然泪下。"
+    }
+   ],
+   "answer": "C",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [],
+   "input_sha256": "fca167c44ba8f2b9a035dcea2eb33844a20e9a69e496b780444bfd579d045e19"
+  },
+  {
+   "id": "bj-2026-shici-2",
+   "gk_id": "2026-shici:2",
+   "year": 2026,
+   "year_label": "2026年北京卷",
+   "q_num": 12,
+   "category": "古典詩歌",
+   "passage": "水龙吟·雁【1】\n苏轼\n露寒烟冷蒹葭老，天外征鸿寥唳。银河秋晚，长门【2】灯悄，一声初至。应念潇湘，岸遥人静，水多菰米。乍望极平田，徘徊欲下，依前被、风惊起。\n\n须信衡阳万里。有谁家、锦书遥寄。万重云外，斜行横阵，才疏又缀。仙掌【3】月明，石头城下，影摇寒水。念征衣未捣，佳人拂杵，有盈盈泪。\n\n注释：【1】这首词作于元丰七年，苏轼离开贬地黄州赴常州，途经金陵。【2】长门：汉武帝时，陈皇后居长门宫，愁闷失意，司马相如作《长门赋》。【3】仙掌：指汉武帝在长安建章宫修造的金铜仙人。",
+   "stem": "下列对这首词的分析与鉴赏，正确的一项是",
+   "options": [
+    {
+     "key": "A",
+     "text": "善写声音，如上阕写雁声由远及近，唤起宫中人的叹息之声和乡关之思。"
+    },
+    {
+     "key": "B",
+     "text": "善摹情状，如写雁“徘徊”“惊起”，写雁影随水波而“摇”，富有动态美。"
+    },
+    {
+     "key": "C",
+     "text": "多用典故，如长门故事、衡阳雁回、仙掌旧迹，增强了历史厚重感和严肃性。"
+    },
+    {
+     "key": "D",
+     "text": "综合运用拟人、比喻、排比等修辞手法，巧妙转换时空，塑造多重优美意境。"
+    }
+   ],
+   "answer": "B",
+   "answer_status": "qualified_learning_reference",
+   "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
+   "answer_references": [],
+   "input_sha256": "567ccf8d08c7e6863f4fca952443ed0dcb4e7419670b30c20124f0efe094ae0c"
+  }
+ ]
+}

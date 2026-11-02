@@ -2,6 +2,9 @@
 import type { QType, Tier } from "./types";
 
 export const LIMIT_MS = 20000; // 每題限時
+/** 真題（北京卷、指考）要先讀完一首詩或一段文字，再比較四個長選項，限時放寬到 90 秒（2026-11-02） */
+export const EXAM_LIMIT_MS = 90000;
+export const limitOf = (type: QType): number => (type === "exam" ? EXAM_LIMIT_MS : LIMIT_MS);
 export const RUN_SIZE = 10; // 每局題數
 export const TIER_BASE: Record<Tier, number> = { N: 10, R: 14, SR: 18, SSR: 24 };
 export const TYPE_BONUS: Record<QType, number> = { who: 0, work: 2, line: 2, era: 0, kw: 4, lang: 1, year: 2, exam: 4 };
@@ -14,8 +17,9 @@ export function clamp(n: number, lo: number, hi: number): number {
 export function questionScore(args: { correct: boolean; tier: Tier; type: QType; ms: number; combo: number }): number {
   if (!args.correct) return 0;
   const base = TIER_BASE[args.tier] + TYPE_BONUS[args.type];
-  const ms = args.ms < 300 ? LIMIT_MS : args.ms; // 不足 0.3 秒視為異常，不給速度分
-  const speed = clamp(1 - ms / LIMIT_MS, 0, 1);
+  const limit = limitOf(args.type);
+  const ms = args.ms < 300 ? limit : args.ms; // 不足 0.3 秒視為異常，不給速度分
+  const speed = clamp(1 - ms / limit, 0, 1);
   const bonus = Math.round(base * 0.5 * speed);
   const mult = 1 + clamp(args.combo - 1, 0, 9) * 0.1;
   return Math.round((base + bonus) * mult);

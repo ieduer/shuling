@@ -111,7 +111,7 @@ export const REGIONS: Region[] = [
   { id: "fusang", books: ["fusang"], name: "扶桑", sub: "日本", map: `${ART}/map-fusang.webp`, guardian: "sr-bookdeer", accent: "#e08aa0" },
   { id: "nobel", books: ["nobel"], name: "諾貝爾星河", sub: "1901–2026 全部得主", map: `${ART}/map-nobel.webp`, guardian: "ssr-kunpeng", accent: "#8fb8e6" },
   { id: "schools", books: ["schools"], name: "思潮館", sub: "思潮、文論與文體", map: `${ART}/map-schools.webp`, guardian: "sr-starwhale", accent: "#b48ef1" },
-  { id: "exam", books: ["exam"], name: "真卷殿", sub: "指考真題", map: `${ART}/map-exam.webp`, guardian: "ssr-tianlu", accent: "#e0b45f" },
+  { id: "exam", books: ["exam"], name: "真卷殿", sub: "北京卷與指考真題", map: `${ART}/map-exam.webp`, guardian: "ssr-tianlu", accent: "#e0b45f" },
 ];
 
 export function regionOf(book: string): Region | undefined {

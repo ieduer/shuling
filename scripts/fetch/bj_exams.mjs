@@ -1,0 +1,150 @@
+#!/usr/bin/env node
+// 真卷殿·北京卷快照：從高考站（gk.bdfz.net）已接受版本讀北京卷語文題面與答案核查表，只取文學類單選題，寫 data/raw/exams/bj-literature.json。
+// 用法：node scripts/fetch/bj_exams.mjs [GK_REPO] [COMMIT]（預設 /Users/ylsuen/CF/sites/exam/gaokao、a209908…，即發布登記簿 gk-bdfz-net 的 accepted source）
+// 收題規則（每條都必須成立，否則整批失敗、不寫輸出）：
+// - 答案核查表狀態 reviewed、kind single_choice、恰有一個正確選項，且在 answer-release-scope 的 activeQuestionIds 內；
+// - 核查表的 inputSha256 與現行題面重新計算的雜湊一致（題面、材料、選項順序都綁定）；
+// - 題面不得是「教學修訂版」（非原卷文字）；選項必須恰好解析成 A–D 四項（標記接「．」「.」「、」或「。」）；
+// - 範圍：詩詞鑑賞（shici）全部合格題；文學常識與名著只收下列逐題審過的題號。
+// 高考站的答案是「學習參考」：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實（核查表 releaseQualification）。快照照錄這個限定。
+import fs from "node:fs";
+import path from "node:path";
+import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
+
+const ROOT = path.resolve(new URL("../../", import.meta.url).pathname);
+const GK = process.argv[2] || "/Users/ylsuen/CF/sites/exam/gaokao";
+const COMMIT = process.argv[3] || "a209908baa1e5ec1e3fa31f5c15b6a64ff4f2499";
+const WENXUE = ["2007-yuyanjichu:5", "2008-yuyanjichu:5", "2009-yuyanjichu:5", "2010-yuyanjichu:4", "2011-yuyanjichu:4", "2012-yuyanjichu:5"];
+const MINGZHU = ["2014-honglou:1"];
+const sha = (b) => createHash("sha256").update(b).digest("hex");
+const show = (f) => execFileSync("git", ["-C", GK, "show", `${COMMIT}:${f}`], { maxBuffer: 256 * 1024 * 1024 });
+const raw = { all: show("data/all.json"), authority: show("data/answer-authority.json"), scope: show("data/answer-release-scope.json") };
+const all = JSON.parse(raw.all);
+const authority = JSON.parse(raw.authority);
+const scope = JSON.parse(raw.scope);
+const active = new Set(scope.activeQuestionIds);
+const records = new Map(all.map((r) => [r.id, r]));
+// 與高考站 scripts/lib/answer-authority.mjs 的 questionDigest 同一算法
+const digest = (record, question) => sha(JSON.stringify({ recordId: record.id, qIndex: question.qIndex, materials: record.materials, topic: record.topic, question: question.text }));
+
+function parse(text) {
+  // 選項標記：行首或空白後的 A–D 接「．」「.」「、」；四個標記必須依序各出現一次
+  const marks = [];
+  const re = /(^|\s)([A-D])\s*[．.、。]/g;
+  let m;
+  while ((m = re.exec(text))) marks.push({ key: m[2], at: m.index + m[1].length, body: re.lastIndex });
+  const seq = [];
+  for (const k of ["A", "B", "C", "D"]) {
+    const hit = marks.find((x) => x.key === k && (!seq.length || x.at > seq[seq.length - 1].at));
+    if (!hit) return null;
+    seq.push(hit);
+  }
+  const options = seq.map((x, i) => ({ key: x.key, text: text.slice(x.body, i < 3 ? seq[i + 1].at : undefined).replace(/\s+/g, " ").trim() }));
+  if (options.some((o) => !o.text)) return null;
+  const stem = text
+    .slice(0, seq[0].at)
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l && !/^\d+\s*[．.、]\s*[（(]\s*\d+\s*分\s*[）)]$/.test(l))
+    .join("\n")
+    .replace(/^\s*(?:\d+\s*[．.、]|[（(]\d+[）)])?\s*[①②③④⑤]?\s*[．.、]?\s*/, "")
+    .replace(/[（(]\s*\d+\s*分\s*[）)]/g, "")
+    .replace(/[（(]\s*[）)]/g, "")
+    .replace(/．{2,}/g, "")
+    .trim();
+  return { stem, options };
+}
+
+const out = [];
+const problems = [];
+const answers = new Map(authority.questions.map((q) => [q.id, q]));
+const wanted = [...authority.questions.filter((q) => q.id.split(":")[0].endsWith("-shici")).map((q) => q.id), ...WENXUE, ...MINGZHU];
+for (const id of wanted) {
+  const a = answers.get(id);
+  const [rid, qi] = id.split(":");
+  const record = records.get(rid);
+  const question = record?.questions?.find((q) => String(q.qIndex) === qi);
+  const isShici = rid.endsWith("-shici");
+  if (!a || !record || !question) {
+    problems.push(`MISSING ${id}`);
+    continue;
+  }
+  // 詩詞題裡開放題、多選題本來就不收；文學常識與名著是逐題指定的，不合格就是錯
+  const fail = (why) => (isShici ? null : problems.push(`${why} ${id}`));
+  if (a.status !== "reviewed" || a.kind !== "single_choice" || a.correctOptions?.length !== 1) {
+    fail("NOT-REVIEWED-SINGLE");
+    continue;
+  }
+  if (!active.has(id)) {
+    problems.push(`OUT-OF-RELEASE-SCOPE ${id}`);
+    continue;
+  }
+  if (digest(record, question) !== a.inputSha256) {
+    problems.push(`DIGEST-MISMATCH ${id}`);
+    continue;
+  }
+  if (/教学修订版|非原卷/.test(question.text)) {
+    if (!isShici) problems.push(`REVISED-NOT-ORIGINAL ${id}`);
+    continue;
+  }
+  const p = parse(question.text);
+  if (!p) {
+    problems.push(`OPTIONS-UNPARSED ${id}`);
+    continue;
+  }
+  const answer = a.correctOptions[0];
+  if (!p.options.some((o) => o.key === answer)) {
+    problems.push(`ANSWER-NOT-AN-OPTION ${id} ${answer}`);
+    continue;
+  }
+  // 詩詞題的材料：新格式在 materials 陣列，舊格式在 material1–3；annotation 混有高考站的來源說明（「來源限定」「非原卷掃描」
+  // 「題面經……交叉核對」），只保留原卷注釋
+  const poems = record.materials?.length ? record.materials.map((m) => m.text) : [record.material1, record.material2, record.material3];
+  const note = String(record.annotation || "")
+    .split("\n")
+    .filter((l) => !/^\s*来源限定/.test(l) && !/题面经.*交叉核对/.test(l))
+    .map((l) => l.replace(/公开转载题源，非原卷扫描。?/g, "").trim())
+    .filter(Boolean)
+    .join("\n");
+  const passage = isShici ? [...poems, note].filter((x) => typeof x === "string" && x.trim()).join("\n\n").trim() : "";
+  if (isShici && passage.replace(/\s/g, "").length < 20) problems.push(`PASSAGE-MISSING ${id}`);
+  const residue = /来源限定|非原卷|转录|重排|出版链|本站|教学修订版|交叉核对|题源/;
+  if (residue.test(passage) || residue.test(p.stem) || p.options.some((o) => residue.test(o.text))) problems.push(`EDITORIAL-NOTE-LEFT ${id}`);
+  const refs = (a.sources || []).filter((s) => s.url).map((s) => ({ title: s.title || s.label || "", url: s.url }));
+  const lead = (s) => Number(String(s || "").match(/^\s*(\d{1,2})\s*[．.、（(]/)?.[1]) || null;
+  out.push({
+    id: `bj-${id.replace(":", "-")}`,
+    gk_id: id,
+    year: record.year,
+    year_label: `${record.year}年北京卷`,
+    q_num: Number(question.sourceQuestionNumber) || lead(question.text) || lead(record.topic) || null,
+    category: isShici ? "古典詩歌" : MINGZHU.includes(id) ? "古典小說與戲曲" : "文學常識",
+    passage,
+    stem: p.stem,
+    options: p.options,
+    answer,
+    answer_status: "qualified_learning_reference",
+    answer_reviewed_by: a.reviewedBy || "",
+    answer_references: refs,
+    input_sha256: a.inputSha256,
+  });
+}
+if (problems.length) {
+  for (const p of problems) console.error(p);
+  console.error(`FAILED: ${problems.length} problems (nothing written)`);
+  process.exit(1);
+}
+out.sort((x, y) => x.year - y.year || (x.q_num || 0) - (y.q_num || 0) || (x.id < y.id ? -1 : 1));
+const snap = {
+  source: "高考站 gk.bdfz.net（ieduer/gaokao）已接受版本的北京卷語文題面與答案核查表",
+  source_commit: COMMIT,
+  source_files: { "data/all.json": sha(raw.all), "data/answer-authority.json": sha(raw.authority), "data/answer-release-scope.json": sha(raw.scope) },
+  answer_qualification: { contract: authority.releaseQualification?.contract || "", originalPublicationVerified: authority.releaseQualification?.originalPublicationVerified ?? null, officialRubricVerified: authority.releaseQualification?.officialRubricVerified ?? null, note: "答案為學習參考：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實。" },
+  selection: { shici: "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題", wenxue: WENXUE, mingzhu: MINGZHU },
+  questions: out,
+};
+fs.writeFileSync(path.join(ROOT, "data/raw/exams/bj-literature.json"), JSON.stringify(snap, null, 1) + "\n");
+const by = {};
+for (const q of out) by[q.category] = (by[q.category] || 0) + 1;
+console.log(JSON.stringify({ questions: out.length, byCategory: by, years: [...new Set(out.map((q) => q.year))].length }));

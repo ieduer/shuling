@@ -50,21 +50,26 @@ const codeDigest = sha(CODE.map((f) => fs.readFileSync(path.join(root, f), "utf8
 const nobelCards = loadNobel(root, problems);
 const shiCards = await loadPoetry(root, problems);
 const canon = await loadCanon(root, problems, nobelCards);
-// 真卷殿：指考試卷一卷一卡（只有一題的卷與下一卷合成一卡，讓每張卡至少兩題）
-const examData = JSON.parse(fs.readFileSync(path.join(root, "data/raw/exams/tw-literature.json"), "utf8"));
+// 真卷殿：指考與北京卷，一年一卡（只有一題的年份與下一年合成一卡，讓每張卡至少兩題）。指考卡號沿用 ex-<學年>，舊存檔不變。
+const EXAMS = [
+  { key: "tw", file: "data/raw/exams/tw-literature.json", src: "tw-exams", id: (y) => `ex-${y}`, name: (labels) => (labels.length > 1 ? `指考 ${labels[0]}–${labels[labels.length - 1]}` : `指考 ${labels[0]}`) },
+  { key: "bj", file: "data/raw/exams/bj-literature.json", src: "bj-exams", id: (y) => `ex-bj-${y}`, name: (labels, years) => (years.length > 1 ? `北京卷 ${years[0]}–${years[years.length - 1]}` : `北京卷 ${years[0]}`) },
+];
 const examCards = [];
-{
+for (const E of EXAMS) {
+  const data = JSON.parse(fs.readFileSync(path.join(root, E.file), "utf8"));
   const byYear = new Map();
-  for (const q of examData.questions) {
+  for (const q of data.questions) {
     if (!byYear.has(q.year)) byYear.set(q.year, []);
-    byYear.get(q.year).push(q);
+    byYear.get(q.year).push({ ...q, exam: E.key });
   }
   let pend = [];
   for (const y of [...byYear.keys()].sort((a, b) => a - b)) {
     pend.push(...byYear.get(y));
     if (pend.length < 2) continue;
     const labels = [...new Set(pend.map((q) => q.year_label))];
-    examCards.push({ id: `ex-${pend[0].year}`, book: "exam", kind: "work", name: labels.length > 1 ? `指考 ${labels[0]}–${labels[labels.length - 1]}` : `指考 ${labels[0]}`, prominence: pend.length * 10, facts: pend.map((q) => ({ p: "exam_item", o: q.id, item: q, src: ["tw-exams"] })) });
+    const years = [...new Set(pend.map((q) => q.year))];
+    examCards.push({ id: E.id(pend[0].year), book: "exam", kind: "work", name: E.name(labels, years), prominence: pend.length * 10, facts: pend.map((q) => ({ p: "exam_item", o: q.id, item: q, src: [E.src] })) });
     pend = [];
   }
   if (pend.length) problems.push(`EXAM-TAIL ${pend.map((q) => q.id).join(",")} (fewer than two items left)`);
@@ -344,7 +349,12 @@ for (const c of examCards) {
       problems.push(`EXAM-ANSWER-MISSING ${q.id}`);
       continue;
     }
-    add(c, f, "exam", q.stem, q.passage, ans.text, q.options.filter((o) => o.key !== q.answer).map((o) => o.text), `指考${q.year_label}第 ${q.q_num} 題，官方答案（${q.answer}）：${ans.text}。`, q.answer_source ? [{ label: "官方答案原檔", url: q.answer_source, role: "official" }] : []);
+    const others = q.options.filter((o) => o.key !== q.answer).map((o) => o.text);
+    if (q.exam === "bj") {
+      // 北京卷沒有公開的官方答案；用高考站答案核查表（學習參考），解析裡照實說明
+      const refs = (q.answer_references || []).slice(0, 2).map((r) => ({ label: `參考解析：${r.title}`, url: r.url, role: "reference" }));
+      add(c, f, "exam", q.stem, q.passage, ans.text, others, `${q.year_label}${q.q_num ? `第 ${q.q_num} 題` : ""}，參考答案（${q.answer}）：${ans.text.replace(/[。.]$/, "")}。答案取自高考站北京卷答案核查表：依公開解析與覆核整理的學習參考，原考試機構答案的出版來源未能核實。`, refs);
+    } else add(c, f, "exam", q.stem, q.passage, ans.text, others, `指考${q.year_label}第 ${q.q_num} 題，官方答案（${q.answer}）：${ans.text}。`, q.answer_source ? [{ label: "官方答案原檔", url: q.answer_source, role: "official" }] : []);
   }
 }
 

@@ -70,6 +70,14 @@ test("關卡名不帶時代或年份（時代題、年份題才不會被關卡�
   }
 });
 
+test("真題限時 90 秒：讀完一首詩再作答仍有速度分，其他題型仍是 20 秒", () => {
+  const exam30 = questionScore({ correct: true, tier: "N", type: "exam", ms: 30000, combo: 1 });
+  const exam90 = questionScore({ correct: true, tier: "N", type: "exam", ms: 90000, combo: 1 });
+  const who30 = questionScore({ correct: true, tier: "N", type: "who", ms: 30000, combo: 1 });
+  assert.ok(exam30 > exam90, "exam answered in 30 s keeps a speed bonus");
+  assert.equal(who30, questionScore({ correct: true, tier: "N", type: "who", ms: 20000, combo: 1 }), "other types still end at 20 s");
+});
+
 test("單題計分：答錯 0 分；稀有度與題型越高分越高", () => {
   assert.equal(questionScore({ correct: false, tier: "SSR", type: "kw", ms: 1000, combo: 5 }), 0);
   const n = questionScore({ correct: true, tier: "N", type: "who", ms: 19000, combo: 1 });

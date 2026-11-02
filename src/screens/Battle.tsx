@@ -10,7 +10,7 @@ import { burst, centerOf, flash, shake } from "../engine/fx";
 import { planDaily, planFree, planLesson, planWrong } from "../engine/planner";
 import { getProgress, recordAnswer } from "../engine/progress";
 import { rngFrom, shuffle } from "../engine/rng";
-import { LIMIT_MS, questionScore } from "../engine/score";
+import { LIMIT_MS, limitOf, questionScore } from "../engine/score";
 import { sfx } from "../engine/sfx";
 import { TYPE_LABEL, type Question, type RunAnswer, type RunSummary } from "../engine/types";
 import { Logo } from "../components/Logo";
@@ -125,10 +125,11 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
   // 倒數
   useEffect(() => {
     if (phase !== "ask") return;
+    setLeft(limitOf(q?.t ?? "who")); // 每題從自己的限時起算（真題 90 秒），不沿用上一題或初始的 20 秒
     let raf = 0;
     const tick = () => {
       const elapsed = performance.now() - qStart.current - bonusMs.current;
-      const remain = Math.max(0, LIMIT_MS - elapsed);
+      const remain = Math.max(0, limitOf(q?.t ?? "who") - elapsed);
       setLeft(remain);
       if (remain <= 0) {
         answer("");
@@ -157,7 +158,7 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
       setPhase("reveal");
       const c = centerOf(arenaRef.current?.querySelector(".foe-glyph") ?? null);
       if (correct) {
-        const crit = ms < LIMIT_MS * 0.35;
+        const crit = ms < limitOf(q.t) * 0.35;
         setScore((s) => s + gained);
         setDmg({ n: gained, key: Date.now(), crit });
         setSlash(Date.now());
@@ -233,7 +234,7 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
       setPicked("");
       setStruck([]);
       setHint("");
-      setLeft(LIMIT_MS);
+      setLeft(limitOf(qs[i + 1]?.t ?? "who"));
       enterFoe();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -317,7 +318,7 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
           <span className="combo-n">{combo}</span>
           <span className="combo-t">連擊</span>
         </div>
-        <TimerRing ms={phase === "ask" ? left : 0} limit={LIMIT_MS} />
+        <TimerRing ms={phase === "ask" ? left : 0} limit={q ? limitOf(q.t) : LIMIT_MS} />
       </header>
 
       <div className="arena" ref={arenaRef}>
