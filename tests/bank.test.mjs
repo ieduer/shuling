@@ -63,6 +63,17 @@ test("授獎辭題的英文短語逐字出現在官方授獎辭裡", () => {
   for (const q of kws) assert.ok(all.some((m) => m.includes(q.s.toLowerCase())), q.s);
 });
 
+test("真題選項不帶原卷答題框或高考站核對說明（只跟在某一項後面就等於標出那一項）", () => {
+  const exam = questions.filter((q) => q.t === "exam");
+  assert.ok(exam.some((q) => q.c.startsWith("ex-bj-")), "北京卷 items present");
+  for (const q of exam) {
+    for (const o of q.opts) assert.ok(!/答\s*[:：]\s*[[［（(【]|题源|非原卷|核对|认证/u.test(o), `${q.id} ${o}`);
+    for (const s of q.sources) assert.ok(!/题源|非原卷|核对|认证|参考解析|參考解析/.test(s.label), `${q.id} ${s.label}`);
+    // 名單式選項（「依次是」）以「、」分隔，不留對齊空格
+    if (/依次是/.test(q.stem)) for (const o of q.opts) assert.ok(!/[\p{Script=Han}] [\p{Script=Han}]/u.test(o), `${q.id} ${o}`);
+  }
+});
+
 test("關卡名不帶時代或年份（時代題、年份題才不會被關卡名洩題）", () => {
   for (const l of meta.lessons) {
     assert.ok(!/\d{4}/.test(l.title), l.title);

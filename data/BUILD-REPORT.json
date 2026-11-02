@@ -21,11 +21,11 @@
   "data/raw/chinese-poetry/anthologies.json": "5ddadb6bdc0e79a8c8c81d6a573baad13eb1564a9492bd717f959e5c149c2360",
   "data/raw/chinese-poetry/canon-extra.json": "7542ea728a77a43892ec70be8516b5a7d06b45a65758bb07a468c0565ee7ae9c",
   "data/raw/exams/tw-literature.json": "3ccd37d8f53091da8a4d68920452a651e3fcd6fe1ea62f195b8d5355d7bc7118",
-  "data/raw/exams/bj-literature.json": "8e84570e82fbd569d917c2adfe1d200bd748d491ca610e1c3b909b34fa3343a5",
+  "data/raw/exams/bj-literature.json": "5ee45bab1e3801d138da7cf5f9d8cbae7aebe43267c42516dfecb657d49388dd",
   "data/raw/recite/recite-ms.json": "6a483845ca2e15c0689def18f1d996c5136d2875ad8b874feca5137e38b0986d",
   "data/raw/recite/recite-gk.json": "ee7c6486c8f14eb8f558d50e6acc45ecc0e7c45714ed42d39c8734c0ed64d7a0"
  },
- "codeDigest": "9b24ea5c1adc5b285166ef2f9fbeb878744bdcb63cb6a6672e1e5171a3b01fa4",
+ "codeDigest": "144cf6d4867078c89104748028e2db6220be1a2a4d602680869882ebeac95cc2",
  "coverage": {
   "canon": {
    "wikidataPeople": 160,

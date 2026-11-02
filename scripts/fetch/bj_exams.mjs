@@ -5,6 +5,8 @@
 // - 答案核查表狀態 reviewed、kind single_choice、恰有一個正確選項，且在 answer-release-scope 的 activeQuestionIds 內；
 // - 核查表的 inputSha256 與現行題面重新計算的雜湊一致（題面、材料、選項順序都綁定）；
 // - 題面不得是「教學修訂版」（非原卷文字）；選項必須恰好解析成 A–D 四項（標記接「．」「.」「、」或「。」）；
+// - 選項只整理排版：去掉末項後的答題框，名單式選項按欄位以「、」分隔；整理後不得殘留答題框或高考站的核對說明；
+// - 延伸閱讀只收原文與辭書條目（CONTENT_REFS），標題不得是核對紀錄；
 // - 範圍：詩詞鑑賞（shici）全部合格題；文學常識與名著只收下列逐題審過的題號。
 // 高考站的答案是「學習參考」：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實（核查表 releaseQualification）。快照照錄這個限定。
 import fs from "node:fs";
@@ -17,6 +19,7 @@ const GK = process.argv[2] || "/Users/ylsuen/CF/sites/exam/gaokao";
 const COMMIT = process.argv[3] || "a209908baa1e5ec1e3fa31f5c15b6a64ff4f2499";
 const WENXUE = ["2007-yuyanjichu:5", "2008-yuyanjichu:5", "2009-yuyanjichu:5", "2010-yuyanjichu:4", "2011-yuyanjichu:4", "2012-yuyanjichu:5"];
 const MINGZHU = ["2014-honglou:1"];
+const CONTENT_REFS = ["checked_reference", "dictionary", "dictionary_usage", "primary_literary_text", "primary_text", "primary_source", "source_text", "literary_text"];
 const sha = (b) => createHash("sha256").update(b).digest("hex");
 const show = (f) => execFileSync("git", ["-C", GK, "show", `${COMMIT}:${f}`], { maxBuffer: 256 * 1024 * 1024 });
 const raw = { all: show("data/all.json"), authority: show("data/answer-authority.json"), scope: show("data/answer-release-scope.json") };
@@ -27,6 +30,16 @@ const active = new Set(scope.activeQuestionIds);
 const records = new Map(all.map((r) => [r.id, r]));
 // 與高考站 scripts/lib/answer-authority.mjs 的 questionDigest 同一算法
 const digest = (record, question) => sha(JSON.stringify({ recordId: record.id, qIndex: question.qIndex, materials: record.materials, topic: record.topic, question: question.text }));
+
+// 選項排版：去掉原卷末項後的答題框「答：[ ]」（只跟在 D 後面，會把 D 標成特別的一項）；名單式選項（欄位間多個空格，
+// 兩字姓名中間補一格對齊，如「李清照       李 白」）照欄位改成「、」分隔，否則「李 白」會被讀成兩個人。字不改。
+const ANSWER_BOX = /\s*答\s*[:：]\s*[[［（(【]\s*[\]］）)】]\s*$/u;
+function tidy(raw) {
+  const t = raw.replace(ANSWER_BOX, "").trim();
+  const cols = t.split(/\s{2,}/);
+  if (cols.length > 1 && cols.every((c) => /^[\p{Script=Han}·]+(?: [\p{Script=Han}·]+)*$/u.test(c))) return { text: cols.map((c) => c.replace(/ /g, "")).join("、"), cols: cols.length };
+  return { text: t.replace(/\s+/g, " "), cols: 1 };
+}
 
 function parse(text) {
   // 選項標記：行首或空白後的 A–D 接「．」「.」「、」；四個標記必須依序各出現一次
@@ -40,7 +53,10 @@ function parse(text) {
     if (!hit) return null;
     seq.push(hit);
   }
-  const options = seq.map((x, i) => ({ key: x.key, text: text.slice(x.body, i < 3 ? seq[i + 1].at : undefined).replace(/\s+/g, " ").trim() }));
+  const tidied = seq.map((x, i) => tidy(text.slice(x.body, i < 3 ? seq[i + 1].at : undefined)));
+  // 名單式選項四項欄數必須一致，否則寧可失敗
+  if (new Set(tidied.map((o) => o.cols)).size !== 1) return null;
+  const options = seq.map((x, i) => ({ key: x.key, text: tidied[i].text }));
   if (options.some((o) => !o.text)) return null;
   const stem = text
     .slice(0, seq[0].at)
@@ -109,9 +125,11 @@ for (const id of wanted) {
     .join("\n");
   const passage = isShici ? [...poems, note].filter((x) => typeof x === "string" && x.trim()).join("\n\n").trim() : "";
   if (isShici && passage.replace(/\s/g, "").length < 20) problems.push(`PASSAGE-MISSING ${id}`);
-  const residue = /来源限定|非原卷|转录|重排|出版链|本站|教学修订版|交叉核对|题源/;
+  const residue = /来源限定|非原卷|转录|重排|出版链|本站|教学修订版|交叉核对|题源|答\s*[:：]\s*[[［（(【]/u;
   if (residue.test(passage) || residue.test(p.stem) || p.options.some((o) => residue.test(o.text))) problems.push(`EDITORIAL-NOTE-LEFT ${id}`);
-  const refs = (a.sources || []).filter((s) => s.url).map((s) => ({ title: s.title || s.label || "", url: s.url }));
+  // 延伸閱讀只收原文與辭書；題面出處（轉載、重排、掃描）與答案出處的條目標題是高考站的核對紀錄，不是給讀者的篇名
+  const refs = (a.sources || []).filter((s) => s.url && CONTENT_REFS.includes(s.type)).map((s) => ({ type: s.type, title: s.title || s.label || "", url: s.url }));
+  if (refs.some((r) => !r.title || residue.test(r.title) || /认证|核对|核實|核实/.test(r.title))) problems.push(`REFERENCE-TITLE ${id}`);
   const lead = (s) => Number(String(s || "").match(/^\s*(\d{1,2})\s*[．.、（(]/)?.[1]) || null;
   out.push({
     id: `bj-${id.replace(":", "-")}`,
@@ -141,7 +159,7 @@ const snap = {
   source_commit: COMMIT,
   source_files: { "data/all.json": sha(raw.all), "data/answer-authority.json": sha(raw.authority), "data/answer-release-scope.json": sha(raw.scope) },
   answer_qualification: { contract: authority.releaseQualification?.contract || "", originalPublicationVerified: authority.releaseQualification?.originalPublicationVerified ?? null, officialRubricVerified: authority.releaseQualification?.officialRubricVerified ?? null, note: "答案為學習參考：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實。" },
-  selection: { shici: "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題", wenxue: WENXUE, mingzhu: MINGZHU },
+  selection: { shici: "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題", wenxue: WENXUE, mingzhu: MINGZHU, references: CONTENT_REFS },
   questions: out,
 };
 fs.writeFileSync(path.join(ROOT, "data/raw/exams/bj-literature.json"), JSON.stringify(snap, null, 1) + "\n");

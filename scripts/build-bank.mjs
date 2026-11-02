@@ -352,7 +352,8 @@ for (const c of examCards) {
     const others = q.options.filter((o) => o.key !== q.answer).map((o) => o.text);
     if (q.exam === "bj") {
       // 北京卷沒有公開的官方答案；用高考站答案核查表（學習參考），解析裡照實說明
-      const refs = (q.answer_references || []).slice(0, 2).map((r) => ({ label: `參考解析：${r.title}`, url: r.url, role: "reference" }));
+      // 延伸只列快照裡的原文與辭書條目（題面、答案出處的核對紀錄不給讀者看）
+      const refs = (q.answer_references || []).slice(0, 2).map((r) => ({ label: r.title, url: r.url, role: "reference" }));
       add(c, f, "exam", q.stem, q.passage, ans.text, others, `${q.year_label}${q.q_num ? `第 ${q.q_num} 題` : ""}，參考答案（${q.answer}）：${ans.text.replace(/[。.]$/, "")}。答案取自高考站北京卷答案核查表：依公開解析與覆核整理的學習參考，原考試機構答案的出版來源未能核實。`, refs);
     } else add(c, f, "exam", q.stem, q.passage, ans.text, others, `指考${q.year_label}第 ${q.q_num} 題，官方答案（${q.answer}）：${ans.text}。`, q.answer_source ? [{ label: "官方答案原檔", url: q.answer_source, role: "official" }] : []);
   }

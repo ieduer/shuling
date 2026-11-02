@@ -24,6 +24,16 @@
   ],
   "mingzhu": [
    "2014-honglou:1"
+  ],
+  "references": [
+   "checked_reference",
+   "dictionary",
+   "dictionary_usage",
+   "primary_literary_text",
+   "primary_text",
+   "primary_source",
+   "source_text",
+   "literary_text"
   ]
  },
  "questions": [
@@ -117,7 +127,7 @@
     },
     {
      "key": "D",
-     "text": "“漏声断”中“断”，是断断续续的意思。 答：[ ]"
+     "text": "“漏声断”中“断”，是断断续续的意思。"
     }
    ],
    "answer": "D",
@@ -150,7 +160,7 @@
     },
     {
      "key": "D",
-     "text": "作者通过“雪晓”、“寒灯”“漏断”、“月斜”等意象，写出了清冷的意境。 答：[ ]"
+     "text": "作者通过“雪晓”、“寒灯”“漏断”、“月斜”等意象，写出了清冷的意境。"
     }
    ],
    "answer": "C",
@@ -204,19 +214,19 @@
    "options": [
     {
      "key": "A",
-     "text": "李清照 李 白 苏 轼 欧阳修"
+     "text": "李清照、李白、苏轼、欧阳修"
     },
     {
      "key": "B",
-     "text": "白居易 曹 植 辛弃疾 司马迁"
+     "text": "白居易、曹植、辛弃疾、司马迁"
     },
     {
      "key": "C",
-     "text": "白居易 李 白 辛弃疾 欧阳修"
+     "text": "白居易、李白、辛弃疾、欧阳修"
     },
     {
      "key": "D",
-     "text": "李清照 曹 植 苏 轼 司马迁"
+     "text": "李清照、曹植、苏轼、司马迁"
     }
    ],
    "answer": "B",
@@ -288,16 +298,7 @@
    "answer": "D",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a1136d-gpt-6-astra",
-   "answer_references": [
-    {
-     "title": "2009北京题源：新浪原卷样式6页逐页目视，第2页缺失，Gzy转载异文限定",
-     "url": "https://slide.edu.sina.com.cn/slide_11_272_71.html?img=708"
-    },
-    {
-     "title": "新浪2009-06-08估分页，新干线学校提供；原卷样式题图，非考试机构出版链认证",
-     "url": "https://edu.sina.com.cn/shiti/2009/0608/2141010572.html"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "f5fb8deb13af41669a62d3f7cc63465f1f8fdb92760fe082b1d3fe879b2bbe0f"
   },
   {
@@ -330,16 +331,7 @@
    "answer": "D",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a1136d-gpt-6-astra",
-   "answer_references": [
-    {
-     "title": "2009北京题源：新浪原卷样式6页逐页目视，第2页缺失，Gzy转载异文限定",
-     "url": "https://slide.edu.sina.com.cn/slide_11_272_71.html?img=708"
-    },
-    {
-     "title": "北京新东方优能中学教育：深度解读2010高考(北京卷)语文试题，回顾2009诗词D项",
-     "url": "https://edu.sina.com.cn/gaokao/2010-06-09/1411251692.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "6e6474d92ff74941f1b0715c7f3f4e3446399e1d5c4017df0051cf1ae78fb93a"
   },
   {
@@ -372,12 +364,7 @@
    "answer": "C",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
-   "answer_references": [
-    {
-     "title": "2010北京题源：18页重排PDF与Gzywtk、明确校勘，原7页卷未认证",
-     "url": "https://cdn.gaokzx.com/zixunzhan/202403/d77fabda-ee06-45c5-b24e-19357370805a.pdf"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "4b35ecda7b1f3829a932d0dc0db0a8f9b81fda4056f5d21864dc8012ecbf895d"
   },
   {
@@ -410,12 +397,7 @@
    "answer": "A",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
-   "answer_references": [
-    {
-     "title": "2010北京题源：18页重排PDF与Gzywtk、明确校勘，原7页卷未认证",
-     "url": "https://cdn.gaokzx.com/zixunzhan/202403/d77fabda-ee06-45c5-b24e-19357370805a.pdf"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "fd1789e804ac4bc59d9e6c67507f4abbf02deaeadacc8e7edbdab8cbf64b9602"
   },
   {
@@ -448,12 +430,7 @@
    "answer": "C",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
-   "answer_references": [
-    {
-     "title": "2011北京题源：北京高考在线重排PDF与Gzywtk，作者文本局部校勘，原卷未认证",
-     "url": "https://gaokao.eol.cn/huodong/2011gkst/201106/t20110608_787585.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "56010089e46cfbce2081fe783e4e60ef8ceb5d2e98cf6b0d914ffdf94439ccd4"
   },
   {
@@ -486,12 +463,7 @@
    "answer": "B",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
-   "answer_references": [
-    {
-     "title": "2011北京题源：北京高考在线重排PDF与Gzywtk，作者文本局部校勘，原卷未认证",
-     "url": "https://gaokao.eol.cn/huodong/2011gkst/201106/t20110608_787585.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "8bc1b76a8982647bcae99a8af126532d7db66700fd9e981f65399ef445ba5c00"
   },
   {
@@ -524,12 +496,7 @@
    "answer": "C",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
-   "answer_references": [
-    {
-     "title": "2012北京题源：EOL学科网重排图与Gzywtk对照，原卷及标记未认证",
-     "url": "https://gaokao.eol.cn/huodong/2012gkst/201206/t20120608_787585.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "ad5330f689a1976b99df79b40f03cfef086241bbdf8de135fa1e122f9332e09a"
   },
   {
@@ -564,10 +531,7 @@
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [
     {
-     "title": "2012北京题源：EOL学科网重排图与Gzywtk对照，原卷及标记未认证",
-     "url": "https://gaokao.eol.cn/huodong/2012gkst/201206/t20120608_787585.shtml"
-    },
-    {
+     "type": "checked_reference",
      "title": "古今图书集成草木典265柳堤",
      "url": "https://zh.wikisource.org/wiki/欽定古今圖書集成/博物彙編/草木典/第265卷"
     }
@@ -606,10 +570,7 @@
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [
     {
-     "title": "2013北京题源：EOL学科网重排图与Gzywtk对照，原卷及标记未认证",
-     "url": "https://gaokao.eol.cn/shiti/zhenti/201306/t20130608_957719.shtml"
-    },
-    {
+     "type": "checked_reference",
      "title": "古风齐有倜傥生原文",
      "url": "https://zh.wikisource.org/zh-hant/%E5%8F%A4%E9%A2%A8_%28%E9%BD%8A%E6%9C%89%E5%80%9C%E5%84%BB%E7%94%9F%29"
     }
@@ -646,12 +607,7 @@
    "answer": "C",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
-   "answer_references": [
-    {
-     "title": "2014北京题源：Sina人工转录，与EOL图及Gzywtk对照，非原卷认证",
-     "url": "https://edu.sina.com.cn/gaokao/2014-06-09/1441422994.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "8b4bb032486f9ca7cbdb6f34e3c88786890684eed757f633fffcff4a0a43a3d6"
   },
   {
@@ -686,10 +642,7 @@
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [
     {
-     "title": "2014北京题源：Sina人工转录，与EOL图及Gzywtk对照，非原卷认证",
-     "url": "https://edu.sina.com.cn/gaokao/2014-06-09/1441422994.shtml"
-    },
-    {
+     "type": "checked_reference",
      "title": "红楼梦第七十六回原文",
      "url": "https://zh.wikisource.org/zh-hans/紅樓夢/第076回"
     }
@@ -728,10 +681,7 @@
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，逐题来源与分歧裁定",
    "answer_references": [
     {
-     "title": "2015北京语文新浪转载重排，仅作限定来源复核，原卷仍待核",
-     "url": "https://edu.sina.com.cn/gaokao/2015-06-07/1622471853.shtml"
-    },
-    {
+     "type": "dictionary",
      "title": "汉典徽：系弦绳与琴面标识的多义",
      "url": "https://www.zdic.net/hans/徽"
     }
@@ -768,12 +718,7 @@
    "answer": "A",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2016北京语文十页原题扫描公开转载，逐页核对",
-     "url": "https://slide.edu.sina.com.cn/slide_11_78377_35062.html"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "95d780e20d2ab667102b8696624acb7bcac667c8156f77db99f60dc19f6792b0"
   },
   {
@@ -806,12 +751,7 @@
    "answer": "B",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2016北京语文十页原题扫描公开转载，逐页核对",
-     "url": "https://slide.edu.sina.com.cn/slide_11_78377_35062.html"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "979109da5ed0db214dc0251219dc43bb2df1e0e14a6ed3abfa8d1dd5cb803e71"
   },
   {
@@ -844,16 +784,7 @@
    "answer": "C",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2017北京语文十页原题扫描公开转载，逐页核对",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523465.shtml"
-    },
-    {
-     "title": "EOL刊学而思高考研究中心参考，非官方发布链",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523795.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "a0deece8b05d5e16b2c7adbacff3a025b24b492519c59b224bd9dcd9da7ae08d"
   },
   {
@@ -886,16 +817,7 @@
    "answer": "B",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2017北京语文十页原题扫描公开转载，逐页核对",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523465.shtml"
-    },
-    {
-     "title": "EOL刊学而思高考研究中心参考，非官方发布链",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170607_1523795.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "f8d19f099aa98e1a2cd2ccf407e82277136f3873b24afa577293bb8553e3ba45"
   },
   {
@@ -928,16 +850,7 @@
    "answer": "D",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2018北京语文公开重排题本，文字与标记核对，原始扫描件待核",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
-    },
-    {
-     "title": "EOL公开参考，来源非官方链，逐项审查而非照录",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "a20cceb1d70ba3be6e083bed4c433c5e279294e3b481ecfea5e7bd549c9f80d1"
   },
   {
@@ -970,16 +883,7 @@
    "answer": "A",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2018北京语文公开重排题本，文字与标记核对，原始扫描件待核",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
-    },
-    {
-     "title": "EOL公开参考，来源非官方链，逐项审查而非照录",
-     "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/W020220527578576687930.doc"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "ffc719dad484d4125f0f0c5173bd6bc1fc7fe016f386a849bd8fa2c022f98bda"
   },
   {
@@ -1012,12 +916,7 @@
    "answer": "C",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2019北京语文参考答案公开转载扫描第11—12页；原发布机关链未核实",
-     "url": "https://cdn.zizzs.com/zixunzhan/202310/29ce91f8-0d5e-474f-8271-3e404cca029a.pdf"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "85a92af73df192f2e7243fa6eaab52f8b5e7c114a5623bb85c75c5cfa8fb2819"
   },
   {
@@ -1050,12 +949,7 @@
    "answer": "A",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2019北京语文参考答案公开转载扫描第11—12页；原发布机关链未核实",
-     "url": "https://cdn.zizzs.com/zixunzhan/202310/29ce91f8-0d5e-474f-8271-3e404cca029a.pdf"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "adb9cb35fd9ff1693e935975c2fcb94393c2bc77c5195750641ab29a5e6f7b56"
   },
   {
@@ -1088,12 +982,7 @@
    "answer": "B",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2020北京语文公开重排题本，文字与标记核对，原始扫描件待核",
-     "url": "https://gaokao.eol.cn/shiti/zhenti/202102/W020220527566843533730.doc"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "7ae1a409b72ebdec24900a4bc5558a4f955eba95d7c0f729909f4ec31fa5763f"
   },
   {
@@ -1126,12 +1015,7 @@
    "answer": "D",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2020北京语文公开重排题本，文字与标记核对，原始扫描件待核",
-     "url": "https://gaokao.eol.cn/shiti/zhenti/202102/W020220527566843533730.doc"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "3bc90907e3d157d6a6d9d26f4719bc5d5207d02ad4cee7c8baf07b1595ff1f98"
   },
   {
@@ -1164,12 +1048,7 @@
    "answer": "A",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2021北京语文原卷十页影像，全文及加点画线核对",
-     "url": "https://gaokaobang.oss-cn-beijing.aliyuncs.com/attachs/ohr/2021/09/05/151605_61346eb566495.docx"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "b5d98605a5a4e4aa39fd216fb319a580c2f025590de3749dd29fe0ca33801976"
   },
   {
@@ -1202,12 +1081,7 @@
    "answer": "D",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "2021北京语文原卷十页影像，全文及加点画线核对",
-     "url": "https://gaokaobang.oss-cn-beijing.aliyuncs.com/attachs/ohr/2021/09/05/151605_61346eb566495.docx"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "4905f533789a8f17580293bbb81c8eabfbc8a078b01054e0c9018d5e1b89e614"
   },
   {
@@ -1240,12 +1114,7 @@
    "answer": "C",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
-   "answer_references": [
-    {
-     "title": "2022北京卷公开题面重印及版面核对（非官方评分认证）",
-     "url": "https://cdn.zgkao.com/zixunzhan/202401/7e28deb2-3b24-4275-8f7d-64a75a17ce26.pdf"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "be7995a3b0e71077ea1f4fa3ce53653e3a5428062638a5b4d86b2977961499bb"
   },
   {
@@ -1278,12 +1147,7 @@
    "answer": "B",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
-   "answer_references": [
-    {
-     "title": "2022北京卷公开题面重印及版面核对（非官方评分认证）",
-     "url": "https://cdn.zgkao.com/zixunzhan/202401/7e28deb2-3b24-4275-8f7d-64a75a17ce26.pdf"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "a0601fa89208cc85aca15c8065384edeeb59fd8fe025327073fc832ab5676ed3"
   },
   {
@@ -1382,12 +1246,7 @@
    "answer": "D",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
-   "answer_references": [
-    {
-     "title": "公开转载题面勘误与格式核对（非官方评分认证）",
-     "url": "https://gaokao.eol.cn/shiti/yw/202407/t20240705_2621911_4.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "986b2b72acbc2cc5a05682ca50ef4db2b7f30579027216684446b80e1ab9e115"
   },
   {
@@ -1420,12 +1279,7 @@
    "answer": "B",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a10ba5-gpt-6-astra",
-   "answer_references": [
-    {
-     "title": "公开转载题面勘误与格式核对（非官方评分认证）",
-     "url": "https://gaokao.eol.cn/shiti/yw/202407/t20240705_2621911_4.shtml"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "c26e3a946c707e040cc25ba69621640d2aab71e5d89be6dfb456547749fc23e8"
   },
   {
@@ -1458,12 +1312,7 @@
    "answer": "B",
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
-   "answer_references": [
-    {
-     "title": "公开转载题面勘误与格式核对（非官方评分认证）",
-     "url": "https://zy.21cnjy.com/23263988"
-    }
-   ],
+   "answer_references": [],
    "input_sha256": "798b8aacc390ccc06060a1ec8d128211433a9e0a4e6bfe0bf7020e942281701f"
   },
   {

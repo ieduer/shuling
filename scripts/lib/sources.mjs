@@ -49,7 +49,7 @@ export const SOURCES = {
     files: ["data/raw/exams/tw-literature.json"],
   },
   "bj-exams": {
-    label: "北京卷語文試題與答案核查表（高考站 gk.bdfz.net 已接受版本 a209908；答案為學習參考：依公開解析與覆核，原考試機構答案出版鏈未證實）",
+    label: "北京卷語文試題與參考答案（高考站 gk.bdfz.net 答案核查表；學習參考，原考試機構答案出版鏈未證實）",
     url: "https://gk.bdfz.net/",
     role: "exam",
     files: ["data/raw/exams/bj-literature.json"],
