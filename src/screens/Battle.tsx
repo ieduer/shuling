@@ -116,11 +116,14 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
   const card = q ? cardById.get(q.c) : undefined;
   const role: FoeRole = q && card ? roleOf(i, qs!.length, card.tier) : "normal";
 
+  // 真題照原卷次序、標原卷字母（答案與解析逐項以 A–D 指稱）；其他題型洗牌、標甲乙丙丁
+  const keyOf = useMemo(() => new Map(q?.keys ? q.opts.map((o, k) => [o, q.keys![k]] as const) : []), [q]);
   const options = useMemo(() => {
     if (!q) return [];
+    if (q.keys) return [...q.opts].sort((x, y) => keyOf.get(x)!.localeCompare(keyOf.get(y)!));
     const rand = rngFrom(`${request.seed}|${q.id}`);
     return shuffle(q.opts, rand);
-  }, [q, request.seed]);
+  }, [q, keyOf, request.seed]);
 
   // 倒數
   useEffect(() => {
@@ -368,7 +371,7 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
           const cls = ["move", phase === "reveal" && isAnswer ? "is-answer" : "", phase === "reveal" && isPicked && !isAnswer ? "is-wrong" : "", isStruck ? "is-struck" : ""].filter(Boolean).join(" ");
           return (
             <button key={o} type="button" className={cls} disabled={phase !== "ask" || isStruck} onClick={() => answer(o)} style={{ animationDelay: `${k * 60}ms` }}>
-              <span className="move-key">{"甲乙丙丁"[k]}</span>
+              <span className="move-key">{keyOf.get(o) ?? "甲乙丙丁"[k]}</span>
               <span className="move-text">{o}</span>
             </button>
           );

@@ -68,9 +68,33 @@ test("真題選項不帶原卷答題框或高考站核對說明（只跟在某�
   assert.ok(exam.some((q) => q.c.startsWith("ex-bj-")), "北京卷 items present");
   for (const q of exam) {
     for (const o of q.opts) assert.ok(!/答\s*[:：]\s*[[［（(【]|题源|非原卷|核对|认证/u.test(o), `${q.id} ${o}`);
-    for (const s of q.sources) assert.ok(!/题源|非原卷|核对|认证|参考解析|參考解析/.test(s.label), `${q.id} ${s.label}`);
+    for (const s of q.sources) assert.ok(!/题源|非原卷|核对|认证/.test(s.label), `${q.id} ${s.label}`);
+    // 「參考解析」只用在高考站解析那一條，延伸連結不得冒用
+    for (const s of q.sources.filter((x) => x.role !== "analysis")) assert.ok(!/参考解析|參考解析/.test(s.label), `${q.id} ${s.label}`);
     // 名單式選項（「依次是」）以「、」分隔，不留對齊空格
     if (/依次是/.test(q.stem)) for (const o of q.opts) assert.ok(!/[\p{Script=Han}] [\p{Script=Han}]/u.test(o), `${q.id} ${o}`);
+  }
+});
+
+test("真題照原卷 A–D：keys 是 ABCD 的排列，keys[0] 就是解析裡的答案字母", () => {
+  const exam = questions.filter((q) => q.t === "exam");
+  for (const q of exam) {
+    assert.deepEqual([...q.keys].sort(), ["A", "B", "C", "D"], q.id);
+    assert.equal(q.why.match(/答案（([A-D])）/)?.[1], q.keys[0], `${q.id} ${q.why.slice(0, 40)}`);
+  }
+  for (const q of questions.filter((x) => x.t !== "exam")) assert.equal(q.keys, undefined, q.id);
+});
+
+test("北京卷每題附高考站 AI 參考解析：簡體照錄、結論字母等於答案、不帶處理說明", () => {
+  const bj = questions.filter((q) => q.c.startsWith("ex-bj-"));
+  assert.equal(bj.length, 40);
+  for (const q of bj) {
+    const a = q.sources.filter((s) => s.role === "analysis");
+    assert.equal(a.length, 1, q.id);
+    assert.match(a[0].label, /^高考站 AI 參考解析（GPT-6 Astra(，節錄)?）$/, q.id);
+    assert.equal(a[0].lang, "zh-Hans", q.id);
+    assert.equal(a[0].note.match(/^(?:答案[：:]?\s*|选\s*)([A-D])/)?.[1], q.keys[0], `${q.id} ${a[0].note.slice(0, 20)}`);
+    assert.ok(!/出版链|认证|null|裁定|题面已|本次裁定|判分|历史作答|原卷|重排|Claude|GPT|暴露|复核|核对|评分|题源/.test(a[0].note), q.id);
   }
 });
 

@@ -7,6 +7,8 @@
 // - 題面不得是「教學修訂版」（非原卷文字）；選項必須恰好解析成 A–D 四項（標記接「．」「.」「、」或「。」）；
 // - 選項只整理排版：去掉末項後的答題框，名單式選項按欄位以「、」分隔；整理後不得殘留答題框或高考站的核對說明；
 // - 延伸閱讀只收原文與辭書條目（CONTENT_REFS），標題不得是核對紀錄；
+// - 解析取高考站給學生看的那一份（核查表 currentVersion 指向的模型作答），必須綁定現行題面與完整語境，結論字母等於核查答案；
+//   只刪下列 TRIM 逐條審過的高考站處理說明（題面更正、出版鏈、裁定經過），刪過的標「節錄」，其餘一字不改；
 // - 範圍：詩詞鑑賞（shici）全部合格題；文學常識與名著只收下列逐題審過的題號。
 // 高考站的答案是「學習參考」：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實（核查表 releaseQualification）。快照照錄這個限定。
 import fs from "node:fs";
@@ -20,6 +22,29 @@ const COMMIT = process.argv[3] || "a209908baa1e5ec1e3fa31f5c15b6a64ff4f2499";
 const WENXUE = ["2007-yuyanjichu:5", "2008-yuyanjichu:5", "2009-yuyanjichu:5", "2010-yuyanjichu:4", "2011-yuyanjichu:4", "2012-yuyanjichu:5"];
 const MINGZHU = ["2014-honglou:1"];
 const CONTENT_REFS = ["checked_reference", "dictionary", "dictionary_usage", "primary_literary_text", "primary_text", "primary_source", "source_text", "literary_text"];
+const MODEL_NAMES = { "gpt-6-astra": "GPT-6 Astra", "claude-opus-5-5": "Claude Opus 5.5" };
+// 解析裡的高考站處理說明（逐條審過）：sentence＝刪去以此開頭、到「。」為止的一句；clause＝刪去這段字（換成 to）；paragraph＝刪去以此開頭的一段
+const TRIM = {
+  "2008-yuyanjichu:5": [{ sentence: "下划线按保存的公开重排页可见范围呈现" }],
+  "2009-yuyanjichu:5": [{ clause: "；不把对B的概括擅自改成某位评论家的逐字引文。", to: "。" }],
+  "2009-shici:1": [{ paragraph: "本次裁定依据是" }],
+  "2014-shici:1": [{ sentence: "注中禁应为消受" }],
+  "2025-shici:2": [{ sentence: "题面已由" }],
+};
+const PROCESS_NOTE = /出版链|认证|null|裁定|题面已|本次裁定|判分|历史作答|原卷|重排|Claude|GPT|暴露|复核|核对|评分|题源/; // 「本次游村」之類的正文不算
+function trimReasoning(id, text) {
+  let t = text;
+  for (const r of TRIM[id] || []) {
+    const before = t;
+    if (r.clause) t = t.split(r.clause).join(r.to ?? "");
+    else if (r.paragraph) t = t.split("\n").filter((p) => !p.startsWith(r.paragraph)).join("\n");
+    else t = t.replace(new RegExp(`${r.sentence.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[^。]*。`, "g"), "");
+    // 每條規則必須恰好刪去一處
+    const hits = r.clause ? before.split(r.clause).length - 1 : r.paragraph ? before.split("\n").filter((p) => p.startsWith(r.paragraph)).length : (before.match(new RegExp(r.sentence.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g")) || []).length;
+    if (hits !== 1) return null;
+  }
+  return { text: t.trim(), excerpt: t !== text };
+}
 const sha = (b) => createHash("sha256").update(b).digest("hex");
 const show = (f) => execFileSync("git", ["-C", GK, "show", `${COMMIT}:${f}`], { maxBuffer: 256 * 1024 * 1024 });
 const raw = { all: show("data/all.json"), authority: show("data/answer-authority.json"), scope: show("data/answer-release-scope.json") };
@@ -131,6 +156,16 @@ for (const id of wanted) {
   const refs = (a.sources || []).filter((s) => s.url && CONTENT_REFS.includes(s.type)).map((s) => ({ type: s.type, title: s.title || s.label || "", url: s.url }));
   if (refs.some((r) => !r.title || residue.test(r.title) || /认证|核对|核實|核实/.test(r.title))) problems.push(`REFERENCE-TITLE ${id}`);
   const lead = (s) => Number(String(s || "").match(/^\s*(\d{1,2})\s*[．.、（(]/)?.[1]) || null;
+  const cur = a.modelAnswers?.[a.currentVersion];
+  if (!cur?.text?.trim() || !MODEL_NAMES[cur.modelId]) problems.push(`REASONING-MISSING ${id}`);
+  else {
+    if (cur.inputSha256 !== a.inputSha256 || cur.inputContextSha256 !== a.inputContextSha256) problems.push(`REASONING-UNBOUND ${id}`);
+    const said = cur.text.match(/^(?:答案[：:]?\s*|选\s*)([A-D])/)?.[1];
+    if (said !== answer || (cur.selectedOptions && cur.selectedOptions.join("") !== answer)) problems.push(`REASONING-ANSWER ${id} ${said}`);
+  }
+  const reasoning = cur?.text ? trimReasoning(id, cur.text) : null;
+  if (cur?.text && !reasoning) problems.push(`REASONING-TRIM ${id}`);
+  if (reasoning && PROCESS_NOTE.test(reasoning.text)) problems.push(`REASONING-NOTE-LEFT ${id} ${reasoning.text.match(PROCESS_NOTE)[0]}`);
   out.push({
     id: `bj-${id.replace(":", "-")}`,
     gk_id: id,
@@ -145,6 +180,7 @@ for (const id of wanted) {
     answer_status: "qualified_learning_reference",
     answer_reviewed_by: a.reviewedBy || "",
     answer_references: refs,
+    reasoning: reasoning && { text: reasoning.text, excerpt: reasoning.excerpt, model: MODEL_NAMES[cur.modelId], model_id: cur.modelId, version: a.currentVersion },
     input_sha256: a.inputSha256,
   });
 }
@@ -159,7 +195,7 @@ const snap = {
   source_commit: COMMIT,
   source_files: { "data/all.json": sha(raw.all), "data/answer-authority.json": sha(raw.authority), "data/answer-release-scope.json": sha(raw.scope) },
   answer_qualification: { contract: authority.releaseQualification?.contract || "", originalPublicationVerified: authority.releaseQualification?.originalPublicationVerified ?? null, officialRubricVerified: authority.releaseQualification?.officialRubricVerified ?? null, note: "答案為學習參考：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實。" },
-  selection: { shici: "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題", wenxue: WENXUE, mingzhu: MINGZHU, references: CONTENT_REFS },
+  selection: { shici: "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題", wenxue: WENXUE, mingzhu: MINGZHU, references: CONTENT_REFS, reasoning: "答案核查表 currentVersion 的模型作答（高考站給學生看的解析）；TRIM 只刪處理說明", trim: TRIM },
   questions: out,
 };
 fs.writeFileSync(path.join(ROOT, "data/raw/exams/bj-literature.json"), JSON.stringify(snap, null, 1) + "\n");

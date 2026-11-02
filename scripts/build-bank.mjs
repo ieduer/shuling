@@ -144,7 +144,7 @@ const countryShow = (c) => (COUNTRY_TW[c] ? `${c}（${COUNTRY_TW[c]}）` : c);
 
 const questions = [];
 const seenFacts = new Set();
-function add(card, f, t, stem, s, answer, distractors, why, extraSources = []) {
+function add(card, f, t, stem, s, answer, distractors, why, extraSources = [], extra = {}) {
   const qid = `q-${h(`${card.id}|${f.p}|${f.o}|${t}`)}`;
   // 同一張卡的同一條事實只出一題；不同卡若題幹、引文、正解完全相同也算重複
   for (const key of [`fact|${card.id}|${f.p}|${f.o}`, `text|${stem}|${s}|${answer}`]) {
@@ -153,7 +153,7 @@ function add(card, f, t, stem, s, answer, distractors, why, extraSources = []) {
   }
   if (distractors.length < 3) problems.push(`OPTIONS-SHORT ${qid} ${card.id} ${card.name} ${f.p} ${f.o} (${distractors.length})`);
   if (new Set([answer, ...distractors]).size !== 1 + distractors.length) problems.push(`OPTIONS-DUP ${qid}`);
-  questions.push({ id: qid, c: card.id, t, stem, s, opts: [answer, ...distractors], why, src: { label: bookLabel(card.book), title: "", book: card.book }, sources: [...srcList(f.src), ...extraSources], book: card.book, f: f.p });
+  questions.push({ id: qid, c: card.id, t, stem, s, opts: [answer, ...distractors], why, src: { label: bookLabel(card.book), title: "", book: card.book }, sources: [...srcList(f.src), ...extraSources], book: card.book, f: f.p, ...extra });
 }
 const qidOf = (c, f, t) => `q-${h(`${c.id}|${f.p}|${f.o}|${t}`)}`;
 
@@ -350,12 +350,17 @@ for (const c of examCards) {
       continue;
     }
     const others = q.options.filter((o) => o.key !== q.answer).map((o) => o.text);
+    // 原卷選項字母（與 opts 同序）：真題照原卷次序、標 A–D，解析與答案裡的字母才對得上
+    const keys = { keys: [q.answer, ...q.options.filter((o) => o.key !== q.answer).map((o) => o.key)] };
     if (q.exam === "bj") {
       // 北京卷沒有公開的官方答案；用高考站答案核查表（學習參考），解析裡照實說明
       // 延伸只列快照裡的原文與辭書條目（題面、答案出處的核對紀錄不給讀者看）
       const refs = (q.answer_references || []).slice(0, 2).map((r) => ({ label: r.title, url: r.url, role: "reference" }));
-      add(c, f, "exam", q.stem, q.passage, ans.text, others, `${q.year_label}${q.q_num ? `第 ${q.q_num} 題` : ""}，參考答案（${q.answer}）：${ans.text.replace(/[。.]$/, "")}。答案取自高考站北京卷答案核查表：依公開解析與覆核整理的學習參考，原考試機構答案的出版來源未能核實。`, refs);
-    } else add(c, f, "exam", q.stem, q.passage, ans.text, others, `指考${q.year_label}第 ${q.q_num} 題，官方答案（${q.answer}）：${ans.text}。`, q.answer_source ? [{ label: "官方答案原檔", url: q.answer_source, role: "official" }] : []);
+      // 逐項解析：高考站給學生看的 AI 參考解析（簡體照錄，刪過處理說明的標節錄）。高考站沒有逐題網址，不給「原條」連結（真題那一條已連到高考站）
+      if (q.reasoning) refs.push({ label: `高考站 AI 參考解析（${q.reasoning.model}${q.reasoning.excerpt ? "，節錄" : ""}）`, role: "analysis", note: q.reasoning.text, lang: "zh-Hans" });
+      else problems.push(`EXAM-REASONING-MISSING ${q.id}`);
+      add(c, f, "exam", q.stem, q.passage, ans.text, others, `${q.year_label}${q.q_num ? `第 ${q.q_num} 題` : ""}，參考答案（${q.answer}）：${ans.text.replace(/[。.]$/, "")}。答案取自高考站北京卷答案核查表：依公開解析與覆核整理的學習參考，原考試機構答案的出版來源未能核實。`, refs, keys);
+    } else add(c, f, "exam", q.stem, q.passage, ans.text, others, `指考${q.year_label}第 ${q.q_num} 題，官方答案（${q.answer}）：${ans.text}。`, q.answer_source ? [{ label: "官方答案原檔", url: q.answer_source, role: "official" }] : [], keys);
   }
 }
 
@@ -504,7 +509,7 @@ fs.rmSync(chunkDir, { recursive: true, force: true });
 fs.mkdirSync(chunkDir, { recursive: true });
 fs.writeFileSync(path.join(chunkDir, `meta.${v}.json`), JSON.stringify(meta) + "\n");
 for (const b of BOOKS) {
-  const qs = questions.filter((q) => q.book === b.id).map((q) => ({ id: q.id, c: q.c, t: q.t, stem: q.stem, s: q.s, opts: q.opts, why: q.why, src: q.src, sources: q.sources, diff: 0.5, region: b.region, book: q.book }));
+  const qs = questions.filter((q) => q.book === b.id).map((q) => ({ id: q.id, c: q.c, t: q.t, stem: q.stem, s: q.s, opts: q.opts, ...(q.keys ? { keys: q.keys } : {}), why: q.why, src: q.src, sources: q.sources, diff: 0.5, region: b.region, book: q.book }));
   fs.writeFileSync(path.join(chunkDir, `${b.id}.${v}.json`), JSON.stringify({ v, book: b.id, q: qs }) + "\n");
 }
 fs.mkdirSync(path.join(root, "src/data"), { recursive: true });

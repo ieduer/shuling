@@ -19,6 +19,7 @@ const ROLE_LABEL: Record<string, string> = {
   structured: "Wikidata",
   editorial: "本站",
   reference: "延伸",
+  analysis: "解析",
 };
 
 /** 解析底板：正解、一句說明、出處一行（每個來源一枚標籤，有網址的可點）。 */
@@ -72,11 +73,16 @@ export function Explain({
         </p>
       )}
       {quoted.map((s, i) => (
-        <details key={i} className={`ref-more ref-${s.role}`}>
+        // 答錯或逾時時，逐項解析直接展開；答對會自動前進，維持收合
+        <details key={i} className={`ref-more ref-${s.role}`} open={!correct && s.role === "analysis"}>
           <summary>
             {ROLE_LABEL[s.role] || s.role} · {shortLabel(s.label)}
           </summary>
-          <p lang="zh-Hant">{s.note}</p>
+          {s.note!.split("\n").filter(Boolean).map((para, k) => (
+            <p key={k} lang={s.lang || "zh-Hant"}>
+              {para}
+            </p>
+          ))}
           {s.url && (
             <a href={s.url} target="_blank" rel="noreferrer">
               原條 ↗
@@ -85,10 +91,12 @@ export function Explain({
         </details>
       ))}
       {card.senses.length > 0 && <p className="explain-senses">{card.w}：{card.senses.filter((x) => x !== q.opts[0]).slice(0, 4).join("／")}</p>}
-      <button type="button" className="btn btn-primary explain-next" onClick={onNext}>
-        {autoMs ? <span className="auto-bar" style={{ animationDuration: `${autoMs}ms` }} /> : null}
-        {nextLabel || "下一隻"}
-      </button>
+      <div className="explain-foot">
+        <button type="button" className="btn btn-primary explain-next" onClick={onNext}>
+          {autoMs ? <span className="auto-bar" style={{ animationDuration: `${autoMs}ms` }} /> : null}
+          {nextLabel || "下一隻"}
+        </button>
+      </div>
     </section>
   );
 }

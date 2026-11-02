@@ -34,7 +34,36 @@
    "primary_source",
    "source_text",
    "literary_text"
-  ]
+  ],
+  "reasoning": "答案核查表 currentVersion 的模型作答（高考站給學生看的解析）；TRIM 只刪處理說明",
+  "trim": {
+   "2008-yuyanjichu:5": [
+    {
+     "sentence": "下划线按保存的公开重排页可见范围呈现"
+    }
+   ],
+   "2009-yuyanjichu:5": [
+    {
+     "clause": "；不把对B的概括擅自改成某位评论家的逐字引文。",
+     "to": "。"
+    }
+   ],
+   "2009-shici:1": [
+    {
+     "paragraph": "本次裁定依据是"
+    }
+   ],
+   "2014-shici:1": [
+    {
+     "sentence": "注中禁应为消受"
+    }
+   ],
+   "2025-shici:2": [
+    {
+     "sentence": "题面已由"
+    }
+   ]
+  }
  },
  "questions": [
   {
@@ -68,6 +97,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。尚余孤瘦雪霜姿着重写红梅虽有桃杏般的红色，仍保持耐寒、清瘦、高洁的品格；这体现的是自持、自许，并不重在透露无奈。A以独开迟理解为晚开及不争时俗，B把自恐看作含蓄曲折的表意，D把酒晕理解为花色如饮酒后的红晕，都能与全诗相联系。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_c1878dff6503"
+   },
    "input_sha256": "007644c0dda9bd9acef80d2f878c6fd9cf8f3de5999358411d73f257a4c73508"
   },
   {
@@ -101,6 +137,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选A。诗确实用了拟人手法，也寄托了诗人的自我品格，但寒心未肯随春态、尚余孤瘦雪霜姿强调的是不趋时俗、保持节操，并非希望与桃杏一起装点春天。B借怕愁贪睡解释独开迟，是拟人化的诗意理解；C概括红梅红色外表与冰雪品格相统一；D说明它面对春态仍警惕自守，均合全诗旨趣。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_ec80f3d3ffff"
+   },
    "input_sha256": "d3701c5c428979597399a025b0a89e61b5f1deabf9aaa292c21d3bfd1d8da40d"
   },
   {
@@ -134,6 +177,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选D。“漏声断”的“断”指停止、断绝，不是“断断续续”；它与寒灯、月斜等意象共同写出梦醒后的清冷寂静。词句不足以让我们仅凭这一字断定漏壶水已滴尽，或把醒来的时间精确限定为深夜、天将明。A项“雪晓”“清笳乱起”提示边地军旅气氛，可以成立。B项承接“梦游处、不知何地”，“想”表示对梦中所在之处的揣想。C项以雁门、青海等边塞地名概括想象中的关河前线，可以从词境理解，并不要求把这些地名当成实际宋金战线的精确标记。D对“断”的直接释义错误，是本题不正确的一项。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_revised_01a111d9_4bc9d6ebd198"
+   },
    "input_sha256": "2b236f946b3f62e067c1902a55a9807ced443d487fe78e46b8891538f2f0f7bd"
   },
   {
@@ -167,6 +217,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。清笳乱起写军中号角纷起，铁骑无声望似水写骑兵阵列严整而浩大，二者共同构成梦中的军旅场面，不能简单判为以声响衬托环境寂静。无声着重表现军队的肃整，并不是全段要突出的静谧背景。A对阵容的概括、B对梦境与梦醒两片结构的分析，及D对雪晓、寒灯等造成清冷意境的说明，都有词句依据。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_df512231237e"
+   },
    "input_sha256": "8f155b260722da7b307d3b68c9d94b503d43316800271f649507ee4f58e51e19"
   },
   {
@@ -200,6 +257,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。《儒林外史》的作者是吴敬梓，蒲松龄的代表作是《聊斋志异》，C混淆了两位清代作家。A所列四首诗与作者对应正确。B对巴尔扎克和卡夫卡的文学地位作的是通常的文学史概括。D小杜指杜牧，他兼擅诗文，《过华清宫》和《阿房宫赋》均为其作品。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_2de116ff6336"
+   },
    "input_sha256": "dd2d8c956e7505a6d0058c970eb16e7fb147295c22dbf95101b3f2521fd1b9fa"
   },
   {
@@ -233,6 +297,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a1139d-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案B。①画线“司马”指《琵琶行》中江州司马白居易，不能把写这句词的李清照当作所指者。②“陈王”指受封陈王的曹植；李白是《将进酒》的作者，不是此处称谓所指。③“继东坡，高唱大江东去”写继苏轼之后以豪放词著称的辛弃疾，不能因引出东坡便仍答苏轼。④“幽愁发愤，著成信史”指司马迁发愤撰《史记》。四项对应白居易、曹植、辛弃疾、司马迁，只有B全部相符。",
+    "excerpt": true,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_plan75_adjudication_01a1139d"
+   },
    "input_sha256": "e27ccd35112149faebecf0365b72256514c61973190a4633c4e7d1bd028f09d9"
   },
   {
@@ -266,6 +337,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选A。是日指重阳日，惊秋老是惊觉秋已深、时序推移，A把秋老直接解释成秋天催人衰老，错置了句中所惊的直接对象。B写与朋友天各一涯、遥相思念。C写借浊酒消解离情。D结合逐客、无家和作者抗清流亡的注释，写亡国之后失去家园的悲痛。全诗确有鬓华衰老之感，但不能把它移来替换首句字面关系。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_d204d599d3ee"
+   },
    "input_sha256": "32382c0b2ee15e88b345742ac4b46ccd839c58b1c114f72da493a55da186a4e8"
   },
   {
@@ -299,6 +377,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a1136d-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选D。《巴黎圣母院》作者是雨果，不能归给左拉。A的《子夜》、茅盾、吴荪甫及社会问题相互对应；B巴尔扎克是19世纪法国作家，《人间喜剧》广泛呈现当时社会，题内编年史称谓不意味着只写上流阶层；C托尔斯泰、《战争与和平》及恢弘叙事相合。D作家作品关系明确错误。",
+    "excerpt": true,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_plan71_adjudication_01a1136d"
+   },
    "input_sha256": "f5fb8deb13af41669a62d3f7cc63465f1f8fdb92760fe082b1d3fe879b2bbe0f"
   },
   {
@@ -332,6 +417,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a1136d-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：D。A：“秋色”点明季节，“平铺”呈现湖面舒展的景象，可成立。B：须合读题注“为风浪所阻”及作者信中的波臣风伯，不能仅据“细浪”的字面大小判断实景；把阻行风浪写成波神留客、鳞鳞细浪，是主观美化，符合旷达词情。C：“明日风回”与“今宵露宿何妨”相承，表达等待顺风、安于暂宿，成立。D：今宵湖上的涛声被想象为水晶宫奏乐，末句接明日到岳阳楼的期待；把奏乐直接安放在抵达岳阳楼之后，将两层时地合并，属于本题应排除的解释。",
+    "excerpt": true,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_poetry2009_adjudication_01a1136d"
+   },
    "input_sha256": "6e6474d92ff74941f1b0715c7f3f4e3446399e1d5c4017df0051cf1ae78fb93a"
   },
   {
@@ -365,6 +457,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。塞万提斯是西班牙作家，不是意大利小说家，《堂吉诃德》的作者对应无误，错误在国别。A对《楚辞》的楚地色彩及《离骚》的代表地位的概括成立；B区分白居易两篇长篇叙事诗的感伤色彩和《新乐府》的讽谕批判精神，成立；D对《哈姆莱特》的复仇主线、作者及四大悲剧归属的说明成立。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "4b35ecda7b1f3829a932d0dc0db0a8f9b81fda4056f5d21864dc8012ecbf895d"
   },
   {
@@ -398,6 +497,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [],
+   "reasoning": {
+    "text": "选A。前四句虽然视野开阔，却有秋霜遍被、旷野风寒等意象，营造的是苍茫萧瑟的氛围，与后文荣华消逝、世事波澜及贤愚倒置的感慨相应，不能概括为昂扬奋发。B两处东流水都寄寓荣华或世事流逝的感受；C白日将尽、浮云无定确能含蓄表现对世事变化的感受；D说明燕雀与鸳鸾栖处错置，与诗句及注释一致。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "fd1789e804ac4bc59d9e6c67507f4abbf02deaeadacc8e7edbdab8cbf64b9602"
   },
   {
@@ -431,6 +537,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。巴尔扎克通常归于十九世纪法国现实主义文学，把他称为浪漫主义文学家错误。A《题乌江亭》咏项羽败亡之事；B枫叶、四弦、浔阳等意象对应白居易《琵琶行》；D海明威及所列作品、诺贝尔文学奖的对应成立。判断C的类别错误即可，不能因为题中还出现作品数量便把数量约数误作主要考点。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "56010089e46cfbce2081fe783e4e60ef8ceb5d2e98cf6b0d914ffdf94439ccd4"
   },
   {
@@ -464,6 +577,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [],
+   "reasoning": {
+    "text": "选B。歌一声写卖饼儿清晨出门沿街呼卖的声音，诗的重心是寒冷中谋生的辛劳与勤勉，并非轻松的童趣；不能把有声音或呼卖有腔调直接推成富于童趣。A小序说明观察对象、时间以及作诗教子的目的；C对应不忧衣单忧饼冷，写卖饼儿宁可自己受冷也忧心饼冷影响售卖；D对应末两句面向孩子的告诫，都有文本依据。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "8bc1b76a8982647bcae99a8af126532d7db66700fd9e981f65399ef445ba5c00"
   },
   {
@@ -497,6 +617,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。《诗经》《楚辞》、唐宋诗词及明清诗文的体裁、句式并不一致，不能把多用对偶、骈散相间、错落有致一概列为所有这些作品的共同特点；格律诗等尤其不能统称为骈散相间。A两部作品分别属莎士比亚戏剧与关汉卿杂剧，均是戏剧艺术；B两首咏史作品分别借诸葛亮、周瑜寄托作者的志向与感慨；D《聊斋志异》常把超现实的情节与具体可信的生活细节结合起来，概括可成立。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "ad5330f689a1976b99df79b40f03cfef086241bbdf8de135fa1e122f9332e09a"
   },
   {
@@ -536,6 +663,13 @@
      "url": "https://zh.wikisource.org/wiki/欽定古今圖書集成/博物彙編/草木典/第265卷"
     }
    ],
+   "reasoning": {
+    "text": "选C。三四句以笼、锁写柳荫绵延与枝条繁茂，五六句写飞燕、落花和春雨暖风，可以说兼写静景与动景；但后两句直接呈现动态，不能据此前静后动就断定为以静写动、借静衬动。晴雨景象也不必是某一瞬间的天气实录。A春江暗点堤岸、密树扣柳，B十里承江堤之长、千条承柳枝之密，都有诗句依据；D莺啼燕飞、暖风落花构成暮春景色。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "69e3ae6ca0de34e74b1031639419b34b3c5f5560efb2a24e54a699470d47a90a"
   },
   {
@@ -575,6 +709,13 @@
      "url": "https://zh.wikisource.org/zh-hant/%E5%8F%A4%E9%A2%A8_%28%E9%BD%8A%E6%9C%89%E5%80%9C%E5%84%BB%E7%94%9F%29"
     }
    ],
+   "reasoning": {
+    "text": "选B。“后世仰末照”说鲁仲连的光辉余泽仍为后人景仰，不是太阳将落、功绩将被遗忘。A“明月出海底”以海中出现、光彩照人的形象比喻杰出人才，所引曹植句以海中明珠喻人才，均为赞誉；本题不必以明月究竟按月亮或明月珠作唯一训诂来决定选项；C末二句以自己的澹荡与鲁连的倜傥相呼应；D“同调”直接表达对鲁仲连人格与志趣的认同，均能由诗句支持。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "9eccf2a65847a9e02fd691b2c23817e887c646a4cf388f195201ae480c356b07"
   },
   {
@@ -608,6 +749,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "GPT-6 Astra + Claude Opus 5.5，全文及来源限定裁定",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。诗的花、新藤等写春日景象，“白发好禁春”也直接点明春光；五六句写石角钩衣、藤梢新绿惹眼，不能据此说春去夏来。A无赖带亲昵语气，和最喜小儿无赖同见喜爱；B绿樽须尽日、白发好禁春写饮酒消受春光，结合失意背景有借酒释怀之意；D恼煞人的表面嗔语实际传达爱极，是正话反说。",
+    "excerpt": true,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "8b4bb032486f9ca7cbdb6f34e3c88786890684eed757f633fffcff4a0a43a3d6"
   },
   {
@@ -647,6 +795,13 @@
      "url": "https://zh.wikisource.org/zh-hans/紅樓夢/第076回"
     }
    ],
+   "reasoning": {
+    "text": "选B，林黛玉。红楼梦第三回以病如西子胜三分写黛玉体态，中秋凹晶馆联诗时，史湘云出寒塘渡鹤影，黛玉对冷月葬花魂。题中多病西施与悲剧人生均指向黛玉。史湘云是联诗的另一方；薛宝钗不是此句作者；妙玉随后出现并续诗，不能据其善诗归到她名下。通行版本有葬花魂、葬诗魂异文，题面所用花魂不影响人物判断，但不能把一个版本说成唯一文本。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "421f513bb68f1eab402d8327a3180a7865775e0f20c1e6775abc738c3af8c9bd"
   },
   {
@@ -686,6 +841,13 @@
      "url": "https://www.zdic.net/hans/徽"
     }
    ],
+   "reasoning": {
+    "text": "答案：C。醉翁去后，空有朝吟夜怨，承接的是流泉，主要把泉声写成醉翁离去后的吟怨，不是叙述苏轼本人站在泉边朝夜吟诵。全词确含怀念欧阳修之情，不能为排除C而说全词没有思念。A以空山写空寂环境，B借荷蒉者赞有心之人来衬托醉翁知音，D联系翁今为飞仙与此意在人间，说明人去而艺术意境犹存。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "0d75a19a6f93d1c3c578b11eb7b9554c6073308f2cb1a735dab4d029deb35df4"
   },
   {
@@ -719,6 +881,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：A。‘往岁求浆忆叩门’是回忆往年叩门求水之事，末句‘细云新月耿黄昏’是本次游村、写诗时的眼前景象；A把两个时间层面合并成同一次黄昏叩门。B两个初都可释为才、刚刚；C由风送禽语写山村幽静，以声衬静；D说残壁青苔侵蚀旧日醉墨痕迹，与诗句相符。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "95d780e20d2ab667102b8696624acb7bcac667c8156f77db99f60dc19f6792b0"
   },
   {
@@ -752,6 +921,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：B。‘横笛闻声’诉诸听觉，‘红旗’及‘天山雪’形成鲜明的视觉色彩，声与色兼备。A歌管、风铃主要写声音，未突出色彩；C茗叶白、梅梢红写颜色，没有声音；D梅酸着重味觉和齿感，芭蕉绿写色彩，没有听觉描写。不能把句中任何可见物都直接等同于题目所要求的色彩表现。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "979109da5ed0db214dc0251219dc43bb2df1e0e14a6ed3abfa8d1dd5cb803e71"
   },
   {
@@ -785,6 +961,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选C。万井指众多村落、街市或人家，不是万亩良田，更不能由井字推出田亩井然有序。A、B分别对应浣女鸡鸣和舟中市场、树梢山桥，D符合暮春忆京、山水稍解离愁的整体情感。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "a0deece8b05d5e16b2c7adbacff3a025b24b492519c59b224bd9dcd9da7ae08d"
   },
   {
@@ -818,6 +1001,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选B。寒天雁鸣、岁晚客程将鸟声与旅途中的思乡相联。A的黄鹂声伴随闺中女子伤怀，侧重怀人；C写春日竹间鸟鸣，D借莺啼惜春，都不如B明确对应羁旅思乡。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "f8d19f099aa98e1a2cd2ccf407e82277136f3873b24afa577293bb8553e3ba45"
   },
   {
@@ -851,6 +1041,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选D。正梅花万里雪深时，须相忆是想象友人远行之后在深冬思念彼此，属于对将来的叮嘱，不是回忆两人过去雪中赏梅。A写失志与离愁，B写赞美友人才华，C写沿途山川可以入诗，都有词句支持。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "a20cceb1d70ba3be6e083bed4c433c5e279294e3b481ecfea5e7bd549c9f80d1"
   },
   {
@@ -884,6 +1081,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选A。借诸葛亮上表出师的典故，把对友人文章才华的称许与报国建功的期望结合。B把赤壁江山写诗的设想直接改为苏轼游赤壁典故及生命短暂感慨，C附加望友人早归，D把休滴儿女泪的劝勉解释成凄苦，都偏离本词语境。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "ffc719dad484d4125f0f0c5173bd6bc1fc7fe016f386a849bd8fa2c022f98bda"
   },
   {
@@ -917,6 +1121,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选 C。桃李在第一首中作为衬托梅花风韵的比较对象出现，并不能推出画面还画了桃花和李花。含章殿与九方皋同样是诗中用典而非实绘物象。A、B概括了诗人对墨梅表现力和画技的赞赏，D符合用典方式。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "85a92af73df192f2e7243fa6eaab52f8b5e7c114a5623bb85c75c5cfa8fb2819"
   },
   {
@@ -950,6 +1161,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选 A。诗人说梅花清姝，即使画成黑色，其风韵仍使桃李居于下位，表现出推重清雅风神而不以浓艳颜色为美的审美趣味。B附加政治讽刺，C把清美误作富贵，D把取神不拘形色的艺术观改成艺术来源于生活，均偏离诗旨。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "adb9cb35fd9ff1693e935975c2fcb94393c2bc77c5195750641ab29a5e6f7b56"
   },
   {
@@ -983,6 +1201,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选B。女儿折花倚桃、儿女同行树下，是远在金陵的李白想象东鲁家中的情景，不是追忆自己与儿女昔日春游。折花不见我，泪下如流泉承接娇女平阳，写想象中的女儿见不到父亲而流泪，也不能直接当作诗人当时泪如泉涌。A由吴地春景引到东鲁家田与春事已不及，理解可通。C语言明白质朴，叙事自然。D以家常口吻写父子亲情，与梦游诗的奇幻壮阔有别。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "7ae1a409b72ebdec24900a4bc5558a4f955eba95d7c0f729909f4ec31fa5763f"
   },
   {
@@ -1016,6 +1241,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "选D。念此承接儿女无人抚慰的情景，失次第写心绪纷乱，忧煎写内心焦虑，表现父亲的牵挂。A把时令、久别之感误解成青春不再；主旨是思家念子。B把田地无人耕种和寄信鲁地误说成归隐志向。C酒楼前是归心想象所到的东鲁家园，不能说由金陵酒楼引发回忆；诗人身在金陵与心归东鲁的空间关系被倒置了。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "3bc90907e3d157d6a6d9d26f4719bc5d5207d02ad4cee7c8baf07b1595ff1f98"
   },
   {
@@ -1049,6 +1281,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：A。开篇写环绕惠州的水与海边苍山，并以无尽风景寄托有限生命，呈现对山水的欣赏与自我安顿，不能概括为幽僻苍凉；环州多白水也不是说群山环绕惠州。B用孔丘、颜渊称邻人，结合交易不欺、耕作不争，突出民风淳朴。C设想曾相对立的周公与管蔡也会希望在此安居。D写一饭、薇蕨即可满足，表现贫困中的知足。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "b5d98605a5a4e4aa39fd216fb319a580c2f025590de3749dd29fe0ca33801976"
   },
   {
@@ -1082,6 +1321,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：D。诗中日常生活的质朴语言包含安贫自适、民风淳厚及典故哲理，符合质而实绮。A忽略苏轼是被贬惠州而非像陶渊明一样主动归隐。B诗中没有具体表达自己躬耕劳作的热爱，不可因和陶诗而移入陶诗内容。C不论陶诗还是这首和诗，都不能说除末句外通篇对仗。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "4905f533789a8f17580293bbb81c8eabfbc8a078b01054e0c9018d5e1b89e614"
   },
   {
@@ -1115,6 +1361,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：C。\n“客从何乡来，伫立久吁怪”写来客面对柏树由盛而衰的异状，久久站立，叹息惊怪；“何乡”没有展开对诗人故乡的回忆或眷恋，不能据此判为思乡。A项前六句写柏树生于高冈、枝叶如车盖，姿态如龙虎，受到故老敬重，赞美之意明确。B项“岂知”引出千年柏树中途衰败，“岁寒”两句写柯叶日夜改易，表达惋惜。D项结尾由追问事物之理而感叹难以凭靠，含有对世事难测的感慨。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_6ccd5af50323"
+   },
    "input_sha256": "be7995a3b0e71077ea1f4fa3ce53653e3a5428062638a5b4d86b2977961499bb"
   },
   {
@@ -1148,6 +1401,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：B。\n前六句写柏树繁盛、轩昂而受人敬重，“岂知”突然转入衰败，“岁寒”又写本应坚贞的柏树竟日渐凋零，诗意和情调由赞美、明朗转为哀伤、黯淡，B项准确。A项刘禹锡写病树前万木逢春，包含新生景象；杜诗着重病柏衰败与贤邪易位，寄托不同。C项“蟠踞亦高大”承接柏树原有的雄健形态，没有充分依据把它直接等同于藩镇割据。D项全诗有对现实的忧愤，结尾却归于疑惑与难以倚赖，没有明确表达对未来的希望。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_d500a447453b"
+   },
    "input_sha256": "a0601fa89208cc85aca15c8065384edeeb59fd8fe025327073fc832ab5676ed3"
   },
   {
@@ -1181,6 +1441,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：D。\n题目已说明诗作于“将赴成都草堂途中”，“今来已恐邻人非”写返程时担忧邻人已不同于往昔，是对战乱后人事变化的忧虑，不能说已回到成都并亲眼看到兵戈扰攘、物是人非。A项“生事微”写生计微薄，透露生活艰难。B项用草堂里的乌皮几这一熟悉器物寄托归思。C项“昔去为忧乱兵入”追叙离开成都与乱兵之忧，符合诗句及注释。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_a888b8e63e77"
+   },
    "input_sha256": "8e30a9e0a92379eca4f74cd00470d0f63b4dd0f119622dc5c669ce445d058728"
   },
   {
@@ -1214,6 +1481,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：B。\n“共说”借众人的评价引出严武指挥军阵的本领，既侧面赞扬友人，也使寄诗中的称赞含蓄得体，B项正确。A项诗的首联并非工整的对仗，不能说四联皆对、属对精切。C项尾联主要承接诗人愿息机、安居的心意，对应严武主军与自己闲居的不同志愿，并非专门照应生计微薄。D项“芰荷衣”虽化用《离骚》的服饰意象，此处结合“息机”“不妨”主要表达甘于退居、保持闲适的愿望，不能脱离语境只解释为不肯同流合污。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_6c49bd30b0b4"
+   },
    "input_sha256": "8d8e85092b948ef2d5fae899ac84dca47fa7fa5e00242083894faf8dfffcd0a2"
   },
   {
@@ -1247,6 +1521,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a111d9-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：D。\n其十三用千金买马骨的典故，却把所买骏骨送给楚襄王；注释特意说明楚襄王并未以爱马著称。诗意包含投献非人、人才遭遇不识才者的讥刺，不能理解为拜谒明主后顺利实现价值。A项概括龙脊连钱的花纹、银蹄踏烟的神采，符合其一。B项概括其五的塞外景象与骏马驰骋的愿望，正确。C项其十借项羽解剑、乌骓泣风的情境，写骏马失去英雄主人后的悲哀，正确。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_retained_3fee7b8f074a"
+   },
    "input_sha256": "986b2b72acbc2cc5a05682ca50ef4db2b7f30579027216684446b80e1ab9e115"
   },
   {
@@ -1280,6 +1561,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "codex-01a10ba5-gpt-6-astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：B。\nA不正确。‘金鞭’‘金络脑’是马具，而‘宝玦’是佩玉，‘宝玦谁家子’写佩玉的贵家子弟，不能把三者都说成马具。\nB正确。其一的‘谁为’发出良马谁来赏识、装备的疑问；其五的‘何当’写期待受用、驰骋建功；其十的‘何处’写英雄失去之后神骓无所追随的悲慨；其十三的‘谁家子’以问语写献马者，并联系末句和注释形成讥刺。‘谁’‘何’等使感慨、期待、悲伤或讽意更加鲜明。\nC不正确。四首都是五言绝句，但不是句句对仗。以其五后两句为例，‘何当金络脑’问何时能配上贵重马具，‘快走踏清秋’承接写奔驰行动，两句重在愿望及其实现的意脉承接，不能据此概括为句句对仗。其一‘无人织锦韂，谁为铸金鞭’反而有明显的对应结构，不应被列作否定对仗的反例。\nD不正确。‘沙如雪’‘月似钩’是比喻，‘神骓泣向风’有人格化的表达；但这四首所示诗句没有形成三个及以上结构相似、语意相关的排比项，不能因为组诗多首或两句相应就断言用了排比。逐项比较，只有B成立。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra_reviewer_01a10ba5"
+   },
    "input_sha256": "c26e3a946c707e040cc25ba69621640d2aab71e5d89be6dfb456547749fc23e8"
   },
   {
@@ -1313,6 +1601,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：B。第二首从诸葛亮因杨颙去世而恸哭这一具体小事切入，揭示其虚心纳谏、得贤支撑事业的品质，构思以小见大。A把夕阳西下说成暮春景色并限定凄凉感，依据不足：“舂”是日落之意，并非“春”；C没有两首诗都使用比喻和拟人的依据；D也不能把咏史人物评价一概归为托物言志。",
+    "excerpt": true,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "798b8aacc390ccc06060a1ec8d128211433a9e0a4e6bfe0bf7020e942281701f"
   },
   {
@@ -1346,6 +1641,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：C。‘斜行横阵’写雁阵形态，‘才疏又缀’写队列刚疏散又重新连缀；不能解释成飞行时而高远、时而停顿。A契合寒露冷烟与衰老蒹葭；B借拟想写南方栖居地的安静与食物丰足；D写捣衣女子的相思泪。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "fca167c44ba8f2b9a035dcea2eb33844a20e9a69e496b780444bfd579d045e19"
   },
   {
@@ -1379,6 +1681,13 @@
    "answer_status": "qualified_learning_reference",
    "answer_reviewed_by": "OpenAI Codex / GPT-6 Astra",
    "answer_references": [],
+   "reasoning": {
+    "text": "答案：B。‘徘徊’‘惊起’刻画雁欲栖又飞的动作，‘影摇寒水’以倒影写动态，均使形象鲜活。A把无明文的‘叹息之声’当成具体声响；C将用典效果归结为‘严肃性’，偏离怀人伤离的情味；D罗列比喻、排比等手法缺少相应文本依据。",
+    "excerpt": false,
+    "model": "GPT-6 Astra",
+    "model_id": "gpt-6-astra",
+    "version": "gpt_6_astra"
+   },
    "input_sha256": "567ccf8d08c7e6863f4fca952443ed0dcb4e7419670b30c20124f0efe094ae0c"
   }
  ]

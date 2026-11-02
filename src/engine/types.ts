@@ -65,6 +65,7 @@ export interface Source {
   url?: string;
   role: string;
   note?: string;
+  lang?: string; // note 的文字（簡體照錄的解析標 zh-Hans）
 }
 
 export interface Question {
@@ -74,6 +75,7 @@ export interface Question {
   stem: string;
   s: string;
   opts: string[]; // opts[0] is always the correct one (shuffle at render time)
+  keys?: string[]; // 真題：原卷選項字母，與 opts 同序；照原卷次序顯示、不洗牌
   why: string;
   src: { label: string; title: string; book: string; author?: string; year?: number };
   sources: Source[];

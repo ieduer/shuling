@@ -931,6 +931,18 @@
   width: 100%;
   margin-top: 14px;
 }
+/* 解析很長（真題逐項解析展開）時，按鈕區黏在底板底部，不必捲到最後；上緣淡出，底色遮住捲到下面的字 */
+.explain-foot {
+  position: sticky;
+  bottom: -16px; /* 黏住時蓋過底板的 16px 下內距，字不會從按鈕下方露出 */
+  z-index: 1;
+  margin: 4px -16px -16px;
+  padding: 10px 16px 16px;
+  background: linear-gradient(180deg, transparent, var(--sheet-b) 12px);
+}
+.explain-foot .explain-next {
+  margin-top: 0;
+}
 .auto-bar {
   position: absolute;
   left: 0;
