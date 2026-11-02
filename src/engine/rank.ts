@@ -1,6 +1,6 @@
 /** 段位統計（前端與 Worker 共用，純函數、無執行期匯入）：
- * 收服＝書靈淨答對三次以上；通關＝該關一局全對（三星）；全通一域＝域內每一關都三星。七域順序固定。 */
-export const REGION_BOOKS = ["shi", "aegean", "rome", "fusang", "nobel", "schools", "exam"] as const;
+ * 收服＝書靈淨答對三次以上；通關＝該關一局全對（三星）；全通一域＝域內每一關都三星。十四域順序固定（與旅程地圖同序）。 */
+export const REGION_BOOKS = ["shi", "wen", "shuo", "xin", "aegean", "rome", "east", "europe", "c19", "modern", "fusang", "nobel", "schools", "exam"] as const;
 /** 附加域的冊別（杏壇書院＝論語、龍門貢院＝北京卷與指考真題，2026-10-31）：其關卡計入通關數，不是「全通域」的分母。 */
 export const EXTRA_STAGE_BOOKS: readonly string[] = [];
 /** 關卡門檻：課文至少三題才成一關（與旅程地圖同一規則）。 */
@@ -28,7 +28,7 @@ export function stagesOfBook(lessons: LessonLite[], book: string, coreOnly = fal
   return lessons.filter((l) => l.books.includes(book) && l.questions >= STAGE_MIN_QUESTIONS && (!coreOnly || !l.bonus));
 }
 
-/** 七域的關卡清單與全地圖的不重複關卡（同一課可在兩域出現，只算一關）。perRegion 只含核心關卡（全通域的分母）；all 含選文關卡（通關數的分母）。 */
+/** 各域的關卡清單與全地圖的不重複關卡（同一課可在兩域出現，只算一關）。perRegion 只含核心關卡（全通域的分母）；all 含選文關卡（通關數的分母）。 */
 export function stageSets(lessons: LessonLite[]): { all: string[]; perRegion: Record<string, string[]> } {
   const perRegion: Record<string, string[]> = {};
   const seen = new Set<string>();

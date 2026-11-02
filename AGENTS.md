@@ -8,11 +8,12 @@
 
 This project inherits the BDFZ operations workspace `AGENTS.md` (paths in this file are relative to that workspace). Read, in order: the workspace instructions, this file, `docs/OPERATIONS.md`, `PROJECT_STATE.md`, then the target source and tests.
 
-## Current status (2026-10-31)
+## Current status (2026-11-02)
 
 - Live since 2026-11-01 at https://shuling.bdfz.net (public repo `ieduer/shuling`, registry project `shuling-bdfz-net`, Worker `shuling`, D1 `shuling-db`). Registered in nav.bdfz.net, i.rdfzer.com, rdfz.net, Pulse, Status and User Center (record-only, since source `8206df5`).
 - Engine forked from 字靈收服 `ieduer/wy-word-battle` main `4b6013c` (React + Vite + TypeScript, Cloudflare Worker + Workers Assets + D1). It is a clone-family copy, not a shared package; never edit 字靈 from here.
-- Content P1: 雲山詩國 (課本必背＋《唐詩三百首》《宋詞三百首》), 愛琴海, 七丘, 扶桑, 諾貝爾星河 (all 123 laureates), 思潮館 (Wikidata movements), 真卷殿 (verified single-answer 指考 literature items).
+- Content: core-canon edition (owner 2026-11-01: 「將人類文學最關鍵問題和最重要內容作為題庫」). Fourteen books — 雲山詩國, 文淵, 說部梨園, 新潮碼頭, 愛琴海, 七丘, 新月與恆河, 聖殿長廊, 浪漫與寫實, 現代迷城, 扶桑, 諾貝爾星河 (all 123 laureates), 思潮館 (movements, 中西文論, 文體), 真卷殿 (verified 指考 items). Curated canon tables live in `data/curated/canon/<book>.mjs`; the long tail of 《唐詩三百首》《宋詞三百首》 is no longer a question source, only a verification source.
+- Title→author rule (owner 2026-11-01): never ask 「〈題名〉的作者是誰」 for a 詞牌／曲牌 title (alone, with a first line, or with a series number), a 樂府舊題, or a title another poet of the same or an earlier era also used (風雅千載 census); those poems are asked through their famous lines.
 
 ## Operating constraints
 

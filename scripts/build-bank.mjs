@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-// 書靈題庫嚴格建置：卡＋事實 → 題目 → 與字靈引擎相容的分片（public/bank）、伺服器索引（worker/bank-index.json）、關卡表（worker/lessons.json）。
-// 任何問題（未登記來源、授獎辭短語不逐字、重複題、選項不足、關卡不足三題）都讓建置失敗且不寫輸出；--loose 只用來看報告。
+// 書靈嚴格建置（核心經典版）：卡＋事實 → 題目 → 分片（public/bank）、伺服器索引（worker/bank-index.json）、關卡表（worker/lessons.json）。
+// 題庫只收文學最關鍵的知識：名篇名句、作家與代表作、人物、稱號、並稱流派、文論與文體、諾貝爾得主、真題。
+// 任何問題（未登記來源、名句不在原文、授獎辭短語不逐字、重複題、選項不足、關卡不足三題）都讓建置失敗且不寫輸出；--loose 只用來看報告。
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { SOURCES } from "./lib/sources.mjs";
 import { loadNobel, PHASES } from "./content/nobel.mjs";
-import { loadPoetry, ERAS, COLLECTIONS } from "./content/poetry.mjs";
-import { loadWorld, WORLD_BOOKS } from "./content/world.mjs";
+import { loadPoetry, ERAS, COLLECTIONS, SHIJING_PARTS, norm, titleKey } from "./content/poetry.mjs";
+import { loadCanon, COUNTRY_TW } from "./content/canon.mjs";
 
 const root = path.resolve(new URL("../", import.meta.url).pathname);
 const STRICT = !process.argv.includes("--loose");
@@ -16,15 +17,23 @@ const h = (s) => sha(s).slice(0, 12);
 
 export const BOOKS = [
   { id: "shi", label: "雲山詩國", glyph: "詩", region: "zh", stage: "core" },
-  { id: "aegean", label: WORLD_BOOKS.aegean, glyph: "希", region: "world", stage: "core" },
-  { id: "rome", label: WORLD_BOOKS.rome, glyph: "羅", region: "world", stage: "core" },
-  { id: "fusang", label: WORLD_BOOKS.fusang, glyph: "桑", region: "world", stage: "core" },
+  { id: "wen", label: "文淵", glyph: "文", region: "zh", stage: "core" },
+  { id: "shuo", label: "說部梨園", glyph: "說", region: "zh", stage: "core" },
+  { id: "xin", label: "新潮碼頭", glyph: "新", region: "zh", stage: "core" },
+  { id: "aegean", label: "愛琴海", glyph: "希", region: "world", stage: "core" },
+  { id: "rome", label: "七丘", glyph: "羅", region: "world", stage: "core" },
+  { id: "east", label: "新月與恆河", glyph: "東", region: "world", stage: "core" },
+  { id: "europe", label: "聖殿長廊", glyph: "歐", region: "world", stage: "core" },
+  { id: "c19", label: "浪漫與寫實", glyph: "實", region: "world", stage: "core" },
+  { id: "modern", label: "現代迷城", glyph: "今", region: "world", stage: "core" },
+  { id: "fusang", label: "扶桑", glyph: "桑", region: "world", stage: "core" },
   { id: "nobel", label: "諾貝爾星河", glyph: "星", region: "world", stage: "core" },
-  { id: "schools", label: WORLD_BOOKS.schools, glyph: "潮", region: "world", stage: "core" },
+  { id: "schools", label: "思潮館", glyph: "潮", region: "world", stage: "core" },
   { id: "exam", label: "真卷殿", glyph: "卷", region: "zh", stage: "core" },
 ];
 const TYPE_CODE = { who: 0, work: 1, line: 2, era: 3, kw: 4, lang: 5, year: 6, exam: 7 };
 const LESSON_MAX = 10;
+const bookLabel = (id) => BOOKS.find((b) => b.id === id).label;
 
 const problems = [];
 const sourceDigests = {};
@@ -35,10 +44,12 @@ for (const [id, s] of Object.entries(SOURCES)) {
     else sourceDigests[f] = sha(fs.readFileSync(p));
   }
 }
-const codeDigest = sha(["scripts/build-bank.mjs", "scripts/content/nobel.mjs", "scripts/content/poetry.mjs", "scripts/content/world.mjs", "scripts/lib/sources.mjs"].map((f) => fs.readFileSync(path.join(root, f), "utf8")).join("\n"));
+const CODE = ["scripts/build-bank.mjs", "scripts/content/nobel.mjs", "scripts/content/poetry.mjs", "scripts/content/canon.mjs", "scripts/lib/sources.mjs"];
+const codeDigest = sha(CODE.map((f) => fs.readFileSync(path.join(root, f), "utf8")).join("\n"));
 
-const nobelLoaded = loadNobel(root, problems);
-const world = loadWorld(root, problems, nobelLoaded);
+const nobelCards = loadNobel(root, problems);
+const shiCards = await loadPoetry(root, problems);
+const canon = await loadCanon(root, problems, nobelCards);
 // 真卷殿：指考試卷一卷一卡（只有一題的卷與下一卷合成一卡，讓每張卡至少兩題）
 const examData = JSON.parse(fs.readFileSync(path.join(root, "data/raw/exams/tw-literature.json"), "utf8"));
 const examCards = [];
@@ -58,12 +69,16 @@ const examCards = [];
   }
   if (pend.length) problems.push(`EXAM-TAIL ${pend.map((q) => q.id).join(",")} (fewer than two items left)`);
 }
-const cards = [...loadPoetry(root, problems), ...world.cards, ...nobelLoaded, ...examCards];
+let cards = [...shiCards, ...canon.cards, ...nobelCards, ...examCards];
 for (const c of cards) for (const f of c.facts) for (const s of f.src) if (!SOURCES[s]) problems.push(`SOURCE-UNREGISTERED ${c.id} ${f.p} ${s}`);
 
-// ── 題目 ───────────────────────────────────────────────────────────────
-const workTitle = (t) => (/[《〈]/.test(t) ? t : `〈${t}〉`);
-const bookTitle = (t) => `《${t}》`;
+// ── 顯示與選項工具 ───────────────────────────────────────────────────
+const bookTitle = (t) => (/^[《〈]/.test(t) ? t : `《${t}》`);
+const poemTitle = (t) => (/^[《〈]/.test(t) ? t : `〈${t}〉`);
+const ESSAYS = new Set(["毛诗序", "报任安书", "典论·论文", "文赋", "与元九书", "梅圣俞诗集序", "题画"]);
+const titleOf = (c) => (c.book === "shi" || c.short ? poemTitle(c.name) : bookTitle(c.name));
+const titleWithAlt = (c) => (c.alt ? `${titleOf(c)}（${titleOf({ ...c, name: c.alt })}）` : titleOf(c));
+const stemTitle = (c) => (c.alt ? `${titleOf(c)}（臺譯${titleOf({ ...c, name: c.alt })}）` : titleOf(c));
 const rankBy = (seed, list) => [...list].sort((a, b) => (sha(seed + a) < sha(seed + b) ? -1 : 1));
 function pickDistractors(qid, answer, tiers, avoid = () => false) {
   const out = [];
@@ -76,19 +91,51 @@ function pickDistractors(qid, answer, tiers, avoid = () => false) {
   }
   return out;
 }
-const srcList = (ids) => ids.map((id) => ({ label: SOURCES[id].label, url: SOURCES[id].url, role: SOURCES[id].role }));
-
-const nobelCards = cards.filter((c) => c.book === "nobel");
-const poemCards = cards.filter((c) => c.book === "shi" && c.kind === "work");
-const poetCards = cards.filter((c) => c.book === "shi" && c.kind === "person");
-const nobelLangs = [...new Set(nobelCards.flatMap((c) => c.facts.filter((f) => f.p === "writing_lang").map((f) => f.o)))];
-const poemsByTitle = new Map(poemCards.map((c) => [c.name, c]));
-const authorsOfEra = (era) => poetCards.filter((p) => p.era === era).map((p) => p.name);
-const allAuthors = poetCards.map((p) => p.name);
+const srcList = (ids) => [...new Set(ids)].map((id) => ({ label: SOURCES[id].label, url: SOURCES[id].url, role: SOURCES[id].role }));
+const leaks = (text, title) => {
+  const t = titleKey(title);
+  const l = norm(text);
+  if (t.length >= 2 && l.includes(t)) return true;
+  for (let i = 0; i + 3 <= t.length; i++) if (l.includes(t.slice(i, i + 3))) return true;
+  return false;
+};
 const nearEras = (era) => {
   const i = ERAS.indexOf(era);
   return ERAS.filter((e, j) => e !== era && Math.abs(j - i) <= 2);
 };
+const neighbourCenturies = (label) => {
+  const m = label.match(/^(公元前)?(\d+)世紀$/);
+  const n = m[1] ? -parseInt(m[2], 10) : parseInt(m[2], 10);
+  return [-3, -2, -1, 1, 2, 3].map((d) => n + d).filter((x) => x !== 0).map((x) => (x < 0 ? `公元前${-x}世紀` : `${x}世紀`));
+};
+const popNote = (f) => (f.pop ? `（通行本作「${f.pop}」）` : "");
+// 解析把題幹改寫成陳述句（「……的是誰？」→「……的是某某。」），讀解析就能記住這條事實
+const restate = (stem, ans) => (/(是誰|是哪一[位部篇首種][^？]*)？$/.test(stem) ? stem.replace(/(是誰|是哪一[位部篇首種][^？]*)？$/, `是${ans}。`) : `答案是${ans}。`);
+
+// ── 題庫索引 ─────────────────────────────────────────────────────────
+const byBook = (b) => cards.filter((c) => c.book === b);
+const works = (b) => byBook(b).filter((c) => c.kind === "work");
+const persons = (b) => byBook(b).filter((c) => c.kind === "person");
+// 全庫同名作品（奧維德與卡夫卡的《變形記》、奧古斯丁與盧梭的《懺悔錄》）：不出「作者是誰」
+const titleBooks = new Map();
+for (const c of cards) if (c.kind === "work" && c.book !== "exam") titleBooks.set(norm(c.name), (titleBooks.get(norm(c.name)) || 0) + 1);
+const dupTitle = (c) => titleBooks.get(norm(c.name)) > 1;
+// 諾貝爾得主卡已問過的代表作，作品卡不再問作者
+const nobelWork = new Set(nobelCards.flatMap((c) => c.facts.filter((f) => f.p === "notable_work").map((f) => `${c.name}|${norm(f.o)}`)));
+// 冊內作者池：作品的作者與人物卡（附國別、時代）
+const authorMeta = new Map();
+for (const c of cards) {
+  if (c.kind === "person") authorMeta.set(`${c.book}|${c.name}`, { name: c.name, country: c.country || "", era: c.era || "" });
+}
+for (const c of cards) if (c.kind === "work" && c.author && !authorMeta.has(`${c.book}|${c.author}`)) authorMeta.set(`${c.book}|${c.author}`, { name: c.author, country: c.country || "", era: c.era || c.dyn || "" });
+const authorsOf = (b) => [...authorMeta.entries()].filter(([k]) => k.startsWith(`${b}|`)).map(([, v]) => v);
+const shiPoets = persons("shi");
+const shiTitleOk = works("shi").filter((w) => w.titleOk);
+const GENRES = ["史詩", "悲劇", "喜劇", "寓言", "抒情詩", "書信體小說", "散文詩", "和歌", "物語", "隨筆", "軍記物語", "章回小说", "文言短篇小说集", "笔记小说", "志怪小说", "传奇", "话本小说集", "拟话本小说集", "杂剧", "南戏", "散文诗"];
+const TI_GENRES = ["语录体", "编年体", "纪传体", "国别体", "纪事本末体"];
+const SCHOOLS = ["儒家", "道家", "法家", "墨家", "杂家", "兵家"];
+const COUNTRIES = ["英國", "法國", "德國", "意大利", "西班牙", "俄國", "美國", "奧地利", "愛爾蘭", "挪威", "丹麥", "阿根廷", "墨西哥", "古巴", "捷克", "尼日利亞", "黎巴嫩"];
+const countryShow = (c) => (COUNTRY_TW[c] ? `${c}（${COUNTRY_TW[c]}）` : c);
 
 const questions = [];
 const seenFacts = new Set();
@@ -99,111 +146,196 @@ function add(card, f, t, stem, s, answer, distractors, why, extraSources = []) {
     if (seenFacts.has(key)) problems.push(`DUP ${card.id} ${key}`);
     seenFacts.add(key);
   }
-  if (distractors.length < 3) problems.push(`OPTIONS-SHORT ${qid} ${card.id} ${f.p} ${f.o} (${distractors.length})`);
+  if (distractors.length < 3) problems.push(`OPTIONS-SHORT ${qid} ${card.id} ${card.name} ${f.p} ${f.o} (${distractors.length})`);
   if (new Set([answer, ...distractors]).size !== 1 + distractors.length) problems.push(`OPTIONS-DUP ${qid}`);
-  questions.push({ id: qid, c: card.id, t, stem, s, opts: [answer, ...distractors], why, src: { label: BOOKS.find((b) => b.id === card.book).label, title: "", book: card.book }, sources: [...srcList(f.src), ...extraSources], book: card.book, f: f.p });
+  questions.push({ id: qid, c: card.id, t, stem, s, opts: [answer, ...distractors], why, src: { label: bookLabel(card.book), title: "", book: card.book }, sources: [...srcList(f.src), ...extraSources], book: card.book, f: f.p });
 }
+const qidOf = (c, f, t) => `q-${h(`${c.id}|${f.p}|${f.o}|${t}`)}`;
 
+// ── 諾貝爾星河 ──
 for (const c of nobelCards) {
   const nm = c.name;
   const samePhase = nobelCards.filter((x) => x.phase.id === c.phase.id && x.year !== c.year).map((x) => x.name);
   const nearYears = nobelCards.filter((x) => Math.abs(x.year - c.year) <= 12 && x.year !== c.year).map((x) => x.name);
   const others = nobelCards.filter((x) => x.year !== c.year).map((x) => x.name);
   const wdSrc = c.url ? [{ label: "維基百科條目", url: c.url, role: "reference" }] : [];
+  const nobelLangs = [...new Set(nobelCards.flatMap((x) => x.facts.filter((g) => g.p === "writing_lang").map((g) => g.o)))];
   for (const f of c.facts) {
     if (f.p === "nobel_year") {
       const shared = nobelCards.some((x) => x.year === c.year && x.id !== c.id);
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|year`)}`;
-      add(c, f, "year", `${c.year}年諾貝爾文學獎${shared ? "得主之一" : "得主"}是誰？`, "", nm, pickDistractors(qid, nm, [samePhase.filter((x) => nearYears.includes(x)), samePhase, others]), `${nm}（${c.en}），${c.year}年諾貝爾文學獎。授獎辭重點：${c.facts.find((x) => x.p === "citation_kw").label}。`, wdSrc);
+      add(c, f, "year", `${c.year}年諾貝爾文學獎${shared ? "得主之一" : "得主"}是誰？`, "", nm, pickDistractors(qidOf(c, f, "year"), nm, [samePhase.filter((x) => nearYears.includes(x)), samePhase, others]), `${nm}（${c.en}），${c.year}年諾貝爾文學獎。授獎辭重點：${c.facts.find((x) => x.p === "citation_kw").label}。`, wdSrc);
     } else if (f.p === "citation_kw") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|kw`)}`;
-      add(c, f, "kw", `授獎辭以下面這句稱述的是哪一位得主？（${f.label}）`, f.o, nm, pickDistractors(qid, nm, [samePhase, others]), `${c.year}年授獎辭寫到 “${f.o}”（${f.label}），得主是${nm}。此年屬授獎辭「${c.phase.label}」一期。`, [{ label: `${c.year}年授獎辭原文`, url: "https://www.nobelprize.org/prizes/literature/", role: "official" }]);
+      // 授獎辭短語裡出現得主姓名（「卡爾費爾特的詩」）等於洩題，不出
+      const surname = String(c.en || "").split(/\s+/).pop().toLowerCase();
+      if (surname && f.o.toLowerCase().includes(surname)) {
+        problems.push(`NOBEL-KW-NAMES-LAUREATE ${c.year} ${c.en} (skipped)`);
+        continue;
+      }
+      add(c, f, "kw", `授獎辭以下面這句稱述的是哪一位得主？（${f.label}）`, f.o, nm, pickDistractors(qidOf(c, f, "kw"), nm, [samePhase, others]), `${c.year}年授獎辭寫到 “${f.o}”（${f.label}），得主是${nm}。此年屬授獎辭「${c.phase.label}」一期。`, [{ label: `${c.year}年授獎辭原文`, url: "https://www.nobelprize.org/prizes/literature/", role: "official" }]);
     } else if (f.p === "notable_work") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|work`)}`;
       const avoid = (cand) => nobelCards.find((x) => x.name === cand)?.facts.some((g) => g.p === "notable_work" && g.o === f.o);
-      add(c, f, "work", `${bookTitle(f.o)}${f.alt ? `（臺譯${bookTitle(f.alt)}）` : ""}是哪一位諾貝爾文學獎得主的作品？`, "", nm, pickDistractors(qid, nm, [samePhase, others], avoid), `${bookTitle(f.o)}是${nm}的代表作之一（Wikidata 列為其代表作，${f.qid}）。${nm}於${c.year}年獲獎。`);
+      add(c, f, "work", `${bookTitle(f.o)}${f.alt ? `（臺譯${bookTitle(f.alt)}）` : ""}是哪一位諾貝爾文學獎得主的作品？`, "", nm, pickDistractors(qidOf(c, f, "work"), nm, [samePhase, others], avoid), `${bookTitle(f.o)}是${nm}的代表作之一（Wikidata 列為其代表作，${f.qid}）。${nm}於${c.year}年獲獎。`);
     } else if (f.p === "writing_lang") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|lang`)}`;
-      add(c, f, "lang", `${nm}主要以哪一種語言寫作？`, "", f.o, pickDistractors(qid, f.o, [nobelLangs]), `${nm}的寫作語言是${f.o}${f.raw && f.raw !== f.o ? `（Wikidata 標為「${f.raw}」）` : "（Wikidata）"}。`);
+      add(c, f, "lang", `${nm}主要以哪一種語言寫作？`, "", f.o, pickDistractors(qidOf(c, f, "lang"), f.o, [nobelLangs]), `${nm}的寫作語言是${f.o}${f.raw && f.raw !== f.o ? `（Wikidata 標為「${f.raw}」）` : "（Wikidata）"}。`);
     }
   }
 }
 
-for (const c of poemCards) {
+// ── 並稱、流派、合璧（各冊共用） ──
+function groupQuestions(c) {
+  const show = (m) => (c.groupKind === "works" ? bookTitle(m) : m);
+  const stem = c.groupKind === "works" ? `下列哪一部屬於「${c.name}」？` : c.groupKind === "chars" ? `下列哪一位是「${c.name}」之一？` : `下列哪一位屬於「${c.name}」？`;
   for (const f of c.facts) {
-    if (f.p === "work_author") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|who`)}`;
-      add(c, f, "who", `${workTitle(c.name)}的作者是誰？`, "", f.o, pickDistractors(qid, f.o, [authorsOfEra(c.era), allAuthors]), `${workTitle(c.name)}，${c.dynasty}·${c.author}。`);
-    } else if (f.p === "work_collection") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|work`)}`;
-      add(c, f, "work", `${workTitle(c.name)}出自哪一部詩集？`, "", bookTitle(f.o), pickDistractors(qid, f.o, [COLLECTIONS]).map(bookTitle), `${workTitle(c.name)}出自${bookTitle(f.o)}${c.dynasty ? `（課本標「${c.dynasty}」）` : ""}。`);
-    } else if (f.p === "line_of_work") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|line`)}`;
-      const sameAuthor = c.anon ? [] : poemCards.filter((x) => x.author === c.author && x.id !== c.id).map((x) => x.name);
-      const sameEra = poemCards.filter((x) => x.era === c.era && x.id !== c.id).map((x) => x.name);
-      const avoid = (cand) => poemsByTitle.get(cand)?.facts.some((g) => g.p === "line_of_work" && g.o === f.o);
-      const ds = pickDistractors(qid, c.name, [sameAuthor, sameEra, poemCards.map((x) => x.name)], avoid);
-      add(c, f, "line", "下面這句詩出自哪一篇？", f.o, workTitle(c.name), ds.map(workTitle), `「${f.o}」出自${c.anon ? "" : `${c.dynasty}·${c.author}`}${workTitle(c.name)}。`);
+    const ds = pickDistractors(qidOf(c, f, "who"), f.o, [c.pool], (x) => c.members.includes(x)).map(show);
+    add(c, f, "who", stem, "", show(f.o), ds, `「${c.name}」指：${c.members.map(show).join("、")}。`);
+  }
+}
+
+// ── 雲山詩國 ──
+for (const c of byBook("shi")) {
+  if (c.kind === "group") {
+    groupQuestions(c);
+    continue;
+  }
+  if (c.kind === "work") {
+    const T = poemTitle(c.name);
+    const by = c.anon ? "" : `${c.dynasty ? `${c.dynasty}·` : ""}${c.author}`;
+    const sameAuthor = shiTitleOk.filter((x) => x.author === c.author && x.id !== c.id).map((x) => poemTitle(x.name));
+    const sameEra = shiTitleOk.filter((x) => x.era === c.era && x.id !== c.id).map((x) => poemTitle(x.name));
+    const allT = shiTitleOk.filter((x) => x.id !== c.id).map((x) => poemTitle(x.name));
+    const eraPoets = shiPoets.filter((p) => p.era === c.era).map((p) => p.name);
+    const allPoets = shiPoets.map((p) => p.name);
+    const note = c.note ? `（${c.note}）` : "";
+    for (const f of c.facts) {
+      if (f.p === "title_author") add(c, f, "who", `${T}的作者是誰？`, "", f.o, pickDistractors(qidOf(c, f, "who"), f.o, [eraPoets, allPoets]), `${T}，${by}。${note}`);
+      else if (f.p === "line_work") add(c, f, "line", "下面這句出自哪一篇？", f.o, T, pickDistractors(qidOf(c, f, "line"), T, [sameAuthor, sameEra, allT]), `「${f.o}」出自${by}${T}。${popNote(f)}${note}`);
+      else if (f.p === "line_author") add(c, f, "line", "下面這句的作者是誰？", f.o, c.author, pickDistractors(qidOf(c, f, "line"), c.author, [eraPoets, allPoets]), `「${f.o}」出自${by}${T}。${popNote(f)}${note}`);
+      else if (f.p === "work_collection") add(c, f, "work", `${T}出自哪一部詩集？`, "", bookTitle(f.o), pickDistractors(qidOf(c, f, "work"), f.o, [COLLECTIONS]).map(bookTitle), `${T}出自${bookTitle(f.o)}。`);
+      else if (f.p === "work_part") add(c, f, "work", `${T}屬於《詩經》的哪一部分？`, "", f.o, pickDistractors(qidOf(c, f, "work"), f.o, [SHIJING_PARTS]), `${T}屬於《詩經》的「${f.o}」。《詩經》分風、雅、頌三部分，雅又分大雅、小雅。`);
+    }
+    continue;
+  }
+  // 詩人
+  const eraPoets = shiPoets.filter((p) => p.era === c.era && p.id !== c.id).map((p) => p.name);
+  const otherPoets = shiPoets.filter((p) => p.id !== c.id).map((p) => p.name);
+  for (const f of c.facts) {
+    if (f.p === "poet_era") add(c, f, "era", `${c.name}是哪一個時代的作家？`, "", f.o, pickDistractors(qidOf(c, f, "era"), f.o, [nearEras(f.o), ERAS]), `${c.name}，課本或選本標為「${f.raw}」，屬${f.o}。`);
+    else if (f.p === "poet_aka") add(c, f, "who", f.o, "", c.name, pickDistractors(qidOf(c, f, "who"), c.name, [eraPoets, otherPoets]), `${restate(f.o, c.name)}（${c.era}）`);
+    else if (f.p === "poet_work") {
+      const other = shiTitleOk.filter((x) => x.author !== c.name);
+      add(c, f, "work", `下列哪一篇是${c.name}的作品？`, "", poemTitle(f.o), pickDistractors(qidOf(c, f, "work"), poemTitle(f.o), [other.filter((x) => x.era === c.era).map((x) => poemTitle(x.name)), other.map((x) => poemTitle(x.name))]), `${poemTitle(f.o)}是${c.name}的作品。`);
     }
   }
 }
 
-for (const c of poetCards) {
-  for (const f of c.facts) {
-    if (f.p === "author_era") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|era`)}`;
-      add(c, f, "era", `${c.name}是哪一個時代的作家？`, "", f.o, pickDistractors(qid, f.o, [nearEras(f.o), ERAS]), `${c.name}，課本標為「${f.raw}」，屬${f.o}。`);
-    } else if (f.p === "author_work") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|work`)}`;
-      const otherEra = poemCards.filter((x) => x.author !== c.name && x.era === c.era).map((x) => x.name);
-      const other = poemCards.filter((x) => x.author !== c.name).map((x) => x.name);
-      add(c, f, "work", `下列哪一篇是${c.name}的作品？`, "", workTitle(f.o), pickDistractors(qid, f.o, [otherEra, other]).map(workTitle), `${workTitle(f.o)}是${c.name}的作品。`);
-    } else if (f.p === "line_author") {
-      const qid = `q-${h(`${c.id}|${f.p}|${f.o}|who`)}`;
-      add(c, f, "who", "下面這句詩的作者是誰？", f.o, c.name, pickDistractors(qid, c.name, [authorsOfEra(c.era), allAuthors]), `「${f.o}」出自${c.name}${workTitle(f.work)}。`);
+// ── 經典各冊（文淵、說部、新潮、萬國各海區、思潮館） ──
+for (const b of ["wen", "shuo", "xin", "aegean", "rome", "east", "europe", "c19", "modern", "fusang", "schools"]) {
+  const W = works(b);
+  const P = persons(b);
+  const A = authorsOf(b);
+  const world = !["wen", "shuo", "xin"].includes(b) && b !== "schools";
+  const otherBooksAuthors = authorsOf(b === "wen" ? "shuo" : b === "shuo" ? "wen" : b === "xin" ? "shuo" : "c19").map((a) => a.name);
+  for (const c of byBook(b)) {
+    if (c.kind === "group") {
+      groupQuestions(c);
+      continue;
+    }
+    if (c.kind === "term") {
+      const T = byBook(b).filter((x) => x.kind === "term" && x.id !== c.id);
+      const inShow = (x) => (ESSAYS.has(x) ? poemTitle(x) : bookTitle(x));
+      for (const f of c.facts) {
+        if (f.p === "term_by") add(c, f, "who", `「${c.name}」這一主張或概念由誰提出？`, "", f.o, pickDistractors(qidOf(c, f, "who"), f.o, [T.filter((x) => x.termKind === c.termKind && x.by).map((x) => x.by)], (x) => T.some((y) => y.by === x && y.name === c.name)), `「${c.name}」由${f.o}提出${c.in ? `，見${inShow(c.in)}` : ""}。`);
+        else if (f.p === "term_in") add(c, f, "work", `「${c.name}」出自哪一部著作或哪一篇？`, "", inShow(f.o), pickDistractors(qidOf(c, f, "work"), f.o, [T.filter((x) => x.in).map((x) => x.in)]).map(inShow), `「${c.name}」出自${inShow(f.o)}${c.by ? `（${c.by}）` : ""}。`);
+        else if (f.p === "term_gist") {
+          if (norm(f.o).includes(norm(c.name)) && norm(c.name).length >= 2) {
+            problems.push(`TERM-GIST-LEAK ${c.name}`);
+            continue;
+          }
+          add(c, f, "kw", c.termKind === "form" ? "下面說的是哪一種文體？" : "下面說的是哪一個主張或概念？", f.o, c.name, pickDistractors(qidOf(c, f, "kw"), c.name, [T.filter((x) => x.termKind === c.termKind).map((x) => x.name)]), `「${c.name}」：${f.o}。${c.by ? `提出者：${c.by}。` : ""}`);
+        } else if (f.p === "term_example") add(c, f, "work", `下列哪一篇屬於「${c.name}」？`, "", f.o, pickDistractors(qidOf(c, f, "work"), f.o, [T.filter((x) => x.termKind === "form").flatMap((x) => x.facts.filter((g) => g.p === "term_example").map((g) => g.o))]), `${f.o}是${c.name}的代表作之一。${c.name}：${c.facts.find((g) => g.p === "term_gist")?.o || ""}。`);
+        else if (f.p === "term_quote") add(c, f, "line", "下面這句出自哪一篇？", f.o, poemTitle(f.piece), pickDistractors(qidOf(c, f, "line"), poemTitle(f.piece), [T.flatMap((x) => x.facts.filter((g) => g.p === "term_quote").map((g) => poemTitle(g.piece))), [...ESSAYS].map(poemTitle)]), `「${f.o}」出自${poemTitle(f.piece)}，與「${c.name}」有關。`);
+      }
+      continue;
+    }
+    if (c.kind === "work") {
+      const T = stemTitle(c);
+      const Ans = titleWithAlt(c);
+      const peers = W.filter((x) => x.id !== c.id);
+      const same = (x) => (world ? x.country && x.country === c.country : x.dyn && x.dyn === c.dyn);
+      const sameAuthor = peers.filter((x) => c.author && x.author === c.author).map(titleWithAlt);
+      const similar = peers.filter(same).map(titleWithAlt);
+      const allW = peers.filter((x) => !x.isBook || c.isBook).map(titleWithAlt);
+      const byText = c.author ? `${c.author}` : "";
+      for (const f of c.facts) {
+        if (f.p === "work_author") {
+          if (dupTitle(c) || c.generic || norm(c.name).includes(norm(f.o)) || nobelWork.has(`${f.o}|${norm(c.name)}`)) continue;
+          const me = authorMeta.get(`${b}|${f.o}`) || {};
+          const tiers = [A.filter((a) => a.name !== f.o && (world ? me.country && a.country === me.country : me.era && a.era === me.era)).map((a) => a.name), A.map((a) => a.name), otherBooksAuthors];
+          add(c, f, "who", `${T}的作者是誰？`, "", f.o, pickDistractors(qidOf(c, f, "who"), f.o, tiers, (x) => W.some((w) => w.author === x && norm(w.name) === norm(c.name))), `${T}的作者是${f.o}${c.dyn ? `（${c.dyn}）` : c.country ? `（${c.country}）` : ""}。${c.qid ? `Wikidata 核對作者：${c.qid}。` : ""}`);
+        } else if (f.p === "work_src") add(c, f, "work", `${T}選自哪一部典籍？`, "", bookTitle(f.o), pickDistractors(qidOf(c, f, "work"), f.o, [W.filter((x) => x.isBook).map((x) => x.name), ["世说新语", "史记", "聊斋志异", "梦溪笔谈", "水经注", "陶庵梦忆", "资治通鉴", "庄子", "荀子"]]).map(bookTitle), `${T}選自${bookTitle(f.o)}${c.author ? `，作者${c.author}` : ""}。`);
+        else if (f.p === "work_char") {
+          if (norm(f.o) && (norm(f.o).includes(norm(c.name)) || norm(c.name).includes(norm(f.o)))) continue;
+          const avoid = (x) => W.some((w) => titleWithAlt(w) === x && w.facts.some((g) => g.p === "work_char" && g.o === f.o));
+          add(c, f, "work", `「${f.o}」是哪一部作品中的人物？`, "", Ans, pickDistractors(qidOf(c, f, "work"), Ans, [sameAuthor, similar, allW], avoid), `「${f.o}」${f.en ? `（${f.en}）` : ""}是${byText}${T}中的人物。${f.wd ? "Wikidata 人物表核對。" : ""}`);
+        } else if (f.p === "work_line") {
+          if (f.piece) {
+            add(c, f, "line", "下面這句出自哪一部典籍？", f.o, Ans, pickDistractors(qidOf(c, f, "line"), Ans, [W.filter((x) => x.isBook && x.id !== c.id).map(titleWithAlt)]), `「${f.o}」出自${T}（課本選文〈${f.piece}〉）。`);
+            continue;
+          }
+          if (leaks(f.o, c.name)) {
+            if (c.author && !c.isBook) {
+              const me = authorMeta.get(`${b}|${c.author}`) || {};
+              add(c, f, "line", world ? "下面這句（譯文）出自哪一位作家？" : "下面這句出自哪一位作家？", f.o, c.author, pickDistractors(qidOf(c, f, "line"), c.author, [A.filter((a) => a.name !== c.author && (world ? a.country === me.country : a.era === me.era)).map((a) => a.name), A.map((a) => a.name)]), `「${f.o}」出自${c.author}${T}。`);
+            } else problems.push(`LINE-LEAKS-TITLE ${c.name} ${f.o}`);
+            continue;
+          }
+          add(c, f, "line", c.textbook ? "下面這句出自哪一篇？" : world ? "下面這句（譯文）出自哪一部作品？" : "下面這句出自哪一部作品？", f.o, Ans, pickDistractors(qidOf(c, f, "line"), Ans, [sameAuthor, similar, allW]), `「${f.o}」出自${byText}${T}。`);
+        } else if (f.p === "work_fame") {
+          if (leaks(f.o, c.name)) {
+            problems.push(`FAME-LEAKS-TITLE ${c.name} ${f.o}`);
+            continue;
+          }
+          add(c, f, "kw", f.o, "", Ans, pickDistractors(qidOf(c, f, "kw"), Ans, [similar, allW, sameAuthor]), `${restate(f.o, T)}${byText ? `作者：${byText}。` : ""}`);
+        } else if (f.p === "work_genre") {
+          const pool = [...new Set(W.map((x) => x.facts.find((g) => g.p === "work_genre")?.o).filter(Boolean))];
+          add(c, f, "work", `${T}屬於哪一種體裁？`, "", f.o, pickDistractors(qidOf(c, f, "work"), f.o, [pool, GENRES]), `${T}是${f.o}。`);
+        } else if (f.p === "book_genre") add(c, f, "work", `${T}屬於哪一種體例？`, "", f.o, pickDistractors(qidOf(c, f, "work"), f.o, [TI_GENRES]), `${T}是${f.o}。`);
+        else if (f.p === "book_school") add(c, f, "work", `${T}屬於哪一家的著作？`, "", f.o, pickDistractors(qidOf(c, f, "work"), f.o, [SCHOOLS]), `${T}屬於${f.o}。`);
+        else if (f.p === "work_country") {
+          const pool = [...new Set(W.map((x) => x.country).filter(Boolean))];
+          add(c, f, "lang", `${T}是哪一個國家或地區的作品？`, "", countryShow(f.o), pickDistractors(qidOf(c, f, "lang"), f.o, [pool, COUNTRIES]).map(countryShow), `${T}是${f.o}的作品。`);
+        } else if (f.p === "work_dyn") add(c, f, "era", `${T}是哪一個朝代的作品？`, "", f.o, pickDistractors(qidOf(c, f, "era"), f.o, [nearEras(f.o), ERAS]), `${T}，${f.o}${c.author ? `·${c.author}` : ""}。`);
+        else if (f.p === "work_century") add(c, f, "era", `${T}成書於哪一個世紀？`, "", f.o, pickDistractors(qidOf(c, f, "era"), f.o, [neighbourCenturies(f.o)]), `${T}成書於${f.o}（Wikidata 年代約 ${f.year < 0 ? `公元前 ${-f.year}` : f.year} 年）。`);
+      }
+      continue;
+    }
+    // 人物
+    const me = c;
+    const peers = [...new Set([...P.filter((x) => x.id !== c.id).map((x) => x.name), ...A.map((a) => a.name).filter((x) => x !== c.name)])];
+    const close = P.filter((x) => x.id !== c.id && (world ? x.country && x.country === me.country : x.era && x.era === me.era)).map((x) => x.name);
+    for (const f of c.facts) {
+      if (f.p === "person_aka") {
+        if (norm(f.o).includes(norm(c.name))) {
+          problems.push(`AKA-LEAK ${c.name} ${f.o}`);
+          continue;
+        }
+        add(c, f, "who", f.o, "", c.name, pickDistractors(qidOf(c, f, "who"), c.name, [close, peers, otherBooksAuthors]), `${restate(f.o, c.name)}${c.country ? `（${c.country}）` : c.era ? `（${c.era}）` : ""}${c.works?.length ? `代表作：${c.works.slice(0, 3).map((x) => titleOf({ ...W.find((w) => w.name === x), name: x })).join("、")}。` : ""}`);
+      } else if (f.p === "person_work") {
+        const w = W.find((x) => x.name === f.o);
+        const ans = titleWithAlt(w);
+        const others = W.filter((x) => x.author !== c.name);
+        add(c, f, "work", `下列哪一部是${c.name}的作品？`, "", ans, pickDistractors(qidOf(c, f, "work"), ans, [others.filter((x) => (world ? x.country && x.country === me.country : x.dyn === w.dyn)).map(titleWithAlt), others.map(titleWithAlt)]), `${titleOf(w)}是${c.name}的作品。`);
+      } else if (f.p === "person_country") {
+        const pool = [...new Set(P.map((x) => x.country).filter(Boolean))];
+        add(c, f, "lang", `${c.name}是哪一國的作家？`, "", countryShow(f.o), pickDistractors(qidOf(c, f, "lang"), f.o, [pool, COUNTRIES]).map(countryShow), `${c.name}是${f.o}作家。`);
+      } else if (f.p === "person_genre") add(c, f, "work", `${c.name}以哪一種體裁著稱？`, "", f.o, pickDistractors(qidOf(c, f, "work"), f.o, [GENRES]), `${c.name}以${f.o}著稱。`);
+      else if (f.p === "person_line") add(c, f, "line", world ? "下面這句（譯文）出自哪一位作家？" : "下面這句出自哪一位作家？", f.o, c.name, pickDistractors(qidOf(c, f, "line"), c.name, [close, peers]), `「${f.o}」出自${c.name}。`);
+      else if (f.p === "person_era") add(c, f, "era", `${c.name}是哪一個朝代的作家？`, "", f.o, pickDistractors(qidOf(c, f, "era"), f.o, [nearEras(f.o), ERAS]), `${c.name}是${f.o}代作家${c.works?.length ? `，代表作${c.works.slice(0, 2).map((x) => titleOf({ ...W.find((w) => w.name === x), name: x })).join("、")}` : ""}。`);
     }
   }
 }
 
-// 萬國星海：作者、作品、體裁、時代、流派
-const worldCards = cards.filter((c) => ["aegean", "rome", "fusang", "schools"].includes(c.book));
-const worldPeople = worldCards.filter((c) => c.kind === "person");
-const workAuthor = new Map();
-for (const c of worldCards) {
-  if (c.kind === "work") workAuthor.set(c.name, c.author);
-  for (const f of c.facts) if (f.p === "author_work") workAuthor.set(f.o, c.name);
-}
-const allWorks = [...workAuthor.keys()];
-// 體裁干擾項先取同一冊出現過的體裁（希臘悲劇配史詩、喜劇；物語配隨筆、和歌），不夠再取全部
-const genresOfBook = (book) => [...new Set(worldCards.filter((x) => x.book === book).flatMap((x) => x.facts.filter((f) => f.p === "work_genre" || f.p === "author_genre").map((f) => f.o)))];
-const BOOK_FAMILY = { aegean: ["aegean", "rome"], rome: ["aegean", "rome"], fusang: ["fusang"] };
-const neighbours = (label, kind) => {
-  if (kind === "decade") {
-    const y = parseInt(label, 10);
-    return [-30, -20, -10, 10, 20, 30].map((d) => `${y + d}年代`);
-  }
-  const m = label.match(/^(公元前)?(\d+)世紀$/);
-  const n = m[1] ? -parseInt(m[2], 10) : parseInt(m[2], 10);
-  return [-3, -2, -1, 1, 2, 3].map((d) => n + d).filter((x) => x !== 0).map((x) => (x < 0 ? `公元前${-x}世紀` : `${x}世紀`));
-};
-for (const c of worldCards) {
-  const sameBookPeople = worldPeople.filter((p) => p.book === c.book && p.id !== c.id).map((p) => p.name);
-  for (const f of c.facts) {
-    const qid = `q-${h(`${c.id}|${f.p}|${f.o}`)}`;
-    if (f.p === "work_author") add(c, f, "who", `${bookTitle(c.name)}${c.alt ? `（臺譯${bookTitle(c.alt)}）` : ""}的作者是誰？`, "", f.o, pickDistractors(qid, f.o, [sameBookPeople, worldPeople.map((p) => p.name), world.allPeople]), `${bookTitle(c.name)}的作者是${f.o}（Wikidata）。`);
-    else if (f.p === "work_genre") add(c, f, "work", `${bookTitle(c.name)}屬於哪一種體裁？`, "", f.o, pickDistractors(qid, f.o, [(BOOK_FAMILY[c.book] || []).flatMap(genresOfBook), world.genres]), `${bookTitle(c.name)}是${f.o}（Wikidata 體裁）。`);
-    else if (f.p === "work_decade") add(c, f, "era", `${bookTitle(c.name)}首次出版於哪一個年代？`, "", f.o, pickDistractors(qid, f.o, [neighbours(f.o, "decade")]), `${bookTitle(c.name)}出版於${f.o}（Wikidata 出版日期）。`);
-    else if (f.p === "work_century") add(c, f, "era", `${bookTitle(c.name)}成書於哪一個世紀？`, "", f.o, pickDistractors(qid, f.o, [neighbours(f.o, "century")]), `${bookTitle(c.name)}成書於${f.o}（Wikidata 成立時間）。`);
-    else if (f.p === "author_work") {
-      const avoid = (cand) => workAuthor.get(cand) === c.name;
-      const sameBook = allWorks.filter((w) => worldCards.some((x) => x.book === c.book && (x.name === workAuthor.get(w) || x.name === w)));
-      add(c, f, "work", `下列哪一部是${c.name}的作品？`, "", bookTitle(f.o), pickDistractors(qid, f.o, [sameBook, allWorks], avoid).map(bookTitle), `${bookTitle(f.o)}${f.alt ? `（臺譯${bookTitle(f.alt)}）` : ""}是${c.name}的作品（Wikidata 作者）。`);
-    } else if (f.p === "birth_century") add(c, f, "era", `${c.name}生於哪一個世紀？`, "", f.o, pickDistractors(qid, f.o, [neighbours(f.o, "century")]), `${c.name}生於${f.o}（Wikidata 出生日期）。`);
-    else if (f.p === "author_genre") add(c, f, "work", `${c.name}以哪一種體裁著稱？`, "", f.o, pickDistractors(qid, f.o, [(BOOK_FAMILY[c.book] || []).flatMap(genresOfBook), world.genres]), `${c.name}的代表體裁是${f.o}（Wikidata）。`);
-    else if (f.p === "movement_member") add(c, f, "who", `下列哪一位被歸入${c.name}${c.alt ? `（臺稱${c.alt}）` : ""}？`, "", f.o, pickDistractors(qid, f.o, [c.distractorPool.filter((p) => !c.memberSet.has(p))]), `Wikidata 把${f.o}歸入${c.name}。`);
-  }
-}
-
+// ── 真卷殿 ──
 for (const c of examCards) {
   for (const f of c.facts) {
     const q = f.item;
@@ -218,15 +350,27 @@ for (const c of examCards) {
 
 // 人名選項並列臺灣譯名（加繆（卡繆）），兩岸讀者都認得；題幹與解析不動
 const altOf = new Map(cards.filter((c) => c.kind === "person" && c.alt).map((c) => [c.name, c.alt]));
-for (const q of questions) {
-  if (q.t === "who" || q.t === "year" || q.t === "kw") q.opts = q.opts.map((o) => (altOf.has(o) ? `${o}（${altOf.get(o)}）` : o));
+for (const c of cards) if (c.kind === "work" && c.author && c.authorAlt) altOf.set(c.author, c.authorAlt);
+for (const q of questions) if (q.t !== "exam") q.opts = q.opts.map((o) => (altOf.has(o) ? `${o}（${altOf.get(o)}）` : o));
+
+// 題目少於兩道的卡不成卡（名句洩題、作者不能問之後只剩一題），連題一起拿掉，列在報告
+{
+  const count = new Map();
+  for (const q of questions) count.set(q.c, (count.get(q.c) || 0) + 1);
+  const thin = new Set(cards.filter((c) => (count.get(c.id) || 0) < 2).map((c) => c.id));
+  for (const c of cards) if (thin.has(c.id)) problems.push(`CARD-THIN-DROPPED ${c.book} ${c.name} (${count.get(c.id) || 0} question)`);
+  cards = cards.filter((c) => !thin.has(c.id));
+  for (let i = questions.length - 1; i >= 0; i--) if (thin.has(questions[i].c)) questions.splice(i, 1);
 }
 
 // ── 稀有度（各冊內按分數分位：SSR 6%、SR 10%、R 20%、其餘 N） ──────────────
 function scoreOf(c) {
-  if (c.book === "nobel" || c.prominence !== undefined) return c.prominence ?? 100;
-  if (c.kind === "work") return (c.inGk ? 2 : 0) + (c.inMs ? 1 : 0) + (c.inAnth ? 0.5 : 0) + Math.min(poetCards.find((p) => p.name === c.author)?.works || 0, 10) * 0.2;
-  return c.works * 1.5 + (c.gkWorks || 0);
+  if (c.book === "shi") {
+    if (c.kind === "work") return (c.inGk ? 2 : 0) + (c.inMs ? 1 : 0) + (c.textbook ? 0 : 0.8) + Math.min(shiPoets.find((p) => p.name === c.author)?.works || 0, 10) * 0.2;
+    if (c.kind === "person") return c.works * 1.5 + (c.gkWorks || 0) + (c.aka || 0) * 1.5;
+    return 2 + c.members.length * 0.3;
+  }
+  return c.prominence ?? 30;
 }
 for (const b of BOOKS) {
   const list = cards.filter((c) => c.book === b.id).sort((a, z) => scoreOf(z) - scoreOf(a) || (a.id < z.id ? -1 : 1));
@@ -237,8 +381,7 @@ for (const b of BOOKS) {
   });
 }
 
-// ── 關卡：星河按授獎辭五期、依年份每 10 張卡一關；詩國不按時代分關（關名一露時代，時代題就洩題），以卡號雜湊混編。
-// 關名不帶時代或年份區間，理由同上。
+// ── 關卡：星河按授獎辭五期、依年份每 10 張卡一關；其餘各冊不按時代分關（關名一露時代，時代題就洩題），以卡號雜湊混編。
 const lessons = [];
 const lessonOfCard = new Map();
 for (const b of BOOKS) {
@@ -257,7 +400,8 @@ for (const b of BOOKS) {
       const part = list.slice(i * size, (i + 1) * size);
       const id = `L-${h(`${b.id}|${g}|${i}`).slice(0, 8)}`;
       const NUM = "一二三四五六七八九十";
-      const title = b.id === "nobel" ? `${PHASES.find((p) => p.id === g).label}·${NUM[i]}` : `${b.id === "shi" ? "詩國" : b.label}·${NUM[i] || i + 1}`;
+      const num = i < 10 ? NUM[i] : i < 20 ? `十${NUM[i - 10] === "十" ? "" : NUM[i - 10]}` : `${NUM[Math.floor(i / 10) - 1]}十${i % 10 ? NUM[(i % 10) - 1] : ""}`;
+      const title = b.id === "nobel" ? `${PHASES.find((p) => p.id === g).label}·${num}` : `${b.label}·${num}`;
       lessons.push({ id, title, author: "", books: [b.id], questions: 0 });
       for (const c of part) lessonOfCard.set(c.id, id);
     }
@@ -270,19 +414,16 @@ for (const q of questions) {
   l.questions += 1;
 }
 for (const l of lessons) if (l.questions < 3) problems.push(`LESSON-TOO-SMALL ${l.id} ${l.title} ${l.questions}`);
-for (const c of cards) {
-  const facts = new Set(questions.filter((q) => q.c === c.id).map((q) => `${q.f}|${q.stem}|${q.s}|${q.opts[0]}`));
-  if (facts.size < 2) problems.push(`CARD-ONE-FACT ${c.id} ${c.name} (${[...facts].join(",") || "none"})`);
-}
 
 // ── 輸出 ───────────────────────────────────────────────────────────────
-// 報告類（官方資料錯配、作品併入作者卡、事實不足兩條而未成卡）不擋建置，列在 BUILD-REPORT
-const WARN = ["NOBEL-WIKIDATA-MISMATCH", "WORLD-WIKIDATA", "WORLD-WORK-FOLDED", "WORLD-WORK-DROPPED", "WORLD-PERSON-DROPPED", "POETRY-ANTH-FOLDED", "EXAM-TAIL"];
+// 報告類（官方資料錯配、作品併入作者卡、事實不足而未成卡、洩題略過）不擋建置，列在 BUILD-REPORT
+const WARN = ["NOBEL-WIKIDATA-MISMATCH", "NOBEL-KW-NAMES-LAUREATE", "EXAM-TAIL", "POETRY-POET-FOLDED", "CANON-PERSON-FOLDED", "CARD-THIN-DROPPED", "LINE-LEAKS-TITLE", "FAME-LEAKS-TITLE", "AKA-LEAK", "TERM-GIST-LEAK"];
 const blocking = problems.filter((p) => !WARN.some((w) => p.startsWith(w)));
-const report = { builtAt: new Date().toISOString().slice(0, 10), sources: sourceDigests, codeDigest, problems };
+const coverage = { canon: canon.stats, byBook: Object.fromEntries(BOOKS.map((b) => [b.id, { cards: cards.filter((c) => c.book === b.id).length, questions: questions.filter((q) => q.book === b.id).length }])) };
+const report = { builtAt: new Date().toISOString().slice(0, 10), sources: sourceDigests, codeDigest, coverage, problems };
 fs.writeFileSync(path.join(root, "data/BUILD-REPORT.json"), JSON.stringify(report, null, 1) + "\n");
 if (STRICT && blocking.length) {
-  for (const p of blocking.slice(0, 120)) console.error(p);
+  for (const p of blocking.slice(0, 150)) console.error(p);
   console.error(`BUILD FAILED: ${blocking.length} problems (nothing written)`);
   process.exit(1);
 }
@@ -291,23 +432,50 @@ const v = h(JSON.stringify(sourceDigests) + codeDigest);
 const cardList = cards.map((c) => {
   const qs = questions.filter((q) => q.c === c.id);
   const isNobel = c.book === "nobel";
-  const isWorld = ["aegean", "rome", "fusang", "schools"].includes(c.book);
   const kw = c.facts.find((f) => f.p === "citation_kw");
   const work = c.facts.find((f) => f.p === "notable_work");
+  const py =
+    c.book === "exam"
+      ? `${c.facts.length} 題`
+      : isNobel
+        ? `${c.year} · ${c.langs.join("／") || c.en}`
+        : c.kind === "group"
+          ? `${c.members.length} ${c.groupKind === "works" ? "部" : "位"}`
+          : c.kind === "term"
+            ? [c.termKind === "form" ? "文體" : c.by, c.in ? (ESSAYS.has(c.in) ? poemTitle(c.in) : bookTitle(c.in)) : ""].filter(Boolean).join(" · ")
+            : c.book === "shi"
+              ? c.kind === "work"
+                ? `${c.dynasty}${c.anon ? "" : ` · ${c.author}`}`
+                : c.dynasties.join("、")
+              : c.kind === "work"
+                ? [c.dyn || c.country, c.author].filter(Boolean).join(" · ") || c.en
+                : [c.era || c.country, c.en].filter(Boolean).join(" · ");
+  const senses =
+    c.book === "exam"
+      ? [...new Set(c.facts.map((f) => f.item.category))]
+      : isNobel
+        ? [kw.label, ...(work ? [bookTitle(work.o)] : [])]
+        : c.kind === "group"
+          ? c.members.map((m) => (c.groupKind === "works" ? bookTitle(m) : m))
+          : c.kind === "term"
+            ? c.facts.filter((f) => f.p === "term_gist" || f.p === "term_quote").map((f) => f.o)
+            : c.kind === "work"
+              ? c.facts.filter((f) => ["line_work", "line_author", "work_line", "work_char"].includes(f.p)).map((f) => f.o).slice(0, 4)
+              : c.facts.filter((f) => ["poet_work", "person_work"].includes(f.p)).map((f) => (c.book === "shi" ? poemTitle(f.o) : bookTitle(f.o)));
   return {
     id: c.id,
     w: c.name,
     key: [c.name, c.alt, c.en, c.author].filter(Boolean).join(" "),
-    py: c.book === "exam" ? `${c.facts.length} 題` : isNobel ? `${c.year} · ${c.langs.join("／") || c.en}` : isWorld ? (c.kind === "term" ? `${c.facts.length} 位作家` : c.en) : c.kind === "work" ? `${c.dynasty}${c.anon ? "" : ` · ${c.author}`}` : c.dynasties.join("、"),
+    py,
     kind: c.kind,
     tier: c.tier,
     score: c.score,
-    senses: c.book === "exam" ? [...new Set(c.facts.map((f) => f.item.category))] : isNobel ? [kw.label, ...(work ? [bookTitle(work.o)] : [])] : isWorld ? c.facts.filter((f) => ["author_work", "work_genre", "author_genre", "movement_member"].includes(f.p)).map((f) => (f.p === "author_work" ? bookTitle(f.o) : f.o)) : c.kind === "work" ? c.facts.filter((f) => f.p === "line_of_work").map((f) => f.o) : c.facts.filter((f) => f.p === "author_work").map((f) => workTitle(f.o)),
-    lists: c.book === "exam" ? ["真卷殿"] : isNobel ? [`授獎辭·${c.phase.label}`] : isWorld ? [BOOKS.find((b) => b.id === c.book).label] : [c.era],
+    senses,
+    lists: c.book === "shi" && c.era ? [c.era] : isNobel ? [`授獎辭·${c.phase.label}`] : [bookLabel(c.book)],
     books: [c.book],
     regions: [BOOKS.find((b) => b.id === c.book).region],
     sw: null,
-    dictUrl: isNobel ? c.url : "",
+    dictUrl: c.url || "",
     alt: c.alt || "",
     n: qs.length,
   };
@@ -318,7 +486,7 @@ const qi = questions.map((q) => [q.id, cardIndex.get(q.c), TYPE_CODE[q.t], q.boo
 const typeCount = Object.fromEntries(Object.keys(TYPE_CODE).map((t) => [t, questions.filter((q) => q.t === t).length]));
 const books = BOOKS.map((b) => ({ ...b, cards: cards.filter((c) => c.book === b.id).length, questions: questions.filter((q) => q.book === b.id).length }));
 const stats = { cards: cards.length, questions: questions.length, lessons: lessons.length, byType: typeCount, byBook: Object.fromEntries(books.map((b) => [b.id, { cards: b.cards, questions: b.questions }])) };
-const meta = { builtAt: report.builtAt, edition: "書靈 P1 首批", v, books, lessons, cards: cardList, qi, stats };
+const meta = { builtAt: report.builtAt, edition: "書靈 核心經典版", v, books, lessons, cards: cardList, qi, stats };
 
 const chunkDir = path.join(root, "public/bank");
 fs.rmSync(chunkDir, { recursive: true, force: true });

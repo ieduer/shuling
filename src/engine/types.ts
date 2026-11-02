@@ -31,7 +31,8 @@ export interface CardMeta {
   w: string;
   key: string;
   py: string;
-  kind: "person" | "work";
+  /** person 人物、work 作品、group 並稱與流派、term 文論概念與文體 */
+  kind: "person" | "work" | "group" | "term";
   /** 臺灣通行譯名（與 w 不同時才有） */
   alt?: string;
   tier: Tier;

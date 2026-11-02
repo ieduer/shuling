@@ -26,7 +26,7 @@ function pathOf(rg: RegionStages): string {
   return d;
 }
 
-/** 旅程：七域連成一張古靈異地圖，各域有自己的守護異獸；關卡是地圖上的燈與印，不標號碼。點一下看關卡、再點出陣。 */
+/** 旅程：十四域連成一張古靈異地圖，各域有自己的守護異獸；關卡是地圖上的燈與印，不標號碼。點一下看關卡、再點出陣。 */
 export function Journey({ onStart, progress }: { onStart: (r: RunRequest) => void; progress: Progress }) {
   const regions = useMemo(() => journeyRegions(), []);
   const cur = useMemo(() => currentRegion(regions, progress), [regions, progress]);

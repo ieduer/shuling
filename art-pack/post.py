@@ -142,7 +142,7 @@ jobs.append(("crown", lambda: keyed_bg("crown", 160)))
 for n in ["mode-daily", "mode-free", "mode-wrong"]: jobs.append((n, lambda n=n: photo(n, 960, 640, 78)))
 for n in sorted(glob.glob(f"{RAW}/beast-*.*")):
     b = os.path.basename(n).rsplit(".", 1)[0]; jobs.append((b, lambda b=b: beast(b)))
-for n in ["map-shi", "map-aegean", "map-rome", "map-fusang", "map-nobel", "map-schools", "map-exam"]: jobs.append((n, lambda n=n: photo(n, 896, 1536, 76, crop_top=0.22, crop_bottom=0.06)))
+for n in ["map-shi", "map-aegean", "map-rome", "map-fusang", "map-nobel", "map-schools", "map-exam", "map-wen", "map-shuo", "map-xin", "map-east", "map-europe", "map-c19", "map-modern"]: jobs.append((n, lambda n=n: photo(n, 896, 1536, 76, crop_top=0.22, crop_bottom=0.06)))
 for n in ["bg-home", "bg-board", "bg-codex", "bg-me", "bg-battle", "bg-result"]: jobs.append((n, lambda n=n: photo(n, 896, 1536, 72)))
 for n in ["node-off", "node-lit", "node-clear", "skill-zhuzhao", "skill-zhishui", "skill-shenji"]: jobs.append((n, lambda n=n: coin(n, 160)))
 jobs.append(("cardback", lambda: photo("cardback", 384, 512, 84)))

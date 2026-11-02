@@ -57,8 +57,9 @@ test("每張卡至少兩種事實可答（收服要跨事實），每關至少�
 test("授獎辭題的英文短語逐字出現在官方授獎辭裡", () => {
   const prizes = rd("data/raw/nobel/prizes-lit.json").nobelPrizes;
   const all = prizes.flatMap((p) => (p.laureates || []).map((l) => (l.motivation?.en || "").replace(/<\/?i>/gi, "").replace(/&ccedil;/g, "ç").replace(/&eacute;/g, "é").replace(/\s+/g, " ").toLowerCase()));
-  const kws = questions.filter((q) => q.t === "kw");
-  assert.equal(kws.length, 123, "每位得主一題");
+  const kws = questions.filter((q) => q.t === "kw" && q.book === "nobel");
+  // 1931 年卡爾費爾特的授獎辭只有「卡爾費爾特的詩」，短語含得主姓名等於洩題，建置略過
+  assert.equal(kws.length, 122, "每位得主一題（卡爾費爾特除外）");
   for (const q of kws) assert.ok(all.some((m) => m.includes(q.s.toLowerCase())), q.s);
 });
 

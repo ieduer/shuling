@@ -1,0 +1,41 @@
+// 愛琴海（古希臘）。名＝大陸通行譯名（繁體字形），tw＝臺灣譯名（不同才填）；en／hint 供 Wikidata 核對作者、年代與知名度。
+// aka＝稱號題的題幹（答案是本人）；fame＝作品定位題的題幹（答案是本作）；chars＝人物（[中文, 英文]）；lines＝名句譯文。
+export default {
+  book: "aegean",
+  people: [
+    { id: "homer", name: "荷馬", en: "Homer", hint: "iliad", aka: ["相傳是位盲詩人、被奉為西方文學源頭的古希臘史詩作者是誰？"] },
+    { id: "hesiod", name: "赫西俄德", en: "Hesiod" },
+    { id: "sappho", name: "薩福", en: "Sappho", genre: "抒情詩", aka: ["被柏拉圖稱為「第十位繆斯」的古希臘女詩人是誰？"] },
+    { id: "aesop", name: "伊索", en: "Aesop", genre: "寓言", aka: ["相傳出身奴隸、以動物故事講道理的古希臘寓言作家是誰？"] },
+    { id: "aeschylus", name: "埃斯庫羅斯", tw: "艾斯奇勒斯", en: "Aeschylus", aka: ["被稱為「悲劇之父」的古希臘劇作家是誰？"] },
+    { id: "sophocles", name: "索福克勒斯", tw: "索福克里斯", en: "Sophocles" },
+    { id: "euripides", name: "歐里庇得斯", tw: "尤里比底斯", en: "Euripides", aka: ["被稱為「舞臺上的哲學家」、最善寫人物內心衝突的古希臘悲劇作家是誰？"] },
+    { id: "aristophanes", name: "阿里斯托芬", en: "Aristophanes", aka: ["被稱為「喜劇之父」的古希臘劇作家是誰？"] },
+    { id: "herodotus", name: "希羅多德", en: "Herodotus", aka: ["被西塞羅稱為「歷史之父」的古希臘作家是誰？"] },
+    { id: "thucydides", name: "修昔底德", en: "Thucydides", aka: ["以嚴謹求真著稱、親身參與並記錄雅典與斯巴達之戰的古希臘史學家是誰？"] },
+    { id: "plato", name: "柏拉圖", en: "Plato", aka: ["主張把模仿的詩人逐出理想城邦的古希臘哲學家是誰？"] },
+    { id: "aristotle", name: "亞里士多德", tw: "亞里斯多德", en: "Aristotle", aka: ["柏拉圖的學生、亞歷山大大帝的老師是誰？"] },
+  ],
+  works: [
+    { id: "iliad", name: "伊利亞特", tw: "伊里亞德", en: "Iliad", by: "homer", genre: "史詩", chars: [["赫克托耳", "Hector"], ["阿伽門農", "Agamemnon"]], lines: ["歌唱吧，女神！歌唱珀琉斯之子阿喀琉斯的憤怒"] },
+    { id: "odyssey", name: "奧德賽", en: "Odyssey", by: "homer", genre: "史詩", chars: [["佩涅洛佩", "Penelope"], ["獨眼巨人波呂斐摩斯", "Polyphemus"]], fame: ["寫英雄攻陷特洛伊後在海上漂泊十年才回到故鄉的史詩是哪一部？"] },
+    { id: "theogony", name: "神譜", en: "Theogony", by: "hesiod", fame: ["系統敘述希臘諸神起源與世系的長詩是哪一部？"] },
+    { id: "worksdays", name: "工作與時日", en: "Works and Days", by: "hesiod", fame: ["以農事勸誡兄弟、講勤勞與正義的古希臘教諭詩是哪一部？"] },
+    { id: "oedipus", name: "俄狄浦斯王", tw: "伊底帕斯王", en: "Oedipus Rex", by: "sophocles", genre: "悲劇", fame: ["弗洛伊德據以命名一種「情結」的古希臘悲劇是哪一部？", "亞里士多德《詩學》推為悲劇典範、主人公追查真相卻發現兇手正是自己的劇作是哪一部？"] },
+    { id: "antigone", name: "安提戈涅", tw: "安蒂岡妮", en: "Antigone", hint: "sophocles", by: "sophocles", genre: "悲劇", fame: ["黑格爾用來說明「城邦法律與神聖親情」衝突的古希臘悲劇是哪一部？"] },
+    { id: "medea", name: "美狄亞", tw: "米蒂亞", en: "Medea", hint: "euripides", by: "euripides", genre: "悲劇", chars: [["伊阿宋", "Jason"]] },
+    { id: "prometheus", name: "被縛的普羅米修斯", en: "Prometheus Bound", by: "aeschylus", genre: "悲劇", fame: ["寫盜火給人類而被宙斯鎖在高加索山崖上的神的悲劇是哪一部？"] },
+    { id: "oresteia", name: "俄瑞斯忒亞", en: "Oresteia", by: "aeschylus", genre: "悲劇", fame: ["唯一完整傳世的古希臘悲劇三部曲是哪一部？"] },
+    { id: "birds", name: "鳥", en: "The Birds", hint: "aristophanes", by: "aristophanes", genre: "喜劇", fame: ["劇中人物在天地之間建起「雲中鵓鴣國」的古希臘喜劇是哪一部？"] },
+    { id: "frogs", name: "蛙", en: "The Frogs", by: "aristophanes", genre: "喜劇", fame: ["酒神下到冥府、讓兩位悲劇詩人比賽高下的古希臘喜劇是哪一部？"] },
+    { id: "histories", name: "歷史", en: "Histories", hint: "herodotus", by: "herodotus", generic: true, fame: ["以希臘與波斯戰爭為主線、被視為西方史學開端的著作是哪一部？"] },
+    { id: "peloponnesian", name: "伯羅奔尼撒戰爭史", en: "History of the Peloponnesian War", by: "thucydides", fame: ["記載雅典與斯巴達之戰、收有伯里克利〈陣亡將士葬禮演說〉的史書是哪一部？"] },
+    { id: "republic", name: "理想國", en: "Republic", hint: "plato", by: "plato", fame: ["以「洞穴之喻」說明認識真理過程的柏拉圖對話是哪一部？"] },
+    { id: "symposium", name: "會飲篇", en: "Symposium", hint: "plato", by: "plato", fame: ["宴席上眾人輪流讚頌愛神厄洛斯的柏拉圖對話是哪一篇？"] },
+    { id: "poetics", name: "詩學", en: "Poetics", hint: "aristotle", by: "aristotle", fame: ["西方第一部系統的文學理論著作是哪一部？"] },
+    { id: "aesopfables", name: "伊索寓言", en: "Aesop's Fables", by: "aesop", genre: "寓言", fame: ["〈狐狸和葡萄〉〈農夫和蛇〉出自哪一部作品？"] },
+  ],
+  groups: [
+    { id: "tragedians", name: "古希臘三大悲劇家", kind: "people", members: ["埃斯庫羅斯", "索福克勒斯", "歐里庇得斯"], pool: ["阿里斯托芬", "荷馬", "赫西俄德", "柏拉圖", "希羅多德", "薩福"] },
+  ],
+};

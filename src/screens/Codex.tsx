@@ -17,11 +17,11 @@ interface Zone {
 }
 
 function zones(): Zone[] {
-  // 九域（七域＋杏壇書院＋龍門貢院）；貢院一域涵蓋北京卷與指考兩冊
+  // 十四域（中文四域、萬國九個海區、真卷殿）
   return REGIONS.filter((r) => r.books.some((b) => bank.books.some((x) => x.id === b))).map((r) => ({ id: r.id, name: r.name, sub: r.sub, img: r.map, books: r.books }));
 }
 
-/** 圖鑑：先選一域（七域＋真題），域內再按稀有度分區，每區先看一頁，想看再翻，不整本往下拉。 */
+/** 圖鑑：先選一域（十四域），域內再按稀有度分區，每區先看一頁，想看再翻，不整本往下拉。 */
 export function Codex() {
   const p = useProgress();
   const zs = useMemo(zones, []);
@@ -138,7 +138,7 @@ export function Codex() {
                 <div className="detail-py">{open.py}</div>
                 <div className={`detail-tier tier-${open.tier}`}>
                   <img className="gem" src={art.gem[open.tier]} alt="" decoding="async" />
-                  {TIER_LABEL[open.tier]} · {openBeast.name} · {open.kind === "person" ? "人靈" : "卷靈"} · {questionsOfCard(open.id).length} 題
+                  {TIER_LABEL[open.tier]} · {openBeast.name} · {open.kind === "person" ? "人靈" : open.kind === "group" ? "合璧" : open.kind === "term" ? "論靈" : "卷靈"} · {questionsOfCard(open.id).length} 題
                 </div>
                 <div className="detail-stats">{openStat ? `答對 ${openStat.ok} · 答錯 ${openStat.bad}${openStat.masteredAt ? " · 已收服" : ""}` : "尚未遇見"}</div>
                 {open.lists.length > 0 && <div className="detail-lists">{open.lists.join(" · ")}</div>}

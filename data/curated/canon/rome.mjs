@@ -1,0 +1,31 @@
+// 七丘（古羅馬）。欄位說明見 aegean.mjs。
+export default {
+  book: "rome",
+  people: [
+    { id: "virgil", name: "維吉爾", tw: "魏吉爾", en: "Virgil", aka: ["在《神曲》中引導但丁遊歷地獄與煉獄的古羅馬詩人是誰？"] },
+    { id: "ovid", name: "奧維德", en: "Ovid", aka: ["因觸怒奧古斯都而被流放黑海之濱的古羅馬詩人是誰？"] },
+    { id: "horace", name: "賀拉斯", en: "Horace", aka: ["寫下「及時行樂」（carpe diem）一語的古羅馬詩人是誰？"] },
+    { id: "lucretius", name: "盧克萊修", en: "Lucretius", aka: ["以長詩闡述伊壁鳩魯原子論的古羅馬詩人是誰？"] },
+    { id: "cicero", name: "西塞羅", en: "Cicero", aka: ["被譽為古羅馬最偉大演說家、其文體成為拉丁散文典範的是誰？"] },
+    { id: "seneca", name: "塞內加", en: "Seneca the Younger", hint: "stoic", aka: ["斯多亞派哲學家、曾任尼祿老師的古羅馬悲劇作家是誰？"] },
+    { id: "aurelius", name: "馬可·奧勒留", tw: "馬可·奧理略", en: "Marcus Aurelius", hint: "emperor", aka: ["被稱為「哲學家皇帝」、在軍營中以希臘文寫下隨想的羅馬皇帝是誰？"] },
+    { id: "augustine", name: "奧古斯丁", en: "Augustine of Hippo", aka: ["北非希波主教、以自傳回顧自己皈依歷程的基督教思想家是誰？"] },
+    { id: "apuleius", name: "阿普列烏斯", en: "Apuleius", aka: ["北非出身、以拉丁文寫成人變驢奇遇小說的羅馬作家是誰？"] },
+  ],
+  works: [
+    { id: "aeneid", name: "埃涅阿斯紀", tw: "伊尼亞德", en: "Aeneid", by: "virgil", genre: "史詩", chars: [["狄多", "Dido"]], fame: ["寫特洛伊英雄流亡義大利、被視為羅馬民族史詩的作品是哪一部？"] },
+    { id: "eclogues", name: "牧歌", en: "Eclogues", by: "virgil" },
+    { id: "georgics", name: "農事詩", en: "Georgics", by: "virgil" },
+    { id: "metamorphoses", name: "變形記", en: "Metamorphoses", hint: "ovid", by: "ovid", fame: ["以約二百五十個神話故事寫人與神「變形」的拉丁長詩是哪一部？"], chars: [["那喀索斯", "Narcissus"]] },
+    { id: "arsamatoria", name: "愛的藝術", en: "Ars Amatoria", by: "ovid", fame: ["奧維德教人戀愛技巧、據說是他遭流放原因之一的長詩是哪一部？"] },
+    { id: "arspoetica", name: "詩藝", en: "Ars Poetica", hint: "horace", by: "horace", fame: ["以書信體寫成、又稱〈致皮索父子書〉的古羅馬詩論是哪一部？"] },
+    { id: "rerumnatura", name: "物性論", en: "De rerum natura", by: "lucretius" },
+    { id: "deoratore", name: "論演說家", en: "De Oratore", by: "cicero", fame: ["西塞羅以對話體論述雄辯者應有何種學識與修養的著作是哪一部？"] },
+    { id: "moralletters", name: "道德書簡", en: "Moral Letters to Lucilius", by: "seneca", fame: ["塞內加寫給友人路西里烏斯、談斯多亞哲學的一百多封書信是哪一部？"] },
+    { id: "meditations", name: "沉思錄", en: "Meditations", by: "aurelius" },
+    { id: "confessions", name: "懺悔錄", en: "Confessions", hint: "augustine", by: "augustine", fame: ["以向上帝禱告的口吻回顧青年放蕩與皈依、常被視為西方第一部自傳的作品是哪一部？"], lines: ["你造我們是為了你，我們的心如不安息在你懷中，便不會安寧"] },
+    { id: "cityofgod", name: "上帝之城", en: "The City of God", by: "augustine", fame: ["羅馬城被西哥特人攻陷後、為基督教辯護並對比「地上之城」的著作是哪一部？"] },
+    { id: "goldenass", name: "金驢記", en: "The Golden Ass", by: "apuleius", fame: ["唯一完整傳世的古羅馬長篇小說是哪一部？"] },
+  ],
+  groups: [],
+};

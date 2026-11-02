@@ -460,5 +460,54 @@
   "w": 896,
   "h": 1536,
   "seed": 110187
+ },
+ {
+  "name": "map-wen",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: an ancient Chinese academy of learning on a riverside: tiled-roof halls with open bamboo-slip scrolls drying on racks, a stone stele forest, an apricot-blossom lecture terrace, a library pavilion beside a stone bridge. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110201
+ },
+ {
+  "name": "map-shuo",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a lantern-lit Chinese opera and storyteller town: an open-air theatre stage with red lanterns, teahouses with balconies, a garden with peonies and a moon gate, a willow-lined canal with painted boats. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110202
+ },
+ {
+  "name": "map-xin",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: an early twentieth-century harbour city at dawn: a waterfront of brick and stone buildings, a clock tower, a printing house with stacks of newspapers, a tram line, small steamships at the wharf. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110203
+ },
+ {
+  "name": "map-east",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a desert-and-river land of the ancient East: a ziggurat by a great river, a domed palace with tiled arches, a lotus pond before a carved Indian temple, palm trees and a caravan of camels under a crescent moon. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110204
+ },
+ {
+  "name": "map-europe",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a medieval and Renaissance European valley: a Gothic cathedral with stained-glass windows, a walled hill town with towers, a round wooden theatre, a windmill on a plain, vineyards along a winding road. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110205
+ },
+ {
+  "name": "map-c19",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a nineteenth-century European landscape: misty lakes and hills with a country manor, a city of mansard roofs and gas lamps by a river, a steam train crossing a stone viaduct, a snowy birch forest with a troika far away. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110206
+ },
+ {
+  "name": "map-modern",
+  "prompt": "Fantasy game world map region, hand-painted ink and color on pale celadon silk, three-quarter top-down view: a dreamlike modern labyrinth city: winding streets that fold into each other, floating staircases, a clock with melting hands, a lighthouse, a train station under a starry sky, endless bookshelves rising like towers. A winding glowing path of silver light snakes from the bottom edge to the top edge of the picture. Soft mist, magical atmosphere, no text, no calligraphy, no seal stamps, no labels, no letters",
+  "w": 896,
+  "h": 1536,
+  "seed": 110207
  }
 ]

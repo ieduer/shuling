@@ -1,4 +1,4 @@
-/** 旅程：七冊融成一張連續地圖（七域），每課一關；關卡沿各域的蜿蜒路徑分佈，位置由課文 id 固定決定。 */
+/** 旅程：十四冊融成一張連續地圖（十四域），每課一關；關卡沿各域的蜿蜒路徑分佈，位置由課文 id 固定決定。 */
 import { bank } from "./bank";
 import { REGIONS, type Region } from "./art";
 import type { Progress } from "./progress";
