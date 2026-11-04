@@ -1,12 +1,13 @@
 # Project State
 
-Last updated: 2026-11-04 (task `bank-fix-shuling-20261104`)
+Last updated: 2026-11-04 (task `shuling-exam-fix-20261104`)
 
-Current version: live at https://shuling.bdfz.net — source `2044739` (ieduer/shuling main, public), Worker `shuling` deployment `35306b2b` / version `be3d8d48` (bank `7c11881db8b4`: bank-QA fixes, 1,301 cards / 3,664 questions; rollback version `19e295fa` / deployment `9e4a9688`, source `42714cf`), D1 `shuling-db` `efec6261`. Accepted 2026-11-04T02:45Z, effective 02:43Z (evidence `_meta/reports/operations/bank-fix-shuling-20261104/`, Status `20261104-shuling-bank-fix`). Previous: 北京卷 analysis `42714cf` / `19e295fa`, accepted 2026-11-02T03:16Z (`_meta/reports/operations/shuling-bj-reasoning-20261102/`, Status `20261102-shuling-beijing-reasoning`); 北京卷 `caa83b3` / `e08e6d23`; core canon `c1ef85d` / `18a20083`. First release 2026-11-01 (registry project `shuling-bdfz-net`).
+Current version: live at https://shuling.bdfz.net — source `53b212d` (ieduer/shuling main, public), Worker `shuling` deployment `36bb32ea` / version `18245fd3` (bank `4a82977f478e`: 真卷殿 figures and 畫線 note, 1,301 cards / 3,664 questions; rollback version `be3d8d48` / deployment `35306b2b`, source `2044739`), D1 `shuling-db` `efec6261`. Accepted 2026-11-04T03:16Z, effective 03:14Z (evidence `_meta/reports/operations/shuling-exam-fix-20261104/`, Status `20261104-shuling-exam-fix`). Previous: bank-QA fixes `2044739` / `be3d8d48`, effective 2026-11-04T02:43Z (`_meta/reports/operations/bank-fix-shuling-20261104/`, Status `20261104-shuling-bank-fix`); 北京卷 analysis `42714cf` / `19e295fa`; 北京卷 `caa83b3` / `e08e6d23`; core canon `c1ef85d` / `18a20083`. First release 2026-11-01 (registry project `shuling-bdfz-net`).
 
 Current objective: core-canon edition (owner 2026-11-01) — the bank is the most important content and key questions of human literature; title→author only for titles that identify one poem.
 
 Completed work:
+- 2026-11-04 真卷殿 leftovers (task `shuling-exam-fix-20261104`): 指考 93 第 6 題 and 96 第 11 題 now carry their original-paper figures (cropped unedited from the official CEEC PDFs by `scripts/fetch/exam_figures.mjs`, shown under the stem, linked to the PDF; the build fails if an exam item mentions 見圖／附圖 without one); 北京卷 2008 第 5 題 gets a labelled 畫線處 note from gk's 题面标记说明 (`bj_exams.mjs` `MARKS`); 真題 stems keep line breaks. Six suspected passage typos checked against the papers: all printed so, unchanged (2025 「忠言」 also matches 《全宋詩》). 《塊肉餘生錄》《分崩離析》 confirmed as Taiwan titles. No option, answer, key or qid change. Tests 154/154.
 - 2026-11-04 bank-QA fixes (task `bank-fix-shuling-20261104`, owner 「全面核查並解決」): 112 items confirmed by the two-round model review; 94 of the 100 self-written items fixed after item-by-item judgement (generic build rules + data tables + qid-keyed `data/curated/qa-fixes.mjs`), 4 judged not wrong, 2 unverified translation titles left; 6 cross-century questions dropped (3,664 questions). 真題 unchanged.
 - Project scaffold forked from 字靈收服 `4b6013c` (engine, UI, Worker, migrations renumbered 0001–0004, tests).
 - Strict content pipeline `scripts/build-bank.mjs`: source registry, fact → question templates, deterministic hard distractors, tiers by evidence (Wikidata sitelinks for laureates, textbook presence for poems), stages, 字靈-compatible outputs.
@@ -25,7 +26,7 @@ Pending work:
 - 通人 final gate (十一域全通＋論衡殿) replaces the P1 stand-in (all questions answered correctly) in P4.
 
 Known problems:
-- Bank-QA leftovers (2026-11-04 report): 指考 93 and 96 need their original figures (unanswerable without them); six 真題 passages have suspected transcription typos and one 北京卷 item lost its underline marks — check against the papers; Taiwan titles 《塊肉餘生錄》 and 《分崩離析》 unverified.
+- Closed 2026-11-04 (`shuling-exam-fix-20261104`): the bank-QA leftovers (figures, typo suspects, 2008 畫線, Taiwan titles). The 畫線 note relies on gk's annotation, which gk itself marks as checked against a public re-typeset page, not the printed paper.
 - Official Nobel API maps J. M. G. Le Clézio to a Wikidata item that is a letter, not the author; the build ignores it (no language/work facts for him) and reports `NOBEL-WIKIDATA-MISMATCH`.
 - 字靈's own `package-lock.json` is out of sync with its package.json (`@emnapi/wasi-threads` 1.2.2 vs 1.2.3), so `npm ci` fails there; 書靈 regenerated its own lockfile with `npm install`.
 
