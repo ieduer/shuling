@@ -126,3 +126,32 @@ test("長名號字級：五字以上總寬不超過四字詞（球內單行不�
   const width = (w) => glyphPx(w, base) * Array.from(w).length;
   for (const c of meta.cards) assert.ok(width(c.w) <= width("一二三四") + 1, `${c.w} ${width(c.w)}`);
 });
+
+// 2026-11-04 題目審校（bank-fix-shuling-20261104）的回歸檢查
+import T2S_FILE from "../scripts/lib/t2s-chars.json" with { type: "json" };
+const T2S = T2S_FILE.map;
+const han = (s) => Array.from(String(s)).map((c) => T2S[c] || c).join("").replace(/[^\p{Script=Han}]/gu, "");
+const optKey = (s) => (/[0-9A-Za-z]/.test(String(s)) ? String(s).replace(/[\s《》〈〉]/g, "") : han(s));
+
+test("審校：自編題沒有繁簡同名的兩個選項（李商隱／李商隐）", () => {
+  for (const q of questions.filter((x) => x.t !== "exam")) {
+    const keys = q.opts.map((o) => optKey(o.split("（")[0]));
+    assert.equal(new Set(keys).size, 4, `${q.id} ${q.opts.join(" / ")}`);
+  }
+});
+
+test("審校：篇與所屬集子不同題出現，合著者與人物也見於的作品不當干擾項", () => {
+  const pairs = [["q-1ece87c22eb2", "《呐喊》"], ["q-11c79fb6bff4", "《呐喊》"], ["q-6bf217a8eaa7", "《彷徨》"], ["q-e1c95ceb0b77", "《人間喜劇》"], ["q-ae08225033df", "《人間喜劇》"], ["q-3e3eb1cfd15a", "《礼记》"], ["q-1333da4cdea8", "《奧德賽》"], ["q-b3c594b4da17", "《奧德賽》"], ["q-ebf888dfcab0", "《摩訶婆羅多》"], ["q-1b42973d5794", "《新生》"], ["q-f9246fa97a77", "《小酒店》"], ["q-afd5ef53a939", "〈受戒〉"], ["q-dbd9dfc47804", "《一樁事先張揚的兇殺案》（《預知死亡紀事》）"], ["q-05c4f1cea764", "柯勒律治（柯立芝）"], ["q-b402eca59979", "《玉台新咏》"], ["q-b9457a801372", "物語"], ["q-890f6959ca1c", "传奇"], ["q-de58a24ca3be", "近現代"], ["q-a194f8425270", "元"]];
+  for (const [id, bad] of pairs) {
+    const q = byId.get(id);
+    assert.ok(q, id);
+    assert.ok(!q.opts.includes(bad), `${id} still offers ${bad}`);
+  }
+});
+
+test("審校：編纂類典籍不問「作者」，選本字句有誤的名句題面用通行本", () => {
+  assert.equal(byId.get("q-e49bee234606").stem, "《战国策》是由誰整理編訂的？");
+  assert.equal(byId.get("q-df9e96c0b7c8").s, "月落烏啼霜滿天，江楓漁火對愁眠");
+  assert.ok(byId.get("q-df9e96c0b7c8").why.includes("所據底本作"));
+  for (const id of ["q-7628732a88b7", "q-862083a1d413", "q-9c023a44be9e", "q-6500db16900c", "q-6053cc0247d2", "q-676b771f7df0"]) assert.ok(!byId.has(id), `${id} (ambiguous century) is dropped`);
+});

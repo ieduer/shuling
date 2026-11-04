@@ -1,22 +1,22 @@
 {
- "builtAt": "2026-11-02",
+ "builtAt": "2026-11-04",
  "sources": {
   "data/raw/nobel/prizes-lit.json": "e9e02082e91976d1b5f0c761c3f659e0cfa114fafc862678f049055cad35f126",
   "data/raw/nobel/laureates-lit.json": "fe42e005dbd62beb5ac839603b5a4a7be643a41d71b5501156b3f843338337b8",
   "data/raw/wikidata/nobel-lit-laureates.json": "b1c62bb0edf4ac35d2e56befd1ea4d28f9bf0bb4e8a1817d36bb69ba7d3d1e68",
   "data/curated/nobel.tsv": "fa1c21c16c45aacbecf13f2acad6d45f0dcfc988b51b910cb26762e24101b7c2",
-  "data/curated/canon/shi.mjs": "a779bcff19150682687d4e0e0c88980241a230e8f56ec0816c910fc2eb949dc1",
-  "data/curated/canon/wen.mjs": "a5499409311b832f3c4ee84579c0ff75b4d090a23b9fa1e0944522cc857a8f17",
-  "data/curated/canon/shuo.mjs": "97d53eb1e528fefe8a93e646c74fefa50bc65a182bd797ca615568814f95b567",
-  "data/curated/canon/xin.mjs": "66a3a24797c10d02624c7103b37cb50cbb0a242d8b2fc750d555a6106cf5baa2",
-  "data/curated/canon/aegean.mjs": "20a3c130293418c2c04511bb2d960da58908c8ddee2a11a9a1e1770bc3c5dfbb",
-  "data/curated/canon/rome.mjs": "6b342671d21b2d40083136ff40f9c904889fe5040968b2806d532f8df0f7763b",
-  "data/curated/canon/east.mjs": "98b1de8837dda266932e232979537b7356ba5176f696f80676ae02c7e6f62480",
-  "data/curated/canon/europe.mjs": "86076a3a4344e9b77c5fefad7ef5595d86fe6978f347d547489327f4709a9132",
-  "data/curated/canon/c19.mjs": "c6b2302ca5cf9f7136d8e4dbdf1883298a7a7d3e34fad401ad9e87c277b8657b",
-  "data/curated/canon/modern.mjs": "a252faf07d0294189064b1210cae426e8a59502c20a039e48e8e515ff82015f7",
-  "data/curated/canon/fusang.mjs": "387c8435a0b614e06d439e636411f711d2b17641ef124dd0e02854e7df9e27e8",
-  "data/curated/canon/schools.mjs": "fe8aa477491571f5e139c9c627f5f302ccc99f0620e28f9d12533aefc3fda302",
+  "data/curated/canon/shi.mjs": "2849b894ebeabdc176055ac61e18f4ce8986dbc2717abbb62716dc780a4b6d9f",
+  "data/curated/canon/wen.mjs": "496a089e316aae52e33c29078dd781d1d13144222319f05dfbfd30b4ed17882e",
+  "data/curated/canon/shuo.mjs": "83e25a9d6a1f886ae6276702996f40b35b29f658c662c3a05794c1d826d11b80",
+  "data/curated/canon/xin.mjs": "7b37955a93f91cb6fa121d07b93ea7286ee63ae3a60512eb2a9df08bdbb1d3d8",
+  "data/curated/canon/aegean.mjs": "6aef3e46137a52beda10678e6d67b859e2db318e7388f942c01280a14d25c0e6",
+  "data/curated/canon/rome.mjs": "8cfd676c414bc050cc650dabea1aa0dc6fd1987b7dfc4bb0f83e4393e4bc4fe9",
+  "data/curated/canon/east.mjs": "f7c1cf31851ed9a27890c5ccb5fbd731e2e44aa17fde7e189a4701da232cf534",
+  "data/curated/canon/europe.mjs": "57500d888c7da4a4c19524807e5fc0c010038b5fa2feff76ef052f45be6ec034",
+  "data/curated/canon/c19.mjs": "3a09814ba9dfe09523f9f0e2e4150d19077d934859bd43ff4ad2140f75dbfbad",
+  "data/curated/canon/modern.mjs": "7a8d61bff41d0abc6b781b68440f05857cf6b6ab0babb8527871e8eae9fb6612",
+  "data/curated/canon/fusang.mjs": "51d31452272c2b555d07ee1a2290cae4f0dfb3a1df41118124a864aceef23b42",
+  "data/curated/canon/schools.mjs": "69d140ab952ba0b33fe5f213c924f84e7a9d72060d7c5ef134803717930ae8fd",
   "data/raw/wikidata/canon.json": "97a5f1e09ab4cbcdd8f388cccbef17e804e8900c032b4d034986ea167b3fef81",
   "data/raw/chinese-poetry/anthologies.json": "5ddadb6bdc0e79a8c8c81d6a573baad13eb1564a9492bd717f959e5c149c2360",
   "data/raw/chinese-poetry/canon-extra.json": "7542ea728a77a43892ec70be8516b5a7d06b45a65758bb07a468c0565ee7ae9c",
@@ -25,7 +25,7 @@
   "data/raw/recite/recite-ms.json": "6a483845ca2e15c0689def18f1d996c5136d2875ad8b874feca5137e38b0986d",
   "data/raw/recite/recite-gk.json": "ee7c6486c8f14eb8f558d50e6acc45ecc0e7c45714ed42d39c8734c0ed64d7a0"
  },
- "codeDigest": "fc032b3ed62c15da19eda0cd97bb094313d7c546aa601e101642c7daf3d6a7e2",
+ "codeDigest": "8c1a3cf31db6c9787c237fb9d92c06d4512b8d496d001116d590382b1bcafc1c",
  "coverage": {
   "canon": {
    "wikidataPeople": 160,
@@ -53,7 +53,7 @@
    },
    "aegean": {
     "cards": 30,
-    "questions": 86
+    "questions": 85
    },
    "rome": {
     "cards": 22,
@@ -61,11 +61,11 @@
    },
    "east": {
     "cards": 28,
-    "questions": 80
+    "questions": 77
    },
    "europe": {
     "cards": 63,
-    "questions": 213
+    "questions": 212
    },
    "c19": {
     "cards": 148,
@@ -77,7 +77,7 @@
    },
    "fusang": {
     "cards": 67,
-    "questions": 158
+    "questions": 157
    },
    "nobel": {
     "cards": 123,

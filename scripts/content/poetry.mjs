@@ -155,7 +155,8 @@ function build(root, problems, C, rd) {
       part = (src.note || "").split("·")[0];
     } else if (src.file?.includes("chuci")) collection = "楚辞";
     else if (/古诗十九首|古詩十九首/.test(src.title)) collection = "古诗十九首";
-    works.push({ title: src.title, display, author, anon: !author, dynasty: src.era, era: e.era || src.era, text: src.text, lines: e.lines, pop: e.pop || {}, note: e.note || "", srcIds: new Set([src.srcId]), textbook: false, collection, part, sub: e.sub || "" });
+    // dyn＝選本標錯朝代時的更正（馮延巳在唐詩語料裡，實為五代南唐）
+    works.push({ title: src.title, display, author, anon: !author, dynasty: e.dyn || src.era, era: e.era || src.era, text: src.text, lines: e.lines, pop: e.pop || {}, note: e.note || "", srcIds: new Set([src.srcId]), textbook: false, collection, part, sub: e.sub || "" });
   }
 
   // ── 題名分類 ──

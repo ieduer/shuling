@@ -44,9 +44,12 @@ export async function loadCanon(root, problems, nobelCards) {
       if (world) rec ? stats.wikidataWorks++ : stats.editorialWorks++;
       const author = w.by ? nameOfBy(w.by) : "";
       if (w.by && !byId.has(w.by) && !nobelByName.has(w.by) && world) problems.push(`CANON-AUTHOR-UNKNOWN ${book}:${w.id || w.name} ${w.by}`);
+      const yearProp = rec ? (rec.P577[0] ? "P577" : rec.P571[0] ? "P571" : "") : "";
       const year = rec ? yearOf(rec.P577[0] || rec.P571[0]) : null;
       const short = (book === "xin" && XIN_SHORT.has(w.name)) || (book === "shuo" && w.dyn === "唐");
-      works.push({ ...w, author, authorAlt: w.by ? altOfBy(w.by) : "", rec, year, short, chars: (w.chars || []).map((c) => (Array.isArray(c) ? c : [c, ""])) });
+      // also＝合著者（人物 id 或人名）：作者題改問「作者之一」，合著者不當干擾項
+      const alsoNames = (w.also || []).map(nameOfBy);
+      works.push({ ...w, author, authorAlt: w.by ? altOfBy(w.by) : "", alsoNames, rec, year, yearProp, short, chars: (w.chars || []).map((c) => (Array.isArray(c) ? [c[0], c[1] || "", c[2] || []] : [c, "", []])) });
     }
     // 文淵：課本篇目（逐字核對名句）與典籍
     if (book === "wen") {
@@ -68,9 +71,9 @@ export async function loadCanon(root, problems, nobelCards) {
           else (b.excerptLines ||= []).push(...lines.map((line) => ({ line, piece: title })));
           continue;
         }
-        works.push({ name: title, author: t.by || "", src: t.src || "", lines, chars: [], textbook: true, gk: gkTitles.has(title), short: true });
+        works.push({ name: title, author: t.by || "", src: t.src || "", lines, chars: [], textbook: true, gk: gkTitles.has(title), short: true, alsoNames: [] });
       }
-      for (const b of M.books) works.push({ name: b.name, author: b.by || "", genre: "", tiGenre: b.genre || "", school: b.school || "", fame: b.fame || [], lines: [], excerptLines: b.excerptLines || [], chars: [], isBook: true });
+      for (const b of M.books) works.push({ name: b.name, author: b.by || "", role: b.role || "", roleNote: b.roleNote || "", in: b.in || "", genre: "", tiGenre: b.genre || "", school: b.school || "", fame: b.fame || [], lines: [], excerptLines: b.excerptLines || [], chars: [], isBook: true, alsoNames: [] });
     }
     // 題名重複（本冊內）
     const seen = new Map();
@@ -83,11 +86,12 @@ export async function loadCanon(root, problems, nobelCards) {
       if (w.textbook) S.push(w.gk ? "recite-gk" : "recite-ms");
       if (w.author) facts.push({ p: "work_author", o: w.author, alt: w.authorAlt, src: S });
       if (w.src) facts.push({ p: "work_src", o: w.src, src: S });
-      for (const [zh, en] of w.chars) {
+      for (const [zh, en, also] of w.chars) {
         const ok = w.rec?.chars ? w.rec.chars[zh] : undefined;
         if (ok) stats.charsConfirmed++;
         else stats.charsEditorial++;
-        facts.push({ p: "work_char", o: zh, en, wd: !!ok, src: S });
+        // also＝這個人物也出現的其他作品（不當干擾項，免得一題兩解）
+        facts.push({ p: "work_char", o: zh, en, wd: !!ok, also, src: S });
       }
       for (const l of w.lines || []) facts.push({ p: "work_line", o: l, src: S });
       for (const x of w.excerptLines || []) facts.push({ p: "work_line", o: x.line, piece: x.piece, src: [...S, "recite-ms", "recite-gk"] });
@@ -97,10 +101,11 @@ export async function loadCanon(root, problems, nobelCards) {
       if (w.school) facts.push({ p: "book_school", o: w.school, src: S });
       if (w.country) facts.push({ p: "work_country", o: w.country, src: S });
       if (w.dyn) facts.push({ p: "work_dyn", o: w.dyn, src: S });
-      if (CENTURY_BOOKS[book] && w.year && w.year < CENTURY_BOOKS[book]) facts.push({ p: "work_century", o: centuryLabel(w.year), year: w.year, src: ["wikidata-canon"] });
+      // 成書世紀：century＝編輯核定的世紀（覆蓋 Wikidata 年代），dated＝解析用的年代說明；century: false＝年代跨世紀或說法不一，不出題
+      if (CENTURY_BOOKS[book] && w.century !== false && (w.century || (w.year && w.year < CENTURY_BOOKS[book]))) facts.push({ p: "work_century", o: w.century || centuryLabel(w.year), year: w.year, yearProp: w.yearProp, dated: w.dated || "", src: w.century ? ["curated-canon", "wikidata-canon"] : ["wikidata-canon"] });
       const id = `cw-${book}-${h(w.id || w.name)}`;
       w.cardId = id;
-      cards.push({ id, book, kind: "work", name: w.name, alt: w.tw || "", en: w.en || w.rec?.labels?.en || "", author: w.author, authorAlt: w.authorAlt, dyn: w.dyn || "", country: w.country || "", year: w.year, short: !!w.short, isBook: !!w.isBook, textbook: !!w.textbook, gk: !!w.gk, generic: !!w.generic, qid: w.rec?.qid || "", url: w.rec?.qid ? `https://www.wikidata.org/wiki/${w.rec.qid}` : "", prominence: w.rec?.sitelinks ?? (w.textbook ? (w.gk ? 60 : 50) : w.isBook ? 50 : 30), facts, srcIds: S });
+      cards.push({ id, book, kind: "work", name: w.name, alt: w.tw || "", qual: w.qual || "", also: w.alsoNames || [], role: w.role || "", roleNote: w.roleNote || "", in: w.in || "", dynAlso: w.dynAlso || [], en: w.en || w.rec?.labels?.en || "", author: w.author, authorAlt: w.authorAlt, dyn: w.dyn || "", country: w.country || "", year: w.year, short: !!w.short, isBook: !!w.isBook, textbook: !!w.textbook, gk: !!w.gk, generic: !!w.generic, qid: w.rec?.qid || "", url: w.rec?.qid ? `https://www.wikidata.org/wiki/${w.rec.qid}` : "", prominence: w.rec?.sitelinks ?? (w.textbook ? (w.gk ? 60 : 50) : w.isBook ? 50 : 30), facts, srcIds: S });
     }
 
     // ── 人物 ──
@@ -120,7 +125,7 @@ export async function loadCanon(root, problems, nobelCards) {
         problems.push(`CANON-PERSON-FOLDED ${book}:${p.id || p.name} (${facts.length} fact)`);
         continue;
       }
-      cards.push({ id, book, kind: "person", name: p.name, alt: p.tw || "", en: p.en || "", country: p.country || "", era: p.era || "", qid: rec?.qid || "", url: rec?.qid ? `https://www.wikidata.org/wiki/${rec.qid}` : "", prominence: rec?.sitelinks ?? 30 + mine.length * 10 + (p.aka || []).length * 5, facts, works: mine.map((w) => w.name), srcIds: src });
+      cards.push({ id, book, kind: "person", name: p.name, alt: p.tw || "", en: p.en || "", country: p.country || "", era: p.era || "", eraAlso: p.eraAlso || [], qid: rec?.qid || "", url: rec?.qid ? `https://www.wikidata.org/wiki/${rec.qid}` : "", prominence: rec?.sitelinks ?? 30 + mine.length * 10 + (p.aka || []).length * 5, facts, works: mine.map((w) => w.name), srcIds: src });
     }
 
     // ── 並稱、流派 ──
@@ -142,7 +147,7 @@ export async function loadCanon(root, problems, nobelCards) {
         else facts.push({ p: "term_quote", o: excerpt(piece.text, q), piece: piece.title, src: ["curated-canon", gkTitles.has(piece.title) ? "recite-gk" : "recite-ms"] });
       }
       if (facts.length < 2) problems.push(`CANON-TERM-THIN ${t.name}`);
-      cards.push({ id: `ct-${book}-${h(t.name)}`, book, kind: "term", name: t.name, termKind: t.kind || "theory", by: t.by || "", in: t.in || "", prominence: t.kind === "form" ? 45 : 40, facts, srcIds: ["curated-canon"] });
+      cards.push({ id: `ct-${book}-${h(t.name)}`, book, kind: "term", name: t.name, termKind: t.kind || "theory", by: t.by || "", byVerb: t.byVerb || "", in: t.in || "", prominence: t.kind === "form" ? 45 : 40, facts, srcIds: ["curated-canon"] });
     }
   }
   return { cards, stats, titleKey };
