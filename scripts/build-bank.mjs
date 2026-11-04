@@ -59,6 +59,20 @@ const EXAMS = [
   { key: "tw", file: "data/raw/exams/tw-literature.json", src: "tw-exams", id: (y) => `ex-${y}`, name: (labels) => (labels.length > 1 ? `指考 ${labels[0]}–${labels[labels.length - 1]}` : `指考 ${labels[0]}`) },
   { key: "bj", file: "data/raw/exams/bj-literature.json", src: "bj-exams", id: (y) => `ex-bj-${y}`, name: (labels, years) => (years.length > 1 ? `北京卷 ${years[0]}–${years[years.length - 1]}` : `北京卷 ${years[0]}`) },
 ];
+// 指考附圖（scripts/fetch/exam_figures.mjs 從原卷 PDF 裁出）：題文提到圖（「見圖」「附圖」）就必須有附圖，否則無法作答、建置失敗
+const FIGS = JSON.parse(fs.readFileSync(path.join(root, "data/raw/exams/tw-figures.json"), "utf8")).figures;
+const usedFig = new Set();
+const figOf = (q) => {
+  const needs = /見圖|附圖/.test(q.stem + q.passage + q.options.map((o) => o.text).join(""));
+  const rec = q.exam === "tw" ? FIGS[q.id] : undefined;
+  if (needs && !rec) problems.push(`EXAM-FIGURE-MISSING ${q.id}`);
+  if (!rec) return null;
+  usedFig.add(q.id);
+  const p = path.join(root, rec.file);
+  if (!fs.existsSync(p) || sha(fs.readFileSync(p)) !== rec.sha256) problems.push(`EXAM-FIGURE-SHA ${q.id} ${rec.file}`);
+  if (rec.src !== `/${rec.file.replace(/^public\//, "")}`) problems.push(`EXAM-FIGURE-SRC ${q.id} ${rec.src}`);
+  return { fig: [{ src: rec.src, alt: rec.alt, cap: rec.caption, w: rec.width, h: rec.height }], figSource: { label: `原卷附圖（大學入學考試中心原卷 PDF 第 ${rec.page} 頁）`, url: rec.pdf_url, role: "figure" } };
+};
 const examCards = [];
 for (const E of EXAMS) {
   const data = JSON.parse(fs.readFileSync(path.join(root, E.file), "utf8"));
@@ -407,7 +421,8 @@ for (const c of examCards) {
     }
     const others = q.options.filter((o) => o.key !== q.answer).map((o) => o.text);
     // 原卷選項字母（與 opts 同序）：真題照原卷次序、標 A–D，解析與答案裡的字母才對得上
-    const keys = { keys: [q.answer, ...q.options.filter((o) => o.key !== q.answer).map((o) => o.key)] };
+    const fg = figOf(q);
+    const keys = { keys: [q.answer, ...q.options.filter((o) => o.key !== q.answer).map((o) => o.key)], ...(fg ? { fig: fg.fig } : {}) };
     if (q.exam === "bj") {
       // 北京卷沒有公開的官方答案；用高考站答案核查表（學習參考），解析裡照實說明
       // 延伸只列快照裡的原文與辭書條目（題面、答案出處的核對紀錄不給讀者看）
@@ -416,9 +431,10 @@ for (const c of examCards) {
       if (q.reasoning) refs.push({ label: `高考站 AI 參考解析（${q.reasoning.model}${q.reasoning.excerpt ? "，節錄" : ""}）`, role: "analysis", note: q.reasoning.text, lang: "zh-Hans" });
       else problems.push(`EXAM-REASONING-MISSING ${q.id}`);
       add(c, f, "exam", q.stem, q.passage, ans.text, others, `${q.year_label}${q.q_num ? `第 ${q.q_num} 題` : ""}，參考答案（${q.answer}）：${ans.text.replace(/[。.]$/, "")}。答案取自高考站北京卷答案核查表：依公開解析與覆核整理的學習參考，原考試機構答案的出版來源未能核實。`, refs, keys);
-    } else add(c, f, "exam", q.stem, q.passage, ans.text, others, `指考${q.year_label}第 ${q.q_num} 題，官方答案（${q.answer}）：${ans.text}。`, q.answer_source ? [{ label: "官方答案原檔", url: q.answer_source, role: "official" }] : [], keys);
+    } else add(c, f, "exam", q.stem, q.passage, ans.text, others, `指考${q.year_label}第 ${q.q_num} 題，官方答案（${q.answer}）：${ans.text}。`, [...(q.answer_source ? [{ label: "官方答案原檔", url: q.answer_source, role: "official" }] : []), ...(fg ? [fg.figSource] : [])], keys);
   }
 }
+for (const id of Object.keys(FIGS)) if (!usedFig.has(id)) problems.push(`EXAM-FIGURE-UNUSED ${id}`);
 
 // 人名選項並列臺灣譯名（加繆（卡繆）），兩岸讀者都認得；題幹與解析不動
 const altOf = new Map(cards.filter((c) => c.kind === "person" && c.alt).map((c) => [c.name, c.alt]));
@@ -569,7 +585,7 @@ fs.rmSync(chunkDir, { recursive: true, force: true });
 fs.mkdirSync(chunkDir, { recursive: true });
 fs.writeFileSync(path.join(chunkDir, `meta.${v}.json`), JSON.stringify(meta) + "\n");
 for (const b of BOOKS) {
-  const qs = questions.filter((q) => q.book === b.id).map((q) => ({ id: q.id, c: q.c, t: q.t, stem: q.stem, s: q.s, opts: q.opts, ...(q.keys ? { keys: q.keys } : {}), why: q.why, src: q.src, sources: q.sources, diff: 0.5, region: b.region, book: q.book }));
+  const qs = questions.filter((q) => q.book === b.id).map((q) => ({ id: q.id, c: q.c, t: q.t, stem: q.stem, s: q.s, opts: q.opts, ...(q.keys ? { keys: q.keys } : {}), ...(q.fig ? { fig: q.fig } : {}), why: q.why, src: q.src, sources: q.sources, diff: 0.5, region: b.region, book: q.book }));
   fs.writeFileSync(path.join(chunkDir, `${b.id}.${v}.json`), JSON.stringify({ v, book: b.id, q: qs }) + "\n");
 }
 fs.mkdirSync(path.join(root, "src/data"), { recursive: true });

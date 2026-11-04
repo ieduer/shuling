@@ -31,6 +31,20 @@ const TRIM = {
   "2014-shici:1": [{ sentence: "注中禁应为消受" }],
   "2025-shici:2": [{ sentence: "题面已由" }],
 };
+// 畫線標記：高考站題面沒有保留畫線，只在 annotation 的「题面标记说明」逐處寫明畫線範圍（按公開重排頁核對，原卷印刷未驗收）。
+// 這裡把畫線處照該說明附在題幹末尾（標明出處），選項與答案不動。每處必須依序出現在說明的引號裡，且出現在題幹對應的第 n 句。
+const MARKS = {
+  "2008-yuyanjichu:5": ["司马", "陈王", "继东坡，高唱大江东去", "幽愁发愤"],
+};
+function markNote(id, record, stem) {
+  const targets = MARKS[id];
+  if (!targets) return { stem, ok: true };
+  const ann = String(record.annotation || "");
+  const quoted = [...ann.matchAll(/[①②③④]“([^”]+)”/g)].map((m) => m[1]);
+  const lines = stem.split("\n").slice(1);
+  const ok = quoted.join("|") === targets.join("|") && targets.every((t, i) => lines[i]?.startsWith(String(i + 1)) && lines[i].includes(t));
+  return { stem: `${stem}\n（畫線處依次為：${targets.map((t, i) => `${i + 1}「${t}」`).join("　")}。據高考站題面標記說明補注）`, ok };
+}
 const PROCESS_NOTE = /出版链|认证|null|裁定|题面已|本次裁定|判分|历史作答|原卷|重排|Claude|GPT|暴露|复核|核对|评分|题源/; // 「本次游村」之類的正文不算
 function trimReasoning(id, text) {
   let t = text;
@@ -155,6 +169,8 @@ for (const id of wanted) {
   // 延伸閱讀只收原文與辭書；題面出處（轉載、重排、掃描）與答案出處的條目標題是高考站的核對紀錄，不是給讀者的篇名
   const refs = (a.sources || []).filter((s) => s.url && CONTENT_REFS.includes(s.type)).map((s) => ({ type: s.type, title: s.title || s.label || "", url: s.url }));
   if (refs.some((r) => !r.title || residue.test(r.title) || /认证|核对|核實|核实/.test(r.title))) problems.push(`REFERENCE-TITLE ${id}`);
+  const marked = markNote(id, record, p.stem);
+  if (!marked.ok) problems.push(`MARKS-UNVERIFIED ${id}`);
   const lead = (s) => Number(String(s || "").match(/^\s*(\d{1,2})\s*[．.、（(]/)?.[1]) || null;
   const cur = a.modelAnswers?.[a.currentVersion];
   if (!cur?.text?.trim() || !MODEL_NAMES[cur.modelId]) problems.push(`REASONING-MISSING ${id}`);
@@ -174,7 +190,7 @@ for (const id of wanted) {
     q_num: Number(question.sourceQuestionNumber) || lead(question.text) || lead(record.topic) || null,
     category: isShici ? "古典詩歌" : MINGZHU.includes(id) ? "古典小說與戲曲" : "文學常識",
     passage,
-    stem: p.stem,
+    stem: marked.stem,
     options: p.options,
     answer,
     answer_status: "qualified_learning_reference",
@@ -195,7 +211,7 @@ const snap = {
   source_commit: COMMIT,
   source_files: { "data/all.json": sha(raw.all), "data/answer-authority.json": sha(raw.authority), "data/answer-release-scope.json": sha(raw.scope) },
   answer_qualification: { contract: authority.releaseQualification?.contract || "", originalPublicationVerified: authority.releaseQualification?.originalPublicationVerified ?? null, officialRubricVerified: authority.releaseQualification?.officialRubricVerified ?? null, note: "答案為學習參考：依公開解析與雙模型覆核，原考試機構答案出版鏈未證實。" },
-  selection: { shici: "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題", wenxue: WENXUE, mingzhu: MINGZHU, references: CONTENT_REFS, reasoning: "答案核查表 currentVersion 的模型作答（高考站給學生看的解析）；TRIM 只刪處理說明", trim: TRIM },
+  selection: { shici: "全部 reviewed 單選且在發布範圍內、非教學修訂版的詩詞鑑賞題", wenxue: WENXUE, mingzhu: MINGZHU, references: CONTENT_REFS, reasoning: "答案核查表 currentVersion 的模型作答（高考站給學生看的解析）；TRIM 只刪處理說明", trim: TRIM, marks: MARKS },
   questions: out,
 };
 fs.writeFileSync(path.join(ROOT, "data/raw/exams/bj-literature.json"), JSON.stringify(snap, null, 1) + "\n");

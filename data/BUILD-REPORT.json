@@ -21,11 +21,15 @@
   "data/raw/chinese-poetry/anthologies.json": "5ddadb6bdc0e79a8c8c81d6a573baad13eb1564a9492bd717f959e5c149c2360",
   "data/raw/chinese-poetry/canon-extra.json": "7542ea728a77a43892ec70be8516b5a7d06b45a65758bb07a468c0565ee7ae9c",
   "data/raw/exams/tw-literature.json": "3ccd37d8f53091da8a4d68920452a651e3fcd6fe1ea62f195b8d5355d7bc7118",
-  "data/raw/exams/bj-literature.json": "7ee756382f4d18d226c69f66cdb1277fee7d70881a4b3eb6cd26a55dcdc5d96c",
+  "data/raw/exams/tw-figures.json": "cfbacf97027ec3d97b1cedf5d304447336033c11af0961fb25ec05b55e821633",
+  "public/assets/exam/v1/tw-93-6.png": "b4760cda5813b01b52bbf2733d82daf6ef5297a7ed8bd9ad4c6ece2828a662d2",
+  "public/assets/exam/v1/tw-96-11.png": "70cd07d02e00e26d23514dc6027f86e946867b7e3c4d9119225c14713ee4ea67",
+  "scripts/fetch/exam_figures.mjs": "1aceee2d6ddda1987261ad65f6179e60e385f64e01a45bf1fcbf8e7463714e24",
+  "data/raw/exams/bj-literature.json": "b1e565af63504ded87009d96ddb0d616a0121a7286237039dbe5f32bfe5a9cd8",
   "data/raw/recite/recite-ms.json": "6a483845ca2e15c0689def18f1d996c5136d2875ad8b874feca5137e38b0986d",
   "data/raw/recite/recite-gk.json": "ee7c6486c8f14eb8f558d50e6acc45ecc0e7c45714ed42d39c8734c0ed64d7a0"
  },
- "codeDigest": "8c1a3cf31db6c9787c237fb9d92c06d4512b8d496d001116d590382b1bcafc1c",
+ "codeDigest": "97b4961c340b459f94f59573e1621a63e41f3625e8ab58bf1f687a8290d66296",
  "coverage": {
   "canon": {
    "wikidataPeople": 160,

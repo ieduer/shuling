@@ -85,6 +85,32 @@ test("真題照原卷 A–D：keys 是 ABCD 的排列，keys[0] 就是解析裡�
   for (const q of questions.filter((x) => x.t !== "exam")) assert.equal(q.keys, undefined, q.id);
 });
 
+test("真題提到圖就有原卷附圖：檔案在 public、雜湊與快照一致、附圖出處連到原卷", () => {
+  const figs = rd("data/raw/exams/tw-figures.json").figures;
+  const exam = questions.filter((q) => q.t === "exam");
+  for (const q of exam) {
+    const needs = /見圖|附圖/.test(q.stem + q.s + q.opts.join(""));
+    assert.equal(!!q.fig?.length, needs, `${q.id} figure ${needs ? "missing" : "unexpected"}`);
+    for (const f of q.fig || []) {
+      const file = path.join(root, "public", f.src);
+      assert.ok(fs.existsSync(file), f.src);
+      const rec = Object.values(figs).find((r) => r.src === f.src);
+      assert.equal(createHash("sha256").update(fs.readFileSync(file)).digest("hex"), rec.sha256, f.src);
+      assert.ok(f.alt && f.cap && f.w > 0 && f.h > 0, f.src);
+      assert.ok(q.sources.some((s) => s.role === "figure" && s.url === rec.pdf_url), q.id);
+    }
+  }
+  assert.equal(exam.filter((q) => q.fig).length, Object.keys(figs).length);
+  for (const q of questions.filter((x) => x.t !== "exam")) assert.equal(q.fig, undefined, q.id);
+});
+
+test("北京卷畫線題附畫線處補注，選項與答案照舊", () => {
+  const q = byId.get("q-e8f6cd99fb01");
+  assert.match(q.stem, /\n（畫線處依次為：1「司马」　2「陈王」　3「继东坡，高唱大江东去」　4「幽愁发愤」。據高考站題面標記說明補注）$/);
+  assert.deepEqual(q.keys, ["B", "A", "C", "D"]);
+  assert.equal(q.opts[0], "白居易、曹植、辛弃疾、司马迁");
+});
+
 test("北京卷每題附高考站 AI 參考解析：簡體照錄、結論字母等於答案、不帶處理說明", () => {
   const bj = questions.filter((q) => q.c.startsWith("ex-bj-"));
   assert.equal(bj.length, 40);

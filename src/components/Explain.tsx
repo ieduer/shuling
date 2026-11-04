@@ -20,6 +20,7 @@ const ROLE_LABEL: Record<string, string> = {
   editorial: "本站",
   reference: "延伸",
   analysis: "解析",
+  figure: "附圖",
 };
 
 /** 解析底板：正解、一句說明、出處一行（每個來源一枚標籤，有網址的可點）。 */

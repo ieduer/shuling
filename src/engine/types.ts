@@ -68,6 +68,14 @@ export interface Source {
   lang?: string; // note 的文字（簡體照錄的解析標 zh-Hans）
 }
 
+export interface Figure {
+  src: string;
+  alt: string;
+  cap: string; // 圖說：原卷出處
+  w: number;
+  h: number;
+}
+
 export interface Question {
   id: string;
   c: string;
@@ -76,6 +84,7 @@ export interface Question {
   s: string;
   opts: string[]; // opts[0] is always the correct one (shuffle at render time)
   keys?: string[]; // 真題：原卷選項字母，與 opts 同序；照原卷次序顯示、不洗牌
+  fig?: Figure[]; // 真題：原卷附圖（沒有圖就無法作答的題）
   why: string;
   src: { label: string; title: string; book: string; author?: string; year?: number };
   sources: Source[];

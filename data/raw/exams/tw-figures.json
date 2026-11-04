@@ -1,0 +1,51 @@
+{
+ "source": "大學入學考試中心公告之指定科目考試國文考科原卷 PDF（本機檔案庫 _scratch/ceec-zhikao，manifest SHA-256 核對）",
+ "note": "只收沒有附圖就無法作答的題；照原卷原樣裁切，不修圖",
+ "renderer": "pdftoppm",
+ "figures": {
+  "tw-93-6": {
+   "id": "tw-93-6",
+   "file": "public/assets/exam/v1/tw-93-6.png",
+   "src": "/assets/exam/v1/tw-93-6.png",
+   "sha256": "b4760cda5813b01b52bbf2733d82daf6ef5297a7ed8bd9ad4c6ece2828a662d2",
+   "bytes": 171818,
+   "width": 1194,
+   "height": 228,
+   "alt": "原卷四個選項的書法圖例 (A)–(D)：四段碑帖字跡，各代表一種書體",
+   "caption": "原卷選項圖示 (A)–(D)，大學入學考試中心 93 學年度指定科目考試國文考科第 3 頁",
+   "pdf_url": "https://www.ceec.edu.tw/files/file_pool/1/0j075820655639896893/93chinese.pdf",
+   "pdf_sha256": "554c3d4bef4a0126e6a3f571372576e913d3163637d484485bc7ecd6a65f4043",
+   "page": 3,
+   "box_pt": [
+    70,
+    134,
+    430,
+    82
+   ],
+   "dpi": 200,
+   "gray": false
+  },
+  "tw-96-11": {
+   "id": "tw-96-11",
+   "file": "public/assets/exam/v1/tw-96-11.png",
+   "src": "/assets/exam/v1/tw-96-11.png",
+   "sha256": "70cd07d02e00e26d23514dc6027f86e946867b7e3c4d9119225c14713ee4ea67",
+   "bytes": 415358,
+   "width": 1086,
+   "height": 536,
+   "alt": "潘天壽「誠齋詩意」水墨畫：細長水草、幾片圓葉與一隻停駐的蜻蜓，右上題「誠齋詩意」",
+   "caption": "原卷附圖：潘天壽「誠齋詩意」（1959），大學入學考試中心 96 學年度指定科目考試國文考科第 4 頁",
+   "pdf_url": "https://www.ceec.edu.tw/files/file_pool/1/0j075824314955440420/01-96%e6%8c%87%e8%80%83%e5%9c%8b%e6%96%87%e5%ae%9a%e7%a8%bf.pdf",
+   "pdf_sha256": "4d00df0d7c2d5818edb744130703b99c513b228b67e50036e26ebd5c61fc7f95",
+   "page": 4,
+   "box_pt": [
+    117,
+    208,
+    391,
+    193
+   ],
+   "dpi": 200,
+   "gray": true
+  }
+ }
+}

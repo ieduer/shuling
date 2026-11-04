@@ -48,6 +48,12 @@ export const SOURCES = {
     role: "exam",
     files: ["data/raw/exams/tw-literature.json"],
   },
+  "tw-exam-figures": {
+    label: "指考國文原卷附圖（大學入學考試中心公告原卷 PDF，照原樣裁切）",
+    url: "https://www.ceec.edu.tw/",
+    role: "figure",
+    files: ["data/raw/exams/tw-figures.json", "public/assets/exam/v1/tw-93-6.png", "public/assets/exam/v1/tw-96-11.png", "scripts/fetch/exam_figures.mjs"],
+  },
   "bj-exams": {
     label: "北京卷語文試題與參考答案（高考站 gk.bdfz.net 答案核查表；學習參考，原考試機構答案出版鏈未證實）",
     url: "https://gk.bdfz.net/",

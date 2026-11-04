@@ -356,6 +356,14 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
       <div className={`spell${long ? " is-long" : ""}`}>
         <Sentence s={q.s} className={long ? "is-compare" : ""} />
         <p className="spell-stem">{q.stem.replace(/^依課文語境，標出的/, "").replace(/在這裡應解為？$/, "在此解為？")}</p>
+        {q.fig?.map((f) => (
+          <figure key={f.src} className="spell-fig">
+            <a href={f.src} target="_blank" rel="noreferrer" aria-label={`放大：${f.alt}`}>
+              <img src={f.src} alt={f.alt} width={f.w} height={f.h} decoding="async" />
+            </a>
+            <figcaption>{f.cap}</figcaption>
+          </figure>
+        ))}
         <p className="spell-meta">
           {/* 只標域名與題型：關卡名含時代或年份區間，時代題、年份題會被它洩題 */}
           {q.src.label} · {TYPE_LABEL[q.t]}

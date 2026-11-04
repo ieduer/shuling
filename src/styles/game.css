@@ -655,6 +655,32 @@
   font-size: 14.5px;
   color: var(--text-2);
   text-align: center;
+  white-space: pre-line; /* 真題題幹的換行（甲乙丙丁、1234 各句）照原卷分行 */
+}
+/* 真題原卷附圖：原圖是白底印刷，放白底框裡；點圖開原檔放大 */
+.spell-fig {
+  margin: 10px auto 0;
+  max-width: 560px;
+}
+.spell-fig a {
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+  border: 1px solid var(--line);
+}
+.spell-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 32dvh;
+  object-fit: contain;
+}
+.spell-fig figcaption {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
 }
 .spell-hint {
   margin-top: 8px;
