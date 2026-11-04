@@ -1,6 +1,7 @@
 /** 書靈 Worker：靜態資產 + 伺服器核分 + 排行榜。
  * 分數不信任客戶端：每局答案以題庫索引（選項雜湊、稀有度、題型）重算，公式與前端共用 src/engine/score.ts。 */
 import bankIndex from "./bank-index.json";
+import legacyIndex from "./bank-index-legacy.json";
 import lessonsIndex from "./lessons.json";
 import { questionScore, limitOf, RUN_SIZE, prestigeOf, rankIdxOf } from "../src/engine/score";
 import { clearedStats, creditXp, masteredFromTallies, repeatMultiplier } from "../src/engine/rank";
@@ -25,7 +26,10 @@ interface IndexEntry {
   r: Tier;
 }
 const INDEX = bankIndex as { version: string; q: Record<string, IndexEntry> };
+// 舊版題庫（scripts/legacy-bank-index.mjs 由 git 歷史產生）：題庫換版後還開著舊頁面的學生送來的舊題照樣核分；題海分母不算它們。
+const LEGACY = legacyIndex as { current: string; versions: string[]; q: Record<string, { c: string; t: QType; r: Tier; a: string[] }>; alt: Record<string, string[]> };
 const QIDS = new Set(Object.keys(INDEX.q)); // 題海分母＝現行題庫的題（文曲之上的段位看答對過一次的題數）
+const BANK_FILE = /^\/bank\/([a-z0-9_-]+)\.([0-9a-f]{12})\.json$/;
 const MODES = new Set(["daily", "free", "wrong", "lesson"]);
 const TZ_OFFSET_MS = 8 * 3600 * 1000; // 兩岸都是 UTC+8，日界線用北京／臺北時間
 
@@ -147,12 +151,15 @@ async function submitRun(request: Request, env: Env): Promise<Response> {
   for (const item of raw) {
     const a = item as { q?: unknown; pick?: unknown; ms?: unknown };
     const q = String(a.q || "");
-    const entry = INDEX.q[q];
+    const cur = INDEX.q[q];
+    const old = cur ? undefined : LEGACY.q[q];
+    const entry = cur || old;
     if (!entry || seen.has(q)) continue;
     seen.add(q);
+    const answers = cur ? [cur.a, ...(LEGACY.alt[q] || [])] : old!.a;
     const pick = String(a.pick ?? "");
     const ms = Math.min(limitOf(entry.t), Math.max(0, Number(a.ms) || 0));
-    const ok = pick !== "" && (await sha16(pick)) === entry.a;
+    const ok = pick !== "" && answers.includes(await sha16(pick));
     combo = ok ? combo + 1 : 0;
     maxCombo = Math.max(maxCombo, combo);
     if (ok) correct++;
@@ -536,6 +543,22 @@ export default {
       }
     }
     const res = await env.ASSETS.fetch(request);
+    // 題庫檔按內容雜湊命名，換版後舊檔不在資產裡；還開著舊頁面或有舊 JS 快取的人要舊雜湊時，改送同名的現行版本檔（不快取、標示兜底）。
+    // 舊前端讀到現行 meta 後會改用現行版本號載入分片；只拿到現行分片時，舊題號找不到的題會略過，其餘照常出題。
+    if (res.status === 404 && (request.method === "GET" || request.method === "HEAD")) {
+      const m = BANK_FILE.exec(path);
+      if (m && m[2] !== INDEX.version) {
+        const cur = await env.ASSETS.fetch(new Request(new URL(`/bank/${m[1]}.${INDEX.version}.json`, url), { method: request.method }));
+        if (cur.ok) {
+          const h = new Headers(cur.headers);
+          h.set("cache-control", "no-store");
+          h.delete("etag");
+          h.delete("last-modified");
+          h.set("x-shuling-bank-fallback", `${m[2]}->${INDEX.version}`);
+          return new Response(request.method === "HEAD" ? null : cur.body, { status: 200, headers: h });
+        }
+      }
+    }
     if (res.status === 404 && request.method === "GET" && !/\.[a-z0-9]+$/i.test(path)) {
       return env.ASSETS.fetch(new Request(new URL("/", request.url), request));
     }

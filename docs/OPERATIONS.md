@@ -39,10 +39,13 @@ Owner: suen. Lifecycle: live since 2026-11-01. Data class: student_owned (nick, 
 
 ```sh
 node scripts/build-bank.mjs
+npm run build:legacy-index   # after every bank change
 npm test
 npx tsc --noEmit -p tsconfig.json && npx tsc --noEmit -p tsconfig.worker.json
 npx vite --host 127.0.0.1 --port 5196 --strictPort .
 ```
+
+**Bank version change (every release that changes the bank).** Bank files are content-hashed (`/bank/<book>.<v>.json`) and the old files leave the assets on release. Tabs still open on the old page, or an old JS cache, keep asking for the old hash. Since 2026-11-04 the Worker answers any missing `/bank/<book>.<12 hex>.json` with the current file of the same name (`cache-control: no-store`, header `x-shuling-bank-fallback: <old>-><current>`). It also scores answers to old question ids from `worker/bank-index-legacy.json`; 題海 counts only the current bank. After `build:data`, always run `npm run build:legacy-index` and commit the result together with the new bank. `tests/run-dedupe.test.mjs` fails if the legacy index lags the current bank. Incident and evidence: `_meta/reports/operations/bank-fix-shuling-20261104/fallback/`.
 
 Vite mode has no Worker, so `/api/*` is offline and results save locally only. `npx wrangler dev --local` runs the Worker with a local D1 (placeholder id) when API behaviour needs checking; `tests/sync.test.mjs` and `tests/run-dedupe.test.mjs` already drive the Worker against an in-memory D1.
 

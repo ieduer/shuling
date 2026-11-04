@@ -10,7 +10,8 @@
     "build": "npm run build:data && npm run check && vite build",
     "dev": "vite --host 127.0.0.1",
     "preview": "vite preview --host 127.0.0.1",
-    "worker:dev": "wrangler dev --local"
+    "worker:dev": "wrangler dev --local",
+    "build:legacy-index": "node scripts/legacy-bank-index.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "6.0.2",

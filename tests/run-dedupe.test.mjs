@@ -98,3 +98,64 @@ test("今日試煉重送：第二次回既有結果，今日排行與詞力都�
     assert.equal(db.tables.runs.length, 1); assert.equal(db.tables.dailyBest.length, 1); assert.equal(db.tables.players.get("dedupe-test-pid-0002").xp, r1.score);
   } finally { cleanup(); }
 });
+
+// 2026-11-04 換版事故：題庫換版後舊雜湊的題庫檔 404，還開著舊頁面的學生跳「書靈召喚失敗」。
+// Worker 對舊雜湊改送同名現行檔（no-store、標示兜底）；舊版題目的作答用 worker/bank-index-legacy.json 照樣核分。
+import { execFileSync } from "node:child_process";
+const legacy = JSON.parse(fs.readFileSync(new URL("worker/bank-index-legacy.json", root), "utf8"));
+const assetsFromPublic = { fetch: async (req) => { const p = new URL(req.url).pathname; const f = new URL("public" + p, root); if (!p.startsWith("/bank/") || !fs.existsSync(f)) return new Response("", { status: 404 }); return new Response(req.method === "HEAD" ? null : fs.readFileSync(f), { headers: { "content-type": "application/json", "cache-control": "public, max-age=0, must-revalidate", etag: '"cur"' } }); } };
+const envWith = (db) => ({ DB: db, SITE_KEY: "shuling", SITE_TITLE: "書靈", PRIMARY_HOST: "shuling.bdfz.net", USER_CENTER_ORIGIN: "https://my.bdfz.net", ASSETS: assetsFromPublic });
+
+test("舊版題庫索引對得上現行：每一個舊版的題都能核分", () => {
+  assert.equal(legacy.current, index.version, "rerun npm run build:legacy-index after build:data");
+  for (const v of ["7c11881db8b4", "1b921b91debe"]) assert(legacy.versions.includes(v), v);
+  const gitShow = (rev) => JSON.parse(execFileSync("git", ["show", rev], { cwd: root.pathname, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 }));
+  for (const sha of execFileSync("git", ["log", "--format=%H", "--", "worker/bank-index.json"], { cwd: root.pathname, encoding: "utf8" }).split("\n").filter(Boolean)) {
+    const old = gitShow(`${sha}:worker/bank-index.json`);
+    for (const [id, e] of Object.entries(old.q)) {
+      const ok = index.q[id] ? index.q[id].a === e.a || (legacy.alt[id] || []).includes(e.a) : (legacy.q[id]?.a || []).includes(e.a);
+      assert(ok, `${old.version} ${id}`);
+    }
+  }
+});
+
+test("舊雜湊題庫檔：改送現行檔、200、no-store、標示兜底；現行檔與不存在的書照舊", async () => {
+  const { worker, cleanup } = await loadWorker();
+  try {
+    const env = envWith(fakeDb());
+    for (const v of legacy.versions) for (const name of ["meta", "exam", "shi"]) {
+      const res = await worker.fetch(new Request(`https://shuling.bdfz.net/bank/${name}.${v}.json`, { headers: { "if-none-match": '"old"' } }), env);
+      assert.equal(res.status, 200, `${name}.${v}`);
+      assert.equal(res.headers.get("cache-control"), "no-store");
+      assert.equal(res.headers.get("x-shuling-bank-fallback"), `${v}->${index.version}`);
+      assert.equal(res.headers.get("etag"), null);
+      assert.equal(await res.text(), fs.readFileSync(new URL(`public/bank/${name}.${index.version}.json`, root), "utf8"));
+    }
+    const head = await worker.fetch(new Request(`https://shuling.bdfz.net/bank/meta.7c11881db8b4.json`, { method: "HEAD" }), env);
+    assert.equal(head.status, 200); assert.equal(head.headers.get("x-shuling-bank-fallback"), `7c11881db8b4->${index.version}`);
+    const cur = await worker.fetch(new Request(`https://shuling.bdfz.net/bank/meta.${index.version}.json`), env);
+    assert.equal(cur.status, 200); assert.equal(cur.headers.get("x-shuling-bank-fallback"), null);
+    assert.equal((await worker.fetch(new Request(`https://shuling.bdfz.net/bank/nosuchbook.7c11881db8b4.json`), env)).status, 404);
+    assert.equal((await worker.fetch(new Request(`https://shuling.bdfz.net/bank/meta.7c11881db8b4.json`, { method: "POST" }), env)).status, 404);
+  } finally { cleanup(); }
+});
+
+test("舊頁面送來舊版題目的作答：照樣核分、寫進作答紀錄", async () => {
+  const { worker, cleanup } = await loadWorker();
+  try {
+    // 從 42714cf（題庫 1b921b91debe，11-04 審校前的現行版）的分片找一題現行題庫已經沒有的題，對出它當時的正確選項
+    const oldV = "1b921b91debe";
+    const show = (p) => JSON.parse(execFileSync("git", ["show", `42714cf:${p}`], { cwd: root.pathname, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 }));
+    const oldMeta = show(`public/bank/meta.${oldV}.json`);
+    let found;
+    for (const b of oldMeta.books) { for (const q of show(`public/bank/${b.id}.${oldV}.json`).q) { const e = legacy.q[q.id]; if (!e) continue; const ans = q.opts.find((o) => e.a.includes(sha16(o))); if (ans) { found = { id: q.id, answer: ans, wrong: q.opts.find((o) => o !== ans), card: e.c }; break; } } if (found) break; }
+    assert(found, "a question retired by the 11-04 bank QA");
+    const db = fakeDb(); const env = envWith(db); const startedAt = Date.now() - 15000;
+    const res = await worker.fetch(new Request("https://shuling.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "shuling_pid=legacy-test-pid-0001" }, body: JSON.stringify({ mode: "lesson", scope: "L-old", seed: "s", nick: "", startedAt, answers: [{ q: found.id, pick: found.answer, ms: 2000 }] }) }), env);
+    const r = await res.json();
+    assert.equal(r.ok, true, JSON.stringify(r)); assert.equal(r.correct, 1); assert(r.score > 0);
+    assert.deepEqual(db.tables.answers.map((x) => [x.q, x.card, x.correct]), [[found.id, found.card, 1]]);
+    const r2 = await (await worker.fetch(new Request("https://shuling.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "shuling_pid=legacy-test-pid-0001" }, body: JSON.stringify({ mode: "lesson", scope: "L-old2", seed: "s", nick: "", startedAt: startedAt - 1, answers: [{ q: found.id, pick: found.wrong, ms: 2000 }] }) }), env)).json();
+    assert.equal(r2.ok, true); assert.equal(r2.correct, 0);
+  } finally { cleanup(); }
+});
