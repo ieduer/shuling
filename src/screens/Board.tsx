@@ -3,12 +3,14 @@ import { fetchBoard, type BoardResult } from "../engine/api";
 import { RANKS, emptyStats, rankOf } from "../engine/score";
 import { RankEmblem } from "../components/RankEmblem";
 import { useProgress } from "../engine/progress";
+import { TotalBoard } from "./TotalBoard";
 
-type Period = "daily" | "weekly" | "all";
+type Period = "daily" | "weekly" | "all" | "total";
 const PERIODS: { id: Period; label: string; hint: string }[] = [
   { id: "daily", label: "今日", hint: "今日試煉首戰得分，每天計一次" },
   { id: "weekly", label: "本週", hint: "本週累計入帳學力" },
   { id: "all", label: "總榜", hint: "學力累計" },
+  { id: "total", label: "六靈", hint: "字靈、書靈、詞靈、句靈、靈山、理靈六站段位相加" },
 ];
 
 /** 榜上的段位以伺服器算的為準（收服、通關依已送達的戰報）；舊伺服器沒給時只能用學力推估（其餘門檻當 0）。 */
@@ -16,10 +18,11 @@ const rankIdxOf = (r: { xp: number; rankIdx?: number }): number => r.rankIdx ?? 
 
 export function Board() {
   const [period, setPeriod] = useState<Period>("daily");
-  const [data, setData] = useState<Record<Period, BoardResult | null | "loading">>({ daily: "loading", weekly: "loading", all: "loading" });
+  const [data, setData] = useState<Record<string, BoardResult | null | "loading">>({ daily: "loading", weekly: "loading", all: "loading" });
   const p = useProgress();
 
   useEffect(() => {
+    if (period === "total") return;
     let alive = true;
     setData((d) => ({ ...d, [period]: "loading" }));
     fetchBoard(period)
@@ -30,7 +33,7 @@ export function Board() {
     };
   }, [period]);
 
-  const cur = data[period];
+  const cur = period === "total" ? null : data[period];
 
   return (
     <div className="board">
@@ -45,7 +48,9 @@ export function Board() {
         </div>
       </header>
 
-      {cur === "loading" ? (
+      {period === "total" ? (
+        <TotalBoard />
+      ) : cur === "loading" ? (
         <p className="muted board-empty">讀取中…</p>
       ) : !cur ? (
         <div className="board-empty">

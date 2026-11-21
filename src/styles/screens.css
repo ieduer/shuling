@@ -1459,3 +1459,123 @@ html[data-screen="journey"] .screen {
 .sea-total b {
   color: var(--gold-2);
 }
+
+/* ───────────── 六靈總榜（/api/total，六站段位相加） ───────────── */
+.total .board-note {
+  margin: 10px 2px 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  text-shadow: 0 0 10px var(--bg);
+}
+.total .total-hint {
+  margin-top: 12px;
+  text-align: center;
+}
+.total-sites {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+.total-site a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 2px 7px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  text-decoration: none;
+  min-width: 0;
+}
+.total-site.is-here a {
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--panel-2) 92%, transparent);
+}
+.total-site.is-off a {
+  opacity: 0.55;
+}
+.total-site img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+.total-site-name {
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.total-site-n {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.total-podium li {
+  min-width: 0;
+}
+.total-podium .total-seals {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  margin-top: 2px;
+}
+.total-big {
+  margin: 2px 0;
+  object-fit: contain;
+}
+.total-seals {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  line-height: 0;
+}
+.total-seals img {
+  object-fit: contain;
+  border-radius: 50%;
+}
+.total-seals img.is-empty {
+  filter: grayscale(1);
+  opacity: 0.2;
+}
+.total-seals img.is-here:not(.is-empty) {
+  box-shadow: 0 0 0 1.5px var(--gold);
+}
+.total-rows {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.total-row {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+}
+.total-row.is-me {
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--panel-2) 92%, transparent);
+}
+.total-who {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.total-who .total-seals {
+  justify-content: flex-start;
+}
