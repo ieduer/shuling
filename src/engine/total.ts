@@ -11,8 +11,11 @@ export interface TotalSite {
   name: string;
   title: string;
   url: string;
-  /** 該站段位徽章與標誌的目錄（各站自己的真圖） */
+  /** 該站段位徽章與標誌的目錄（各站自己的真圖：rank-N.webp、logo.webp） */
   art: string;
+  /** 沒有分階徽章的站（義戰論語，2026-11-21 起）：每一階都用這一張真圖 */
+  emblem?: string;
+  logo?: string;
   ranks: string[];
   ok: boolean;
   players: number;
@@ -74,6 +77,13 @@ export async function fetchTotal(): Promise<TotalResult | null> {
     return null;
   }
 }
+
+/** 某站某階的徽章圖與該站標誌（站可以給單一 emblem／logo；否則照 rank-N.webp、logo.webp） */
+export const sealSrc = (s: TotalSite, idx: number): string => s.emblem ?? `${s.art}/rank-${idx + 1}.webp`;
+export const logoSrc = (s: TotalSite): string => s.logo ?? `${s.art}/logo.webp`;
+const NUM = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+/** 站數寫成中文數字（七站） */
+export const siteCount = (n: number): string => NUM[n] ?? String(n);
 
 /** 一列在哪一站分數最高（頒獎台上的大徽章用那一站的） */
 export function bestSite(row: TotalRow): number {

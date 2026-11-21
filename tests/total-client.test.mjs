@@ -21,8 +21,9 @@ test("六靈分頁：本站鍵、跨站讀 ling.bdfz.net（帶 cookie、不加�
 
 test("段位徽章用各站自己的真圖（不是文字章）", () => {
   const tb = read("src/screens/TotalBoard.tsx");
-  assert.match(tb, /src=\{`\$\{s\.art\}\/rank-\$\{x\[0\] \+ 1\}\.webp`\}/);
-  assert.match(tb, /src=\{`\$\{s\.art\}\/logo\.webp`\}/);
+  // 2026-11-21 起圖路徑集中在 total.ts 的 sealSrc／logoSrc（各站 rank-N.webp、logo.webp；義戰論語給單一 emblem）
+  assert.match(tb, /src=\{sealSrc\(s, x\[0\]\)\}/);
+  assert.match(tb, /src=\{logoSrc\(s\)\}/);
 });
 
 test("本站 Worker 沒有六靈總榜端點（彙總只在靈山）", () => {
@@ -39,4 +40,15 @@ test("沒登入的人送 meKey＝SHA-256(\"sixling-me:\" + 本站 pid) 前 24 �
   const tb = read("src/screens/TotalBoard.tsx");
   assert.match(tb, /沒登入的玩家只計所在那一站/);
   assert.match(tb, /is-anon/);
+});
+
+test("義戰論語加入後（2026-11-21，sixling-ly-20261121）：站可給單一 emblem／logo，版面依站數排，說明不寫死六站", () => {
+  const t = read("src/engine/total.ts");
+  assert.match(t, /export const sealSrc = \(s: TotalSite, idx: number\): string => s\.emblem \?\? `\$\{s\.art\}\/rank-\$\{idx \+ 1\}\.webp`;/);
+  assert.match(t, /export const logoSrc = \(s: TotalSite\): string => s\.logo \?\? `\$\{s\.art\}\/logo\.webp`;/);
+  const tb = read("src/screens/TotalBoard.tsx");
+  assert.match(tb, /gridTemplateColumns: `repeat\(\$\{sites\.length\}, minmax\(0, 1fr\)\)`/);
+  assert.match(tb, /\{siteCount\(sites\.length\)\}站段位相加/);
+  assert.doesNotMatch(tb, /六站/);
+  assert.match(read("src/screens/Board.tsx"), /靈山、理靈與義戰論語段位相加/);
 });

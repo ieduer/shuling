@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { bestSite, fetchTotal, HERE, type TotalResult, type TotalRow, type TotalSite } from "../engine/total";
+import { bestSite, fetchTotal, HERE, logoSrc, sealSrc, siteCount, type TotalResult, type TotalRow, type TotalSite } from "../engine/total";
 
-/** 六站各一枚段位徽章（各站自己的真圖）；沒玩過的站顯示該站第一階徽章的灰影 */
-function Seals({ row, sites, size }: { row: TotalRow; sites: TotalSite[]; size: number }) {
+/** 每站一枚段位徽章（各站自己的真圖）；沒玩過的站顯示該站第一階徽章的灰影 */
+function Seals({ row, sites, size, cols }: { row: TotalRow; sites: TotalSite[]; size: number; cols?: number }) {
   return (
-    <span className="total-seals">
+    <span className="total-seals" style={cols ? { gridTemplateColumns: `repeat(${cols}, auto)` } : undefined}>
       {sites.map((s, i) => {
         const x = row.t[i];
         return x ? (
-          <img key={s.key} className={s.key === HERE ? "is-here" : undefined} src={`${s.art}/rank-${x[0] + 1}.webp`} alt={`${s.name}${s.ranks[x[0]] ?? ""}`} title={`${s.title}・${s.ranks[x[0]] ?? ""}・${x[1]} 分`} width={size} height={size} decoding="async" loading="lazy" />
+          <img key={s.key} className={s.key === HERE ? "is-here" : undefined} src={sealSrc(s, x[0])} alt={`${s.name}${s.ranks[x[0]] ?? ""}`} title={`${s.title}・${s.ranks[x[0]] ?? ""}・${x[1]} 分`} width={size} height={size} decoding="async" loading="lazy" />
         ) : (
-          <img key={s.key} className="is-empty" src={`${s.art}/rank-1.webp`} alt="" title={`${s.title}・未上場`} width={size} height={size} decoding="async" loading="lazy" />
+          <img key={s.key} className="is-empty" src={sealSrc(s, 0)} alt="" title={`${s.title}・未上場`} width={size} height={size} decoding="async" loading="lazy" />
         );
       })}
     </span>
@@ -22,10 +22,10 @@ function BigSeal({ row, sites, size }: { row: TotalRow; sites: TotalSite[]; size
   const s = sites[i];
   const x = row.t[i];
   if (!s || !x) return null;
-  return <img className="total-big" src={`${s.art}/rank-${x[0] + 1}.webp`} alt={`${s.name}${s.ranks[x[0]] ?? ""}`} width={size} height={size} decoding="async" />;
+  return <img className="total-big" src={sealSrc(s, x[0])} alt={`${s.name}${s.ranks[x[0]] ?? ""}`} width={size} height={size} decoding="async" />;
 }
 
-/** 排行榜「六靈」分頁：六站段位相加的總榜（靈山 /api/total） */
+/** 排行榜「六靈」分頁：各站段位相加的總榜（靈山 /api/total；2026-11-21 起含義戰論語） */
 export function TotalBoard() {
   const [data, setData] = useState<TotalResult | null | "loading">("loading");
 
@@ -47,12 +47,12 @@ export function TotalBoard() {
   const rest = rows.length >= 3 ? rows.slice(3) : rows;
   return (
     <div className="total">
-      <p className="board-note">六站段位相加：任一站每升一階記 {data.perTier} 分，階內按靈力比例。登入 my.bdfz.net 的帳號合計六站；沒登入的玩家只計所在那一站。各站自己的榜不變。</p>
-      <ul className="total-sites">
+      <p className="board-note">{siteCount(sites.length)}站段位相加：任一站每升一階記 {data.perTier} 分，階內按該站進度比例。登入 my.bdfz.net 的帳號合計各站；沒登入的玩家只計所在那一站。各站自己的榜不變。</p>
+      <ul className="total-sites" style={{ gridTemplateColumns: `repeat(${sites.length}, minmax(0, 1fr))` }}>
         {sites.map((s) => (
           <li key={s.key} className={`total-site${s.key === HERE ? " is-here" : ""}${s.ok ? "" : " is-off"}`}>
             <a href={s.url} target={s.key === HERE ? undefined : "_blank"} rel="noreferrer" lang="zh-Hant">
-              <img src={`${s.art}/logo.webp`} alt="" width={34} height={34} decoding="async" />
+              <img src={logoSrc(s)} alt="" width={34} height={34} decoding="async" />
               <span className="total-site-name">{s.name}</span>
               <span className="total-site-n">{s.ok ? `${s.players} 人` : "連不上"}</span>
             </a>
@@ -68,7 +68,7 @@ export function TotalBoard() {
               <BigSeal row={r} sites={sites} size={k === 1 ? 60 : 46} />
               <span className="podium-nick">{r.nick || "無名氏"}</span>
               <span className="podium-score">{r.score}</span>
-              <Seals row={r} sites={sites} size={18} />
+              <Seals row={r} sites={sites} size={18} cols={Math.ceil(sites.length / 2)} />
             </li>
           ))}
         </ol>
@@ -96,12 +96,12 @@ export function TotalBoard() {
           <span className="row-score">{me.score}</span>
         </div>
       )}
-      {data.viewer === "anonymous" && me && <p className="board-note total-hint">你沒登入，這裡只計本站成績；登入 my.bdfz.net 後，六站戰績合成一列。</p>}
-      {data.viewer === "anonymous" && !me && <p className="board-note total-hint">在本站打完一局就會上榜；登入 my.bdfz.net 後，六站戰績合成一列。</p>}
+      {data.viewer === "anonymous" && me && <p className="board-note total-hint">你沒登入，這裡只計本站成績；登入 my.bdfz.net 後，各站戰績合成一列。</p>}
+      {data.viewer === "anonymous" && !me && <p className="board-note total-hint">在本站打完一局就會上榜；登入 my.bdfz.net 後，各站戰績合成一列。</p>}
       {data.viewer === "unavailable" && !me && <p className="board-note total-hint">用戶中心暫時連不上，認不出哪一列是你。</p>}
       {data.viewer === "user" && !me && <p className="board-note total-hint">你已登入；在任一站打完一局就會上榜。</p>}
       {data.partial && <p className="board-note total-hint">有一站暫時讀不到，這一站的分數稍後補上。</p>}
-      <p className="board-foot">{data.entries ?? data.accounts} 位上榜・{data.accounts} 個登入帳號合計六站</p>
+      <p className="board-foot">{data.entries ?? data.accounts} 位上榜・{data.accounts} 個登入帳號合計各站</p>
     </div>
   );
 }
