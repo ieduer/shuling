@@ -47,7 +47,7 @@ export function TotalBoard() {
   const rest = rows.length >= 3 ? rows.slice(3) : rows;
   return (
     <div className="total">
-      <p className="board-note">六站段位相加：任一站每升一階記 {data.perTier} 分，階內按靈力比例。登入 my.bdfz.net 的帳號才能合計六站；各站自己的榜不變。</p>
+      <p className="board-note">六站段位相加：任一站每升一階記 {data.perTier} 分，階內按靈力比例。登入 my.bdfz.net 的帳號合計六站；沒登入的玩家只計所在那一站。各站自己的榜不變。</p>
       <ul className="total-sites">
         {sites.map((s) => (
           <li key={s.key} className={`total-site${s.key === HERE ? " is-here" : ""}${s.ok ? "" : " is-off"}`}>
@@ -75,7 +75,7 @@ export function TotalBoard() {
       )}
       <ol className="total-rows" start={podium.length ? 4 : 1}>
         {rest.map((r) => (
-          <li key={r.rank} className={`total-row${r.me ? " is-me" : ""}`}>
+          <li key={r.rank} className={`total-row${r.me ? " is-me" : ""}${r.anon ? " is-anon" : ""}`}>
             <span className="row-rank">{r.rank}</span>
             <span className="total-who">
               <span className="row-nick">{r.nick || "無名氏"}</span>
@@ -87,7 +87,7 @@ export function TotalBoard() {
       </ol>
       {rows.length === 0 && <p className="board-empty">還沒有登入帳號上榜</p>}
       {me && !rows.some((r) => r.me) && (
-        <div className="total-row is-me row-mine">
+        <div className={`total-row is-me row-mine${me.anon ? " is-anon" : ""}`}>
           <span className="row-rank">{me.rank}</span>
           <span className="total-who">
             <span className="row-nick">{me.nick || "你"}</span>
@@ -96,11 +96,12 @@ export function TotalBoard() {
           <span className="row-score">{me.score}</span>
         </div>
       )}
-      {data.viewer === "anonymous" && <p className="board-note total-hint">登入 my.bdfz.net 後，你在六站的戰績會合計上榜。</p>}
-      {data.viewer === "unavailable" && <p className="board-note total-hint">用戶中心暫時連不上，認不出哪一列是你。</p>}
+      {data.viewer === "anonymous" && me && <p className="board-note total-hint">你沒登入，這裡只計本站成績；登入 my.bdfz.net 後，六站戰績合成一列。</p>}
+      {data.viewer === "anonymous" && !me && <p className="board-note total-hint">在本站打完一局就會上榜；登入 my.bdfz.net 後，六站戰績合成一列。</p>}
+      {data.viewer === "unavailable" && !me && <p className="board-note total-hint">用戶中心暫時連不上，認不出哪一列是你。</p>}
       {data.viewer === "user" && !me && <p className="board-note total-hint">你已登入；在任一站打完一局就會上榜。</p>}
       {data.partial && <p className="board-note total-hint">有一站暫時讀不到，這一站的分數稍後補上。</p>}
-      <p className="board-foot">{data.accounts} 個帳號合計</p>
+      <p className="board-foot">{data.entries ?? data.accounts} 位上榜・{data.accounts} 個登入帳號合計六站</p>
     </div>
   );
 }
