@@ -207,7 +207,7 @@ test("總榜＝詞力（對局入帳＋成就加成，v2.10）：詞力高者在
   const weekBefore = sqlite.prepare("SELECT score, games FROM weekly_sum WHERE pid = 'pid-AAAA'").get();
   const daily = (n) => { const startedAt = Date.now() - 20000 - 1000 * seq++; return call("/api/run", { method: "POST", pid: "pid-AAAA", uc: "u1", body: { mode: "daily", scope: "daily", seed: "d" + n, nick: "", startedAt, answers: [{ q: q.id, pick: q.answer, ms: 1500 }] } }); };
   const d1r = await daily(1); assert.equal(d1r.body.scored, true); assert(d1r.body.xpGain > 0);
-  const d2r = await daily(2); assert.equal(d2r.body.scored, false); assert.equal(d2r.body.reason, "daily_done"); assert(d2r.body.xpGain > 0 && d2r.body.multiplier === 0.5, JSON.stringify(d2r.body));
+  const d2r = await daily(2); assert.equal(d2r.body.scored, false); assert.equal(d2r.body.reason, "daily_done"); assert(d2r.body.xpGain > 0 && d2r.body.repeatQs === 1 && d2r.body.repeat === 0, JSON.stringify(d2r.body)); // 今日試煉也按題遞減（2026-11-26）：同一題再答對才打折
   const weekAfter = sqlite.prepare("SELECT score, games FROM weekly_sum WHERE pid = 'pid-AAAA'").get();
   assert.equal(weekAfter.score - weekBefore.score, d1r.body.xpGain + d2r.body.xpGain, "both daily runs add their credited xp to the weekly board"); assert.equal(weekAfter.games - weekBefore.games, 2);
   assert.equal(count("SELECT COUNT(*) AS n FROM daily_best WHERE pid = 'pid-AAAA'"), 1, "only the first daily attempt is on the daily board");

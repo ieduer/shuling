@@ -80,11 +80,11 @@ export function creditXp(score: number, prior: number): number {
   return Math.round(score * repeatMultiplier(prior));
 }
 
-/** 按題遞減的模式（2026-11-26）：出陣（free）、復仇／溫習（wrong）與闖關（lesson；站長同日追加）不按「同範圍今日第幾局」打折，
+/** 按題遞減的模式（2026-11-26，站長同日陸續追加）：出陣（free）、復仇／溫習（wrong）、闖關（lesson）與今日試煉（daily）都不按「同範圍今日第幾局」打折，
  * 改成「同一題今天第幾次答對」：今天還沒答對過的題全額，同一題第二次答對起按 repeatMultiplier 遞減。
- * 只有今日試煉（daily，全站同題、排行只計首戰）仍按局數遞減。 */
+ * 今日試煉的排行仍只計首戰（daily_best），按題遞減只管入帳的力。 */
 export function perQuestionMode(mode: string): boolean {
-  return mode === "free" || mode === "wrong" || mode === "lesson";
+  return mode === "free" || mode === "wrong" || mode === "lesson" || mode === "daily";
 }
 
 /** 按題入帳：prior(q)＝這一題今天之前已答對幾次；本局內重複出現的同一題也會遞增。答錯（0 分）不計次。 */

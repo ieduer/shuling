@@ -186,9 +186,9 @@ export interface FinishResult {
   /** 實際入帳的學力（重複出陣遞減後） */
   gain: number;
   multiplier: number;
-  /** 本局之前，同一範圍今天已出陣幾次（今日試煉） */
+  /** 本局之前，同一範圍今天已出陣幾次（按局數遞減的模式才用；題庫局都已按題） */
   repeat: number;
-  /** 出陣／復仇／闖關：本局有幾題今天已答對過（這幾題遞減，其餘全額） */
+  /** 出陣／復仇／闖關／今日試煉：本局有幾題今天已答對過（這幾題遞減，其餘全額） */
   repeatQs: number;
 }
 
@@ -219,7 +219,7 @@ export function finishRun(run: RunSummary): FinishResult {
   let multiplier = 1;
   let gain = run.score;
   if (perQuestionMode(run.mode)) {
-    // 出陣／復仇／闖關按題遞減（2026-11-26）：題目不同就全額，同一題今天第二次答對起遞減
+    // 出陣／復仇／闖關／今日試煉按題遞減（2026-11-26）：題目不同就全額，同一題今天第二次答對起遞減
     const r = creditByQuestion(run.answers.map((a) => ({ q: a.q, score: a.correct ? a.score : 0 })), (q) => dayRuns[questionDayKey(q, today)] || 0);
     gain = r.credited;
     repeatQs = r.repeated;
