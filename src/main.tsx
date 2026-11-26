@@ -1,12 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import { installTranslateGuard } from "./lib/dom-guard";
 import { initBank } from "./engine/bank";
 import { applyTheme, getTheme } from "./engine/theme";
 import "./styles/index.css";
 import "./styles/game.css";
 import "./styles/screens.css";
 
+installTranslateGuard();
 applyTheme(getTheme());
 const root = createRoot(document.getElementById("root")!);
 initBank()

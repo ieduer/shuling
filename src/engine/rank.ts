@@ -79,3 +79,25 @@ export function repeatMultiplier(prior: number): number {
 export function creditXp(score: number, prior: number): number {
   return Math.round(score * repeatMultiplier(prior));
 }
+
+/** 按題遞減的模式（2026-11-26 用戶反饋）：出陣（free，隨機抽題）與復仇／溫習（wrong）每局題目不同，
+ * 不再按「同範圍今日第幾局」打折，改成「同一題今天第幾次答對」：沒答對過的題全額，同一題第二次答對起按 repeatMultiplier 遞減。
+ * 闖關（lesson，同一關題目固定）與今日試煉（daily）仍按局數遞減。 */
+export function perQuestionMode(mode: string): boolean {
+  return mode === "free" || mode === "wrong";
+}
+
+/** 按題入帳：prior(q)＝這一題今天之前已答對幾次；本局內重複出現的同一題也會遞增。答錯（0 分）不計次。 */
+export function creditByQuestion(items: readonly { q: string; score: number }[], prior: (q: string) => number): { credited: number; repeated: number } {
+  const seen = new Map<string, number>();
+  let credited = 0;
+  let repeated = 0;
+  for (const it of items) {
+    if (!(it.score > 0)) continue;
+    const n = prior(it.q) + (seen.get(it.q) || 0);
+    if (n > 0) repeated++;
+    credited += Math.round(it.score * repeatMultiplier(n));
+    seen.set(it.q, (seen.get(it.q) || 0) + 1);
+  }
+  return { credited, repeated };
+}

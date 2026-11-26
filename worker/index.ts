@@ -4,7 +4,7 @@ import bankIndex from "./bank-index.json";
 import legacyIndex from "./bank-index-legacy.json";
 import lessonsIndex from "./lessons.json";
 import { questionScore, limitOf, RUN_SIZE, prestigeOf, rankIdxOf } from "../src/engine/score";
-import { clearedStats, creditXp, masteredFromTallies, repeatMultiplier } from "../src/engine/rank";
+import { clearedStats, creditByQuestion, creditXp, masteredFromTallies, perQuestionMode, repeatMultiplier } from "../src/engine/rank";
 import { mergeSaves, normalizeSave, SAVE_MAX_BYTES, serializeSave, utf8Bytes, type SaveShape } from "../src/engine/save";
 import { saveRankStats } from "../src/engine/save-rank";
 import { ucCookie, ucIdentity } from "./uc";
@@ -146,7 +146,7 @@ async function submitRun(request: Request, env: Env): Promise<Response> {
   let score = 0;
   let correct = 0;
   let maxCombo = 0;
-  const rows: { q: string; card: string; correct: boolean; ms: number }[] = [];
+  const rows: { q: string; card: string; correct: boolean; ms: number; score: number }[] = [];
   const seen = new Set<string>();
   for (const item of raw) {
     const a = item as { q?: unknown; pick?: unknown; ms?: unknown };
@@ -163,8 +163,9 @@ async function submitRun(request: Request, env: Env): Promise<Response> {
     combo = ok ? combo + 1 : 0;
     maxCombo = Math.max(maxCombo, combo);
     if (ok) correct++;
-    score += questionScore({ correct: ok, tier: entry.r, type: entry.t, ms, combo });
-    rows.push({ q, card: entry.c, correct: ok, ms });
+    const gained = questionScore({ correct: ok, tier: entry.r, type: entry.t, ms, combo });
+    score += gained;
+    rows.push({ q, card: entry.c, correct: ok, ms, score: gained });
   }
   if (!rows.length) return json({ ok: false, reason: "no_valid_answers" }, { status: 400 });
 
@@ -199,10 +200,23 @@ async function submitRun(request: Request, env: Env): Promise<Response> {
       reason = "daily_done";
     }
   }
-  // 同範圍同日重複出陣：學力遞減（第 1 次全額、第 2 次一半、第 3 次四分之一、之後一成）。單局分數（今日排行）仍是原始分。
-  const prior = (await db.prepare("SELECT COUNT(*) AS n FROM arena_runs WHERE pid = ? AND scope = ? AND day_key = ?").bind(pid, scope, dayKey).first<{ n: number }>())?.n || 0;
-  const multiplier = repeatMultiplier(prior);
-  const credited = creditXp(score, prior);
+  // 同日重複：闖關／今日試煉按同範圍局數遞減（第 1 次全額、第 2 次一半、第 3 次四分之一、之後一成）；出陣／復仇按題；單局分數（今日排行）仍是原始分。
+  let prior = 0;
+  let multiplier = 1;
+  let credited = score;
+  let repeatQs = 0;
+  if (perQuestionMode(mode)) {
+    // 出陣／復仇按題遞減：只看這一局的題今天之前答對過幾次，題目不同就全額（2026-11-26）
+    const done = await priorCorrectToday(db, pid, dayKey, now, rows.map((x) => x.q));
+    const rq = creditByQuestion(rows, (q) => done.get(q) || 0);
+    credited = rq.credited;
+    repeatQs = rq.repeated;
+    multiplier = score > 0 ? Math.round((credited / score) * 100) / 100 : 1;
+  } else {
+    prior = (await db.prepare("SELECT COUNT(*) AS n FROM arena_runs WHERE pid = ? AND scope = ? AND day_key = ?").bind(pid, scope, dayKey).first<{ n: number }>())?.n || 0;
+    multiplier = repeatMultiplier(prior);
+    credited = creditXp(score, prior);
+  }
   const runId = crypto.randomUUID();
   const stmts: D1PreparedStatement[] = [
     db
@@ -222,9 +236,23 @@ async function submitRun(request: Request, env: Env): Promise<Response> {
 
   const st = await rankStats(db, pid);
   const r = await ranksFor(db, pid, dayKey, weekKey, mode === "daily" && scored ? score : null);
-  return json({ ok: true, scored, reason, score, correct, xp: r.xp ?? score, xpGain: credited, multiplier, repeat: prior, rankIdx: st.rankIdx, mastered: st.mastered, cleared: st.cleared, regions: st.regions, prestige: st.prestige, ranks: r.ranks }, { headers });
+  return json({ ok: true, scored, reason, score, correct, xp: r.xp ?? score, xpGain: credited, multiplier, repeat: prior, repeatQs, rankIdx: st.rankIdx, mastered: st.mastered, cleared: st.cleared, regions: st.regions, prestige: st.prestige, ranks: r.ranks }, { headers });
 }
 
+
+/** 這一局的題今天（北京日）之前各答對過幾次：arena_runs 依 (pid, created_at) 索引取今天的局，再按主鍵 (run_id, q) 查答題。 */
+async function priorCorrectToday(db: D1Database, pid: string, dayKey: string, now: number, qs: string[]): Promise<Map<string, number>> {
+  const out = new Map<string, number>();
+  const ids = [...new Set(qs)].slice(0, RUN_SIZE + 2);
+  if (!ids.length) return out;
+  const dayStart = Date.parse(`${dayKey}T00:00:00Z`) - TZ_OFFSET_MS;
+  const rows = await db
+    .prepare(`SELECT a.q AS q, COUNT(*) AS n FROM arena_runs r JOIN arena_answers a ON a.run_id = r.id WHERE r.pid = ? AND r.created_at >= ? AND r.created_at <= ? AND r.day_key = ? AND a.correct = 1 AND a.q IN (${ids.map(() => "?").join(", ")}) GROUP BY a.q`)
+    .bind(pid, dayStart, now, dayKey, ...ids)
+    .all<{ q: string; n: number }>();
+  for (const x of rows.results || []) out.set(x.q, Number(x.n) || 0);
+  return out;
+}
 /** 段位統計（伺服器版，依已送達的戰報）：收服＝淨答對三次以上的書靈；通關＝該課有一局全對；全通域＝域內每一關都全對。
  * 寫回 players（mastered／cleared／rank_idx）供排行榜顯示；規則與前端 rankStatsOf 相同（旅程關卡清單來自 worker/lessons.json）。 */
 async function rankStats(db: D1Database, pid: string, save?: SaveShape): Promise<{ mastered: number; cleared: number; regions: number; rankIdx: number; prestige: number }> {

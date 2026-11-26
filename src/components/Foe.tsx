@@ -67,7 +67,7 @@ export function Foe({ card, role, state, hp, maxHp, masked = false }: { card: Ca
           <img className="foe-beast" src={beast.src} alt="" decoding="async" />
           <span className="foe-shine" />
         </div>
-        <span className="foe-glyph" lang="zh-Hant" style={{ fontSize: glyphPx(shown, base) }}>
+        <span key={shown} className="foe-glyph" lang="zh-Hant" style={{ fontSize: glyphPx(shown, base) }}>
           {shown}
         </span>
         {role === "boss" && <img className="foe-crown" src={art.crown} alt="" aria-hidden="true" decoding="async" />}

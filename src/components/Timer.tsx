@@ -9,7 +9,7 @@ export function TimerRing({ ms, limit }: { ms: number; limit: number }) {
         <circle cx="20" cy="20" r={r} className="timer-track" />
         <circle cx="20" cy="20" r={r} className="timer-fill" strokeDasharray={c} strokeDashoffset={c * (1 - frac)} />
       </svg>
-      <span className="timer-num">{Math.ceil(ms / 1000)}</span>
+      <span className="timer-num" translate="no">{Math.ceil(ms / 1000)}</span>
     </div>
   );
 }

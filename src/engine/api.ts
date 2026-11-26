@@ -24,6 +24,8 @@ export interface SubmitResult {
   xpGain?: number; // 實際入帳學力（同範圍同日重複出陣遞減）
   multiplier?: number;
   repeat?: number;
+  /** 出陣／復仇：本局有幾題今天已答對過（按題遞減） */
+  repeatQs?: number;
   rankIdx?: number; // 伺服器算的段位（收服／通關依已送達的戰報）
   mastered?: number;
   cleared?: number;

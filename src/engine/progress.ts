@@ -2,7 +2,7 @@
 import { useSyncExternalStore } from "react";
 import type { CardMeta, Question, RunSummary } from "./types";
 import { dayKey } from "./rng";
-import { clearedStats, creditXp, repeatMultiplier } from "./rank";
+import { clearedStats, creditByQuestion, creditXp, perQuestionMode, repeatMultiplier } from "./rank";
 
 export interface QStat {
   ok: number;
@@ -186,12 +186,19 @@ export interface FinishResult {
   /** 實際入帳的學力（重複出陣遞減後） */
   gain: number;
   multiplier: number;
-  /** 本局之前，同一範圍今天已出陣幾次 */
+  /** 本局之前，同一範圍今天已出陣幾次（闖關／今日試煉） */
   repeat: number;
+  /** 出陣／復仇：本局有幾題今天已答對過（這幾題遞減，其餘全額） */
+  repeatQs: number;
 }
 
 export function repeatKey(scope: string, day = dayKey()): string {
   return `${day}|${scope}`;
+}
+
+/** 這一題今天答對次數的鍵（與局數共用 dayRuns，前綴 q: 與範圍鍵分開）。 */
+export function questionDayKey(q: string, day = dayKey()): string {
+  return `${day}|q:${q}`;
 }
 
 export function priorRunsToday(scope: string): number {
@@ -204,14 +211,28 @@ export function finishRun(run: RunSummary): FinishResult {
   const dayStreak = state.lastDay === today ? state.dayStreak : state.lastDay === yesterday ? state.dayStreak + 1 : 1;
   const xpBefore = state.xp;
   const key = repeatKey(run.scope, today);
-  const repeat = state.dayRuns?.[key] || 0;
-  const multiplier = repeatMultiplier(repeat);
-  const gain = creditXp(run.score, repeat);
-  const xpAfter = state.xp + gain;
-  // 只留今天的計數，存檔不會越積越大
+  // 只留今天的計數，存檔不會越積越大；鍵 `日|範圍` 記局數，`日|q:題號` 記這一題今天答對幾次
   const dayRuns: Record<string, number> = {};
   for (const [k, v] of Object.entries(state.dayRuns || {})) if (k.startsWith(today + "|")) dayRuns[k] = v;
-  dayRuns[key] = repeat + 1;
+  let repeat = 0;
+  let repeatQs = 0;
+  let multiplier = 1;
+  let gain = run.score;
+  if (perQuestionMode(run.mode)) {
+    // 出陣／復仇按題遞減（2026-11-26）：題目不同就全額，同一題今天第二次答對起遞減
+    const r = creditByQuestion(run.answers.map((a) => ({ q: a.q, score: a.correct ? a.score : 0 })), (q) => dayRuns[questionDayKey(q, today)] || 0);
+    gain = r.credited;
+    repeatQs = r.repeated;
+    multiplier = run.score > 0 ? Math.round((gain / run.score) * 100) / 100 : 1;
+  } else {
+    repeat = dayRuns[key] || 0;
+    multiplier = repeatMultiplier(repeat);
+    gain = creditXp(run.score, repeat);
+  }
+  // 同一局裡重複出現的題只記一次（與 Worker 的 arena_answers 主鍵 (run_id, q) 一致）
+  for (const q of new Set(run.answers.filter((a) => a.correct && a.score > 0).map((a) => a.q))) dayRuns[questionDayKey(q, today)] = (dayRuns[questionDayKey(q, today)] || 0) + 1;
+  const xpAfter = state.xp + gain;
+  dayRuns[key] = (dayRuns[key] || 0) + 1;
   const daily = { ...state.daily };
   if (run.mode === "daily") {
     // 今日榜只計首戰（再練不計排行），本機也記首戰的分數，首頁「今日 N 分」和榜上一致（2026-10-31 v2.10）
@@ -237,7 +258,7 @@ export function finishRun(run: RunSummary): FinishResult {
     losses: state.losses + (run.lost ? 1 : 0),
     dayRuns,
   });
-  return { xpBefore, xpAfter, gain, multiplier, repeat };
+  return { xpBefore, xpAfter, gain, multiplier, repeat, repeatQs };
 }
 
 /** 本機段位統計：收服＝已收服的書靈；通關／域＝旅程關卡的星數。 */

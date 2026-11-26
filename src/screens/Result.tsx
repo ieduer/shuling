@@ -3,6 +3,7 @@ import { RankBadge } from "../components/RankBadge";
 import { bank, cardById, qIndexById } from "../engine/bank";
 import type { SubmitResult } from "../engine/api";
 import { cardLevel, useProgress } from "../engine/progress";
+import { perQuestionMode } from "../engine/rank";
 import type { RankStats } from "../engine/score";
 import type { RunSummary } from "../engine/types";
 import { sfx } from "../engine/sfx";
@@ -17,6 +18,7 @@ interface ResultState {
   gain: number;
   multiplier: number;
   repeat: number;
+  repeatQs: number;
   statsAfter: RankStats;
   server: Promise<SubmitResult | null>;
   rankUp: boolean;
@@ -47,7 +49,7 @@ function cardOfQuestion(qid: string): string {
 }
 
 export function Result({ state, onAgain, onWrong, onHome, onBoard }: { state: ResultState; onAgain: () => void; onWrong: () => void; onHome: () => void; onBoard: () => void }) {
-  const { summary, gain, multiplier, repeat, statsAfter, rankUp, prestigeBefore, prestigeAfter } = state;
+  const { summary, gain, multiplier, repeat, repeatQs, statsAfter, rankUp, prestigeBefore, prestigeAfter } = state;
   const bonusGain = Math.max(0, prestigeAfter - prestigeBefore - gain); // 這局收服／三星／全通域／題海帶來的成就加成
   const progress = useProgress();
   const shown = useCountUp(summary.score);
@@ -108,11 +110,17 @@ export function Result({ state, onAgain, onWrong, onHome, onBoard }: { state: Re
           學力 {prestigeBefore} → <b>{prestigeAfter}</b>（對局 +{gain}
           {bonusGain > 0 ? `、成就 +${bonusGain}` : ""}）
         </p>
-        {multiplier < 1 && (
-          <p className="result-repeat">
-            本範圍今日第 {repeat + 1} 次出陣，學力 ×{multiplier}；收服與星數照算
-          </p>
-        )}
+        {perQuestionMode(summary.mode)
+          ? repeatQs > 0 && (
+              <p className="result-repeat">
+                本局 {repeatQs} 題今天已答對過，這幾題學力遞減，其餘全額；收服與星數照算
+              </p>
+            )
+          : multiplier < 1 && (
+              <p className="result-repeat">
+                本範圍今日第 {repeat + 1} 次出陣，學力 ×{multiplier}；收服與星數照算
+              </p>
+            )}
       </section>
 
       <section className="result-server">

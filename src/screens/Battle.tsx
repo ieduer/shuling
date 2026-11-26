@@ -315,25 +315,25 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
         </ol>
         <div className="battle-meta">
           <span className="battle-label">{request.label}</span>
-          <span className="battle-book">{bookLabel}</span>
+          <span className="battle-book" key={bookLabel}>{bookLabel}</span>
         </div>
         <div className={`combo${combo >= 3 ? " is-hot" : ""}`} aria-label={`連擊 ${combo}`}>
-          <span className="combo-n">{combo}</span>
+          <span className="combo-n" translate="no">{combo}</span>
           <span className="combo-t">連擊</span>
         </div>
         <TimerRing ms={phase === "ask" ? left : 0} limit={q ? limitOf(q.t) : LIMIT_MS} />
       </header>
 
       <div className="arena" ref={arenaRef}>
-        <Foe card={card} role={role} state={foeState} hp={phase === "reveal" && correct ? 0 : 100} maxHp={100} masked={phase !== "reveal"} />
+        <Foe key={`foe-${q.id}`} card={card} role={role} state={foeState} hp={phase === "reveal" && correct ? 0 : 100} maxHp={100} masked={phase !== "reveal"} />
         {dmg && (
-          <div key={dmg.key} className={`dmg${dmg.crit ? " is-crit" : ""}`}>
+          <div key={`dmg-${dmg.key}`} className={`dmg${dmg.crit ? " is-crit" : ""}`} translate="no">
             {dmg.crit ? "暴擊 " : ""}-{dmg.n}
           </div>
         )}
-        {slash > 0 && phase === "reveal" && correct && <div key={slash} className="slash" aria-hidden="true" />}
+        {slash > 0 && phase === "reveal" && correct && <div key={`slash-${slash}`} className="slash" aria-hidden="true" />}
         <div className="score-now" aria-label={`本局得分 ${score}`}>
-          <span className="score-now-n">{score}</span>
+          <span className="score-now-n" translate="no">{score}</span>
           <span className="score-now-t">分</span>
         </div>
         <div className="party" aria-label={`燭火 ${hp}，神思 ${mana}`}>
@@ -353,7 +353,9 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
         </div>
       </div>
 
-      <div className={`spell${long ? " is-long" : ""}`}>
+      {/* 題面與選項按題目 key 重新掛載：頁面翻譯換掉的舊文字節點整塊移除，不殘留上一題的字（2026-11-26） */}
+
+      <div key={`spell-${q.id}`} className={`spell${long ? " is-long" : ""}`}>
         <Sentence s={q.s} className={long ? "is-compare" : ""} />
         <p className="spell-stem">{q.stem.replace(/^依課文語境，標出的/, "").replace(/在這裡應解為？$/, "在此解為？")}</p>
         {q.fig?.map((f) => (
@@ -371,7 +373,7 @@ export function Battle({ request, onFinish, onQuit }: { request: RunRequest; onF
         {hint && <p className="spell-hint">{hint}</p>}
       </div>
 
-      <div className={`moves${long ? " is-long" : ""}`} role="group" aria-label="招式">
+      <div key={`moves-${q.id}`} className={`moves${long ? " is-long" : ""}`} role="group" aria-label="招式">
         {options.map((o, k) => {
           const isAnswer = o === q.opts[0];
           const isPicked = o === picked;

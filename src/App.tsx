@@ -36,6 +36,7 @@ interface ResultState {
   gain: number;
   multiplier: number;
   repeat: number;
+  repeatQs: number;
   statsAfter: RankStats;
   server: Promise<SubmitResult | null>;
   rankUp: boolean;
@@ -95,7 +96,7 @@ export default function App() {
       }, 600);
     }
     setRun(null);
-    setResult({ summary, xpBefore, xpAfter, gain: fin.gain, multiplier: fin.multiplier, repeat: fin.repeat, statsAfter, server, rankUp, prestigeBefore: before.prestige, prestigeAfter: after.prestige });
+    setResult({ summary, xpBefore, xpAfter, gain: fin.gain, multiplier: fin.multiplier, repeat: fin.repeat, repeatQs: fin.repeatQs, statsAfter, server, rankUp, prestigeBefore: before.prestige, prestigeAfter: after.prestige });
   }, []);
 
   const quitRun = useCallback(() => {
