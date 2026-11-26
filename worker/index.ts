@@ -200,13 +200,13 @@ async function submitRun(request: Request, env: Env): Promise<Response> {
       reason = "daily_done";
     }
   }
-  // 同日重複：闖關／今日試煉按同範圍局數遞減（第 1 次全額、第 2 次一半、第 3 次四分之一、之後一成）；出陣／復仇按題；單局分數（今日排行）仍是原始分。
+  // 同日重複：今日試煉按同範圍局數遞減（第 1 次全額、第 2 次一半、第 3 次四分之一、之後一成）；出陣／復仇／闖關按題；單局分數（今日排行）仍是原始分。
   let prior = 0;
   let multiplier = 1;
   let credited = score;
   let repeatQs = 0;
   if (perQuestionMode(mode)) {
-    // 出陣／復仇按題遞減：只看這一局的題今天之前答對過幾次，題目不同就全額（2026-11-26）
+    // 出陣／復仇／闖關按題遞減：只看這一局的題今天之前答對過幾次，題目不同就全額（2026-11-26）
     const done = await priorCorrectToday(db, pid, dayKey, now, rows.map((x) => x.q));
     const rq = creditByQuestion(rows, (q) => done.get(q) || 0);
     credited = rq.credited;

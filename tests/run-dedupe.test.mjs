@@ -44,6 +44,8 @@ function fakeDb() {
     if (sql.startsWith("SELECT xp FROM players")) { const [pid] = a; const p = players.get(pid); return p ? { xp: p.xp } : null; }
     if (sql.startsWith("SELECT DISTINCT a.q FROM arena_answers a JOIN arena_runs r")) { const [pid] = a; const ids = new Set(); for (const r of runs) if (r.pid === pid) for (const x of answers.filter((y) => y.run_id === r.id && y.correct)) ids.add(x.q); return [...ids].map((q) => ({ q })); } // v2.9 題海
     if (sql.startsWith("SELECT xp, uc_slug FROM players")) { const [pid] = a; const p = players.get(pid); return p ? { xp: p.xp, uc_slug: p.uc_slug ?? null } : null; } // v2.8 rankStats 也看是否連結帳號
+    // 出陣／復仇／闖關按題遞減（2026-11-26）：這一局的題今天之前各答對過幾次
+    if (sql.startsWith("SELECT a.q AS q, COUNT(*) AS n FROM arena_runs r JOIN arena_answers a ON a.run_id = r.id WHERE r.pid = ? AND r.created_at >= ?")) { const [pid, from, to, day, ...qs] = a; const ids = new Set(runs.filter((r) => r.pid === pid && r.created_at >= from && r.created_at <= to && r.day_key === day).map((r) => r.id)); const by = new Map(); for (const x of answers) if (ids.has(x.run_id) && x.correct && qs.includes(x.q)) by.set(x.q, (by.get(x.q) || 0) + 1); return [...by].map(([q, n]) => ({ q, n })); }
     throw new Error("fake D1 does not know: " + sql);
   };
   const prepare = (sql) => { const stmt = (args) => ({ sql, args, bind: (...b) => stmt(b), first: async () => exec(sql, args), run: async () => (exec(sql, args), { success: true, meta: {} }), all: async () => ({ results: exec(sql, args) || [] }) }); return stmt([]); };
@@ -75,14 +77,14 @@ test("同一份戰報送兩次：第二次回 duplicate，只入庫一局、詞�
     assert.equal(db.tables.runs.length, 1, "second submission must not insert"); assert.equal(db.tables.answers.length, 1); assert.equal(db.tables.players.get("dedupe-test-pid-0001").xp, r1.score, "xp added once"); assert.equal(db.tables.players.get("dedupe-test-pid-0001").games, 1);
     assert.equal([...db.tables.weekly.values()][0].games, 1);
     assert.equal(r1.xpGain, r1.score); assert.equal(r1.multiplier, 1); assert.equal(r1.repeat, 0); assert.equal(r1.rankIdx, 0); assert.equal(r1.mastered, 0);
-    // 同種子、不同起始時刻（真的再打一局）仍然入庫，但同範圍今日第 2 次：詞力折半；第 3 次四分之一；換範圍又是全額
+    // 同種子、不同起始時刻（真的再打一局）仍然入庫，但闖關也按題遞減（2026-11-26）：同一題今天第 2 次答對詞力折半、第 3 次四分之一；換一關、同一題第 4 次一成
     const send2 = (startedAt, scope = "L-test") => worker.fetch(new Request("https://shuling.bdfz.net/api/run", { method: "POST", headers: { "content-type": "application/json", cookie: "shuling_pid=dedupe-test-pid-0001" }, body: JSON.stringify({ ...payload, scope, startedAt }) }), env).then((r) => r.json());
     const r3 = await send2(startedAt - 60000);
-    assert.equal(r3.duplicate, undefined); assert.equal(db.tables.runs.length, 2); assert.equal(r3.repeat, 1); assert.equal(r3.multiplier, 0.5); assert.equal(r3.xpGain, Math.round(r1.score * 0.5)); assert.equal(db.tables.players.get("dedupe-test-pid-0001").xp, r1.score + Math.round(r1.score * 0.5));
-    const r4 = await send2(startedAt - 120000); assert.equal(r4.multiplier, 0.25); assert.equal(r4.xpGain, Math.round(r1.score * 0.25));
+    assert.equal(r3.duplicate, undefined); assert.equal(db.tables.runs.length, 2); assert.equal(r3.repeat, 0); assert.equal(r3.repeatQs, 1); assert.equal(r3.xpGain, Math.round(r1.score * 0.5)); assert.equal(db.tables.players.get("dedupe-test-pid-0001").xp, r1.score + Math.round(r1.score * 0.5));
+    const r4 = await send2(startedAt - 120000); assert.equal(r4.repeatQs, 1); assert.equal(r4.xpGain, Math.round(r1.score * 0.25));
     assert.equal(r4.mastered, 1, "同一字靈淨答對三次＝收服一隻"); assert.equal(db.tables.players.get("dedupe-test-pid-0001").mastered, 1); assert.equal(r4.cleared, 0, "一題的局不成關（關卡至少三題）");
-    const r5 = await send2(startedAt - 180000, "L-other"); assert.equal(r5.multiplier, 1); assert.equal(r5.xpGain, r1.score);
-    assert.equal([...db.tables.weekly.values()][0].score, r1.score * 2 + Math.round(r1.score * 0.5) + Math.round(r1.score * 0.25), "本週榜加的是入帳詞力");
+    const r5 = await send2(startedAt - 180000, "L-other"); assert.equal(r5.repeatQs, 1); assert.equal(r5.xpGain, Math.round(r1.score * 0.1));
+    assert.equal([...db.tables.weekly.values()][0].score, r1.score + Math.round(r1.score * 0.5) + Math.round(r1.score * 0.25) + Math.round(r1.score * 0.1), "本週榜加的是入帳詞力");
   } finally { cleanup(); }
 });
 

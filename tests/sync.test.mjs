@@ -129,8 +129,8 @@ test("第三台裝置先匿名打了一局再登入：merge 把戰績併入正�
   assert.equal(A.mastered, 1, "server tallies alone give 0 (net ≥3 not reached); the cloud save already has c1 mastered and v2.8 takes the larger of the two");
   // 舊 cookie（pid-CCCC）再來：導回正本、換 cookie、linked
   r = await call("/api/me", { pid: "pid-CCCC" }); assert.equal(r.body.pid, "pid-AAAA"); assert.equal(r.pid, "pid-AAAA"); assert.equal(r.body.linked, true); assert.equal(r.body.games, 2);
-  // 併入後同範圍今日已有兩局 → 第三局 ×0.25（遞減跟著正本算）
-  const again = await run("pid-AAAA", "u1"); assert.equal(again.body.repeat, 2); assert.equal(again.body.multiplier, 0.25);
+  // 併入後這一題今天已答對兩次（兩局都改指向正本）→ 第三次答對 ×0.25（按題遞減跟著正本算，2026-11-26）
+  const again = await run("pid-AAAA", "u1"); assert.equal(again.body.repeat, 0); assert.equal(again.body.repeatQs, 1); assert.equal(again.body.xpGain, Math.round(again.body.score * 0.25));
   assert.equal(again.body.mastered, 1, "third net-correct answer on the same card masters it");
   // 再 merge 一次（已是正本）→ 不再動資料
   r = await call("/api/sync", { method: "POST", pid: "pid-AAAA", uc: "u1", body: { action: "merge" } }); assert.equal(r.body.same, true); assert.equal(r.body.merged, false); assert.equal(count("SELECT COUNT(*) AS n FROM player_merges"), 1);

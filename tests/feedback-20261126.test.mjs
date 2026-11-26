@@ -1,5 +1,5 @@
 // 2026-11-26 用戶反饋兩項（task sixling-feedback-20261126）：
-// 一、出陣（free）／復仇（wrong）不再按「同範圍今日第幾局」打折，改成同一題今天第二次答對起才遞減；闖關與今日試煉照舊按局數。
+// 一、出陣（free）／復仇（wrong）不再按「同範圍今日第幾局」打折，改成同一題今天第二次答對起才遞減；同日站長追加闖關（lesson）也按題；只有今日試煉照舊按局數。
 // 二、瀏覽器整頁翻譯（正體→简体）換掉文字節點後，React 移除／插入不再拋 NotFoundError；題面與選項按題目 key 重新掛載。
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -16,10 +16,11 @@ const root = new URL("../", import.meta.url);
 const read = (p) => fs.readFileSync(new URL(p, root), "utf8");
 const sha16 = (t) => createHash("sha256").update(t).digest("hex").slice(0, 16);
 
-test("按題遞減只用在出陣與復仇；闖關、今日試煉照舊按局數", () => {
+test("按題遞減用在出陣、復仇與闖關（闖關 2026-11-26 站長追加）；只有今日試煉照舊按局數", () => {
   assert.equal(perQuestionMode("free"), true);
   assert.equal(perQuestionMode("wrong"), true);
-  for (const m of ["lesson", "daily", "feihua", "jielong", ""]) assert.equal(perQuestionMode(m), false, m);
+  assert.equal(perQuestionMode("lesson"), true);
+  for (const m of ["daily", "feihua", "jielong", ""]) assert.equal(perQuestionMode(m), false, m);
 });
 
 test("creditByQuestion：沒答對過的題全額，同一題第二次答對起 ×0.5、×0.25、×0.1；答錯不計次", () => {
@@ -105,11 +106,15 @@ test("Worker：復仇答對今天答錯過的題算全額；答對過的題再�
   assert.equal(c.repeatQs, 1); assert.equal(c.xpGain, Math.round(c.score * 0.5));
 });
 
-test("Worker：闖關仍按同範圍局數遞減（第二局 ×0.5），不受按題規則影響", async () => {
+test("Worker：闖關也按題遞減：同一關再打、同一題再答對才遞減，同一關換題全額；今日試煉仍按局數", async () => {
   const pid = "feedback-lesson-pid-0003";
   const a = await run(pid, "lesson", "L-x", [q6]);
   const b = await run(pid, "lesson", "L-x", [q6]);
-  assert.equal(a.multiplier, 1); assert.equal(b.repeat, 1); assert.equal(b.multiplier, 0.5); assert.equal(b.xpGain, Math.round(b.score * 0.5));
+  assert.equal(a.multiplier, 1); assert.equal(b.repeat, 0); assert.equal(b.repeatQs, 1); assert.equal(b.xpGain, Math.round(b.score * 0.5));
+  const c = await run(pid, "lesson", "L-x", [q3]);
+  assert.equal(c.repeatQs, 0); assert.equal(c.xpGain, c.score, "same lesson, different question: full");
+  const d1 = await run(pid, "daily", "daily", [q4]); const d2 = await run(pid, "daily", "daily", [q5]);
+  assert.equal(d1.multiplier, 1); assert.equal(d2.repeat, 1); assert.equal(d2.multiplier, 0.5, "daily keeps the per-scope run decay");
 });
 
 test("按題查詢走 arena_runs(pid, created_at) 索引與 arena_answers 主鍵，不掃全表", () => {
@@ -122,7 +127,7 @@ test("按題查詢走 arena_runs(pid, created_at) 索引與 arena_answers 主鍵
 });
 
 // ── 本機進度：finishRun 與 Worker 同一規則 ──
-test("本機 finishRun：出陣不同題全額、同題遞減；闖關照舊按局數", async () => {
+test("本機 finishRun：出陣、闖關不同題全額、同題遞減；今日試煉照舊按局數", async () => {
   const mem = new Map();
   globalThis.localStorage = { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, String(v)), removeItem: (k) => mem.delete(k) };
   globalThis.window = globalThis.window || {};
@@ -138,8 +143,11 @@ test("本機 finishRun：出陣不同題全額、同題遞減；闖關照舊按�
   const c = finishRun(summary("wrong", "wrong", ["q-a", "q-e"]));
   assert.equal(c.gain, 150); assert.equal(c.repeatQs, 1);
   const d = finishRun(summary("lesson", "L-1", ["q-f"]));
-  const e = finishRun(summary("lesson", "L-1", ["q-g"]));
-  assert.equal(d.gain, 100); assert.equal(e.repeat, 1); assert.equal(e.gain, 50, "lesson keeps the per-scope run decay");
+  const e = finishRun(summary("lesson", "L-1", ["q-f", "q-f-2"]));
+  assert.equal(d.gain, 100); assert.equal(e.repeat, 0); assert.equal(e.repeatQs, 1); assert.equal(e.gain, 150, "lesson: the repeated question is halved, the new one is full");
+  const g = finishRun(summary("daily", "daily", ["q-f-3"]));
+  const h = finishRun(summary("daily", "daily", ["q-f-4"]));
+  assert.equal(g.gain, 100); assert.equal(h.repeat, 1); assert.equal(h.gain, 50, "daily keeps the per-scope run decay");
 });
 
 // ── 翻譯防護 ──
