@@ -120,7 +120,7 @@ export function Me() {
       <section className="panel">
         <h2>學術之路</h2>
         <p className="muted sea-note">
-          學力 <b>{rank.prestige}</b>＝對局入帳 {p.xp} ＋ 成就加成 {bonusOf(stats)}（收服 {stats.mastered} 隻 ×30、三星通關 {stats.cleared} 關 ×120、全通 {stats.regions} 域 ×1,500、題海 {stats.done} 題 ×4）。段位只看學力；文聖另須題庫每一題都答對過。
+          學力 <b>{rank.prestige}</b>＝對局入帳 {p.xp} ＋ 成就加成 {bonusOf(stats)}（收服 {stats.mastered} 隻 ×30、三星通關 {stats.cleared} 關 ×120、全通 {stats.regions} 域 ×1,500、題海 {stats.done} 題 ×4）。段位只看學力；通人另須題庫每一題都答對過。
           {incompleteRegions.length > 0 ? ` 尚未全通：${incompleteRegions.join("、")}（全通一域 +1,500）。` : ""}
         </p>
         <ol className="ladder">
@@ -128,7 +128,7 @@ export function Me() {
             const reached = i <= rank.idx;
             const current = i === rank.idx;
             const isNext = i === rank.idx + 1;
-            // 門檻只看學力（對局入帳＋成就加成，v2.10）；下一階顯示「現在／門檻」；文聖另須題庫每一題都答對過
+            // 門檻只看學力（對局入帳＋成就加成，v2.10）；下一階顯示「現在／門檻」；通人另須題庫每一題都答對過
             const sea = r.all ? (isNext ? ` · 題海 ${stats.done}/${stats.total}（全部題目）` : " · 題海 全部題目") : "";
             const req = i === 0 ? "起點" : isNext ? `學力 ${rank.prestige}/${r.xp}${sea}` : `學力 ${r.xp}${sea}`;
             return (
@@ -152,7 +152,7 @@ export function Me() {
 
       <section className="panel">
         <h2>題海</h2>
-        <p className="muted sea-note">題海每答對一題 +4 學力；題庫裡每一題都答對過才有文聖。重返關卡時，沒做過與沒答對過的題會先出；每題都答對過的關卡在地圖上多一圈金環。</p>
+        <p className="muted sea-note">題海每答對一題 +4 學力；題庫裡每一題都答對過才有通人。重返關卡時，沒做過與沒答對過的題會先出；每題都答對過的關卡在地圖上多一圈金環。</p>
         <ul className="sea">
           {seaRows.map((row) => (
             <li key={row.id} className={row.c.left === 0 && row.c.total > 0 ? "is-full" : ""}>
