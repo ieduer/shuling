@@ -13,7 +13,9 @@ test("六靈分頁：本站鍵、跨站讀 ling.bdfz.net（帶 cookie、不加�
   assert.match(t, /credentials: "include", headers: \{ accept: "application\/json" \}/);
   assert.doesNotMatch(t, /content-type/i);
   const b = read("src/screens/Board.tsx");
-  assert.match(b, /\{ id: "total", label: "六靈"/);
+  // 2026-11-28 qiling-tab-20261128: 考靈 joined the hub (eighth source); the tab is 七靈 and its hint names 考靈, as on 靈山 and 考靈.
+  assert.match(b, /\{ id: "total", label: "七靈", hint: "字靈、書靈、詞靈、句靈、靈山、理靈、考靈與義戰論語段位相加" \}/);
+  assert.doesNotMatch(read("src/screens/TotalBoard.tsx"), /六靈/);
   assert.match(b, /<TotalBoard \/>/);
   assert.match(b, /if \(period === "total"\) return;/);
   assert.match(read("src/styles/screens.css"), /\.total-seals img\.is-empty/);
@@ -50,5 +52,5 @@ test("義戰論語加入後（2026-11-21，sixling-ly-20261121）：站可給單
   assert.match(tb, /gridTemplateColumns: `repeat\(\$\{sites\.length\}, minmax\(0, 1fr\)\)`/);
   assert.match(tb, /\{siteCount\(sites\.length\)\}站段位相加/);
   assert.doesNotMatch(tb, /六站/);
-  assert.match(read("src/screens/Board.tsx"), /靈山、理靈與義戰論語段位相加/);
+  assert.match(read("src/screens/Board.tsx"), /靈山、理靈、考靈與義戰論語段位相加/);
 });

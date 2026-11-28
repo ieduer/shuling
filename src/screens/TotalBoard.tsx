@@ -25,7 +25,7 @@ function BigSeal({ row, sites, size }: { row: TotalRow; sites: TotalSite[]; size
   return <img className="total-big" src={sealSrc(s, x[0])} alt={`${s.name}${s.ranks[x[0]] ?? ""}`} width={size} height={size} decoding="async" />;
 }
 
-/** 排行榜「六靈」分頁：各站段位相加的總榜（靈山 /api/total；2026-11-21 起含義戰論語） */
+/** 排行榜「七靈」分頁：各站段位相加的總榜（靈山 /api/total；2026-11-21 起含義戰論語，2026-11-28 起含考靈） */
 export function TotalBoard() {
   const [data, setData] = useState<TotalResult | null | "loading">("loading");
 
@@ -39,8 +39,8 @@ export function TotalBoard() {
     };
   }, []);
 
-  if (data === "loading") return <p className="muted board-empty">召集六靈中…</p>;
-  if (!data) return <p className="muted board-empty">六靈總榜暫時連不上</p>;
+  if (data === "loading") return <p className="muted board-empty">召集七靈中…</p>;
+  if (!data) return <p className="muted board-empty">七靈總榜暫時連不上</p>;
 
   const { sites, rows, me } = data;
   const podium = rows.length >= 3 ? [rows[1], rows[0], rows[2]] : [];

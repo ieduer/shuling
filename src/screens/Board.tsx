@@ -10,7 +10,7 @@ const PERIODS: { id: Period; label: string; hint: string }[] = [
   { id: "daily", label: "今日", hint: "今日試煉首戰得分，每天計一次" },
   { id: "weekly", label: "本週", hint: "本週累計入帳學力" },
   { id: "all", label: "總榜", hint: "學力累計" },
-  { id: "total", label: "六靈", hint: "字靈、書靈、詞靈、句靈、靈山、理靈與義戰論語段位相加" },
+  { id: "total", label: "七靈", hint: "字靈、書靈、詞靈、句靈、靈山、理靈、考靈與義戰論語段位相加" },
 ];
 
 /** 榜上的段位以伺服器算的為準（收服、通關依已送達的戰報）；舊伺服器沒給時只能用學力推估（其餘門檻當 0）。 */
